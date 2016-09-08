@@ -34,7 +34,7 @@
                                     <span class="input-group-addon">
                                         <span class="fa fa-key fa-fw"></span>
                                     </span>
-                                    <input type="password" name="password" placeholder="密码2" class="len form-control"
+                                    <input type="password" name="password" placeholder="密码" class="len form-control"
                                            label="密码"/>
                                 </div>
                             </div>
