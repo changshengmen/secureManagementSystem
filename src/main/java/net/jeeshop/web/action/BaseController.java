@@ -131,7 +131,7 @@ public abstract class BaseController<E extends PagerModel> {
 //				throw new PrivilegeException(Container.db_privilege_delete_error);
 //			}
 //		}
-
+    	
         getService().deletes(ids);
         addMessage(flushAttrs, "操作成功！");
         return "redirect:selectList";
