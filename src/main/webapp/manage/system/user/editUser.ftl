@@ -27,7 +27,7 @@
             <ul>
                 <li><a href="#tabs-1" style="font-size: 14px;">用户管理</a>
                 </li>
-               <li><a href="#tabs-2" style="font-size: 14px;">产品绑定</a></li>
+               <li><a href="${basepath}/manage/secureProduct/selectListTap" style="font-size: 14px;">产品绑定</a></li>
             </ul>
             <!--------------------------------tap1 用户管理----------------------------->
             <div id="tabs-1">
