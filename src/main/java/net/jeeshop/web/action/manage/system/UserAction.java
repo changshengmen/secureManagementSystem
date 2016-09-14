@@ -589,8 +589,7 @@ public class UserAction extends BaseController<User> {
 	 * @return
 	 * @throws Exception 
 	 */
-	@RequestMapping(value = "bindUp", method = RequestMethod.POST)
-	public String bindUp(@ModelAttribute("e")SecureProduct e) throws Exception{		
+	public String bindUpProduct(@ModelAttribute("e")SecureProduct e) throws Exception{		
 		String[] ids = e.getId().split(",");
 		 List<String> tmp = new ArrayList<String>();
 	        for(String str:ids){
