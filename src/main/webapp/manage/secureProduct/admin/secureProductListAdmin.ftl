@@ -62,6 +62,32 @@
 							<i class="icon-search icon-white"></i> 查询
 						</button>
                     </#if>
+
+                     <#if checkPrivilege("secureProduct/toAdd")>
+						<a href="toAdd" class="btn btn-success">
+							<i class="icon-plus-sign icon-white"></i> 添加
+						</a>
+                     </#if>
+
+                    <#if checkPrivilege("secureProduct/deletes")>
+						<button method="deletes" class="btn btn-danger" onclick="return submitIDs(this,'确定删除选择的记录?');">
+							<i class="icon-remove-sign icon-white"></i> 删除
+						</button>
+                    </#if>
+
+                    <#if checkPrivilege("secureProduct/updateUp")>
+<!-- 							<i class="icon-arrow-up icon-white"></i> 上架 -->
+						<button method="updateUp" class="btn btn-warning" onclick="return submitIDs(this,'确定上架选择的记录?');">
+							<i class="icon-arrow-up icon-white"></i> 上架
+						</button>
+                    </#if>
+
+                    <#if checkPrivilege("secureProduct/updateDown")>
+						<button method="updateDown" class="btn btn-warning" onclick="return submitIDs(this,'确定下架选择的记录?');">
+							<i class="icon-arrow-down icon-white"></i> 下架
+						</button>
+                    </#if>
+
 				</td>
 			</tr>
 		</table>
@@ -106,7 +132,7 @@
 					<td>&nbsp;
 						${item.remark!""}
 					</td>
-					<td >
+					<td ><a href="toEdit?id=${item.id}">编辑</a>|
 						<a href="toOrder?id=${item.id}">查看</a>
 					</td>
 				</tr>
