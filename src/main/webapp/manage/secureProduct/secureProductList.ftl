@@ -46,7 +46,7 @@
 					</select>
 				</td>	
 					
-				<td style="text-align: right;">状态1</td>
+				<td style="text-align: right;">状态</td>
 				<td style="text-align: left;">
                     <#assign map = {"0":'全部',"1":'已上架',"2":'已下架'}>
                     <select id="status" name="status" class="input-medium">
