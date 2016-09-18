@@ -11,5 +11,3 @@ classes/
 build/
 spy.log
 .git/
-
-conf.properties
