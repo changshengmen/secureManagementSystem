@@ -5,31 +5,7 @@
 	<input type="hidden" value="${e.id!""}" id="productID"/>
 	<input type="hidden" value="${e.catalogID!""}" id="catalogID"/>
 
-		<div style="text-align: center;">
-			<div id="updateMsg"><font color='red'>${updateMsg!""}</font></div>
-			<#if e.id??>
-                产品ID：<span class="badge badge-success">${e.id!""}</span>
-                <button method="update" class="btn btn-success">
-                    <i class="icon-ok icon-white"></i> 保存
-                </button>
-                <#if e.status??&&e.status!=2>
-                    <button method="updateUpProduct?id=${e.id!""}" class="btn btn-warning" onclick="return confirm('确定上架产品吗?');">
-                    <i class="icon-arrow-up icon-white"></i> 上架
-                    </button>
-                <#else>
-                    <button method="updateDownProduct?id=${e.id!""}" class="btn btn-warning" onclick="return confirm('确定下架产品吗?');">
-                    <i class="icon-arrow-down icon-white"></i> 下架
-                    </button>
-                </#if>
-            <#else>
-                <button method="insert" class="btn btn-success">
-                    <i class="icon-ok icon-white"></i> 新增
-                </button>
-			</#if>
-			<button onclick='javascript:history.back(-1);' class="btn btn-success">
-                    <i class="icon-ok icon-white"></i>返回
-            </button>	           
-		</div>	
+		
 		<div id="tabs">
 			<ul>
 				<li><a href="#tabs-1">产品基本信息</a></li>
@@ -95,7 +71,36 @@
                                 </a>
 							</#if>						
                         </div>
-                    </div>                  
+                    </div>            
+                    
+                   <!------------------------------按钮（保存 返回）------------------------------> 
+                    <div style="text-align: right;">
+			<div id="updateMsg"><font color='red'>${updateMsg!""}</font></div>
+			<#if e.id??>
+                产品ID：<span class="badge badge-success">${e.id!""}</span>
+                <button method="update" class="btn btn-success">
+                    <i class="icon-ok icon-white"></i> 保存
+                </button>
+                <#if e.status??&&e.status!=2>
+                    <button method="updateUpProduct?id=${e.id!""}" class="btn btn-warning" onclick="return confirm('确定上架产品吗?');">
+                    <i class="icon-arrow-up icon-white"></i> 上架
+                    </button>
+                <#else>
+                    <button method="updateDownProduct?id=${e.id!""}" class="btn btn-warning" onclick="return confirm('确定下架产品吗?');">
+                    <i class="icon-arrow-down icon-white"></i> 下架
+                    </button>
+                </#if>
+            <#else>
+                <button method="insert" class="btn btn-success">
+                    <i class="icon-ok icon-white"></i> 保存	
+                </button>
+			</#if>
+			<button onclick='javascript:history.back(-1);' class="btn btn-success">
+                    <i class="icon-ok icon-white"></i>返回
+            </button>	           
+		</div>	      
+		
+		
 					<#if e.id??>
                     <div class="form-group">
                         <label class="col-md-2 control-label">其他信息</label>
