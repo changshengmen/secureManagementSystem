@@ -1,7 +1,6 @@
 <#import "/manage/tpl/pageBase.ftl" as page>
-<@page.pageBase currentMenu="商品管理">
+<@page.pageBase currentMenu="产品管理">
 <form action="${basepath}/manage/secureProduct" id="form" name="form" namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">
-
 	<span id="pifeSpan" class="input-group-addon" style="display:none">${systemSetting().imageRootPath}</span>
 	<input type="hidden" value="${e.id!""}" id="productID"/>
 	<input type="hidden" value="${e.catalogID!""}" id="catalogID"/>
@@ -9,17 +8,16 @@
 		<div style="text-align: center;">
 			<div id="updateMsg"><font color='red'>${updateMsg!""}</font></div>
 			<#if e.id??>
-                商品ID：<span class="badge badge-success">${e.id!""}</span>
+                产品ID：<span class="badge badge-success">${e.id!""}</span>
                 <button method="update" class="btn btn-success">
                     <i class="icon-ok icon-white"></i> 保存
                 </button>
-
                 <#if e.status??&&e.status!=2>
-                    <button method="updateUpProduct?id=${e.id!""}" class="btn btn-warning" onclick="return confirm('确定上架商品吗?');">
+                    <button method="updateUpProduct?id=${e.id!""}" class="btn btn-warning" onclick="return confirm('确定上架产品吗?');">
                     <i class="icon-arrow-up icon-white"></i> 上架
                     </button>
                 <#else>
-                    <button method="updateDownProduct?id=${e.id!""}" class="btn btn-warning" onclick="return confirm('确定下架商品吗?');">
+                    <button method="updateDownProduct?id=${e.id!""}" class="btn btn-warning" onclick="return confirm('确定下架产品吗?');">
                     <i class="icon-arrow-down icon-white"></i> 下架
                     </button>
                 </#if>
@@ -28,18 +26,15 @@
                     <i class="icon-ok icon-white"></i> 新增
                 </button>
 			</#if>
-			
-<!-- 			<a href="selectList?init=y" class="btn btn-inverse">返回</a> -->
-		</div>
-		
+			<button onclick='javascript:history.back(-1);' class="btn btn-success">
+                    <i class="icon-ok icon-white"></i>返回
+            </button>	           
+		</div>	
 		<div id="tabs">
 			<ul>
-				<li><a href="#tabs-1">基本信息</a></li>
+				<li><a href="#tabs-1">产品基本信息</a></li>
 				
-				
-			
-			
-			
+				<li><a href="#tabs-2">本地上传图片</a></li>			
 			</ul>
 			<div id="tabs-1">
                 <input type="hidden" value="${e.id!""}" name="id" label="id" id="id"/>
@@ -48,7 +43,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">名称</label>
                         <div class="col-md-10">
-                            <input type="text" value="${e.name!""}" name="name"  data-rule="商品名称;required;name;length[0~44];" size="44" maxlength="44" style="width: 80%;"
+                            <input type="text" value="${e.name!""}" name="name"  data-rule="产品名称;required;name;length[0~44];" size="44" maxlength="44" style="width: 80%;"
                                    id="name" />
                         </div>
                     </div>
@@ -68,24 +63,17 @@
                             </select>(请选择子类别)
                         </div>
 						</div>
-
                     <div class="form-group col-md-6">
-                        <label class="col-md-4 control-label">单位</label>
-                        <div class="col-md-8">
-							<#assign map = {'item':'件'}>
-                            <select id="unit" name="unit" class="input-medium">
-								<#list map?keys as key>
-                                    <option value="${key}" <#if e.unit?? && e.unit==key>selected="selected" </#if>>${map[key]}</option>
-								</#list>
-                            </select>
-							</div>
-						</div>
-
+                         <label class="col-md-2 control-label">价格/元</label>
+                        <div class="col-md-4"><input type="text"  value="${e.price!""}" name="price"  data-rule="定价;required;price;" size="10" maxlength="10"
+                                                     id="price" />
+                        </div>
+					</div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">简介</label>
                         <div class="col-md-10">
 							<textarea name="introduce" class="form-control" rows="3" id="introduce"
-									  data-rule="商品简介;required;introduce;length[4~500];">${e.introduce!""}</textarea>
+									  data-rule="产品简介;required;introduce;length[4~500];">${e.introduce!""}</textarea>
                         </div>
                     </div>
                     <div class="form-group">
@@ -95,42 +83,57 @@
 									  data-rule="备注;required;introduce;length[4~500];">${e.remark!""}</textarea>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">主图</label>
+					<div class="form-group">
+                        <label class="col-md-2 control-label">图片库</label>
                         <div class="col-md-10">
-                            <input type="button" name="filemanager" value="浏览图片1" class="btn btn-success"/>
-                            <input type="text"  value="${e.picture!""}" name="picture" type="text" id="picture"  ccc="imagesInput" style="width: 600px;"
-                                   data-rule="小图;required;maxPicture;"/>
-							<#if e.picture??>
-                                <a target="_blank" href="${systemSetting().imageRootPath}${e.picture!""}">
-                                    <img style="max-width: 50px;max-height: 50px;" alt="" src="${systemSetting().imageRootPath}${e.picture!""}">
+                            <input type="button" name="filemanager" value="浏览图片库" class="btn btn-success"/>
+                            <input type="text"  value="${e.picture_url!""}" name="picture_url" type="text" id="picture_url"  ccc="imagesInput" style="width: 600px;"
+                                   data-rule="小图;maxPicture;"/>
+							<#if e.picture_url??>
+                                <a target="_blank" href="${systemSetting().imageRootPath}${e.picture_url!""}">
+                                    <img id="productImg" style="max-width: 50px;max-height: 50px;" alt="" src="${systemSetting().imageRootPath}${e.picture_url!""}">
                                 </a>
-							</#if>
+							</#if>						
                         </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="col-md-4 control-label">价格</label>
-                        <div class="col-md-8"><input type="text"  value="${e.price!""}" name="price"  data-rule="定价;required;price;" size="10" maxlength="10"
-                                                     id="price" />
-                        </div>
-                    </div>
-                   
-                    
+                    </div>                  
 					<#if e.id??>
                     <div class="form-group">
                         <label class="col-md-2 control-label">其他信息</label>
                         <div class="col-md-10">
-                            录入人：<a style="text-decoration: underline;" target="_blank" href="${basepath}/manage/user/show?account=${e.createAccount!""}">${e.createAccount!""}</a>
-                            录入时间：${e.createtime!""}<br>
-                            最后修改人：<a style="text-decoration: underline;" target="_blank" href="${basepath}/manage/user/show?account=${e.updateAccount!""}">${e.updateAccount!""}</a>
-                            最后修改时间：${e.updatetime!""}
+			                            录入人：<a style="text-decoration: underline;" target="_blank" href="${basepath}/manage/user/show?account=${e.createAccount!""}">${e.createAccount!""}</a>
+			                            录入时间：${e.createtime!""}<br>
+			                            最后修改人：<a style="text-decoration: underline;" target="_blank" href="${basepath}/manage/user/show?account=${e.updateAccount!""}">${e.updateAccount!""}</a>
+			                            最后修改时间：${e.updatetime!""}
                         </div>
                     </div>
 					</#if>
                     </div> <!--end form-->
+			    </div>
+				<div id="tabs-2">
+				<div>
+					<h4><div class="alert alert-info">图片列表</div></h4>
+					<table class="table table-bordered">
+					<tr id="firstTr" style="display:none">
+						<td>
+								<img name="img"  style="width:50px;height:50px;max-width: 50px;max-height: 50px;">								
+						</td>
+					</tr>
+					<tr>
+					<div id="fileQueue"></div> 
+						<td>
+                            <input id="uploadify" name="uploadify" value="添加" class="btn btn-warning" type="button"/>
+                        </td>
+					</tr>
+					<tr>
+						 <p>    
+	                		<a href="javascript:$('#uploadify').uploadify('upload')">开始上传</a>     
+	                		<a href="javascript:$('#uploadify').uploadify('cancel','*')">取消上传</a>    
+           				</p>              									
+					</tr>
+					
+				</table>
+				</div>
 			</div>
-			
 																		
 		</div>
 </form>
@@ -138,27 +141,9 @@
 <script>
 $(function() {
 	$( "#tabs" ).tabs({
-		//event: "mouseover"
-	});
-	//alert($("#insertOrUpdateMsg").html());
-//	if($("#insertOrUpdateMsg").html()!='' && $("#insertOrUpdateMsg").html().trim().length>0){
-//		$("#insertOrUpdateMsg").slideDown(1000).delay(1500).slideUp(1000);
-//	}
-	
+	});	
 	selectDefaultCatalog();
-	
-	$("#removePife").click(function(){
-		clearRootImagePath();
-	});
 });
-//删除图片主路径
-function deleteImageByImgPaths(){
-	if ($("input:checked").size() == 0) {
-		alert("请选择要删除的图片！");
-		return false;
-	}
-	return confirm("确定删除选择的图片吗?");
-}
 
 function selectDefaultCatalog(){
 	var _catalogID = $("#catalogID").val();
@@ -167,18 +152,24 @@ function selectDefaultCatalog(){
 		$("#catalogSelect").val(_catalogID);
 	}
 }
-
+//本地上传图片后添加预览图片的行
+function previewImg(imgSrc){
+debugger;
+   var $tr = $("#firstTr").clone();
+   $tr.find("img[name=img]").attr("src",imgSrc);
+   $("#firstTr").parent().append($tr);
+   $tr.show();
+}
 function catalogChange(obj){
 	var _pid = $(obj).find("option:selected").attr("pid");
 	if(_pid==0){
 		alert("不能选择大类!");
-		selectDefaultCatalog();
 		return false;
 	}
 	var _productID = $("#productID").val();
 	
-	if(confirm("修改商品类别会清空该商品的属性和参数，确认要这样做吗？")){
-		$.blockUI({ message: "正在切换商品目录，请稍候...",css: { 
+	if(confirm("修改险种类别会置空产品的一些属性信息，您确认要修改么？")){
+		$.blockUI({ message: "正在切换产品目录，请稍候...",css: { 
             border: 'none', 
             padding: '15px', 
             backgroundColor: '#000', 
@@ -186,8 +177,7 @@ function catalogChange(obj){
             '-moz-border-radius': '10px', 
             opacity: .5, 
             color: '#fff' 
-        }});
-		
+        }});		
 		//alert($(obj).val());
 		if(_productID==''){
 			//alert(3);
@@ -201,7 +191,29 @@ function catalogChange(obj){
 	}
 }
 </script>
-
+<script>
+		KindEditor.ready(function(K) {
+				var uploadbutton = K.uploadbutton({
+					button : K('#uploadButton')[0],
+					fieldName : 'imgFile',
+					url : '${basepath}/editor/upload?dir=image',
+					afterUpload : function(data) {
+						if (data.error === 0) {
+							var url = K.formatUrl(data.url, 'absolute');
+							K('#url').val(url);
+						} else {
+							alert(data.message);
+						}
+					},
+					afterError : function(str) {
+						alert('自定义错误信息: ' + str);
+					}
+				});
+				uploadbutton.fileBox.change(function(e) {
+					uploadbutton.submit();
+				});
+			});
+</script>
 <script>
 	var editor;
 	KindEditor.ready(function(K) {
@@ -210,36 +222,12 @@ function catalogChange(obj){
             uploadJson : '${basepath}/editor/upload',
             fileManagerJson : '${basepath}/editor/fileManager'
 		});
-		K('input[name=getHtml]').click(function(e) {
-			alert(editor.html());
-		});
-		K('input[name=isEmpty]').click(function(e) {
-			alert(editor.isEmpty());
-		});
-		K('input[name=getText]').click(function(e) {
-			alert(editor.text());
-		});
-		K('input[name=selectedHtml]').click(function(e) {
-			alert(editor.selectedHtml());
-		});
-		K('input[name=setHtml]').click(function(e) {
-			editor.html('<h3>Hello KindEditor</h3>');
-		});
-		K('input[name=setText]').click(function(e) {
-			editor.text('<h3>Hello KindEditor</h3>');
-		});
-		K('input[name=insertHtml]').click(function(e) {
-			editor.insertHtml('<strong>插入HTML</strong>');
-		});
-		K('input[name=appendHtml]').click(function(e) {
-			editor.appendHtml('<strong>添加HTML</strong>');
-		});
-		K('input[name=clear]').click(function(e) {
-			editor.html('');
-		});
+				
 	});
+
 	
 	function addTrFunc(){
+	alert("addTrFunc函数");
 		var cc = $("#firstTr").clone();
 		$("#firstTr").after(cc);
 		
@@ -257,16 +245,19 @@ KindEditor.ready(function(K) {
 	var editor = K.editor({
 		fileManagerJson : '${basepath}/editor/fileManager'
 	});
+	debugger;	
+	
 	K('input[name=filemanager]').click(function() {
+	
 		var imagesInputObj = $(this).parent().children("input[ccc=imagesInput]");
 		editor.loadPlugin('filemanager', function() {
 			editor.plugin.filemanagerDialog({
 				viewType : 'VIEW',
-				dirName : 'image',
+				dirName : '',
 				clickFn : function(url, title) {
 					//K('#picture').val(url);
-					//alert(url);
-					imagesInputObj.val(url);
+					arr=url.split("/");	
+					imagesInputObj.val(arr[5]);
 					editor.hideDialog();
 					clearRootImagePath(imagesInputObj);//$("#picture"));
 				}
@@ -284,47 +275,47 @@ KindEditor.ready(function(K) {
 	$(document).ready(function() {
 	
 		ajaxLoadImgList();
-		var url = '${basepath}/common/uploadify.do';
-		//alert(url);
+		
+		var url = '${basepath}/uploadify.do';
+		
 		$("#uploadify").uploadify({
-			//'auto'           : false,
-           'swf'       	 : '${basepath}/resource/uploadify/uploadify.swf',
+		
+		   'auto'           : false,
+           'swf'        	 : '${basepath}/resource/uploadify/uploadify.swf',
            'uploader'       : url,//后台处理的请求
            'queueID'        : 'fileQueue',//与下面的id对应
-           //'queueSizeLimit' :100,
-           //'fileTypeDesc'   : 'rar文件或zip文件',
-           //'fileTypeExts' 	 : '*.jpg;*.jpg', //控制可上传文件的扩展名，启用本项时需同时声明fileDesc
-           //'fileTypeExts'   : '*.rar;*.zip', //控制可上传文件的扩展名，启用本项时需同时声明fileDesc  
-           
-           
-           //'fileTypeDesc' : '图片文件' , //出现在上传对话框中的文件类型描述
-//'fileTypeExts' : '*.jpg;*.bmp;*.png;*.gif', //控制可上传文件的扩展名，启用本项时需同时声明filedesc
-
+           'queueSizeLimit' :5,
+           'fileTypeDesc'   : '图片文件' , //出现在上传对话框中的文件类型描述,
+           'fileTypeExts' : '*.jpg;*.bmp;*.png;*.gif', //控制可上传文件的扩展名，启用本项时需同时声明filedesc
            'multi'          : true,
-           'buttonText'     : '本地上传',
-           
+           'buttonText'     : '本地上传',         
            onUploadSuccess:function(file, data, response){
-				//alert("上传成功,data="+data+",file="+file+",response="+response);      
+           
+				alert("上传成功,data="+data+",file="+file+",response="+response);  
+				    
 //				ajaxLoadImgList();
-			   data = $.parseJSON(data);
+		  
 			   if(data.error == '1') {
 				   alert("上传失败：\n失败原因:" + data.msg);
 			   } else {
-					var $tr = $("#firstTr").clone();
-				   $tr.find("img[name=img]").attr("src", "${systemSetting().imageRootPath}" + data.filePath);
-				   $tr.find(":input[name=images]").val(data.filePath);
-				   $("#firstTr").parent().append($tr);
-				   $tr.show();
+			       previewImg(data);
+				   imgArr=data.split("/");
+				   var imgSrc=imgArr[6]+"/"+imgArr[7];
+				   $("#picture_url").val(imgSrc);
+				   $("#productImg").attr("src",data);	
 			   }
            },
+           
            onUploadError:function(file, errorCode, errorMsg) {
         	   alert("上传失败,data="+data+",file="+file+",response="+response);   
            }
 	 	});
 	});
 	
+	
 	//ajax加载内容图片列表
 	function ajaxLoadImgList(){
+	
 		if($("#id").val()==''){
 			 $("#fileListDiv").html("");
 			 return;

@@ -11,27 +11,49 @@
 }
 </style>
 
-	<form action="${basepath}/manage/product" namespace="/manage" method="post" theme="simple">
-		<input type="hidden" value="${e.catalogID!""}" id="catalogID"/>
+	<form action="${basepath}/manage/secureProduct" namespace="/manage" method="post" theme="simple">
+		
 		<table class="table table-bordered table-condensed">
 			<tr>
+			
+				<!--
 				<td style="text-align: right;">商品编号</td>
 				<td style="text-align: left;"><input type="text"  value="${e.id!""}" name="id"  class="search-query input-small"
 						id="id" /></td>
+				-->
+				<td style="text-align: right;">商品名称</td>
+				<td style="text-align: left;" ><input type="text"  value="${e.name!""}" name="name"  class="input-small"
+						id="name" /></td>	
+				<td style="text-align: right;">录入时间</td>
+				<td style="text-align: left;" ><input type="text"  value="${e.createtime!""}" name="createtime"  class="input-small"
+						id="createtime" /></td>
+			</tr>
+			<tr>
+				<td style="text-align: right;">
+					险种
+				</td>
+				<td>
+					<select onchange="catalogChange(this)" name="catalogID" id="catalogID" class="input-medium">
+						<option></option>
+                        <#list catalogs as item>
+							<option pid="0" value="${item.id!""}"><font color='red'>${item.name!""}</font></option>
+                            <#if item.children??>
+                                <#list item.children as item>
+								    <option value="${item.id!""}">&nbsp;&nbsp;&nbsp;&nbsp;${item.name!""}</option>
+                                </#list>
+                            </#if>
+                        </#list>
+					</select>
+				</td>	
+					
 				<td style="text-align: right;">状态</td>
 				<td style="text-align: left;">
-                    <#assign map = {"2":'',"0":'已上架',"1":'已下架'}>
+                    <#assign map = {"0":'全部',"1":'已上架',"2":'已下架'}>
                     <select id="status" name="status" class="input-medium">
                         <#list map?keys as key>
                             <option value="${key}" <#if e.status?? && e.status==key?eval>selected="selected" </#if>>${map[key]}</option>
                         </#list>
-				</td>				
-			</tr>
-			<tr>
-				<td style="text-align: right;">商品名称</td>
-				<td style="text-align: left;" ><input type="text"  value="${e.name!""}" name="name"  class="input-small"
-						id="name" />
-				</td>			
+				</td>						
 			</tr>
 			<tr>
 				<td colspan="20">
@@ -66,12 +88,6 @@
 						</button>
                     </#if>
 
-					
-					<a target="_blank" href="${systemSetting().www}/product/selectMemoryStock.html" class="btn btn-info">
-					<i class="icon-eye-open icon-white"></i> 内存库存查询</a>
-					<div style="float: right;vertical-align: middle;bottom: 0px;top: 10px;">
-						<#include "/manage/system/pager.ftl"/>
-					</div>
 				</td>
 			</tr>
 		</table>
@@ -85,13 +101,14 @@
 				<th>定价</th>
 				<th>产品简介</th>
 				<th>录入日期</th>
+				<th>险种</th>
 				<th>状态</th>
 				<th>备注</th>
 				<th width="60">操作</th>
 			</tr>
             <#list pager.list as item>
 				<tr>
-					<td><input type="checkbox" name="id"
+					<td><input type="checkbox" name="ids"
 						value="${item.id!""}" /></td>
 					<td nowrap="nowrap">&nbsp;${item.id!""}</td>	
 					
@@ -100,13 +117,14 @@
 					<td>&nbsp;${item.price!""}</td>
 					<td>&nbsp;${item.introduce!""}</td>
 					<td>&nbsp;${item.createtime!""}</td>
-	
+					
+					<td>&nbsp;${item.catalogID!""}</td>
 			
 					<td>&nbsp;
-						<#if item.delete_flag??&&item.delete_flag==0>
+						<#if item.status??&&item.status==1>
 							<img alt="已上架" src="${basepath}/resource/images/action_check.gif">
 						
-						<#elseif item.delete_flag??&&item.delete_flag==1>
+						<#elseif item.status??&&item.status==2>
 							<img alt="已下架" src="${basepath}/resource/images/action_delete.gif">
 						</#if>
 					</td>
@@ -114,8 +132,8 @@
 					<td>&nbsp;
 						${item.remark!""}
 					</td>
-					<td ><a href="toEdit?id=${item.id}">编辑</a>|
-					<a target="_blank" href="${systemSetting().www}/secureProduct/${item.id!""}.html">查看</a>
+					<td ><a href="toEdit?id=${item.id}">编辑</a>
+					
 					</td>
 				</tr>
             </#list>
@@ -136,14 +154,13 @@
 	</form>
 	
 <script type="text/javascript">
-	$(function() {
-		selectDefaultCatalog();
-	});
-	function selectDefaultCatalog(){
-		var _catalogID = $("#catalogID").val();
-		if(_catalogID!='' && _catalogID>0){
-			$("#catalogSelect").attr("value",_catalogID);
-		}
-	}
+function catalogChange(obj){
+	var _pid = $(obj).find("option:selected").attr("pid");
+	if(_pid==0){
+		alert("不能选择大类!");
+		$(obj).val("");
+		return false;
+	}	
+}
 </script>
 </@page.pageBase>
