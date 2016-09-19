@@ -16,7 +16,7 @@ public class ManageContainer {
 	public static final String USERS = "users";
 	public static final String loginError = "loginError";//登陆错误
 
-	public static final int PAGE_SIZE = 20;// 默认分页条数
+	public static final int PAGE_SIZE = 10;// 默认分页条数
 	
 	/**
 	 * 商品目录树
