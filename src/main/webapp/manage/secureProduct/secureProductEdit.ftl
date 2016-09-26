@@ -13,7 +13,7 @@
 				<li><a href="#tabs-2">本地上传图片</a></li>			
 			</ul>
 			<div id="tabs-1">
-                <input type="hidden" value="${e.id!""}" name="id" label="id" id="id"/>
+                <input type="hidden" value="${e}" name="id" label="id" id="id"/>
 				<div class="row form-horizontal"-role="form">
 
                     <div class="form-group">

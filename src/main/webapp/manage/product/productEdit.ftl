@@ -33,7 +33,7 @@
                     <i class="icon-refresh icon-white"></i> 静态化</a>
             <#else>
                 <button method="insert" class="btn btn-success">
-                    <i class="icon-ok icon-white"></i> 新增
+                    <i class="icon-ok icon-white"></i> 新增1
                 </button>
 			</#if>
 			

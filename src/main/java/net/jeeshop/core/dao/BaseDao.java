@@ -154,6 +154,18 @@ public class BaseDao extends SqlSessionDaoSupport {
 		}
 		throw new IbatisException();
 	}
+	
+	public  int insertByUUID(String arg0, Object arg1) {
+		if(selectPrivilege){
+			throw new PrivilegeException("只具备查询的权限！");
+		}
+		SqlSession session = openSession();
+		int row = session.insert(arg0, arg1);
+		if(row==1){
+			return 1;
+		}
+		throw new IbatisException();
+	}
 
 	/**
 	 * 更新一条记录

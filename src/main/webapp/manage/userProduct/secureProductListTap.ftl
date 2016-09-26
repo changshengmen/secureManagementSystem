@@ -1,3 +1,5 @@
+<#import "/manage/tpl/pageBase.ftl" as page>
+<@page.pageBase currentMenu="产品管理">
 <script type="text/javascript" src="${basepath}/manage/manage.js"></script>
 <style type="text/css">
 .product-name {
@@ -9,76 +11,57 @@
 	text-overflow: ellipsis;
 }
 </style>
-
-	<form action="${basepath}/manage/product" namespace="/manage" method="post" theme="simple">
-		<input type="hidden" value="${e.catalogID!""}" id="catalogID"/>
-		<table class="table table-bordered table-condensed">
-			<tr>
-				<td style="text-align: right;">保险名称</td>
-				<td style="text-align: left;">
-				<input type="text"  value="${e.name!""}" name="name"  class="search-query input-small" id="name" />
-				</td>
-			</tr>
-			<tr>
-					<td colspan="20">
-                    <#if checkPrivilege("secureProduct/selectListTap")>
-						<button method="selectListTap" class="btn btn-primary" onclick="selectListTap(this)">
-							<i class="icon-search icon-white"></i> 查询
-						</button>
-                    </#if>
-					
-					
-        		    <#if checkPrivilege("user/bindUp")>
-						<button method="bindUp" class="btn btn-warning" onclick="return submitIDs(this,'确定绑定选择的记录?');">
-							<i class="icon-arrow-up icon-white"></i> 绑定
-						</button>
-                    </#if>
-
-					
+	<script type="text/javascript">
+	function bindProduct(){
+		var obj = $("#bd");
+		var ids =$("td[name='itemId']");
+		var param ='';
+		$.each(ids,function(a){
+		  param += ","+ ids[a].innerHTML;
+		})
+	 	var _form = $("form");
+		_form.attr("action",$(obj).attr("method")+"?ids="+param);
+		_form.submit();
+	}
+	</script>
+	<form action="${basepath}/manage/secureProduct" namespace="/manage" method="post" theme="simple">
+	
+	<!----------------------------------------------按钮-------------------------------------------->
+	<table class="table table-bordere d table-condensed">
+			<tr><td style="">
+			<label style="font-size:20px">用户名  : ${userName}</label>
+					</td><td>	
+					    
 					<div style="float: right;vertical-align: middle;bottom: 0px;top: 10px;">
-						<#include "/manage/system/pager.ftl"/>
+					<button method="getAllProduct" class="btn btn-primary" id="bd" onclick="bindProduct()">
+							<i class="icon-arrow-up icon-white"></i> 绑定产品
+						</button>
+					<button class="btn btn-warning"  onclick="javascript:history.back(-1);">
+							<i class="icon-arrow-up icon-white"></i> 返回
+						</button>
 					</div>
 				</td>
 			</tr>
 		</table>
-
+	<!----------------------------------------------商品列表-------------------------------------------->
 		<table class="table table-bordered table-condensed table-hover">
-			<tr style="background-color: #dff0d8">
-				<th width="20"><input type="checkbox" id="firstCheckbox" /></th>
-				<th nowrap="nowrap">商品编号</th>
-				
-				<th>保险名称</th>
-				<th>定价</th>
-				<th>保险简介</th>
-			</tr>
-            <#list pager.list as item>
-				<tr>
-					<td><input type="checkbox" name="id"
-						value="${item.id!""}" /></td>
-					<td nowrap="nowrap">&nbsp;${item.id!""}</td>	
+				<tr style="background-color: #dff0d8">
+					<th width="20"><input type="checkbox" id="firstCheckbox" /></th>
+					<th nowrap="nowrap">商品编号</th>
 					
-					
+					<th>保险名称</th>
+					<th>定价</th>
+					<th>保险简介</th>
+				</tr>
+				<#list product as item>
+	   			<tr>
+					<td><input type="checkbox" name="id" value="${item.id!""}" /></td>
+					<td nowrap="nowrap" name="itemId">${item.id!""}</td>	
 					<td>&nbsp;${item.name!""}</td>
 					<td>&nbsp;${item.price!""}</td>
 					<td>&nbsp;${item.introduce!""}</td>
 				</tr>
-            </#list>
-
-			<tr>
-				<td colspan="70" style="text-align: center;">
-                    <#include "/manage/system/pager.ftl"/></td>
-			</tr>
-		</table>
+				</#list>
 	</form>
 	
-<script type="text/javascript">
-	$(function() {
-		selectDefaultCatalog();
-	});
-	function selectDefaultCatalog(){
-		var _catalogID = $("#catalogID").val();
-		if(_catalogID!='' && _catalogID>0){
-			$("#catalogSelect").attr("value",_catalogID);
-		}
-	}
-</script>
+</@page.pageBase>

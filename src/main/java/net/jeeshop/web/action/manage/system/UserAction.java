@@ -1,8 +1,32 @@
 package net.jeeshop.web.action.manage.system;
 
+import java.io.IOException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import net.jeeshop.core.ManageContainer;
 import net.jeeshop.core.Services;
 import net.jeeshop.core.dao.page.PagerModel;
+import net.jeeshop.core.front.SystemManager;
 import net.jeeshop.core.oscache.ManageCache;
 import net.jeeshop.core.system.bean.Menu;
 import net.jeeshop.core.system.bean.MenuItem;
@@ -18,23 +42,6 @@ import net.jeeshop.services.manage.systemlog.bean.Systemlog;
 import net.jeeshop.web.action.BaseController;
 import net.jeeshop.web.util.LoginUserHolder;
 import net.jeeshop.web.util.RequestHolder;
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.util.*;
 
 /**
  * 后台用户管理
@@ -44,7 +51,7 @@ import java.util.*;
  */
 @Controller
 @RequestMapping("/manage/user")
-public class UserAction extends BaseController<User> {
+public class UserAction extends BaseController<User>  {
 	private static final org.slf4j.Logger logger = LoggerFactory.getLogger(UserAction.class);
 
 	private static final long serialVersionUID = 1L;
@@ -583,25 +590,4 @@ public class UserAction extends BaseController<User> {
         throw new RuntimeException("not support");
     }
     
-    
-    /**
-	 * 保险绑定
-	 * @return
-	 * @throws Exception 
-	 */
-    @RequestMapping("bindUpProduct")
-	public String bindUpProduct(@ModelAttribute("e")SecureProduct e) throws Exception{		
-//		String[] ids = e.getId().split(",");
-//		 List<String> tmp = new ArrayList<String>();
-//	        for(String str:ids){
-//	            if(str!=null && str.length()!=0){
-//	                tmp.add(str);
-//	            }
-//	        }
-//	        ids = tmp.toArray(new String[0]);
-		//updateStatus(ids,SecureProduct.Product_status_y);
-		//return "redirect:selectList";
-		//return selectList(RequestHolder.getRequest(), new SecureProduct());
-    	return "";
-	}
 }

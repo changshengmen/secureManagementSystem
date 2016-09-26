@@ -11,6 +11,13 @@
 		 $("#username").focus();
 		 
 	});
+	
+	//绑定产品
+	function bindUp(){
+	 var uid = $("input[name='id']").val();
+	 var uname = $("#username").val();
+	 window.location.href=basepath + "/manage/secureProduct/productList?uid="+uid+"&uname="+uname;
+	}
 </script>
 </head>
 
@@ -27,7 +34,7 @@
             <ul>
                 <li><a href="#tabs-1" style="font-size: 14px;">用户管理</a>
                 </li>
-               <li><a href="${basepath}/manage/secureProduct/selectListTap" style="font-size: 14px;">产品绑定</a></li>
+               <!--<li><a href="${basepath}/manage/secureProduct/selectListTap" style="font-size: 14px;">产品绑定</a></li>-->
             </ul>
             <!--------------------------------tap1 用户管理----------------------------->
             <div id="tabs-1">
@@ -97,14 +104,21 @@
 								</tr>
 				            </#if>
 							<tr >
-								<td colspan="2" style="text-align: center;">
+								<td colspan="2" style="padding-left:25%">
 									<#if insertAction>
 										<button method="insert" class="btn btn-success">
 											<i class="icon-ok icon-white"></i> 新增
 										</button>
 				                        <#else >
+				                        
+										
 										<button method="update" class="btn btn-success">
 											<i class="icon-ok icon-white"></i> 保存
+										</button>
+										<button type="button" class="btn btn-primary" onclick="bindUp()" >
+											<i class="icon-ok icon-white"></i> 产品
+											<!--<a href="${basepath}/manage/secureProduct/selectListTap" style="font-family:Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;color:#fff"> 产品</a>
+											-->
 										</button>
 				                    </#if>
 								</td>
@@ -113,10 +127,10 @@
 				</form>
             </div>
             <!--------------------------------tap2 产品管理----------------------------->
-            <div id="tabs-2">
+          <!--  <div id="tabs-2">
               
 
-            </div>
+            </div>-->
         </div>
 
 </@page.pageBase>
