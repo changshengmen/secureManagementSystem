@@ -2,20 +2,22 @@ package net.jeeshop.services.manage.secureProduct.dao.impl;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
-import org.springframework.stereotype.Repository;
-
 import net.jeeshop.core.dao.BaseDao;
 import net.jeeshop.core.dao.page.PagerModel;
 import net.jeeshop.core.util.MathUtil;
 import net.jeeshop.services.common.userProduct;
+import net.jeeshop.services.manage.orderdetail.bean.Orderdetail;
 import net.jeeshop.services.manage.secureProduct.bean.SecureProduct;
+import net.jeeshop.services.manage.secureProduct.bean.SecureProductDetail;
 import net.jeeshop.services.manage.secureProduct.dao.SecureProductDao;
+
+import org.springframework.stereotype.Repository;
+
+import javax.annotation.Resource;
 
 @Repository("secureProductDaoManage")
 public class SecureProductDaoImpl implements SecureProductDao {
-	@Resource
+    @Resource
 	private BaseDao dao;
 
 	public void setDao(BaseDao dao) {
@@ -23,7 +25,9 @@ public class SecureProductDaoImpl implements SecureProductDao {
 	}
 
 	public PagerModel selectPageList(SecureProduct e) {
-		return dao.selectPageList("manage.secureProduct.selectPageList", "manage.secureProduct.selectPageCount", e);
+		
+		return dao.selectPageList("manage.secureProduct.selectPageList",
+				"manage.secureProduct.selectPageCount", e);
 	}
 
 	public List selectList(SecureProduct e) {
@@ -42,12 +46,12 @@ public class SecureProductDaoImpl implements SecureProductDao {
 		return dao.update("manage.secureProduct.update", e);
 	}
 
-	public int deletes(String[] ids, int delete_flag, String updateAccount) {
-
+	public int deletes(String[] ids,int delete_flag, String updateAccount) {
+		
 		SecureProduct e = new SecureProduct();
 		for (int i = 0; i < ids.length; i++) {
 			e.setId(ids[i]);
-			e.setDelete_flag(1);
+			e.setDeleteFlag(1);
 			e.setUpdateAccount(updateAccount);
 			delete(e);
 		}
@@ -68,14 +72,20 @@ public class SecureProductDaoImpl implements SecureProductDao {
 
 	@Override
 	public void deleteAttributeLinkByProductID(int parseInt) {
-		dao.delete("manage.secureProduct.deleteAttributeLinkByProductID", parseInt);
+		dao.delete("manage.secureProduct.deleteAttributeLinkByProductID", parseInt);		
 	}
 
 	@Override
 	public List<SecureProduct> selectStockByIDs(List<String> productIDs) {
-		return dao.selectList("manage.secureProduct.selectStockByIDs", productIDs);
+		return dao.selectList("manage.secureProduct.selectStockByIDs",productIDs);
 	}
-
+	
+	@Override
+	//查询保险子产品
+	public List<SecureProductDetail> selectSecureProductDetail(String id) {
+		
+		return dao.selectList("manage.secureProduct.selectDetail",id);
+	}
 	@Override
 	public int selectOutOfStockProductCount() {
 		return (Integer) dao.selectOne("manage.secureProduct.selectOutOfStockProductCount");
@@ -83,25 +93,40 @@ public class SecureProductDaoImpl implements SecureProductDao {
 
 	@Override
 	public void updateImg(SecureProduct p) {
-		dao.update("manage.secureProduct.updateImg", p);
+		dao.update("manage.secureProduct.updateImg",p);
 	}
 
 	@Override
 	public void updateProductStatus(SecureProduct p) {
-		dao.update("manage.secureProduct.updateProductStatus", p);
+		dao.update("manage.secureProduct.updateProductStatus",p);
 	}
 
 	@Override
 	public void updateProductBindActivityId(SecureProduct pro) {
-		dao.update("manage.secureProduct.updateProductBindActivityId", pro);
+		dao.update("manage.secureProduct.updateProductBindActivityId",pro);
 	}
 
 	@Override
 	public void updateResetThisProductActivityID(String activityID) {
-		dao.update("manage.secureProduct.updateResetThisProductActivityID", activityID);
+		dao.update("manage.secureProduct.updateResetThisProductActivityID",activityID);
 	}
 
 	@Override
+	public int insertSecureProduct(SecureProduct p) {
+		 return dao.insert("manage.secureProduct.insertSecureProduct", p);
+	}
+
+	@Override
+	public int insertSecureProductDetail(SecureProductDetail p) {
+		return dao.insert("manage.secureProduct.insertSecureProductDetail", p);
+	}
+
+	@Override
+	public int updateSecureProductDetail(SecureProductDetail p) {
+		return dao.update("manage.secureProduct.updateSecureProductDetail", p);
+	}
+
+@Override
 	public List getAllProductsByUserId(String uid) {
 		return dao.selectList("manage.secureProduct.getAllProductsByUserId", uid);
 	}

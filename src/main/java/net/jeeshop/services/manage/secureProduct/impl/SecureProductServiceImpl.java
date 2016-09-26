@@ -4,6 +4,7 @@ import java.util.List;
 import net.jeeshop.core.ServersManager;
 import net.jeeshop.services.manage.secureProduct.SecureProductService;
 import net.jeeshop.services.manage.secureProduct.bean.SecureProduct;
+import net.jeeshop.services.manage.secureProduct.bean.SecureProductDetail;
 import net.jeeshop.services.manage.secureProduct.dao.SecureProductDao;
 import net.jeeshop.services.manage.spec.SpecService;
 import net.jeeshop.services.manage.spec.bean.Spec;
@@ -157,7 +158,11 @@ SecureProductService {
 	public List<SecureProduct> selectStockByIDs(List<String> productIDs) {
 		return dao.selectStockByIDs(productIDs);
 	}
-
+	@Override
+	public List<SecureProductDetail> selectSecureProductDetail(String id) {
+		// TODO Auto-generated method stub
+		return dao.selectSecureProductDetail(id);
+	}
 	@Override
 	public int selectOutOfStockProductCount() {
 		return dao.selectOutOfStockProductCount();
@@ -180,9 +185,28 @@ SecureProductService {
 
 	@Override
 	public void deletes(String[] ids, int deleteFlagY, String username) {
+		// TODO Auto-generated method stub
 		dao.deletes(ids,deleteFlagY,username);
 	}
 
+	@Override
+	public int insertSecureProduct(SecureProduct p) {
+		// TODO Auto-generated method stub
+		return dao.insertSecureProduct(p);
+	}
+
+	@Override
+	public int insertSecureProductDetail(SecureProductDetail p) {
+		// TODO Auto-generated method stub
+		return dao.insertSecureProductDetail(p);
+	}
+
+	@Override
+	public int updateSecureProductDetail(SecureProductDetail p) {
+		// TODO Auto-generated method stub
+		return dao.updateSecureProductDetail(p);
+	}
+	
 	@Override
 	public List<SecureProduct> getAllProductsByUserId(String uid) {
 		return dao.getAllProductsByUserId(uid);
@@ -204,5 +228,4 @@ SecureProductService {
 		return dao.addUsersBind(ids,uid);
 		
 	}
-
 }
