@@ -8,44 +8,23 @@
 				<li><a href="#tabs-1">产品基本信息</a></li>				
 				<!--<li><a href="#tabs-2">本地上传图片</a></li>-->	
 			</ul>		
-			<!--Start tab-2-->			
-			<!--<div id="tabs-2">
-				<div>
-					<h4><div class="alert alert-info">图片列表</div></h4>
-					<table class="table table-bordered">
-					<tr id="firstTr" style="display:none">
-						<td>
-								<img name="img"  style="width:50px;height:50px;max-width: 50px;max-height: 50px;">								
-						</td>
-					</tr>
-					<tr>
-					<div id="fileQueue"></div> 
-						<td>
-                            <input id="uploadify" name="uploadify" value="添加" class="btn btn-warning" type="button"/>
-                        </td>
-					</tr>
-					<tr>
-						<p>    
-	                		<a href="javascript:$('#uploadify').uploadify('upload')">开始上传</a>     
-	                		<a href="javascript:$('#uploadify').uploadify('cancel','*')">取消上传</a>    
-           				</p>              									
-					</tr>
-					
-					</table>
-				</div>
-			</div>-->
-			<!--end tab-2-->																		
+																					
 		</div>
 		<!--end tab-->
 		<!------------------------------------------------------------------------------->
+		<div id="tabs-1">
+			<div class="row form-horizontal"-role="form">
+			
+			</div>
+		</div>
 		<!--Start主产品table-->	
 		<#if e.id??>
 		<!--在列表页面点击编辑进入分支-->
 			<table class="table table-bordered table-condensed table-hover">
 				<h4>保险主产品</h4>
 				<tr style="background-color: #dff0d8">
-					<th>产品名称</th>
-					<th>币种（默认值RMB）</th>
+					<th>产品名称1</th>
+					<th>币种1（默认值RMB）</th>
 					<th>免责说明</th>
 					<th>总保险金额</th>
 					<th>总保险费</th>
@@ -94,8 +73,8 @@
 			<table class="table table-bordered table-condensed table-hover">
 				<h4>保险主产品</h4>
 				<tr style="background-color: #dff0d8">
-					<th>产品名称</th>
-					<th>币种（默认值RMB）</th>
+					<th>产品名称2</th>
+					<th>币种2（默认值RMB）</th>
 					<th>免责说明</th>
 					<th>总保险金额</th>
 					<th>总保险费</th>

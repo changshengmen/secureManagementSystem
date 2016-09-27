@@ -5,11 +5,12 @@
 		<!--Start tabs-->
 		<div id="tabs">
 			<ul>
-				<li><a href="#tabs-1">产品基本信息</a></li>				
-				<!--<li><a href="#tabs-2">本地上传图片</a></li>-->	
-			</ul>		
-			<!--Start tab-2-->			
-			<!--<div id="tabs-2">
+				<li><a href="#tabs-1">产品基本信息</a></li>	
+				<li><a href="#tabs-2">保险条款</a></li>			
+				<!--<li><a href="#tabs-3">本地上传图片</a></li>-->	
+			</ul>	
+			<!---------------------------Start tab-2--------------------------------------->			
+			<!--<div id="tabs-3">
 				<div>
 					<h4><div class="alert alert-info">图片列表</div></h4>
 					<table class="table table-bordered">
@@ -33,115 +34,85 @@
 					
 					</table>
 				</div>
-			</div>-->
-			<!--end tab-2-->																		
+			</div>-->																	
+		<!---------------------------end tab-2--------------------------------------->
+		<!---------------------------tabs-1------------------------------------------>
+			<div id="tabs-1">
+		        <input type="hidden" value="${e.id!""}" name="id" label="id" id="id"/>
+				<div class="row form-horizontal"-role="form">
+					<!--Start主产品table-->	
+					<#if e.id??>
+					<!--在列表页面点击编辑进入分支-->
+						<div class="form-group">
+	                        <label class="col-md-2 control-label">保险名称</label>
+	                        <div class="col-md-10">
+	                            <input type="text" value="${e.name!""}" name="name"  data-rule="保险名称;required;name;length[0~44];" size="44" maxlength="44" style="width: 80%;"
+	                                   id="name" />
+	                        </div>
+                    	</div>
+						<div class="form-group">
+	                        <label class="col-md-2 control-label">币种</label>
+	                        <div class="col-md-10">
+	                            <input type="text" value="${e.currency!""}" name="currency"  data-rule="商品名称;required;currency;length[0~44];" size="44" maxlength="44" style="width: 80%;"
+	                                   id="currency" />
+	                        </div>
+                    	</div>
+                    	<div class="form-group">
+	                        <label class="col-md-2 control-label">免责说明</label>
+	                        <div class="col-md-10">
+								<textarea name="deductible" class="form-control" rows="3" id="deductible"
+										  data-rule="免责说明;required;deductible;length[4~500];">${e.deductible!""}</textarea>
+	                        </div>
+                    	</div>
+                    	<div class="form-group">
+	                        <label class="col-md-2 control-label">总保险费</label>
+	                        <div class="col-md-10">
+	                            <input type="text" value="${e.premiums!""}" name="premiums"  data-rule="总保险费;required;premiums;length[0~44];" size="44" maxlength="44" style="width: 80%;"
+	                                   id="premiums" />
+	                        </div>
+                    	</div>
+                    	<div class="form-group">
+	                        <label class="col-md-2 control-label">总保险金额</label>
+	                        <div class="col-md-10">
+	                            <input type="text" value="${e.amounts!""}" name="amounts"  data-rule="总保险金额;required;amounts;length[0~44];" size="44" maxlength="44" style="width: 80%;"
+	                                   id="amounts" />
+	                        </div>
+                    	</div>
+                    	<div class="form-group">
+	                        <label class="col-md-2 control-label">特别说明</label>
+	                        <div class="col-md-10">
+								<textarea name="appointment" class="form-control" rows="3" id="appointment"
+										  data-rule="特别说明;required;appointment;length[4~500];">${e.appointment!""}</textarea>
+	                        </div>
+                    	</div>
+                    	<div class="form-group">
+	                        <label class="col-md-2 control-label">简介</label>
+	                        <div class="col-md-10">
+								<textarea name="introduce" class="form-control" rows="3" id="introduce"
+										  data-rule="简介;required;introduce;length[4~500];">${e.introduce!""}</textarea>
+	                        </div>
+                    	</div>
+                    	<div class="form-group">
+	                        <label class="col-md-2 control-label">状态</label>
+	                        <div class="col-md-10">
+								<#if e.status??&&e.status==1>
+									<img alt="已上架" src="${basepath}/resource/images/action_check.gif">已上架								
+								<#elseif e.status??&&e.status==2>
+									<img alt="已下架" src="${basepath}/resource/images/action_delete.gif">已下架
+								</#if>
+	                        </div>
+                    	</div>
+					</#if>		
+					<!--end主产品table-->
+				</div>
+			</div>
+			<!---------------------------end-tabs-1------------------------------------------>
+			<div id="tabs-2">
+			<textarea data-rule="保险条款;required;insuranceClause;" id="insuranceClause" name="insuranceClause" style="width:100%;height:500px;visibility:hidden;">${e.insuranceClause!""}</textarea>
+			</div>				
 		</div>
-		<!--end tab-->
-		<!------------------------------------------------------------------------------->
-		<!--Start主产品table-->	
-		<#if e.id??>
-		<!--在列表页面点击编辑进入分支-->
-			<table class="table table-bordered table-condensed table-hover">
-				<h4>保险主产品</h4>
-				<tr style="background-color: #dff0d8">
-					<th>产品名称</th>
-					<th>币种（默认值RMB）</th>
-					<th>免责说明</th>
-					<th>总保险金额</th>
-					<th>总保险费</th>
-					<th>特别约定</th>
-					<th>保险条款</th>
-					<th>删除标志</th>				
-					<th>录入日期</th>
-					<th>录入人</th>
-					<th>更新日期</th>
-					<th>更新人</th>
-					<th>状态</th>									
-				</tr>
-				<tr style="background-color: #dff0d8">
-					<th><input type="text" name="name" value="${e.name!""}" data-rule="产品名称;required;name;length[0~44];" size="44" maxlength="44"
-	                                   id="name" /></th>
-	                <th><input type="text" name="currency"  value="${e.currency!""}" data-rule="币种;required;currency;length[0~44];" size="44" maxlength="44"
-	                                   id="currency" /></th>
-					<th><input type="text" name="deductible"  value="${e.deductible!""}"data-rule="免责说明;required;deductible;length[0~44];" size="44" maxlength="44"
-	                                   id="deductible" /></th>
-					<th><input type="text" name="amounts"  value="${e.amounts!""}"data-rule="总保险金额;required;amounts;length[0~44];" size="44" maxlength="44"
-	                                   id="amounts" /></th>
-					<th><input type="text" name="premiums"  value="${e.premiums!""}"data-rule="总保险费;required;premiums;length[0~44];" size="44" maxlength="44"
-	                                   id="premiums" /></th>
-					<th><input type="text" name="appointment"  value="${e.appointment!""}"data-rule="特别约定;required;appointment;length[0~44];" size="44" maxlength="44"
-	                                   id="appointment" /></th>
-					<th><input type="text" name="insuranceClause"  value="${e.insuranceClause!""}"data-rule="保险条款;required;insuranceClause;length[0~44];" size="44" maxlength="44"
-	                                   id="insuranceClause" /></th>
-					<th><input type="text" name="deleteFlag"  value="${e.deleteFlag!""}"data-rule="删除标志;required;deleteFlag;length[0~44];" size="44" maxlength="44"
-	                                   id="deleteFlag" /></th>				
-					<th>录入日期</th>
-					<th>录入人</th>
-					<th>更新日期</th>
-					<th>更新人</th>
-					<th>
-						<#if e.status??&&e.status==1>
-							<img alt="已上架" src="${basepath}/resource/images/action_check.gif">
-						
-						<#elseif e.status??&&e.status==2>
-							<img alt="已下架" src="${basepath}/resource/images/action_delete.gif">
-						</#if>
-					</th>									
-				</tr>
-			</table>		
-		<#else>
-		<!--在列表页面点击添加进入分支-->
-			<table class="table table-bordered table-condensed table-hover">
-				<h4>保险主产品</h4>
-				<tr style="background-color: #dff0d8">
-					<th>产品名称</th>
-					<th>币种（默认值RMB）</th>
-					<th>免责说明</th>
-					<th>总保险金额</th>
-					<th>总保险费</th>
-					<th>特别约定</th>
-					<th>保险条款</th>
-					<th>删除标志</th>				
-					<th>录入日期</th>
-					<th>录入人</th>
-					<th>更新日期</th>
-					<th>更新人</th>
-					<th>状态</th>									
-				</tr>
-				<tr style="background-color: #dff0d8">
-					<th><input type="text" name="name"  data-rule="产品名称;required;name;length[0~40];" size="44" maxlength="44"
-	                                   id="name" /></th>
-	                <th><input type="text" name="currency"  data-rule="币种;required;currency;length[0~44];" size="44" maxlength="44"
-	                                   id="currency" /></th>
-					<th><input type="text" name="deductible"  data-rule="免责说明;required;deductible;length[0~44];" size="44" maxlength="44"
-	                                   id="deductible" /></th>
-					<th><input type="text" name="amounts"  data-rule="总保险金额;required;amounts;length[0~44];" size="44" maxlength="44"
-	                                   id="amounts" /></th>
-					<th><input type="text" name="premiums"  data-rule="总保险费;required;premiums;length[0~44];" size="44" maxlength="44"
-	                                   id="premiums" /></th>
-					<th><input type="text" name="appointment"  data-rule="特别约定;required;appointment;length[0~44];" size="44" maxlength="44"
-	                                   id="appointment" /></th>
-					<th><input type="text" name="insuranceClause"  data-rule="保险条款;required;insuranceClause;length[0~44];" size="44" maxlength="44"
-	                                   id="insuranceClause" /></th>
-					<th><input type="text" name="deleteFlag"  data-rule="删除标志;required;deleteFlag;length[0~44];" size="44" maxlength="44"
-	                                   id="deleteFlag" /></th>				
-					<th>录入日期</th>
-					<th>录入人</th>
-					<th>更新日期</th>
-					<th>更新人</th>
-					<th>
-						<#if e.status??&&e.status==1>
-							<img alt="已上架" src="${basepath}/resource/images/action_check.gif">
-						
-						<#elseif e.status??&&e.status==2>
-							<img alt="已下架" src="${basepath}/resource/images/action_delete.gif">
-						</#if>
-					</th>									
-				</tr>
-			</table>		
-		</#if>		
-		<!--end主产品table-->	
 		
+		<!--end tab-->
 		<!------------------------------------------------------------------------------->	
 		<!--Start操作按钮-->		
 		<div style="text-align: center;">
@@ -150,7 +121,7 @@
                     <i class="icon-ok icon-white"></i> 保存
                 </button>
 
-                <#if e.status??&&e.status!=2>
+                <#if e.status??&&e.status!=1>
                     <button method="updateUpProduct?id=${e.id!""}" class="btn btn-warning" onclick="return confirm('确定上架商品吗?');">
                     <i class="icon-arrow-up icon-white"></i> 上架
                     </button>
@@ -249,17 +220,41 @@ function catalogChange(obj){
 <script>
 	var editor;
 	KindEditor.ready(function(K) {
-		editor = K.create('textarea[name="productHTML"]', {
+		editor = K.create('textarea[name="insuranceClause"]', {
 			allowFileManager : true,
             uploadJson : '${basepath}/editor/upload',
             fileManagerJson : '${basepath}/editor/fileManager'
 		});
-				
+		K('input[name=getHtml]').click(function(e) {
+			alert(editor.html());
+		});
+		K('input[name=isEmpty]').click(function(e) {
+			alert(editor.isEmpty());
+		});
+		K('input[name=getText]').click(function(e) {
+			alert(editor.text());
+		});
+		K('input[name=selectedHtml]').click(function(e) {
+			alert(editor.selectedHtml());
+		});
+		K('input[name=setHtml]').click(function(e) {
+			editor.html('<h3>Hello KindEditor</h3>');
+		});
+		K('input[name=setText]').click(function(e) {
+			editor.text('<h3>Hello KindEditor</h3>');
+		});
+		K('input[name=insertHtml]').click(function(e) {
+			editor.insertHtml('<strong>插入HTML</strong>');
+		});
+		K('input[name=appendHtml]').click(function(e) {
+			editor.appendHtml('<strong>添加HTML</strong>');
+		});
+		K('input[name=clear]').click(function(e) {
+			editor.html('');
+		});
 	});
-
 	
 	function addTrFunc(){
-	alert("addTrFunc函数");
 		var cc = $("#firstTr").clone();
 		$("#firstTr").after(cc);
 		
@@ -277,19 +272,16 @@ KindEditor.ready(function(K) {
 	var editor = K.editor({
 		fileManagerJson : '${basepath}/editor/fileManager'
 	});
-	debugger;	
-	
 	K('input[name=filemanager]').click(function() {
-	
 		var imagesInputObj = $(this).parent().children("input[ccc=imagesInput]");
 		editor.loadPlugin('filemanager', function() {
 			editor.plugin.filemanagerDialog({
 				viewType : 'VIEW',
-				dirName : '',
+				dirName : 'image',
 				clickFn : function(url, title) {
 					//K('#picture').val(url);
-					arr=url.split("/");	
-					imagesInputObj.val(arr[5]);
+					//alert(url);
+					imagesInputObj.val(url);
 					editor.hideDialog();
 					clearRootImagePath(imagesInputObj);//$("#picture"));
 				}
@@ -299,19 +291,14 @@ KindEditor.ready(function(K) {
 	
 });
 </script>
-		
-	 <link rel="stylesheet" href="${basepath}/resource/uploadify/uploadify.css"  type="text/css">
-	 <script type="text/javascript" src="${basepath}/resource/uploadify/jquery.uploadify.min.js"></script>
+ <link rel="stylesheet" href="${basepath}/resource/uploadify/uploadify.css"  type="text/css">
+ <script type="text/javascript" src="${basepath}/resource/uploadify/jquery.uploadify.min.js"></script>
 	 
-	 <script type="text/javascript">
-	$(document).ready(function() {
-	
-		ajaxLoadImgList();
-		
-		var url = '${basepath}/uploadify.do';
-		
-		$("#uploadify").uploadify({
-		
+ <script type="text/javascript">
+	$(document).ready(function() {	
+		ajaxLoadImgList();		
+		var url = '${basepath}/uploadify.do';		
+		$("#uploadify").uploadify({		
 		   'auto'           : false,
            'swf'        	 : '${basepath}/resource/uploadify/uploadify.swf',
            'uploader'       : url,//后台处理的请求
@@ -321,12 +308,9 @@ KindEditor.ready(function(K) {
            'fileTypeExts' : '*.jpg;*.bmp;*.png;*.gif', //控制可上传文件的扩展名，启用本项时需同时声明filedesc
            'multi'          : true,
            'buttonText'     : '本地上传',         
-           onUploadSuccess:function(file, data, response){
-           
-				alert("上传成功,data="+data+",file="+file+",response="+response);  
-				    
-//				ajaxLoadImgList();
-		  
+           onUploadSuccess:function(file, data, response){           
+				alert("上传成功,data="+data+",file="+file+",response="+response);  				    
+//				ajaxLoadImgList();		  
 			   if(data.error == '1') {
 				   alert("上传失败：\n失败原因:" + data.msg);
 			   } else {
@@ -336,23 +320,18 @@ KindEditor.ready(function(K) {
 				   $("#picture_url").val(imgSrc);
 				   $("#productImg").attr("src",data);	
 			   }
-           },
-           
+           },          
            onUploadError:function(file, errorCode, errorMsg) {
         	   alert("上传失败,data="+data+",file="+file+",response="+response);   
            }
 	 	});
-	});
-	
-	
+	});	
 	//ajax加载内容图片列表
-	function ajaxLoadImgList(){
-	
+	function ajaxLoadImgList(){	
 		if($("#id").val()==''){
 			 $("#fileListDiv").html("");
 			 return;
-		}
-		
+		}		
 		 $("#fileListDiv").html("");
 		var _url = "ajaxLoadImgList?id="+$("#id").val();
 		$.ajax({
@@ -379,8 +358,7 @@ KindEditor.ready(function(K) {
 			alert("加载图片列表失败！");
 		  }
 		});
-	}
-	
+	}	
 	//产品图片设置为默认图片
 	function setProductImageToDefault(imageUrl){
 		var _url = "setProductImageToDefault?id="+$("#id").val()+"&imageUrl="+imageUrl;
@@ -400,8 +378,7 @@ KindEditor.ready(function(K) {
 			alert("设置失败！");
 		  }
 		});
-	}
-	
+	}	
 	//产品图片设置为默认图片
 	function deleteImageByProductID(imageUrl){
 		if(!confirm("确定删除选择的记录?")){
@@ -416,8 +393,7 @@ KindEditor.ready(function(K) {
 				  	ajaxLoadImgList();
 			  //$("#showMessage").append("删除成功！").fadeTo(2000, 1, function(){
 				//   $("#showMessage").html("").hide();
-			  //});
-			  
+			  //});			  
 		  },
 		  dataType: "text",
 		  error:function(){
