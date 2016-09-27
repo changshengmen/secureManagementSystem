@@ -1,5 +1,5 @@
 <#import "/manage/tpl/pageBase.ftl" as page>
-<@page.pageBase currentMenu="商品管理">
+<@page.pageBase currentMenu="用户管理">
 <style type="text/css">
 .product-name {
 	display: inline-block;
@@ -13,24 +13,29 @@
 <script type="text/javascript">
   //初始化将已绑定的产品check
 	$(function(){
-	 var ids = $("#repeatIds").val();
-	 var arr = ids.split(',');
-		 $.each(arr,function(a){
-		 $("input[name='ids'][value="+arr[a]+"]").attr("checked",true);
-		})
+	   var ids = $("#repeatIds").val();;
+	   var arr = ids.split(',');
+		   $.each(arr,function(a){
+			  $("input[name='ids'][value="+arr[a]+"]").attr("checked",true);
+		  })
 	})
 
+  	
   //模糊查询	
 	function query(){
-	  var qName = $("#name").val();
-	  var _form = $("form");
+		var ids =''	;//所有选中的节点
+		$("input:checkbox[name='ids']:checked").each(function(i){ 
+			ids += ','+ $(this).val();
+		})
+	     var qName = $("#name").val();
+	     var _form = $("form");
 		_form.attr("action","queryList?qName="+qName);
 		_form.submit();
 	}
 	
 	//绑定
 	function bind(){
-	 var ids =''	;
+	  var ids ='';
 		$("input:checkbox[name='ids']:checked").each(function(i){ 
 			ids += ','+ $(this).val();
 		})
