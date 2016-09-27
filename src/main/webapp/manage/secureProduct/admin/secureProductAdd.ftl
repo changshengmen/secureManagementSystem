@@ -1,7 +1,6 @@
 <#import "/manage/tpl/pageBase.ftl" as page>
 <@page.pageBase currentMenu="保险产品管理">
-<form action="${basepath}/manage/secureProduct/insertSecureProduct" id="form" name="form" namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">
-		
+<form action="${basepath}/manage/secureProduct/insertSecureProduct" id="form" name="form" namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">		
 		<div id="tabs">
 			<ul>
 				<li><a href="#tabs-1">产品基本信息</a></li>				

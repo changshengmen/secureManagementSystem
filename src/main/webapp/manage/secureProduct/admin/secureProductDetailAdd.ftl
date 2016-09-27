@@ -69,7 +69,6 @@
 		</div>
 		<!--end tab-->
 </form>
-
 <script>
 $(function() {
 	$( "#tabs" ).tabs({

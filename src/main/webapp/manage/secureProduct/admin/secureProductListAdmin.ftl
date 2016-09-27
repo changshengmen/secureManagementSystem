@@ -10,7 +10,6 @@
 	text-overflow: ellipsis;
 }
 </style>
-
 	<form action="${basepath}/manage/secureProduct" namespace="/manage" method="post" theme="simple">
 		
 		<table class="table table-bordered table-condensed">
