@@ -47,10 +47,11 @@
 		<table class="table table-bordered table-condensed table-hover">
 				<tr style="background-color: #dff0d8">
 					<th width="20"><input type="checkbox" id="firstCheckbox" /></th>
-					<th nowrap="nowrap">商品编号</th>
-					
+					<th nowrap="nowrap">保险编号</th>
 					<th>保险名称</th>
-					<th>定价</th>
+					<th>币种</th>
+					<th>总保险金额</th>
+					<th>总保险费</th>
 					<th>保险简介</th>
 				</tr>
 				<#list product as item>
@@ -58,7 +59,9 @@
 					<td><input type="checkbox" name="id" value="${item.id!""}" /></td>
 					<td nowrap="nowrap" name="itemId">${item.id!""}</td>	
 					<td>&nbsp;${item.name!""}</td>
-					<td>&nbsp;${item.price!""}</td>
+					<td>&nbsp;${item.currency!""}</td>
+					<td>&nbsp;${item.amounts!""}</td>
+					<td>&nbsp;${item.premiums!""}</td>
 					<td>&nbsp;${item.introduce!""}</td>
 				</tr>
 				</#list>
