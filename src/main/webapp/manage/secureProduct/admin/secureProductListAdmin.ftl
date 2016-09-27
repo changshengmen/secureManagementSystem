@@ -9,6 +9,16 @@
 	-o-text-overflow: ellipsis;
 	text-overflow: ellipsis;
 }
+/* 设置td内容超出宽度时隐藏超出部分的内容 */
+#t_secure{
+    table-layout:fixed;/* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */  
+}  
+#t_secure td{
+    word-break:keep-all;/*不换行 */  
+    white-space:nowrap;/* 不换行 */  
+    overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */  
+    text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用*/  
+}  
 </style>
 	<form action="${basepath}/manage/secureProduct" namespace="/manage" method="post" theme="simple">
 		
@@ -64,7 +74,6 @@
 							<i class="icon-arrow-up icon-white"></i> 上架
 						</button>
                     </#if>
-
                     <#if checkPrivilege("secureProduct/updateDown")>
 						<button method="updateDown" class="btn btn-warning" onclick="return submitIDs(this,'确定下架选择的记录?');">
 							<i class="icon-arrow-down icon-white"></i> 下架
@@ -75,46 +84,28 @@
 			</tr>
 		</table>
 
-		<table class="table table-bordered table-condensed table-hover">
+		<table id="t_secure" class="table table-bordered table-condensed table-hover" style="text-align: center;">
 			<tr style="background-color: #dff0d8">
-				<th width="20"><input type="checkbox" id="firstCheckbox" /></th>
-				<th nowrap="nowrap">商品编号</th>
-				<th>业务员编号</th>
-				<th>产品名称</th>
-				<th>币种</th>
-				<th>免责说明</th>
-				<th>总保险金额</th>
-				<th>总保险费</th>
-				<th>特别约定</th>
-				<th>保险条款</th>
-				<th>删除标志</th>				
-				<th>录入日期</th>
-				<th>录入人</th>
-				<th>更新日期</th>
-				<th>更新人</th>
-				<th>状态</th>
-				
-				<th width="60">操作</th>
+				<th style="width:5%;text-align: center"><input type="checkbox" id="firstCheckbox" /></th>
+				<th style="width:10%;text-align: center">保险编号</th>				
+				<th style="width:10%;text-align: center">保险名称</th>
+				<th style="width:10%;text-align: center">币种</th>
+				<th style="width:15%;text-align: center">总保险金额</th>
+				<th style="width:15%;text-align: center">总保险费</th>	
+				<th style="width:20%;text-align: center">保险简介</th>					
+				<th style="width:5%">状态</th>				
+				<th style="width:10%;text-align: center">操作</th>
 			</tr>
             <#list pager.list as item>
 				<tr>
 					<td><input type="checkbox" name="ids"
 						value="${item.id!""}" /></td>
-					<td nowrap="nowrap">&nbsp;${item.id!""}</td>				
-					<td>&nbsp;${item.uid!""}</td>
+					<td >&nbsp;${item.id!""}</td>									
 					<td>&nbsp;${item.name!""}</td>
 					<td>&nbsp;${item.currency!""}</td>	
-					<td>&nbsp;${item.deductible!""}</td>
 					<td>&nbsp;${item.amounts!""}</td>
 					<td>&nbsp;${item.premiums!""}</td>	
-					<td>&nbsp;${item.appointment!""}</td>	
-					<td>&nbsp;${item.insuranceClause!""}</td>
-					<td>&nbsp;${item.deleteFlag!""}</td>
-					<td>&nbsp;${item.createtime!""}</td>	
-					<td>&nbsp;${item.createAccount!""}</td>	
-					<td>&nbsp;${item.updatetime!""}</td>
-					<td>&nbsp;${item.updateAccount!""}</td>
-					
+					<td>&nbsp;${item.introduce!""}</td>			
 					<td>&nbsp;
 						<#if item.status??&&item.status==1>
 							<img alt="已上架" src="${basepath}/resource/images/action_check.gif">
@@ -124,9 +115,8 @@
 						</#if>
 					</td>
 					<td >
-						<a href="toEditProduct?id=${item.id}">编辑</a>
-					</td>
-					<td >
+						<a href="toEditProduct?id=${item.id}">编辑</a>|
+					
 						<a href="toOrder?id=${item.id}">查看</a>
 					</td>
 				</tr>

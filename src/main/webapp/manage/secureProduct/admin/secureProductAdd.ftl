@@ -1,61 +1,112 @@
 <#import "/manage/tpl/pageBase.ftl" as page>
 <@page.pageBase currentMenu="保险产品管理">
 <form action="${basepath}/manage/secureProduct/insertSecureProduct" id="form" name="form" namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">		
-		<div id="tabs">
-			<ul>
-				<li><a href="#tabs-1">产品基本信息</a></li>				
-				<!--<li><a href="#tabs-2">本地上传图片</a></li>-->	
-			</ul>
-		<div>
-		<table class="table table-bordered table-condensed table-hover">
-			<h4>保险主产品</h4>
-			<tr style="background-color: #dff0d8">
-			<!--	<th nowrap="nowrap">商品编号</th>
-				<th>业务员编号</th>-->
-				<th>产品名称</th>
-				<th>币种（默认值RMB）</th>
-				<th>免责说明</th>
-				<th>总保险金额</th>
-				<th>总保险费</th>
-				<th>特别约定</th>
-				<th>保险条款</th>
-				<th>删除标志</th>				
-				<th>录入日期</th>
-				<th>录入人</th>
-				<th>更新日期</th>
-				<th>更新人</th>
-				<th>状态</th>				
-				<th width="60">操作</th>
-			</tr>
-			<tr style="background-color: #dff0d8">
-			<!--	<th><input id="id" type="text"name="id"/></th>
-				<th></th>-->
-				<th><input id="name" type="text"name="name"/></th>
-				<th><input id="currency" type="text"name="currency"value="RMB"/></th>
-				<th>免责说明</th>
-				<th>总保险金额</th>
-				<th>总保险费</th>
-				<th>特别约定</th>
-				<th>保险条款</th>
-				<th>删除标志</th>				
-				<th>录入日期</th>
-				<th>录入人</th>
-				<th>更新日期</th>
-				<th>更新人</th>
-				<th>状态</th>				
-				<th width="60">操作</th>
-			</tr>
-			</table>		
-			<span style="margin-left:0px;">
-				<button class="btn btn-success">
-                    <i class="icon-ok icon-white"></i>添加	
-                </button>
-				<button onclick='javascript:history.back(-1);' class="btn btn-success">
-	                <i class="icon-ok icon-white"></i>返回
-	            </button>	           
-			</span>	
+	<div id="tabs">
+		<ul>
+			<li><a href="#tabs-1">保险主产品基本信息</a></li>	
+			<li><a href="#tabs-2">保险子产品基本信息</a></li>
+			<li><a href="#tabs-3">保险条款</a></li>				
+			<!--<li><a href="#tabs-4">本地上传图片</a></li>-->	
+		</ul>
+		<!--------------------------主产品信息添加模块------------------------------------->		
+		<div id="tabs-1">
+			<div class="row form-horizontal"-role="form">
+			  	  <div class="form-group col-md-6">
+	                        <label class="col-md-4 control-label">产品名称</label>
+	                        <div class="col-md-8"><input type="text"  value="${e.name!""}" name="name"  data-rule="产品名称;required;price;" size="10" maxlength="10"
+	                                                     id="name" />
+	                        </div>
+	              </div>
+	               <div class="form-group col-md-6">
+	                        <label class="col-md-4 control-label">币种</label>
+	                        <div class="col-md-8"><input type="text"  value="${e.currency!""}" name="currency"  data-rule="币种（默认值RMB）;required;currency;" size="10" maxlength="10"
+	                                                     id="currency" />
+	                        </div>
+	              </div>
+	               <div class="form-group col-md-6">
+	                        <label class="col-md-4 control-label">总保险金额</label>
+	                        <div class="col-md-8"><input type="text"  value="${e.amounts!""}" name="amounts"  data-rule="总保险金额;required;amounts;" size="10" maxlength="10"
+	                                                     id="amounts" />
+	                        </div>
+	              </div>
+	              <div class="form-group col-md-6">
+	                        <label class="col-md-4 control-label">总保险费</label>
+	                        <div class="col-md-8"><input type="text"  value="${e.premiums!""}" name="premiums"  data-rule="总保险费;required;premiums;" size="10" maxlength="10"
+	                                                     id="premiums" />
+	                        </div>
+	              </div>
+	                <div class="form-group col-md-12">
+	                       <label class="col-md-2 control-label">特别约定</label>
+	                        <div class="col-md-10">
+								<textarea name="appointment" class="form-control" rows="3" id="appointment"
+										  data-rule="特别约定;required;appointment;length[4~500];">${e.appointment!""}</textarea>
+	                        </div>
+	               </div>
+				   <div class="form-group col-md-12">
+	                        <label class="col-md-2 control-label">免责说明</label>
+	                        <div class="col-md-10">
+								<textarea name="deductible" class="form-control" rows="3" id="deductible"
+										  data-rule="免责说明;required;deductible;length[4~500];">${e.deductible!""}</textarea>
+	                        </div>
+	               </div>
+	               
+	            </div>
+            </div>
+            <!--------------------------主产品信息添加模块------------------------------------->
+            
+            <!--------------------------start子产品信息添加模块------------------------------------->
+            <div id="tabs-2">
+            
+            	<#list [1,2,3] as item>
+					<table class="table">                 
+	     				<tr>
+	     				<td>id</td>
+	     				<td>子产品名称</td>
+	     				<td>保险金额</td>
+	     				<td>费率</td>
+	     				<td>保费</td>  
+	     				<td>保险金额的确定方式</td>		           				
+	     				</tr>
+						<tr>
+							<td><input type="text" name="e.secureProductList[item_index].id"/></td>
+							<td><input type="text" name="e.secureProductList[${item_index}].subName"  class="search-query input-small"/></td>
+							<td><input type="text" name="e.secureProductList[${item_index}].amount"  class="search-query input-small"/></td>
+							<td><input type="text" name="e.secureProductList[${item_index}].rate"  class="search-query input-small"/></td>
+							<td><input type="text" name="e.secureProductList[${item_index}].premium"  class="search-query input-small"/></td>
+							<td>
+	                            <#assign map = {'0':'确定方式1','1':'确定方式2','2':'确定方式3','3':'确定方式4'}>
+	                            <select id="sure_way" name="e.secureProductList[item_index].sure_way" class="search-query input-medium">
+	                                <#list map?keys as key>
+	                                    <option value="${key}">${map[key]}</option>
+	                                </#list>
+	                            </select>
+	                        </td>
+						</tr>
+						<tr>
+							<td>
+							备注
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">
+							<textarea name="e.secureProductList[item_index].remark" class="form-control"
+							  data-rule="备注;required;secureProductList[item_index].remark;length[4~500];"></textarea>
+							</td>
+						</tr>
+						</table>
+           		  </#list>
+           	 	
 			</div>	
-			<!--	<div id="tabs-2">
+            <!--------------------------end子产品信息添加模块------------------------------------->
+		    
+			<!--------------------------start-tabs-3------------------------------------->
+			<div id="tabs-3">
+				<textarea data-rule="保险条款;required;insuranceClause;" id="insuranceClause" name="insuranceClause" style="width:100%;height:500px;visibility:hidden;">${e.appointment!""}</textarea>
+			</div>
+				
+			<!--------------------------end-tabs-3------------------------------------->			
+			<!--------------------------start-tabs-4------------------------------------->
+			<!--<div id="tabs-4">
 					<div>
 						<h4><div class="alert alert-info">图片列表</div></h4>
 						<table class="table table-bordered">
@@ -80,8 +131,20 @@
 						</table>
 					</div>
 				</div>
-				--><!--end tab-2-->																		
+				-->
+			<!--------------------------end-tabs-4------------------------------------->	
+																
 		</div><!--end tab-->
+			<!--------------------------操作按钮模块------------------------------------->
+			<span style="margin-left:0px;">
+				<button class="btn btn-success">
+	                <i class="icon-ok icon-white"></i>添加	
+	            </button>
+				<button onclick='javascript:history.back(-1);' class="btn btn-success">
+	                <i class="icon-ok icon-white"></i>返回
+	            </button>	           
+			</span>	
+			<!--------------------------操作按钮模块------------------------------------->	
 </form>
 
 <script>
@@ -162,7 +225,7 @@ function catalogChange(obj){
 <script>
 	var editor;
 	KindEditor.ready(function(K) {
-		editor = K.create('textarea[name="productHTML"]', {
+		editor = K.create('textarea[name="insuranceClause"]', {
 			allowFileManager : true,
             uploadJson : '${basepath}/editor/upload',
             fileManagerJson : '${basepath}/editor/fileManager'

@@ -1,63 +1,13 @@
 <#import "/manage/tpl/pageBase.ftl" as page>
 <@page.pageBase currentMenu="保险产品管理">
 <form action="${basepath}/manage/secureProduct" id="form" name="form" namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">				
-		<!------------------------------------------------------------------------------->
-		<!--Start子产品table-->	
-		
-		<#if e.id?? && e.id?size gt 0>
-		<!--在主产品编辑页面点击编辑进入分支-->		
-		<#list e.secureProductDetailList as item>
-			<table class="table table-bordered table-condensed table-hover">
-				<h4>保险子产品</h4>
-				<tr>
-					<td style="display: none;"><input type="hidden" value="${item.id!""}" name="item.id"/></td>"
-					<td><input type="text"  value="${item.subName!""}" name="item.subName"  class="search-query input-small"/></td>
-			 		<td><input type="text"  value="${item.amount!""}" name="item.amount"  class="search-query input-small"/></td>
-			 		<td><input type="text"  value="${item.sure_way!""}" name="item.sure_way"  class="search-query input-small"/></td>
-			 		<td><input type="text"  value="${item.rate!""}" name="item.rate"  class="search-query input-small"/></td>
-					<td><input type="text"  value="${item.premium!""}" name="item.premium"  class="search-query input-small"/></td>
-					<td><input type="text"  value="${item.remark!""}" name="item.remark"  class="search-query input-small"/></td>
-				</tr>
-			</table>
-		</#list>
-		<#else>
-		<!--id为空代表没有子产品-->	
-		<span><input type="button" value="追加子产品" onclick="addSubTable()"/></span>
-		<div id="subProduct">
-			没有子产品可以修改，请先为该产品添加子产品！
-		</div>		
-		</#if>				
-		<!--end子产品table-->	
-		<!------------------------------------------------------------------------------->
-		<!--Start操作按钮-->		
-		<div style="text-align: center;">
-                <button method="updateSubProduct" class="btn btn-success">
-                    <i class="icon-ok icon-white"></i> 保存
-                </button>
-                <#if e.status??&&e.status!=2>
-                    <button method="updateUpProduct?id=${e.id!""}" class="btn btn-warning" onclick="return confirm('确定上架商品吗?');">
-                    <i class="icon-arrow-up icon-white"></i> 上架
-                    </button>
-                <#else>
-                    <button method="updateDownProduct?id=${e.id!""}" class="btn btn-warning" onclick="return confirm('确定下架商品吗?');">
-                    <i class="icon-arrow-down icon-white"></i> 下架
-                    </button>
-                </#if>          
-				<button onclick='javascript:history.back(-1);' class="btn btn-success">
-		                <i class="icon-ok icon-white"></i>返回
-		        </button>	 
-		</div>
-		<!--end操作按钮-->	
-		<!------------------------------------------------------------------------------->
-		<!--Start tabs-->
+	<!--<span><input type="button" value="追加子产品" onclick="addSubTable()"/></span>-->
 		<div id="tabs">
 			<ul>
-				<li><a href="#tabs-1">产品基本信息</a></li>				
+				<li><a href="#tabs-1">保险子产品基本信息</a></li>				
 				<!--<li><a href="#tabs-2">本地上传图片</a></li>-->	
 			</ul>
-			
-			
-			<!--Start tab-2-->			
+			<!---------------------------Start-tabs-2---------------------------------------------->				
 			<!--<div id="tabs-2">
 				<div>
 					<h4><div class="alert alert-info">图片列表</div></h4>
@@ -83,9 +33,71 @@
 					</table>
 				</div>
 			</div>-->
-			<!--end tab-2-->																		
+			<!---------------------------end-tabs-2---------------------------------------------->	
+			<!---------------------------Start-tabs-1-子产品修改table--------------------------------------------->		
+			<div id="tabs-1">
+			<#if e.secureProductList?? && e.secureProductList?size gt 0>
+                        <#list e.secureProductList as item>	  
+                        	<table class="table">                 
+	             				<tr>
+	             				<td>子产品名称</td>
+	             				<td>保险金额</td>
+	             				<td>费率</td>
+	             				<td>保费</td>  
+	             				<td>保险金额的确定方式</td>		           				
+	             				</tr>
+								<tr>
+									<td><input type="text" value="${item.id!""}" name="secureProductList[item_index].id"/></td>
+									<td><input type="text"  value="${e.secureProductList[item_index].subName!""}" name="secureProductList[${item_index}].subName"  class="search-query input-small"/></td>
+									<td><input type="text"  value="${e.secureProductList[item_index].amount!""}" name="secureProductList[${item_index}].amount"  class="search-query input-small"/></td>
+									<td><input type="text"  value="${e.secureProductList[item_index].rate!""}" name="secureProductList[${item_index}].rate"  class="search-query input-small"/></td>
+									<td><input type="text"  value="${e.secureProductList[item_index].premium!""}" name="secureProductList[${item_index}].premium"  class="search-query input-small"/></td>
+									<td>
+	                                    <#assign map = {'0':'确定方式1','1':'确定方式2','2':'确定方式3','3':'确定方式4'}>
+	                                    <select id="sure_way" name="secureProductList[item_index].sure_way" class="search-query input-medium">
+	                                        <#list map?keys as key>
+	                                            <option value="${key}" <#if item.sure_way?? && item.sure_way==key>selected="selected" </#if>>${map[key]}</option>
+	                                        </#list>
+	                                    </select>
+	                                </td>
+								</tr>
+								<tr>
+									<td>
+									备注
+									</td>
+								</tr>
+								<tr>
+									<td>
+									<textarea name="secureProductList[item_index].remark" class="form-control" rows="3"
+									  data-rule="备注;required;secureProductList[item_index].remark;length[4~500];">${e.secureProductList[item_index].remark!""}</textarea>
+									</td>
+								</tr>
+							<table class="table">
+                        </#list>					
+					</#if>			
+               
+	              <div class="form-group">
+	                        <label class="col-md-2 control-label">备注</label>
+	                        <div class="col-md-10">
+								<textarea name="remark" class="form-control" rows="3" id="remark"
+										  data-rule="备注;required;remark;length[4~500];">${e.remark!""}</textarea>
+	                        </div>
+	               </div>
+		</div>								
+		<!---------------------------end-tabs-1---------------------------------------------->				
+		
+		<!--Start操作按钮-->		
+		<div style="text-align: center;">
+                <button class="btn btn-success">
+                    <i class="icon-ok icon-white"></i>添加	
+                </button>		
+				<button onclick='javascript:history.back(-1);' class="btn btn-success">
+		                <i class="icon-ok icon-white"></i>返回
+		        </button>	 
 		</div>
-		<!--end tab-->
+		<!--end操作按钮-->	
+		<!------------------------------------------------------------------------------->
+	</div><!--end-tabs-->
 </form>
 
 <script>
