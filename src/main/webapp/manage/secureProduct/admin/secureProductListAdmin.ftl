@@ -17,27 +17,32 @@
     word-break:keep-all;/*不换行 */  
     white-space:nowrap;/* 不换行 */  
     overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */  
-    text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用*/  
+    text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:Rhidden;一起使用*/  
 }  
 </style>
-	<form action="${basepath}/manage/secureProduct" namespace="/manage" method="post" theme="simple">
-		
+	<form action="${basepath}/manage/secureProduct" namespace="/manage" method="post" theme="simple">		
 		<table class="table table-bordered table-condensed">
 			<tr>
-
 				<td style="text-align: right;">商品编号</td>
-				<td style="text-align: left;"><input type="text"  value="${e.id!""}" name="id"  class="search-query input-small"
+				<td style="text-align: left;"><input type="text" name="id"  class="search-query input-small"
 						id="id" /></td>
 
 				<td style="text-align: right;">商品名称</td>
-				<td style="text-align: left;" ><input type="text"  value="${e.name!""}" name="name"  class="input-small"
+				<td style="text-align: left;" ><input type="text" name="name"  class="input-small"
 						id="name" /></td>	
 				
 			</tr>
 			<tr>
 				<td style="text-align: right;">录入时间</td>
-				<td style="text-align: left;" ><input type="text"  value="${e.createtime!""}" name="createtime"  class="input-small"
-						id="createtime" /></td>
+				<td style="text-align: left;">
+					<input id="d4311" type="text" name="startDate"
+					value="${e.startDate!""}"
+					onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'d4312\')||\'2020-10-01\'}'})"/>
+					~ 
+					<input id="d4312" type="text" name="endDate"
+					value="${e.endDate!""}"
+					onFocus="WdatePicker({minDate:'#F{$dp.$D(\'d4311\')}',maxDate:'2020-10-01'})"/>
+				</td>
 					
 				<td style="text-align: right;">状态</td>
 				<td style="text-align: left;">
@@ -115,9 +120,7 @@
 						</#if>
 					</td>
 					<td >
-						<a href="toEditProduct?id=${item.id}">编辑</a>|
-					
-						<a href="toOrder?id=${item.id}">查看</a>
+						<a href="toEditProduct?id=${item.id}">编辑</a>
 					</td>
 				</tr>
             </#list>

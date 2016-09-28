@@ -39,9 +39,15 @@ public class SecureProductDaoImpl implements SecureProductDao {
 	}
 
 	public int delete(SecureProduct e) {
+		SecureProductDetail subProduct=new SecureProductDetail();
+		subProduct.setPid(e.getId());
+		subProduct.setUpdateAccount(e.getUpdateAccount());
+		deleteSubProduct(subProduct);
 		return dao.delete("manage.secureProduct.delete", e);
 	}
-
+	public int deleteSubProduct(SecureProductDetail e) {
+		return dao.delete("manage.secureProduct.deleteSubProduct", e);
+	}
 	public int update(SecureProduct e) {
 		return dao.update("manage.secureProduct.update", e);
 	}
@@ -98,9 +104,15 @@ public class SecureProductDaoImpl implements SecureProductDao {
 
 	@Override
 	public void updateProductStatus(SecureProduct p) {
+		SecureProductDetail subProduct=new SecureProductDetail();
+		subProduct.setPid(p.getId());
+		updateSubProductStatus(subProduct);
 		dao.update("manage.secureProduct.updateProductStatus",p);
 	}
-
+	public void updateSubProductStatus(SecureProductDetail e) {		
+		dao.update("manage.secureProduct.updateSubProductStatus",e);
+	}
+	
 	@Override
 	public void updateProductBindActivityId(SecureProduct pro) {
 		dao.update("manage.secureProduct.updateProductBindActivityId",pro);

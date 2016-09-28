@@ -53,7 +53,7 @@ SecureProductService {
 	@Override
 	public int update(SecureProduct e) {
 		super.update(e);
-		insertOrUpdateSpec(e);
+		
 		return 1;
 	}
 	

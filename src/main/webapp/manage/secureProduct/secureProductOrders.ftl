@@ -1,15 +1,84 @@
 <#import "/manage/tpl/pageBase.ftl" as page>
 <@page.pageBase currentMenu="保险产品管理">
 <form action="${basepath}/manage/secureProduct" id="form" name="form" namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">		
-		<!------------------------------------------------------------------------------->
-		<!--Start tabs-->
-		<div id="tabs">
-			<ul>
-				<li><a href="#tabs-1">产品基本信息</a></li>				
-				<!--<li><a href="#tabs-2">本地上传图片</a></li>-->	
-			</ul>		
-				<!--Start tab-2-->			
-				<!--<div id="tabs-2">
+	<div id="tabs">
+		<ul>
+			<li><a href="#tabs-1">保险主产品基本信息</a></li>	
+			<li><a href="#tabs-2">保险子产品基本信息</a></li>
+			<li><a href="#tabs-3">保险条款</a></li>				
+			<!--<li><a href="#tabs-4">本地上传图片</a></li>-->	
+		</ul>
+		<!--------------------------主产品信息添加模块------------------------------------->		
+		<div id="tabs-1">
+		 	<input type="hidden" value="${e.id!""}" name="id" label="id" id="id"/>
+		 	<!----------------------------------------------商品列表-------------------------------------------->
+			<table class="table table-bordered table-condensed table-hover">
+				<tr style="background-color: #dff0d8">
+					<td style="display: none;">保险编号</td>
+					<th nowrap="nowrap">保险名称</th>
+					<th>币种</th>
+					<th>总保险金额</th>
+					<th>总保险费</th>
+					<th>特别约定</th>
+					<th>免责说明</th>
+					<th>保险简介</th>
+				</tr>
+				
+	   			<tr>
+					<td style="display: none;">${e.id!""}</td>	
+					<td>&nbsp;${e.name!""}</td>
+					<td>&nbsp;${e.currency!""}</td>
+					<td>&nbsp;${e.amounts!""}</td>
+					<td>&nbsp;${e.premiums!""}</td>
+					<td>&nbsp;${e.appointment!""}</td>
+					<td>&nbsp;${e.deductible!""}</td>
+					<td>&nbsp;${e.introduce!""}</td>
+				</tr>
+			</table>
+           </div>
+            <!--------------------------主产品信息添加模块------------------------------------->
+            
+            <!--------------------------start子产品信息添加模块------------------------------------->
+            <div id="tabs-2"> 
+            	<table class="table" table-bordered table-condensed table-hover">                 
+     				<tr style="background-color: #dff0d8">
+     				<td style="display: none;">保险编号</td>
+     				<td>子产品名称</td>
+     				<td>保险金额</td>
+     				<td>费率</td>
+     				<td>保费</td> 
+     				<td>备注</td> 	
+     				<td>保险金额的确定方式</td>	           				
+     				</tr>
+        	        <#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
+	                    <#list e.secureProductDetailList as item>
+							<tr>
+								<td style="display: none;"><input type="hidden" value="${item.id!""}" name="secureProductDetailList[${item_index}].id"/></td>
+								<td>${e.secureProductDetailList[item_index].subName!""}</td>
+								<td>${e.secureProductDetailList[item_index].amount!""}</td>
+								<td>${e.secureProductDetailList[item_index].rate!""}</td>
+								<td>${e.secureProductDetailList[item_index].premium!""}</td>
+								<td>${e.secureProductDetailList[item_index].remark!""}</td>
+								<td>
+	                                <#assign map = {'0':'确定方式1','1':'确定方式2','2':'确定方式3','3':'确定方式4'}>	                                
+	                                    <#list map?keys as key>
+	                                        <#if item.sure_way?? && item.sure_way==key> ${map[key]}</#if>
+	                                    </#list>	                                
+	                            </td>
+							</tr>
+	                    </#list>
+				     </#if>
+           		  </table>          	 	
+			</div>	
+            <!--------------------------end子产品信息添加模块------------------------------------->
+		    
+			<!--------------------------start-tabs-3------------------------------------->
+			<div id="tabs-3">
+				${e.insuranceClause!""}
+			</div>				
+			<!--------------------------end-tabs-3------------------------------------->			
+			<!--------------------------start-tabs-4------------------------------------->
+			<!--<div id="tabs-4">
 					<div>
 						<h4><div class="alert alert-info">图片列表</div></h4>
 						<table class="table table-bordered">
@@ -25,7 +94,7 @@
 	                        </td>
 						</tr>
 						<tr>
-							<p>    
+							 <p>    
 		                		<a href="javascript:$('#uploadify').uploadify('upload')">开始上传</a>     
 		                		<a href="javascript:$('#uploadify').uploadify('cancel','*')">取消上传</a>    
 	           				</p>              									
@@ -33,154 +102,20 @@
 						
 						</table>
 					</div>
-				</div>-->
-				<!--end tab-2-->																		
-		</div>
-		<!--end tab-->
-		<!------------------------------------------------------------------------------->
-		<!--Start主产品table-->	
-		<#if e.id??>
-		<!--在列表页面点击编辑进入分支-->
-			<table class="table table-bordered table-condensed table-hover">
-				<h4>保险主产品</h4>
-				<tr style="background-color: #dff0d8">
-					<th>产品名称</th>
-					<th>币种（默认值RMB）</th>
-					<th>免责说明</th>
-					<th>总保险金额</th>
-					<th>总保险费</th>
-					<th>特别约定</th>
-					<th>保险条款</th>
-					<th>删除标志</th>				
-					<th>录入日期</th>
-					<th>录入人</th>
-					<th>更新日期</th>
-					<th>更新人</th>
-					<th>状态</th>									
-				</tr>
-				<tr style="background-color: #dff0d8">
-					<th><input type="text" name="name" value="${e.name!""}" data-rule="产品名称;required;name;length[0~44];" size="44" maxlength="44"
-	                                   id="name" /></th>
-	                <th><input type="text" name="currency"  value="${e.currency!""}" data-rule="币种;required;currency;length[0~44];" size="44" maxlength="44"
-	                                   id="currency" /></th>
-					<th><input type="text" name="deductible"  value="${e.deductible!""}"data-rule="免责说明;required;deductible;length[0~44];" size="44" maxlength="44"
-	                                   id="deductible" /></th>
-					<th><input type="text" name="amounts"  value="${e.amounts!""}"data-rule="总保险金额;required;amounts;length[0~44];" size="44" maxlength="44"
-	                                   id="amounts" /></th>
-					<th><input type="text" name="premiums"  value="${e.premiums!""}"data-rule="总保险费;required;premiums;length[0~44];" size="44" maxlength="44"
-	                                   id="premiums" /></th>
-					<th><input type="text" name="appointment"  value="${e.appointment!""}"data-rule="特别约定;required;appointment;length[0~44];" size="44" maxlength="44"
-	                                   id="appointment" /></th>
-					<th><input type="text" name="insuranceClause"  value="${e.insuranceClause!""}"data-rule="保险条款;required;insuranceClause;length[0~44];" size="44" maxlength="44"
-	                                   id="insuranceClause" /></th>
-					<th><input type="text" name="deleteFlag"  value="${e.deleteFlag!""}"data-rule="删除标志;required;deleteFlag;length[0~44];" size="44" maxlength="44"
-	                                   id="deleteFlag" /></th>				
-					<th>录入日期</th>
-					<th>录入人</th>
-					<th>更新日期</th>
-					<th>更新人</th>
-					<th>
-						<#if e.status??&&e.status==1>
-							<img alt="已上架" src="${basepath}/resource/images/action_check.gif">
-						
-						<#elseif e.status??&&e.status==2>
-							<img alt="已下架" src="${basepath}/resource/images/action_delete.gif">
-						</#if>
-					</th>									
-				</tr>
-			</table>		
-		<#else>
-		<!--在列表页面点击添加进入分支-->
-			<table class="table table-bordered table-condensed table-hover">
-				<h4>保险主产品</h4>
-				<tr style="background-color: #dff0d8">
-					<th>产品名称</th>
-					<th>币种（默认值RMB）</th>
-					<th>免责说明</th>
-					<th>总保险金额</th>
-					<th>总保险费</th>
-					<th>特别约定</th>
-					<th>保险条款</th>
-					<th>删除标志</th>				
-					<th>录入日期</th>
-					<th>录入人</th>
-					<th>更新日期</th>
-					<th>更新人</th>
-					<th>状态</th>									
-				</tr>
-				<tr style="background-color: #dff0d8">
-					<th><input type="text" name="name"  data-rule="产品名称;required;name;length[0~40];" size="44" maxlength="44"
-	                                   id="name" /></th>
-	                <th><input type="text" name="currency"  data-rule="币种;required;currency;length[0~44];" size="44" maxlength="44"
-	                                   id="currency" /></th>
-					<th><input type="text" name="deductible"  data-rule="免责说明;required;deductible;length[0~44];" size="44" maxlength="44"
-	                                   id="deductible" /></th>
-					<th><input type="text" name="amounts"  data-rule="总保险金额;required;amounts;length[0~44];" size="44" maxlength="44"
-	                                   id="amounts" /></th>
-					<th><input type="text" name="premiums"  data-rule="总保险费;required;premiums;length[0~44];" size="44" maxlength="44"
-	                                   id="premiums" /></th>
-					<th><input type="text" name="appointment"  data-rule="特别约定;required;appointment;length[0~44];" size="44" maxlength="44"
-	                                   id="appointment" /></th>
-					<th><input type="text" name="insuranceClause"  data-rule="保险条款;required;insuranceClause;length[0~44];" size="44" maxlength="44"
-	                                   id="insuranceClause" /></th>
-					<th><input type="text" name="deleteFlag"  data-rule="删除标志;required;deleteFlag;length[0~44];" size="44" maxlength="44"
-	                                   id="deleteFlag" /></th>				
-					<th>录入日期</th>
-					<th>录入人</th>
-					<th>更新日期</th>
-					<th>更新人</th>
-					<th>
-						<#if e.status??&&e.status==1>
-							<img alt="已上架" src="${basepath}/resource/images/action_check.gif">
-						
-						<#elseif e.status??&&e.status==2>
-							<img alt="已下架" src="${basepath}/resource/images/action_delete.gif">
-						</#if>
-					</th>									
-				</tr>
-			</table>		
-		</#if>
-		
-		<!--end主产品table-->	
-		
-		<!------------------------------------------------------------------------------->	
-		<!--Start操作按钮-->		
-		<div style="text-align: center;">
-			<div id="updateMsg"><font color='red'>${updateMsg!""}</font></div>
-			<#if e.id??>
-
-                <button method="update" class="btn btn-success">
-                    <i class="icon-ok icon-white"></i> 保存
-                </button>
-
-                <#if e.status??&&e.status!=2>
-                    <button method="updateUpProduct?id=${e.id!""}" class="btn btn-warning" onclick="return confirm('确定上架商品吗?');">
-                    <i class="icon-arrow-up icon-white"></i> 上架
-                    </button>
-                <#else>
-                    <button method="updateDownProduct?id=${e.id!""}" class="btn btn-warning" onclick="return confirm('确定下架商品吗?');">
-                    <i class="icon-arrow-down icon-white"></i> 下架
-                    </button>
-                </#if>
-                <button method="toUpdateSubProduct?id=$e.id" class="btn btn-success">
-                    <i class="icon-ok icon-white"></i> 修改子产品
-                </button>
-            <#else>
-                <button method="insert" class="btn btn-success">
-                    <i class="icon-ok icon-white"></i> 新增
-                </button>
-                 <button method="toAddSubProduct" class="btn btn-success">
-                    <i class="icon-ok icon-white"></i> 添加子产品
-                </button>
-			</#if>
-				<button onclick='javascript:history.back(-1);' class="btn btn-success">
-		                <i class="icon-ok icon-white"></i>返回
-		        </button>	 
-		</div>
-		<!--end操作按钮-->	
-		
+				</div>
+				-->
+			<!--------------------------end-tabs-4------------------------------------->	
+																
+		</div><!--end tab-->
+			<!--------------------------操作按钮模块------------------------------------->
+		 	<button method="selectList" class="btn btn-success">
+                <i class="icon-ok icon-white"></i> 下单
+            </button>             
+			<button onclick="javascript:history.back(-1)" class="btn btn-success">
+	                <i class="icon-ok icon-white"></i>返回
+	        </button>				
+			<!--------------------------操作按钮模块------------------------------------->	
 </form>
-
 <script>
 $(function() {
 	$( "#tabs" ).tabs({
@@ -197,7 +132,6 @@ function selectDefaultCatalog(){
 }
 //本地上传图片后添加预览图片的行
 function previewImg(imgSrc){
-debugger;
    var $tr = $("#firstTr").clone();
    $tr.find("img[name=img]").attr("src",imgSrc);
    $("#firstTr").parent().append($tr);
@@ -260,7 +194,7 @@ function catalogChange(obj){
 <script>
 	var editor;
 	KindEditor.ready(function(K) {
-		editor = K.create('textarea[name="productHTML"]', {
+		editor = K.create('textarea[name="insuranceClause"]', {
 			allowFileManager : true,
             uploadJson : '${basepath}/editor/upload',
             fileManagerJson : '${basepath}/editor/fileManager'
@@ -288,8 +222,6 @@ KindEditor.ready(function(K) {
 	var editor = K.editor({
 		fileManagerJson : '${basepath}/editor/fileManager'
 	});
-	debugger;	
-	
 	K('input[name=filemanager]').click(function() {
 	
 		var imagesInputObj = $(this).parent().children("input[ccc=imagesInput]");
