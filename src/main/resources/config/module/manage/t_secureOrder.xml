@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- create by autoCode,v1.0.0 -->
+<mapper namespace="manage.SecureOrder">
+	<!-- 保险订单查询 -->
+	<select id="manage.SecureOrder.selectPageList"
+		parameterType="net.jeeshop.services.manage.secureOrder.bean.SecureOrder"
+		resultType="net.jeeshop.services.manage.secureOrder.bean.SecureOrder">
+		select o.id,o.product_id ,s.name productName,o.orderAmount
+		,purchase_time,expire_time from t_ms_order o ,t_secureproduct s where
+		1=1 and o.product_id=s.id
+		and o.isExpire='0' and o.deleteFlag='0'
+		<if test="id!=null and id!=''">
+			and id=#{id}
+		</if>
+		<if test="productName != null">
+			and name like CONCAT('%',#{productName,jdbcType=VARCHAR}
+			,'%' )
+		</if>
+		<if test="purchaseStartDate!=null and purchaseStartDate!=''">
+			and purchase_time &gt;= #{purchaseStartDate}
+		</if>
+		<if test="purchaseEndDate!=null and purchaseEndDate!=''">
+			and purchase_time &lt;= #{purchaseEndDate}
+		</if>
+		order by o.createTime desc
+		limit #{offset},#{pageSize}
+	</select>
+
+	<!-- 保险订单查询分页 -->
+	<select id="manage.SecureOrder.selectPageCount"
+		parameterType="net.jeeshop.services.manage.secureOrder.bean.SecureOrder"
+		resultType="java.lang.Integer">
+		select count(*) from t_ms_order where 1=1
+		<if test="id!=null and id!=''">
+			and id=#{id}
+		</if>
+	</select>
+
+</mapper>

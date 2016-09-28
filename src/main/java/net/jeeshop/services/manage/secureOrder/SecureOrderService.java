@@ -1,0 +1,1 @@
+package net.jeeshop.services.manage.secureOrder;import net.jeeshop.core.Services;import net.jeeshop.services.manage.secureOrder.bean.SecureOrder;/** * 保险订单管理 * @author lin * */public interface SecureOrderService extends Services<SecureOrder> {}
