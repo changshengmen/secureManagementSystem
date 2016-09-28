@@ -65,6 +65,7 @@
 					<td>&nbsp;${item.introduce!""}</td>
 				</tr>
 				</#list>
+		</table>
 	</form>
 	
 </@page.pageBase>
