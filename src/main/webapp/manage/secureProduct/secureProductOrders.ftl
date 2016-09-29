@@ -108,7 +108,7 @@
 																
 		</div><!--end tab-->
 			<!--------------------------操作按钮模块------------------------------------->
-		 	<button method="selectList" class="btn btn-success">
+		 	<button method="page_toPay" class="btn btn-success">
                 <i class="icon-ok icon-white"></i> 下单
             </button>             
 			<button onclick="javascript:history.back(-1)" class="btn btn-success">
