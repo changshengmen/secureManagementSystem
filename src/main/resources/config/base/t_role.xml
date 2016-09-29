@@ -47,4 +47,7 @@
 <!-- 	<delete id="role.delete" parameterType="net.jeeshop.core.system.bean.Role"> -->
 <!-- 		delete from t_role where id=#{id} -->
 <!-- 	</delete> -->
+    <select id="role.selectById" parameterType="string" resultType="net.jeeshop.core.system.bean.Role">
+		select * from t_role  where id = #{id}
+	</select>
 </mapper>  

@@ -117,8 +117,7 @@ public class RoleService implements Services<Role> {
 
 	@Override
 	public Role selectById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Role)dao.selectOne("role.selectById",id);
 	}
 
 }
