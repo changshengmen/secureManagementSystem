@@ -159,16 +159,6 @@
 			 	<button method="update" class="btn btn-success">
                     <i class="icon-ok icon-white"></i> 保存
                 </button>
-
-                <#if e.status??&&e.status!=1>
-                    <button method="updateUpProduct?id=${e.id!""}" class="btn btn-warning" onclick="return confirm('确定上架商品吗?');">
-                    <i class="icon-arrow-up icon-white"></i> 上架
-                    </button>
-                <#else>
-                    <button method="updateDownProduct?id=${e.id!""}" class="btn btn-warning" onclick="return confirm('确定下架商品吗?');">
-                    <i class="icon-arrow-down icon-white"></i> 下架
-                    </button>
-                </#if>
                 <button method="selectList?init=y" class="btn btn-success">
 	                <i class="icon-ok icon-white"></i>返回
 	        	</button>	
