@@ -40,7 +40,7 @@ public class SecureProductDaoImpl implements SecureProductDao {
 
 	public int delete(SecureProduct e) {
 		SecureProductDetail subProduct=new SecureProductDetail();
-		subProduct.setPid(e.getId());
+		subProduct.setpId(e.getId());
 		subProduct.setUpdateAccount(e.getUpdateAccount());
 		deleteSubProduct(subProduct);
 		return dao.delete("manage.secureProduct.delete", e);
@@ -48,10 +48,36 @@ public class SecureProductDaoImpl implements SecureProductDao {
 	public int deleteSubProduct(SecureProductDetail e) {
 		return dao.delete("manage.secureProduct.deleteSubProduct", e);
 	}
+	//更新保险产品
 	public int update(SecureProduct e) {
+		updateSubProduct(e);
 		return dao.update("manage.secureProduct.update", e);
 	}
+	//更新保险子产品
+	public void updateSubProduct(SecureProduct e) {
+		List<SecureProductDetail> f=e.getSecureProductDetailList();
+		for(int i=0;i<f.size();i++){					
+			SecureProductDetail subProduct = f.get(i);
+			if(subProduct.getId().length()>0){
+				subProduct.setUpdateAccount(e.getUpdateAccount());
+				updateSecureProductDetail(subProduct);
+			}	
+			else{
+				if(subProduct.getSubName().length()>0){
+					subProduct.setpId(e.getId());
+					subProduct.setCreateAccount(e.getUpdateAccount());
+					insertSecureProductDetail(subProduct);	
+				}
+				
+			}			
+		}
+	}		
 
+	//更新保险子产品子函数
+	@Override	
+	public int updateSecureProductDetail(SecureProductDetail p) {
+		return dao.update("manage.secureProduct.updateSecureProductDetail", p);
+	}
 	public int deletes(String[] ids,int delete_flag, String updateAccount) {
 		
 		SecureProduct e = new SecureProduct();
@@ -105,7 +131,8 @@ public class SecureProductDaoImpl implements SecureProductDao {
 	@Override
 	public void updateProductStatus(SecureProduct p) {
 		SecureProductDetail subProduct=new SecureProductDetail();
-		subProduct.setPid(p.getId());
+		subProduct.setpId(p.getId());
+		subProduct.setUpdateAccount(p.getUpdateAccount());
 		updateSubProductStatus(subProduct);
 		dao.update("manage.secureProduct.updateProductStatus",p);
 	}
@@ -131,14 +158,9 @@ public class SecureProductDaoImpl implements SecureProductDao {
 	@Override
 	public int insertSecureProductDetail(SecureProductDetail p) {
 		return dao.insert("manage.secureProduct.insertSecureProductDetail", p);
-	}
+	}	
 
 	@Override
-	public int updateSecureProductDetail(SecureProductDetail p) {
-		return dao.update("manage.secureProduct.updateSecureProductDetail", p);
-	}
-
-@Override
 	public List getAllProductsByUserId(String uid) {
 		return dao.selectList("manage.secureProduct.getAllProductsByUserId", uid);
 	}
