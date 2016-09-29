@@ -1,117 +1,99 @@
 <#import "/manage/tpl/pageBase.ftl" as page>
 <@page.pageBase currentMenu="保险产品管理">
-<form action="${basepath}/manage/secureProduct/insertSubProduct" id="form" name="form" namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">		
-		<!--<span><input type="button" value="追加子产品" onclick="addSubTable()"/></span>-->
-		<div id="tabs">
-			<ul>
-				<li><a href="#tabs-1">保险子产品基本信息</a></li>				
-				<!--<li><a href="#tabs-2">本地上传图片</a></li>-->	
-			</ul>
-			<!---------------------------Start-tabs-2---------------------------------------------->				
-			<!--<div id="tabs-2">
-				<div>
-					<h4><div class="alert alert-info">图片列表</div></h4>
-					<table class="table table-bordered">
-					<tr id="firstTr" style="display:none">
-						<td>
-								<img name="img"  style="width:50px;height:50px;max-width: 50px;max-height: 50px;">								
-						</td>
-					</tr>
+<form action="${basepath}/manage/secureProduct/selectList" id="form" name="form" namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">		
+	<div id="tabs">
+	           
+            <!--------------------------订单主产品信息模块-------------------------------->
+    <!--	<table class="table table-bordered table-condensed table-hover">
+				<tr style="background-color: #dff0d8">
+					<td style="display: none;">保险编号</td>
+					<th nowrap="nowrap">保险名称</th>
+					<th>币种</th>
+					<th>总保险金额</th>
+					<th>总保险费</th>
+					<th>特别约定</th>
+					<th>免责说明</th>
+					<th>保险简介</th>
+				</tr>
+				
+	   			<tr>
+					<td style="display: none;">${e.id!""}</td>	
+					<td>&nbsp;${e.name!""}</td>
+					<td>&nbsp;${e.currency!""}</td>
+					<td>&nbsp;${e.amounts!""}</td>
+					<td>&nbsp;${e.premiums!""}</td>
+					<td>&nbsp;${e.appointment!""}</td>
+					<td>&nbsp;${e.deductible!""}</td>
+					<td>&nbsp;${e.introduce!""}</td>
+				</tr>
+			</table>
+			-->
+            <!--------------------------订单主产品信息模块---------------------------------->
+		    
+		<!--------------------------订单子产品信息模块------------------------------------->		
+		<!--<table class="table">                 
+			<tr>
+			<th style="display: none;">id</th>
+			<td>子产品名称</td>
+			<td>保险金额</td>
+			<td>费率</td>
+			<td>保费</td> 
+			<td>备注</td> 
+			<td>保险金额的确定方式</td>		           				
+			</tr>
+	        <#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
+                <#list e.secureProductDetailList as item>
 					<tr>
-					<div id="fileQueue"></div> 
+						<td style="display: none;"><input type="hidden" value="${item.id!""}" name="secureProductDetailList[${item_index}].id"/></td>
+						<td><input type="text"  value="${e.secureProductDetailList[item_index].subName!""}" name="secureProductDetailList[${item_index}].subName"  class="search-query input-small"/></td>
+						<td><input type="text"  value="${e.secureProductDetailList[item_index].amount!""}" name="secureProductDetailList[${item_index}].amount"  class="search-query input-small"/></td>
+						<td><input type="text"  value="${e.secureProductDetailList[item_index].rate!""}" name="secureProductDetailList[${item_index}].rate"  class="search-query input-small"/></td>
+						<td><input type="text"  value="${e.secureProductDetailList[item_index].premium!""}" name="secureProductDetailList[${item_index}].premium"  class="search-query input-small"/></td>
+						<td><input type="text"  value="${e.secureProductDetailList[item_index].remark!""}" name="secureProductDetailList[${item_index}].remark"  class="search-query input-small"/></td>
 						<td>
-                            <input id="uploadify" name="uploadify" value="添加" class="btn btn-warning" type="button"/>
+                            <#assign map = {'0':'确定方式1','1':'确定方式2','2':'确定方式3','3':'确定方式4'}>
+                            <select id="sure_way" name="secureProductDetailList[${item_index}].sure_way" class="search-query input-medium">
+                                <#list map?keys as key>
+                                    <option value="${key}" <#if item.sure_way?? && item.sure_way==key>selected="selected" </#if>>${map[key]}</option>
+                                </#list>
+                            </select>
                         </td>
 					</tr>
-					<tr>
-						 <p>    
-	                		<a href="javascript:$('#uploadify').uploadify('upload')">开始上传</a>     
-	                		<a href="javascript:$('#uploadify').uploadify('cancel','*')">取消上传</a>    
-           				</p>              									
-					</tr>
-					
-					</table>
-				</div>
-			</div>-->
-			<!---------------------------end-tabs-2---------------------------------------------->	
-			<!---------------------------Start-tabs-1-子产品修改table--------------------------------------------->		
-			<div id="tabs-1">
-			 	<#list [1,2,3] as item>
-					<table class="table">                 
-	     				<tr>
-	     				<td>子产品名称</td>
-	     				<td>保险金额</td>
-	     				<td>费率</td>
-	     				<td>保费</td>  
-	     				<td>保险金额的确定方式</td>		           				
-	     				</tr>
-						<tr>
-							<td><input type="text" name="secureProductList[item_index].id"/></td>
-							<td><input type="text" name="secureProductList[${item_index}].subName"  class="search-query input-small"/></td>
-							<td><input type="text" name="secureProductList[${item_index}].amount"  class="search-query input-small"/></td>
-							<td><input type="text" name="secureProductList[${item_index}].rate"  class="search-query input-small"/></td>
-							<td><input type="text" name="secureProductList[${item_index}].premium"  class="search-query input-small"/></td>
-							<td>
-	                            <#assign map = {'0':'确定方式1','1':'确定方式2','2':'确定方式3','3':'确定方式4'}>
-	                            <select id="sure_way" name="secureProductList[item_index].sure_way" class="search-query input-medium">
-	                                <#list map?keys as key>
-	                                    <option value="${key}">${map[key]}</option>
-	                                </#list>
-	                            </select>
-	                        </td>
-						</tr>
-						<tr>
-							<td>
-							备注
-							</td>
-						</tr>
-						<tr>
-							<td>
-							<textarea name="secureProductList[item_index].remark" class="form-control" rows="3"
-							  data-rule="备注;required;secureProductList[item_index].remark;length[4~500];"></textarea>
-							</td>
-						</tr>
-						</table>
-           		  </#list>
-			</div>								
-		<!---------------------------end-tabs-1---------------------------------------------->		
-		<!--Start操作按钮-->		
-		<div style="text-align: center;">
-                <button class="btn btn-success">
-                    <i class="icon-ok icon-white"></i>添加	
-                </button>		
+                </#list>
+   		  </#if>
+        </table>
+        -->	
+            <!--------------------------订单订单子产品信息模块------------------------------------->
+ 
+			<!--------------------------start-tabs-3---------------------------------------->
+			客户名称：<input type="text" />
+			性别：<input type="text" />
+			家庭住址：<input type="text" />			
+			<!--------------------------end-tabs-3------------------------------------------>			
+			<!--------------------------start-tabs-4---------------------------------------->
+			
+			<!--------------------------end-tabs-4------------------------------------->	
+																
+	</div><!--end tab-->
+			<!--------------------------操作按钮模块------------------------------------->
+			<span style="margin-left:0px;">
+				<button class="btn btn-success">
+	                <i class="icon-ok icon-white"></i>支付
+	            </button>
 				<button onclick='javascript:history.back(-1);' class="btn btn-success">
-		                <i class="icon-ok icon-white"></i>返回
-		        </button>	 
-		</div>
-		<!--end操作按钮-->	
-		<!------------------------------------------------------------------------------->
-	</div><!--end-tabs-->
+	                <i class="icon-ok icon-white"></i>返回
+	            </button>	           
+			</span>	
+			<!--------------------------操作按钮模块------------------------------------->	
 </form>
+
 <script>
 $(function() {
 	$( "#tabs" ).tabs({
 	});	
 	selectDefaultCatalog();
 });
-//追加子类产品table
-function addSubTable(){
-  var _tableHtml = "<table class='table table-bordered table-condensed table-hover'>";
-  				_tableHtml += "<h4>保险子产品</h4>";
-				_tableHtml += "<tr style='background-color: #dff0d8'>";
-				_tableHtml += "<td>子产品名称</td><td>保险金额</td><td>保险金额的确定方式</td><td>费率</td><td>保费</td><td>备注</td>";
-			    _tableHtml += "</tr>";
-				_tableHtml += "<tr>";
-				_tableHtml += "<td><input type='text' name='e.secureProductDetailList.subName'  class='search-query input-small'/></td>";
-				_tableHtml += "<td><input type='text' name='e.secureProductDetailList.amount'  class='search-query input-small'/></td>";
-				_tableHtml += "<td><input type='text' name='e.secureProductDetailList.sure_way'  class='search-query input-small'/></td>";
-				_tableHtml += "<td><input type='text' name='e.secureProductDetailList.rate'  class='search-query input-small'/></td>";
-				_tableHtml += "<td><input type='text' name='e.secureProductDetailList.premium'  class='search-query input-small'/></td>";
-				_tableHtml += "<td><input type='text' name='e.secureProductDetailList.remark'  class='search-query input-small'/></td>";
-				_tableHtml += "</tr>";		  		
-			    _tableHtml += "</table>";		  			  
-			  $("#subProduct").append(_tableHtml);
-}
+
 function selectDefaultCatalog(){
 	var _catalogID = $("#catalogID").val();
 	if(_catalogID!='' && _catalogID>0){
@@ -121,7 +103,6 @@ function selectDefaultCatalog(){
 }
 //本地上传图片后添加预览图片的行
 function previewImg(imgSrc){
-debugger;
    var $tr = $("#firstTr").clone();
    $tr.find("img[name=img]").attr("src",imgSrc);
    $("#firstTr").parent().append($tr);
@@ -184,7 +165,7 @@ function catalogChange(obj){
 <script>
 	var editor;
 	KindEditor.ready(function(K) {
-		editor = K.create('textarea[name="productHTML"]', {
+		editor = K.create('textarea[name="insuranceClause"]', {
 			allowFileManager : true,
             uploadJson : '${basepath}/editor/upload',
             fileManagerJson : '${basepath}/editor/fileManager'
@@ -212,8 +193,6 @@ KindEditor.ready(function(K) {
 	var editor = K.editor({
 		fileManagerJson : '${basepath}/editor/fileManager'
 	});
-	debugger;	
-	
 	K('input[name=filemanager]').click(function() {
 	
 		var imagesInputObj = $(this).parent().children("input[ccc=imagesInput]");
