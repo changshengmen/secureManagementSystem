@@ -65,6 +65,10 @@
                 <entry key="checkPrivilege">
                     <bean class="net.jeeshop.core.freemarker.fn.PrivilegeChecker" />
                 </entry>
+                <!-- 验证按钮权限 -->
+                 <entry key="checkDbPrivilege">
+                    <bean class="net.jeeshop.core.freemarker.fn.checkDbPrivilege" />
+                </entry>
                 <entry key="i18nParser">
                     <bean class="net.jeeshop.core.freemarker.fn.I18N" />
                 </entry>

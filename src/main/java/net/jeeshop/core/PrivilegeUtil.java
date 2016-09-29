@@ -34,8 +34,6 @@ public class PrivilegeUtil {
 		if(1==1){
 			return true;
 		}
-		
-		
 		Map<String,String> root = (Map<String,String>) session.getAttribute(ManageContainer.user_resource_menus_button);
 		if(root==null || root.size()==0){
 			logger.error("该用户没有任何权限。没有权限访问该资源！");
