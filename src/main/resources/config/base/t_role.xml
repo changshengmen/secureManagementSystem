@@ -26,7 +26,7 @@
 		</if>
 	</select>
 	<insert id="role.insert" parameterType="net.jeeshop.core.system.bean.Role" useGeneratedKeys="true" keyProperty="id">
-		insert into t_role (id,role_name,role_desc,role_dbPrivilege,status) values (id,#{role_name},#{role_desc},#{role_dbPrivilege},#{status})
+		insert into t_role (id,role_name,role_desc,role_dbPrivilege,status,select_range) values (id,#{role_name},#{role_desc},#{role_dbPrivilege},#{status},#{select_range})
 	</insert>
 	<update id="role.update" parameterType="net.jeeshop.core.system.bean.Role">
 		update t_role set id=#{id}
@@ -41,6 +41,9 @@
 		</if>
 		<if test="status!=null and status!=''">
 			,status=#{status}
+		</if>
+		<if test="select_range!=null and select_range!=''">
+			,select_range=#{select_range}
 		</if>
 		where id=#{id}
 	</update>

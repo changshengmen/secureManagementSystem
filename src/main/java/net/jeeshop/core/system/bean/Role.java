@@ -16,7 +16,7 @@ public class Role extends PagerModel implements Serializable {
 	private String role_desc;
 	private String role_dbPrivilege;
 	private String status;
-	
+	private String select_range;
 	public static final String role_status_y = "y";//启用
 	public static final String role_status_n = "n";//禁用
 	
@@ -88,5 +88,13 @@ public class Role extends PagerModel implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getSelect_range() {
+		return select_range;
+	}
+
+	public void setSelect_range(String select_range) {
+		this.select_range = select_range;
 	}
 }

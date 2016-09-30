@@ -53,6 +53,7 @@ function deleteSelect(){
 					<th>角色名称</th>
 					<th>角色描述</th>
 					<th>数据库权限</th>
+					<th>查看范围</th>
 					<th>状态</th>
 					<th width="50px">操作</th>
 				</tr>
@@ -63,6 +64,7 @@ function deleteSelect(){
 						<td>&nbsp;${item.role_name!""}</td>
 						<td>&nbsp;${item.role_desc!""}</td>
 						<td>&nbsp;${item.role_dbPrivilege!""}</td>
+						<td>&nbsp;${item.select_range!""}</td>
 						<td>&nbsp;
 							<#if item.status=="y">
 								<img alt="显示" src="${basepath}/resource/images/action_check.gif">

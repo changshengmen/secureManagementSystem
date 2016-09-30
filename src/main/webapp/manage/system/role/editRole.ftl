@@ -87,7 +87,8 @@
 						roleName : roleName,
 						roleDesc : $("#role_desc").val(),
 						role_dbPrivilege : $("#role_dbPrivilege").val(),
-						status:$("#status").val()
+						status:$("#status").val(),
+						select_range:$("#select_range").val()
 					},
 					dataType : "text",
 					success : function(data) {
@@ -198,6 +199,17 @@
                                 <#assign map_dbPrivilege ={'select':'select','select,insert':'select,insert','select,insert,update':'select,insert,update','select,insert,update,delete':'select,insert,update,delete'}/>
                                 <#list map_dbPrivilege?keys as item>
                                     <option value="${item}" <#if e.role_dbPrivilege?? && e.role_dbPrivilege==item>selected="selected" </#if>>${map_dbPrivilege[item]}</option>
+                                </#list>
+                            </select>
+						</td>
+					</tr>
+					<tr>
+						<th style="background-color: #dff0d8;text-align: center;">查看范围</th>
+						<td style="text-align: left;">
+                            <select name="select_range" id="select_range">
+                                <#assign map_selectRange ={'查看个人','查看个人','查看所有':'查看所有'}/>
+                                <#list map_selectRange?keys as item>
+                                    <option value="${item}" <#if e.select_range?? && e.select_range==item>selected="selected" </#if>>${map_selectRange[item]}</option>
                                 </#list>
                             </select>
 						</td>

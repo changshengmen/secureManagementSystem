@@ -7,7 +7,7 @@
 		parameterType="net.jeeshop.services.manage.secureOrder.bean.SecureOrder"
 		resultType="net.jeeshop.services.manage.secureOrder.bean.SecureOrder">
 		select o.id,o.product_id ,s.name productName,o.orderAmount
-		,purchase_time,expire_time from t_ms_order o ,t_secureproduct s where
+		,purchase_time,expire_time,o.createAccount from t_ms_order o ,t_secureproduct s where
 		1=1 and o.product_id=s.id
 		and o.isExpire='0' and o.deleteFlag='0'
 		<if test="id!=null and id!=''">
@@ -23,18 +23,36 @@
 		<if test="purchaseEndDate!=null and purchaseEndDate!=''">
 			and purchase_time &lt;= #{purchaseEndDate}
 		</if>
-		order by o.createTime desc
-		limit #{offset},#{pageSize}
+		<if test = "createAccount!=null and createAccount!=''">
+		   and o.createAccount=#{createAccount}
+		</if>
+			order by o.createTime desc
+			limit #{offset},#{pageSize}
 	</select>
 
 	<!-- 保险订单查询分页 -->
 	<select id="manage.SecureOrder.selectPageCount"
 		parameterType="net.jeeshop.services.manage.secureOrder.bean.SecureOrder"
 		resultType="java.lang.Integer">
-		select count(*) from t_ms_order where 1=1
+		select count(*) from  t_ms_order o ,t_secureproduct s where
+		1=1 and o.product_id=s.id
 		<if test="id!=null and id!=''">
 			and id=#{id}
 		</if>
+		<if test="productName != null">
+			and name like CONCAT('%',#{productName,jdbcType=VARCHAR}
+			,'%' )
+		</if>
+		<if test="purchaseStartDate!=null and purchaseStartDate!=''">
+			and purchase_time &gt;= #{purchaseStartDate}
+		</if>
+		<if test="purchaseEndDate!=null and purchaseEndDate!=''">
+			and purchase_time &lt;= #{purchaseEndDate}
+		</if>
+		<if test = "createAccount!=null and createAccount!=''">
+		   and o.createAccount=#{createAccount}
+		</if>
+		
 	</select>
 
 </mapper>

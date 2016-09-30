@@ -26,14 +26,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import net.jeeshop.core.ManageContainer;
 import net.jeeshop.core.Services;
 import net.jeeshop.core.dao.page.PagerModel;
-import net.jeeshop.core.front.SystemManager;
 import net.jeeshop.core.oscache.ManageCache;
 import net.jeeshop.core.system.bean.Menu;
 import net.jeeshop.core.system.bean.MenuItem;
+import net.jeeshop.core.system.bean.Role;
 import net.jeeshop.core.system.bean.User;
 import net.jeeshop.core.util.AddressUtils;
 import net.jeeshop.core.util.MD5;
-import net.jeeshop.services.manage.secureProduct.bean.SecureProduct;
 import net.jeeshop.services.manage.system.impl.MenuService;
 import net.jeeshop.services.manage.system.impl.RoleService;
 import net.jeeshop.services.manage.system.impl.UserService;
@@ -188,6 +187,12 @@ public class UserAction extends BaseController<User>  {
 		}
 		u.setUsername(e.getUsername());
 		session.setAttribute(ManageContainer.manage_session_user_info, u);
+		
+		//角色信息保存到 管理容器
+		Role role = new Role();
+		role.setId(u.getRid());
+		role = roleService.selectOne(role);
+		session.setAttribute(ManageContainer.manage_session_role_info, roleService.selectOne(role));
 		
 		//解析用户的数据库权限，以后可以进行DB权限限制
 		if(StringUtils.isNotBlank(u.getRole_dbPrivilege())){

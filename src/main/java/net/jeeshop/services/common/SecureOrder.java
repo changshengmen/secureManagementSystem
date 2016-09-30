@@ -23,6 +23,13 @@ public class SecureOrder extends QueryModel implements Serializable {
 	private String payStatus;
 	private String remark;
 	private String isExpire;
+	private String createAccount;
+	public String getCreateAccount() {
+		return createAccount;
+	}
+	public void setCreateAccount(String createAccount) {
+		this.createAccount = createAccount;
+	}
 	public String getId() {
 		return id;
 	}

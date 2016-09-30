@@ -65,6 +65,7 @@ public class RoleAction extends BaseController<Role> {
         role.setRole_dbPrivilege(request.getParameter("role_dbPrivilege"));
         role.setPrivileges(request.getParameter("privileges"));
         role.setStatus(request.getParameter("status"));
+        role.setSelect_range(request.getParameter("select_range"));
 		if(role.getRole_name()==null || role.getRole_name().trim().equals("")){
 			return "0";
 		}else{

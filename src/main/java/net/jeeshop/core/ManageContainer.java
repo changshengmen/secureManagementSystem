@@ -37,6 +37,7 @@ public class ManageContainer {
 	public static final String user_resource_menus_button = "user_resource_menus_button";//用户资源功能菜单
 	public static final String SystemSetting = "SystemSetting";//资源菜单
 	public static final String manage_session_user_info = "manage_session_user_info";//用户信息
+	public static final String manage_session_role_info = "manage_session_role_info";//用户角色信息
 	
 	
 	/**
