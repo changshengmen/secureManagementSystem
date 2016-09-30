@@ -9,10 +9,13 @@
 			<!--<li><a href="#tabs-4">本地上传图片</a></li>-->	
 		</ul>
 		<!--------------------------主产品信息添加模块------------------------------------->		
-		<div id="tabs-1">
+		<div id="tabs-1">		
 		 	<input type="hidden" value="${e.id!""}" name="id" label="id" id="id"/>
+		 	<!--没有实际意义，去掉的话，点击下单按钮进入不到下一页面-->
+		 	<input type="hidden"  value="${e.currency!""}" name="currency"  data-rule="币种;currency;" size="10" maxlength="10"
+	                                                     id="currency" />
 		 	<!----------------------------------------------商品列表-------------------------------------------->
-			<table class="table table-bordered table-condensed table-hover">
+			<table class="table table-bordered table-condensed table-hover>
 				<tr style="background-color: #dff0d8">
 					<td style="display: none;">保险编号</td>
 					<th nowrap="nowrap">保险名称</th>
@@ -23,7 +26,6 @@
 					<th>免责说明</th>
 					<th>保险简介</th>
 				</tr>
-				
 	   			<tr>
 					<td style="display: none;">${e.id!""}</td>	
 					<td>&nbsp;${e.name!""}</td>
@@ -37,8 +39,7 @@
 			</table>
            </div>
             <!--------------------------主产品信息添加模块------------------------------------->
-            
-            <!--------------------------start子产品信息添加模块------------------------------------->
+        <!--------------------------start子产品信息模块------------------------------------->
             <div id="tabs-2"> 
             	<table class="table" table-bordered table-condensed table-hover">                 
      				<tr style="background-color: #dff0d8">
@@ -60,23 +61,25 @@
 								<td>${e.secureProductDetailList[item_index].premium!""}</td>
 								<td>${e.secureProductDetailList[item_index].remark!""}</td>
 								<td>
-	                                <#assign map = {'0':'确定方式1','1':'确定方式2','2':'确定方式3','3':'确定方式4'}>	                                
+	                                <#assign map = {'0':'确定方式1','1':'确定方式2','2':'确定方式3','3':'确定方式4'}>	                             
+	                                    <select id="sure_way" name="secureProductDetailList[${item_index}].sure_way" class="search-query input-medium">
 	                                    <#list map?keys as key>
-	                                        <#if item.sure_way?? && item.sure_way==key> ${map[key]}</#if>
-	                                    </#list>	                                
+	                                        <option value="${key}" <#if item.sure_way?? && item.sure_way==key>selected="selected" </#if>>${map[key]}</option>
+	                                    </#list>
+	                                </select>	                                
 	                            </td>
 							</tr>
 	                    </#list>
 				     </#if>
            		  </table>          	 	
 			</div>	
-            <!--------------------------end子产品信息添加模块------------------------------------->
-		    
+            <!--------------------------end子产品信息模块------------------------------------->
+		  
 			<!--------------------------start-tabs-3------------------------------------->
 			<div id="tabs-3">
 				${e.insuranceClause!""}
 			</div>				
-			<!--------------------------end-tabs-3------------------------------------->			
+			<!--------------------------end-tabs-3------------------------------------->		
 			<!--------------------------start-tabs-4------------------------------------->
 			<!--<div id="tabs-4">
 					<div>
@@ -108,14 +111,19 @@
 																
 		</div><!--end tab-->
 			<!--------------------------操作按钮模块------------------------------------->
-		 	<button method="page_toPay" class="btn btn-success">
+			<#if e.id??>
+			 	<button method="toPayPage" class="btn btn-success">
                 <i class="icon-ok icon-white"></i> 下单
-            </button>             
-			<button onclick="javascript:history.back(-1)" class="btn btn-success">
+            </button>   
+                <button method="selectList?init=y" class="btn btn-success">
 	                <i class="icon-ok icon-white"></i>返回
-	        </button>				
+	        	</button>	
+			
+			</#if>
+						
 			<!--------------------------操作按钮模块------------------------------------->	
 </form>
+
 <script>
 $(function() {
 	$( "#tabs" ).tabs({
