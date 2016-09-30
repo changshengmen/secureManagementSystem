@@ -28,10 +28,8 @@
 	
 	<!----------------------------------------------按钮-------------------------------------------->
 	<table class="table table-bordere d table-condensed">
-			<tr><td style="">
-			<label style="font-size:20px">用户 【&nbsp;<label style="color:red">${userName}</label>&nbsp;】</label></label>
-					</td><td>	
-					    
+			<tr><td >
+		<span class="badge badge-info" style="font-size:20px">用户: ${userName}</span>					</td><td>	
 					<div style="float: right;vertical-align: middle;bottom: 0px;top: 10px;">
 					<button method="getAllProduct" class="btn btn-primary" id="bd" onclick="bindProduct()">
 							<i class="icon-arrow-up icon-white"></i> 绑定产品

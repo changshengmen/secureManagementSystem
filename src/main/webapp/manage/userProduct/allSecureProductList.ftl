@@ -37,7 +37,7 @@
 		
 		<table class="table table-bordered table-condensed">
 		
-					<td  style="text-align: right;">商品名称</td>
+					<td  style="text-align: right;line-height:35px;font-weight:bold">商品名称</td>
 						<td style="text-align: left;"  >
 						<input type="text"  value="${e.name!""}" name="name"  class="input-small" id="name" />&nbsp;&nbsp;&nbsp;
 						<button method="getAllProduct" class="btn btn-primary" onclick="selectList(this)">
