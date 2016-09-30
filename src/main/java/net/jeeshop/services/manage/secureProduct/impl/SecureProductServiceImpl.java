@@ -2,6 +2,7 @@ package net.jeeshop.services.manage.secureProduct.impl;
 import java.util.ArrayList;
 import java.util.List;
 import net.jeeshop.core.ServersManager;
+import net.jeeshop.core.dao.page.PagerModel;
 import net.jeeshop.services.manage.secureProduct.SecureProductService;
 import net.jeeshop.services.manage.secureProduct.bean.SecureProduct;
 import net.jeeshop.services.manage.secureProduct.bean.SecureProductDetail;
@@ -208,19 +209,10 @@ SecureProductService {
 	}
 	
 	@Override
-	public List<SecureProduct> getAllProductsByUserId(String uid) {
-		return dao.getAllProductsByUserId(uid);
+	public PagerModel selectProductPageList(SecureProduct e) {
+		return dao.selectProductPageList(e);
 	}
-
-	@Override
-	public List<SecureProduct> selectProductList() {
-		return dao.selectProductList();
-	}
-
-	@Override
-	public List<SecureProduct> queryProductList(SecureProduct e) {
-		return dao.queryProductList(e);
-	}
+	
 
 	@Override
 	public int bindUserProduct(String ids, String uid) {
@@ -228,4 +220,6 @@ SecureProductService {
 		return dao.addUsersBind(ids,uid);
 		
 	}
+
+	
 }

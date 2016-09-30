@@ -1,5 +1,5 @@
 <#import "/manage/tpl/pageBase.ftl" as page>
-<@page.pageBase currentMenu="产品管理">
+<@page.pageBase currentMenu="用户产品">
 <script type="text/javascript" src="${basepath}/manage/manage.js"></script>
 <style type="text/css">
 .product-name {
@@ -29,7 +29,7 @@
 	<!----------------------------------------------按钮-------------------------------------------->
 	<table class="table table-bordere d table-condensed">
 			<tr><td style="">
-			<label style="font-size:20px">用户名  : ${userName}</label>
+			<label style="font-size:20px">用户 【&nbsp;<label style="color:red">${userName}</label>&nbsp;】</label></label>
 					</td><td>	
 					    
 					<div style="float: right;vertical-align: middle;bottom: 0px;top: 10px;">
@@ -54,7 +54,7 @@
 					<th>总保险费</th>
 					<th>保险简介</th>
 				</tr>
-				<#list product as item>
+				 <#list pager.list as item>
 	   			<tr>
 					<td><input type="checkbox" name="id" value="${item.id!""}" /></td>
 					<td nowrap="nowrap" name="itemId">${item.id!""}</td>	
@@ -65,6 +65,10 @@
 					<td>&nbsp;${item.introduce!""}</td>
 				</tr>
 				</#list>
+				<tr>
+					<td colspan="70" style="text-align: center;">
+                    <#include "/manage/system/pager.ftl"/></td>
+			</tr>
 		</table>
 	</form>
 	

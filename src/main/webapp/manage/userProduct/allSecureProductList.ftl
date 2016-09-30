@@ -1,5 +1,5 @@
 <#import "/manage/tpl/pageBase.ftl" as page>
-<@page.pageBase currentMenu="用户管理">
+<@page.pageBase currentMenu="所有产品列表">
 <style type="text/css">
 .product-name {
 	display: inline-block;
@@ -20,19 +20,6 @@
 		  })
 	})
 
-  	
-  //模糊查询	
-	function query(){
-		var ids =''	;//所有选中的节点
-		$("input:checkbox[name='ids']:checked").each(function(i){ 
-			ids += ','+ $(this).val();
-		})
-	     var qName = $("#name").val();
-	     var _form = $("form");
-		_form.attr("action","queryList?qName="+qName);
-		_form.submit();
-	}
-	
 	//绑定
 	function bind(){
 	  var ids ='';
@@ -49,16 +36,18 @@
 	<form action="${basepath}/manage/secureProduct" namespace="/manage" method="post" theme="simple">
 		
 		<table class="table table-bordered table-condensed">
-		<td style="text-align:center;line-height:20px"><label>用户名  : ${userName}</label></td>
+		
 					<td  style="text-align: right;">商品名称</td>
 						<td style="text-align: left;"  >
 						<input type="text"  value="${e.name!""}" name="name"  class="input-small" id="name" />&nbsp;&nbsp;&nbsp;
-						<button  class="btn btn-primary" onclick="query()">
+						<button method="getAllProduct" class="btn btn-primary" onclick="selectList(this)">
 							<i class="icon-search icon-white"></i> 查询
+						</button>
 						</button>&nbsp;&nbsp;&nbsp;
 						<button class="btn btn-primary"  onclick="bind()">
 							<i class="icon-arrow-up icon-white"></i> 绑定
 						</button>
+						<label style="font-size:20">&nbsp;到用户&nbsp;【&nbsp;<label style="color:red">${userName}</label>&nbsp;】</label>
 						</td>	
 					
 				
@@ -80,7 +69,7 @@
 					<th>总保险费</th>
 					<th>保险简介</th>
 			</tr>
-            <#list productList as item>
+           <#list pager.list as item>
 				<tr>
 					<td><input type="checkbox" name="ids" 
 						value="${item.id!""}" /></td>
@@ -96,6 +85,10 @@
 			<tr>
 				<td colspan="70" style="text-align: center;">
                     </td>
+			</tr>
+			<tr>
+				<td colspan="70" style="text-align: center;">
+                    <#include "/manage/system/pager.ftl"/></td>
 			</tr>
 		</table>
 		

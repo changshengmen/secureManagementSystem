@@ -16,7 +16,7 @@
 	function bindUp(){
 	 var uid = $("input[name='id']").val();
 	 var uname = $("#username").val();
-	 window.location.href=basepath + "/manage/secureProduct/productList?uid="+uid+"&uname="+uname;
+	 window.location.href = basepath + "/manage/secureProduct/userProductList?uid="+uid+"&uname="+uname;
 	}
 </script>
 </head>

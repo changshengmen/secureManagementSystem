@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 
 @Repository("secureProductDaoManage")
 public class SecureProductDaoImpl implements SecureProductDao {
-    @Resource
+	@Resource
 	private BaseDao dao;
 
 	public void setDao(BaseDao dao) {
@@ -25,9 +25,8 @@ public class SecureProductDaoImpl implements SecureProductDao {
 	}
 
 	public PagerModel selectPageList(SecureProduct e) {
-		
-		return dao.selectPageList("manage.secureProduct.selectPageList",
-				"manage.secureProduct.selectPageCount", e);
+
+		return dao.selectPageList("manage.secureProduct.selectPageList", "manage.secureProduct.selectPageCount", e);
 	}
 
 	public List selectList(SecureProduct e) {
@@ -39,47 +38,50 @@ public class SecureProductDaoImpl implements SecureProductDao {
 	}
 
 	public int delete(SecureProduct e) {
-		SecureProductDetail subProduct=new SecureProductDetail();
+		SecureProductDetail subProduct = new SecureProductDetail();
 		subProduct.setpId(e.getId());
 		subProduct.setUpdateAccount(e.getUpdateAccount());
 		deleteSubProduct(subProduct);
 		return dao.delete("manage.secureProduct.delete", e);
 	}
+
 	public int deleteSubProduct(SecureProductDetail e) {
 		return dao.delete("manage.secureProduct.deleteSubProduct", e);
 	}
-	//更新保险产品
+
+	// 更新保险产品
 	public int update(SecureProduct e) {
 		updateSubProduct(e);
 		return dao.update("manage.secureProduct.update", e);
 	}
-	//更新保险子产品
+
+	// 更新保险子产品
 	public void updateSubProduct(SecureProduct e) {
-		List<SecureProductDetail> f=e.getSecureProductDetailList();
-		for(int i=0;i<f.size();i++){					
+		List<SecureProductDetail> f = e.getSecureProductDetailList();
+		for (int i = 0; i < f.size(); i++) {
 			SecureProductDetail subProduct = f.get(i);
-			if(subProduct.getId().length()>0){
+			if (subProduct.getId().length() > 0) {
 				subProduct.setUpdateAccount(e.getUpdateAccount());
 				updateSecureProductDetail(subProduct);
-			}	
-			else{
-				if(subProduct.getSubName().length()>0){
+			} else {
+				if (subProduct.getSubName().length() > 0) {
 					subProduct.setpId(e.getId());
 					subProduct.setCreateAccount(e.getUpdateAccount());
-					insertSecureProductDetail(subProduct);	
+					insertSecureProductDetail(subProduct);
 				}
-				
-			}			
-		}
-	}		
 
-	//更新保险子产品子函数
-	@Override	
+			}
+		}
+	}
+
+	// 更新保险子产品子函数
+	@Override
 	public int updateSecureProductDetail(SecureProductDetail p) {
 		return dao.update("manage.secureProduct.updateSecureProductDetail", p);
 	}
-	public int deletes(String[] ids,int delete_flag, String updateAccount) {
-		
+
+	public int deletes(String[] ids, int delete_flag, String updateAccount) {
+
 		SecureProduct e = new SecureProduct();
 		for (int i = 0; i < ids.length; i++) {
 			e.setId(ids[i]);
@@ -104,20 +106,21 @@ public class SecureProductDaoImpl implements SecureProductDao {
 
 	@Override
 	public void deleteAttributeLinkByProductID(int parseInt) {
-		dao.delete("manage.secureProduct.deleteAttributeLinkByProductID", parseInt);		
+		dao.delete("manage.secureProduct.deleteAttributeLinkByProductID", parseInt);
 	}
 
 	@Override
 	public List<SecureProduct> selectStockByIDs(List<String> productIDs) {
-		return dao.selectList("manage.secureProduct.selectStockByIDs",productIDs);
+		return dao.selectList("manage.secureProduct.selectStockByIDs", productIDs);
 	}
-	
+
 	@Override
-	//查询保险子产品
+	// 查询保险子产品
 	public List<SecureProductDetail> selectSecureProductDetail(String id) {
-		
-		return dao.selectList("manage.secureProduct.selectDetail",id);
+
+		return dao.selectList("manage.secureProduct.selectDetail", id);
 	}
+
 	@Override
 	public int selectOutOfStockProductCount() {
 		return (Integer) dao.selectOne("manage.secureProduct.selectOutOfStockProductCount");
@@ -125,54 +128,40 @@ public class SecureProductDaoImpl implements SecureProductDao {
 
 	@Override
 	public void updateImg(SecureProduct p) {
-		dao.update("manage.secureProduct.updateImg",p);
+		dao.update("manage.secureProduct.updateImg", p);
 	}
 
 	@Override
 	public void updateProductStatus(SecureProduct p) {
-		SecureProductDetail subProduct=new SecureProductDetail();
+		SecureProductDetail subProduct = new SecureProductDetail();
 		subProduct.setpId(p.getId());
 		subProduct.setUpdateAccount(p.getUpdateAccount());
 		updateSubProductStatus(subProduct);
-		dao.update("manage.secureProduct.updateProductStatus",p);
+		dao.update("manage.secureProduct.updateProductStatus", p);
 	}
-	public void updateSubProductStatus(SecureProductDetail e) {		
-		dao.update("manage.secureProduct.updateSubProductStatus",e);
+
+	public void updateSubProductStatus(SecureProductDetail e) {
+		dao.update("manage.secureProduct.updateSubProductStatus", e);
 	}
-	
+
 	@Override
 	public void updateProductBindActivityId(SecureProduct pro) {
-		dao.update("manage.secureProduct.updateProductBindActivityId",pro);
+		dao.update("manage.secureProduct.updateProductBindActivityId", pro);
 	}
 
 	@Override
 	public void updateResetThisProductActivityID(String activityID) {
-		dao.update("manage.secureProduct.updateResetThisProductActivityID",activityID);
+		dao.update("manage.secureProduct.updateResetThisProductActivityID", activityID);
 	}
 
 	@Override
 	public int insertSecureProduct(SecureProduct p) {
-		 return dao.insert("manage.secureProduct.insertSecureProduct", p);
+		return dao.insert("manage.secureProduct.insertSecureProduct", p);
 	}
 
 	@Override
 	public int insertSecureProductDetail(SecureProductDetail p) {
 		return dao.insert("manage.secureProduct.insertSecureProductDetail", p);
-	}	
-
-	@Override
-	public List getAllProductsByUserId(String uid) {
-		return dao.selectList("manage.secureProduct.getAllProductsByUserId", uid);
-	}
-
-	@Override
-	public List<SecureProduct> selectProductList() {
-		return dao.selectList("manage.secureProduct.getAllProducts");
-	}
-
-	@Override
-	public List<SecureProduct> queryProductList(SecureProduct e) {
-		return dao.selectList("manage.secureProduct.getAllProducts", e.getName());
 	}
 
 	@Override
@@ -197,5 +186,11 @@ public class SecureProductDaoImpl implements SecureProductDao {
 			k = i;
 		}
 		return k;
+	}
+
+	@Override
+	public PagerModel selectProductPageList(SecureProduct e) {
+		return dao.selectPageList("manage.secureProduct.getAllProductsByUserId",
+				"manage.secureProduct.getProductsByUserIdPageCount", e);
 	}
 }
