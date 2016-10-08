@@ -7,7 +7,7 @@
 		parameterType="net.jeeshop.services.manage.secureOrder.bean.SecureOrder"
 		resultType="net.jeeshop.services.manage.secureOrder.bean.SecureOrder">
 		select o.id,o.product_id ,s.name productName,o.orderAmount
-		,DATE_FORMAT(purchase_time,'%Y-%m-%d')purchase_time,DATE_FORMAT(expire_time,'%Y-%m-%d')expire_time,o.createAccount from t_ms_order o ,t_secureproduct s where
+		,purchase_time,expire_time,o.createAccount ,DATEDIFF(NOW(),expire_time) expire_days from t_ms_order o ,t_secureproduct s where
 		1=1 and o.product_id=s.id
 		and o.isExpire='0' and o.deleteFlag='0'
 		<if test="id!=null and id!=''">
