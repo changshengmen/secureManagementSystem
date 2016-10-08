@@ -31,31 +31,9 @@
 </style>
 <script type="text/javascript">
 	$(function() {
-		function c1(f) {
-			$(":checkbox").each(function() {
-				$(this).attr("checked", f);
-			});
-		}
-		$("#firstCheckbox").click(function() {
-			if ($(this).attr("checked")) {
-				c1(true);
-			} else {
-				c1(false);
-			}
-		});
+		var dt = $("#expireDate").text();
+	
 	});
-	function deleteSelect() {
-		if ($("input:checked").size() == 0) {
-			return false;
-		}
-		return confirm("确定删除选择的记录?");
-	}
-	function updateInBlackList() {
-		if ($("input:checked").size() == 0) {
-			return false;
-		}
-		return confirm("确定将选择的记录拉入新闻黑名单吗?");
-	}
 </script>
 	<form action="${basepath}/manage/SecureOrder" method="post" theme="simple">
 		<table class="table table-bordered">
@@ -65,11 +43,11 @@
 				<td style="width:100px">入保时间</td>
                 <td ><input id="d4311" class="Wdate search-query input-small" style="width:50px" type="text" name="purchaseStartDate"
                            value="${e.purchaseStartDate!""}"
-                           onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'d4312\')||\'2020-10-01\'}'})"/>
+                           onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'d4312\')||\'2030-10-01\'}'})"/>
                     ~
                     <input id="d4312" class="Wdate search-query input-small" style="width:80px" type="text" name="purchaseEndDate"
                            value="${e.purchaseEndDate!""}"
-                           onFocus="WdatePicker({minDate:'#F{$dp.$D(\'d4311\')}',maxDate:'2020-10-01'})"/>
+                           onFocus="WdatePicker({minDate:'#F{$dp.$D(\'d4311\')}',maxDate:'2030-10-01'})"/>
                 </td>
 			</tr>
 			
@@ -88,7 +66,6 @@
 				
 		<table class="table table-bordered table-hover">
 			<tr style="background-color: #dff0d8">
-				<th width="20"><input type="checkbox" id="firstCheckbox" /></th>
 				<th>订单号</th>
 				<th>保险名称</th>
 				<th>保险总金额</th>
@@ -97,13 +74,17 @@
 			</tr>
 			<#list pager.list as item>
 				<tr>
-					<td><input type="checkbox" name="ids" value="${item.id!""}" /></td>
 					<td>${item.id!""}</td>
 					<td>${item.productName!""}</td>
 					<td>${item.orderAmount!""}</td>
 					<td>${item.purchase_time!""}</td>
-					<td>${item.expire_time!""}</td>
-				</tr>
+					<!--如果超期天数为负数 则高亮显示 -->
+					<#if item.expire_days lt 0> 
+					<td id="expireDate" style="color:red">${item.expire_time!""}</td>
+					<#else> 
+					<td id="expireDate">${item.expire_time!""}</td>
+					</#if>
+</tr>
 			</#list>
 			<tr>
 				<td colspan="55" style="text-align: center;">

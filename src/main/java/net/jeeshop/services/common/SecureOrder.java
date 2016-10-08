@@ -24,6 +24,8 @@ public class SecureOrder extends QueryModel implements Serializable {
 	private String remark;
 	private String isExpire;
 	private String createAccount;
+	private Integer expire_days;
+	
 	public String getCreateAccount() {
 		return createAccount;
 	}
@@ -90,7 +92,11 @@ public class SecureOrder extends QueryModel implements Serializable {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	
-
+	public Integer getExpire_days() {
+		return expire_days;
+	}
+	public void setExpire_days(Integer expire_days) {
+		this.expire_days = expire_days;
+	}
 
 }
