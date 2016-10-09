@@ -72,8 +72,17 @@ public abstract class BaseController<E extends PagerModel> {
         }
         // 计算总页数
         pager.setPagerSize((pager.getTotal() + pager.getPageSize() - 1)  / pager.getPageSize());
-
-        selectListAfter(pager);
+        
+        String servletPath=request.getServletPath();
+        String[] servletPathArray = servletPath.split("/");
+        if(servletPathArray.length>=4){
+        	pager.setPagerUrl(servletPathArray[servletPathArray.length-1]);
+        }
+        else{
+        	pager.setPagerUrl("selectList");
+        }
+        
+       // selectListAfter(pager);
         request.setAttribute("pager", pager);
         return page_toList;
     }
