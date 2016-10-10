@@ -216,9 +216,13 @@ SecureProductService {
 
 	@Override
 	public int bindUserProduct(String ids, String uid) {
-		dao.deleteUsersBind(uid);
-		return dao.addUsersBind(ids,uid);
-		
+		if(ids== null || ids.length() <= 0){
+			dao.deleteUsersBind(uid);
+			return 0;
+		}else{
+			dao.deleteUsersBind(uid);
+			return dao.addUsersBind(ids,uid);
+		}		
 	}
 
 	

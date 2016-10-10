@@ -10,26 +10,101 @@
 	text-overflow: ellipsis;
 }
 </style>
+ <script type="text/javascript" src="${basepath}/resource/js/jquery.cookie.js"></script>
 <script type="text/javascript">
   //初始化将已绑定的产品check
-	$(function(){
-	   var ids = $("#repeatIds").val();;
-	   var arr = ids.split(',');
-		   $.each(arr,function(a){
-			  $("input[name='ids'][value="+arr[a]+"]").attr("checked",true);
-		  })
-	})
-
-	//绑定
-	function bind(){
-	  var ids ='';
-		$("input:checkbox[name='ids']:checked").each(function(i){ 
-			ids += ','+ $(this).val();
-		})
-		var _form = $("form");
-		_form.attr("action","bindUserProduct?ids="+ids);
-		_form.submit();
+$(function(){
+debugger;
+	var ids = $("#repeatIds").val();
+	//alert(document.cookie.indexOf("oldIDS="));
+	//alert(document.cookie.match(/[^ =;]+(?=\=)/g)[0]); 
+	//alert($.cookie('oldIDS'));
+	//alert(document.cookie.indexOf("cookieIDS="));
+	//alert($.cookie('cookieIDS'));
+	if(document.cookie.indexOf("oldIDS=")==-1){
+	//初始化保存ids
+		$.cookie('oldIDS',ids);
 	}
+	else{	
+		if(document.cookie.indexOf("cookieIDS=")!=-1){
+		//还原修改的ids
+			ids=$.cookie('cookieIDS');
+		}else{
+		//还原原始ids
+			ids=$.cookie('oldIDS');
+		}
+	}	
+	//新建cookies,保存修改的ids
+	$.cookie('cookieIDS',ids); 
+   if(!ids==""){
+	   var arr = ids.split(',');
+	   $.each(arr,function(a){
+		  $("input[name='ids'][value="+arr[a]+"]").attr("checked",true);
+	   });  
+   } 
+    $(".pageLink").bind("click",function(){
+   		ids=saveIDS(ids);
+   		$.cookie('cookieIDS',ids);
+	});   
+})
+//保存ids到cookies中
+function saveIDS(ids){
+debugger;
+	var id_len=$("input[name='ids']").length;
+	if(!ids==""){
+	//如果ids开始的时候不是空，没选中就删，选中就判断是否有重复，没重复就加。
+		var ids_arr = ids.split(',');
+		for(var i=0;i<id_len;i++){
+			var id_value=$("input[name='ids']")[i].value;
+			var is_checked=$("input[name='ids']")[i].checked;	
+			if(is_checked&&(jQuery.inArray( id_value,ids_arr)<0)){
+				ids=ids+","+id_value;
+			}else{
+				if(jQuery.inArray( id_value,ids_arr)>=0&&(!is_checked)){
+					ids_arr.splice(jQuery.inArray(id_value,ids_arr),1);
+					ids=ids_arr.join(",");
+				}
+			}
+		}
+	}
+	else{
+	//如果ids开始的时候就是空，直接判断添加ids
+		for(var i=0;i<id_len;i++){
+			var id_value=$("input[name='ids']")[i].value;
+			var is_checked=$("input[name='ids']")[i].checked;	
+			if(is_checked){
+				ids=ids+","+id_value;
+			}
+		}
+	}
+	
+	return ids;
+}
+
+//绑定
+function bind(){
+debugger;
+	ids=$.cookie('cookieIDS');
+	ids=saveIDS(ids);
+	var oldIDS='oldIDS';
+	var cookieIDS='cookieIDS';
+	clearCookie(oldIDS);
+	clearCookie(cookieIDS);
+	var _form = $("form");
+	_form.attr("action","bindUserProduct?ids="+ids);
+	_form.submit();
+}
+//删除cookies
+function clearCookie(name){ 
+var keys=document.cookie.match(/[^ =;]+(?=\=)/g); 
+	if (keys) { 
+		for (var i = keys.length; i--;){ 
+			if(keys[i]==name){
+				document.cookie=keys[i]+'=0;expires=' + new Date( 0).toUTCString()
+			}
+		}
+	} 
+}
 </script>
 
 	<input id="repeatIds" value="${repeatIds!""}" type="hidden"/>
@@ -44,7 +119,7 @@
 							<i class="icon-search icon-white"></i> 查询
 						</button>
 						</button>&nbsp;&nbsp;&nbsp;
-						<button class="btn btn-primary"  onclick="bind()">
+						<button class="btn btn-primary"  onclick="bind()" >
 							<i class="icon-arrow-up icon-white"></i> 绑定
 						</button>
 						<label style="font-size:20">&nbsp;到用户&nbsp;【&nbsp;<label style="color:red">${userName}</label>&nbsp;】</label>

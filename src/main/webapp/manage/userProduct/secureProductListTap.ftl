@@ -12,6 +12,18 @@
 }
 </style>
 	<script type="text/javascript">
+	//删除cookies
+$(function(){ 
+debugger;
+	var keys=document.cookie.match(/[^ =;]+(?=\=)/g); 
+	if (keys) { 
+		for (var i = keys.length; i--;){ 
+			if((keys[i]=='cookieIDS')||(keys[i]=='oldIDS')){
+				document.cookie=keys[i]+'=0;expires=' + new Date( 0).toUTCString()
+			}
+		}
+	} 
+})
 	function bindProduct(){
 		var obj = $("#bd");
 		var ids =$("td[name='itemId']");
@@ -23,6 +35,7 @@
 		_form.attr("action",$(obj).attr("method")+"?ids="+param);
 		_form.submit();
 	}
+	
 	</script>
 	<form action="${basepath}/manage/secureProduct" namespace="/manage" method="post" theme="simple">
 	
