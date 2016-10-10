@@ -12,9 +12,13 @@
 }
 </style>
 	<script type="text/javascript">
-	//删除cookies
-$(function(){ 
-debugger;
+	
+$(function(){
+ 	$.each($(".pageLink"),function(a,oldHref){
+		var newHref=oldHref.href+'&'+'uid='+$('input[name="uid"]').val();
+		oldHref.href=newHref;
+	}); 
+	//删除cookies 
 	var keys=document.cookie.match(/[^ =;]+(?=\=)/g); 
 	if (keys) { 
 		for (var i = keys.length; i--;){ 
@@ -24,25 +28,28 @@ debugger;
 		}
 	} 
 })
-	function bindProduct(){
-		var obj = $("#bd");
-		var ids =$("td[name='itemId']");
-		var param ='';
-		$.each(ids,function(a){
-		  param += ","+ ids[a].innerHTML;
-		})
-	 	var _form = $("form");
-		_form.attr("action",$(obj).attr("method")+"?ids="+param);
-		_form.submit();
-	}
-	
-	</script>
+
+//绑定
+function bindProduct(){
+	var obj = $("#bd");
+	var ids =$("td[name='itemId']");
+	var param ='';
+	$.each(ids,function(a){
+	  param += ","+ ids[a].innerHTML;
+	})
+ 	var _form = $("form");
+	_form.attr("action",$(obj).attr("method")+"?ids="+param);
+	_form.submit();
+}
+</script>
 	<form action="${basepath}/manage/secureProduct" namespace="/manage" method="post" theme="simple">
 	
 	<!----------------------------------------------按钮-------------------------------------------->
 	<table class="table table-bordere d table-condensed">
 			<tr><td >
-		<span class="badge badge-info" style="font-size:20px">用户: ${userName}</span>					</td><td>	
+		<span class="badge badge-info" style="font-size:20px">用户: ${userName}</span>	
+		<span class="badge badge-info" style="font-size:20px">用户ID: ${uid}</span>	
+						</td><td>	
 					<div style="float: right;vertical-align: middle;bottom: 0px;top: 10px;">
 					<button method="getAllProduct" class="btn btn-primary" id="bd" onclick="bindProduct()">
 							<i class="icon-arrow-up icon-white"></i> 绑定产品
@@ -56,6 +63,7 @@ debugger;
 		</table>
 	<!----------------------------------------------商品列表-------------------------------------------->
 		<table class="table table-bordered table-condensed table-hover">
+		
 				<tr style="background-color: #dff0d8">
 					<th width="20"><input type="checkbox" id="firstCheckbox" /></th>
 					<th nowrap="nowrap">保险编号</th>
@@ -67,7 +75,8 @@ debugger;
 				</tr>
 				 <#list pager.list as item>
 	   			<tr>
-					<td><input type="checkbox" name="id" value="${item.id!""}" /></td>
+		   			<input type="hidden" name="uid" value=${uid}>
+					<td><input type="checkbox" name="id" value= /></td>
 					<td nowrap="nowrap" name="itemId">${item.id!""}</td>	
 					<td>&nbsp;${item.name!""}</td>
 					<td>&nbsp;${item.currency!""}</td>

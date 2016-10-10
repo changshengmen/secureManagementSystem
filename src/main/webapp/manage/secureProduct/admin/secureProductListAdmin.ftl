@@ -55,31 +55,31 @@
 			</tr>
 			<tr>
 				<td colspan="20">
-                    <#if checkPrivilege("secureProduct/selectList")>
+                    <#if checkDbPrivilege("secureProduct/selectList")>
 						<button method="selectList" class="btn btn-primary" onclick="selectList(this)">
 							<i class="icon-search icon-white"></i> 查询
 						</button>
                     </#if>
 
-                     <#if checkPrivilege("secureProduct/toAdd")>
+                     <#if checkDbPrivilege("secureProduct/toAdd")>
 						<a href="toAdd" class="btn btn-success">
 							<i class="icon-plus-sign icon-white"></i> 添加
 						</a>
                      </#if>
 
-                    <#if checkPrivilege("secureProduct/deletes")>
+                    <#if checkDbPrivilege("secureProduct/deletes")>
 						<button method="deletes" class="btn btn-danger" onclick="return submitIDs(this,'确定删除选择的记录?');">
 							<i class="icon-remove-sign icon-white"></i> 删除
 						</button>
                     </#if>
 
-                    <#if checkPrivilege("secureProduct/updateUp")>
+                    <#if checkDbPrivilege("secureProduct/updateUp")>
 <!-- 							<i class="icon-arrow-up icon-white"></i> 上架 -->
 						<button method="updateUp" class="btn btn-warning" onclick="return submitIDs(this,'确定上架选择的记录?');">
 							<i class="icon-arrow-up icon-white"></i> 上架
 						</button>
                     </#if>
-                    <#if checkPrivilege("secureProduct/updateDown")>
+                    <#if checkDbPrivilege("secureProduct/updateDown")>
 						<button method="updateDown" class="btn btn-warning" onclick="return submitIDs(this,'确定下架选择的记录?');">
 							<i class="icon-arrow-down icon-white"></i> 下架
 						</button>
@@ -90,8 +90,7 @@
 		</table>
 
 		<table id="t_secure" class="table table-bordered table-condensed table-hover" style="text-align: center;">
-			<tr style="background-color: #dff0d8">
-				<th style="width:5%;text-align: center"><input type="checkbox" id="firstCheckbox" /></th>
+			<tr style="background-color: #dff0d8">				
 				<th style="width:10%;text-align: center">保险编号</th>				
 				<th style="width:10%;text-align: center">保险名称</th>
 				<th style="width:10%;text-align: center">币种</th>
@@ -102,9 +101,7 @@
 				<th style="width:10%;text-align: center">操作</th>
 			</tr>
             <#list pager.list as item>
-				<tr>
-					<td><input type="checkbox" name="ids"
-						value="${item.id!""}" /></td>
+				<tr>					
 					<td >&nbsp;${item.id!""}</td>									
 					<td>&nbsp;${item.name!""}</td>
 					<td>&nbsp;${item.currency!""}</td>	
@@ -120,7 +117,11 @@
 						</#if>
 					</td>
 					<td >
-						<a href="toEditProduct?id=${item.id}">编辑</a>
+					<#if checkDbPrivilege("secureProduct/updateDown")>
+						<a href="toEditProduct?id=${item.id}">编辑</a>|
+						
+					</#if>
+					<a href="toEditProduct?id=${item.id}">查看</a>
 					</td>
 				</tr>
             </#list>
