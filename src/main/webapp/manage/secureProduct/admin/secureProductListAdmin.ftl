@@ -26,11 +26,9 @@
 				<td style="text-align: right;">商品编号</td>
 				<td style="text-align: left;"><input type="text" name="id"  class="search-query input-small"
 						id="id" /></td>
-
 				<td style="text-align: right;">商品名称</td>
 				<td style="text-align: left;" ><input type="text" name="name"  class="input-small"
-						id="name" /></td>	
-				
+						id="name" /></td>					
 			</tr>
 			<tr>
 				<td style="text-align: right;">录入时间</td>

@@ -28,7 +28,6 @@ $(function(){
 		}
 	} 
 })
-
 //绑定
 function bindProduct(){
 	var obj = $("#bd");
@@ -48,7 +47,6 @@ function bindProduct(){
 	<table class="table table-bordere d table-condensed">
 			<tr><td >
 		<span class="badge badge-info" style="font-size:20px">用户: ${userName}</span>	
-		<span class="badge badge-info" style="font-size:20px">用户ID: ${uid}</span>	
 						</td><td>	
 					<div style="float: right;vertical-align: middle;bottom: 0px;top: 10px;">
 					<button method="getAllProduct" class="btn btn-primary" id="bd" onclick="bindProduct()">
