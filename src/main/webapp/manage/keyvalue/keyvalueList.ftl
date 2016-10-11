@@ -36,9 +36,9 @@
 						<td style="text-align: left;">
 							<input type="text" name="key1" id="e.key1" value="${e.key1!""}">
 						</td>
-						<td style="text-align: right;">值</td>
+						<td style="text-align: right;">备注</td>
 						<td style="text-align: left;">
-                            <input type="text" name="value" id="e.value" value="${e.value!""}">
+                            <input type="text" name="remark" id="e.remark" value="${e.remark!""}">
 						</td>
 					</tr>
 					<tr>
@@ -53,9 +53,6 @@
 								<i class="icon-remove-sign icon-white"></i> 删除
 							</button>
 							
-							<div style="float: right;vertical-align: middle;bottom: 0px;top: 10px;">
-								<#include "/manage/system/pager.ftl"/>
-							</div>
 						</td>
 					</tr>
 				</table>
@@ -66,6 +63,8 @@
 						<th style="display: none;">编号</th>
 						<th >键</th>
 						<th >值</th>
+						<th>父键值</th>
+						<th>备注</th>
 						<th >操作</th>
 					</tr>
 					<#list pager.list as item>
@@ -75,6 +74,8 @@
 							<td style="display: none;">&nbsp;${item.id}</td>
 							<td>&nbsp;${item.key1!""}</td>
 							<td>&nbsp;${item.value!""}</td>
+							<td>&nbsp;${item.p_code!""}</td>
+							<td>&nbsp;${item.remark!""}</td>
 							<td><a href="toEdit?id=${item.id}">编辑</a></td>
 						</tr>
 					</#list>

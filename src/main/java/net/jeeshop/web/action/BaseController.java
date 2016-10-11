@@ -56,6 +56,7 @@ public abstract class BaseController<E extends PagerModel> {
         /**
          * 由于prepare方法不具备一致性，加此代码解决init=y查询的时候条件不被清除干净的BUG
          */
+    	beforeSelectList();
         this.initPageSelect();
 
         setParamWhenInitQuery(e);
@@ -268,4 +269,15 @@ public abstract class BaseController<E extends PagerModel> {
     protected void addError(RedirectAttributes flushAttrs, String warning) {
         flushAttrs.addFlashAttribute("errorMsg", warning);
     }
+    
+    /**
+    * @Description: TODO(声明接口 子类重写) 
+    * @author lyx
+    * @date 2016年10月9日 上午11:24:15 
+    * @return boolean    返回类型 
+    * @throws
+     */
+    public  void  beforeSelectList(){
+    }
+    
 }

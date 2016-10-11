@@ -15,7 +15,10 @@ public class SecureOrder extends QueryModel implements Serializable {
 	private String id;
 	private String product_id;
 	private String customer_id;
-	private String amounts;
+	private String insuredCurrency; //保额币种
+	private Double sumInsured;
+	private String feeCurrency; //保费币种
+	private Double sumFee;
 	private String premiums;
 	private String purchase_time;
 	private String valid_time;
@@ -50,11 +53,30 @@ public class SecureOrder extends QueryModel implements Serializable {
 	public void setCustomer_id(String customer_id) {
 		this.customer_id = customer_id;
 	}
-	public String getAmounts() {
-		return amounts;
+	
+	public Double getSumInsured() {
+		return sumInsured;
 	}
-	public void setAmounts(String amounts) {
-		this.amounts = amounts;
+	public void setSumInsured(Double sumInsured) {
+		this.sumInsured = sumInsured;
+	}
+	public String getInsuredCurrency() {
+		return insuredCurrency;
+	}
+	public void setInsuredCurrency(String insuredCurrency) {
+		this.insuredCurrency = insuredCurrency;
+	}
+	public Double getSumFee() {
+		return sumFee;
+	}
+	public void setSumFee(Double sumFee) {
+		this.sumFee = sumFee;
+	}
+	public String getFeeCurrency() {
+		return feeCurrency;
+	}
+	public void setFeeCurrency(String feeCurrency) {
+		this.feeCurrency = feeCurrency;
 	}
 	public String getPremiums() {
 		return premiums;

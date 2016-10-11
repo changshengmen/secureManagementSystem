@@ -49,6 +49,20 @@
                            value="${e.purchaseEndDate!""}"
                            onFocus="WdatePicker({minDate:'#F{$dp.$D(\'d4311\')}',maxDate:'2030-10-01'})"/>
                 </td>
+                
+			</tr>
+			<tr>
+			
+                	<td style="text-align: right;" nowrap="nowrap">币种</td>
+                	
+					<td style="text-align: left;">
+					<select id="insuredCurrency" name="insuredCurrency" class="input-medium">
+							<option value="" ></option>
+						<#list dic_map as key>
+                            <option value="${key.key1}" >${key.value}</option>
+						</#list>
+                    </select>
+                    
 			</tr>
 			
 			<tr>
@@ -57,9 +71,6 @@
 						<button method="selectList" class="btn btn-primary" onclick="selectList(this)">
 							<i class="icon-search icon-white"></i> 查询
 						</button>
-					<div style="float: right;vertical-align: middle;bottom: 0px;top: 10px;">
-						<#include "/manage/system/pager.ftl"/>
-					</div>
 				</td>
 			</tr>
 		</table>
@@ -68,7 +79,7 @@
 			<tr style="background-color: #dff0d8">
 				<th>订单号</th>
 				<th>保险名称</th>
-				<th>保险总金额</th>
+				<th>保额币种</th>
 				<th>参保时间</th>
 				<th>失效时间</th>
 			</tr>
@@ -76,7 +87,7 @@
 				<tr>
 					<td>${item.id!""}</td>
 					<td>${item.productName!""}</td>
-					<td>${item.orderAmount!""}</td>
+					<td>${item.insuredCurrency!""}</td>
 					<td>${item.purchase_time!""}</td>
 					<!--如果超期天数为负数 则高亮显示 -->
 					<#if item.expire_days lt 0> 

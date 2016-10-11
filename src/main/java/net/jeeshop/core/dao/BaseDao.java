@@ -65,7 +65,6 @@ public class BaseDao extends SqlSessionDaoSupport {
 
 	/**
 	 * 分页查询
-	 * 
 	 * @param selectList
 	 * @param selectCount
 	 * @param param
@@ -112,7 +111,6 @@ public class BaseDao extends SqlSessionDaoSupport {
 
 	/**
 	 * 查询总数
-	 * 
 	 * @param arg0
 	 * @param arg1
 	 * @return

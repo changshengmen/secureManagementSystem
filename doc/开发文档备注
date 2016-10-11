@@ -5,3 +5,13 @@
 		if(range.indexOf("个人")>-1){
 			e.setCreateAccount(LoginUserHolder.getLoginUser().getUsername());
 		}
+		
+3.下拉框改成键值对
+ sql 与keyValue表关联 通过 key 和 p_code 双重关联 做多表查询
+	que :表结构不匹配 mysql
+	ALTER TABLE t_ms_order CONVERT TO CHARACTER SET utf8 collate utf8_unicode_ci
+	
+   键值对填写规则
+  （1）备注为查询条件  父键值 为0 及为定义 字典名称 键值为子字典项的 父ID
+
+		

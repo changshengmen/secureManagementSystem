@@ -6,9 +6,10 @@
 	<select id="manage.SecureOrder.selectPageList"
 		parameterType="net.jeeshop.services.manage.secureOrder.bean.SecureOrder"
 		resultType="net.jeeshop.services.manage.secureOrder.bean.SecureOrder">
-		select o.id,o.product_id ,s.name productName,o.orderAmount
-		,purchase_time,expire_time,o.createAccount ,DATEDIFF(NOW(),expire_time) expire_days from t_ms_order o ,t_secureproduct s where
-		1=1 and o.product_id=s.id
+		select o.id,o.product_id ,s.name productName,k.value insuredCurrency
+		,purchase_time,expire_time,o.createAccount ,DATEDIFF(NOW(),expire_time) expire_days from t_ms_order o ,
+		t_secureproduct s ,t_keyvalue k where
+		1=1 and o.product_id=s.id and k.p_code='Currency'  and k.key1=o.insuredCurrency 
 		and o.isExpire='0' and o.deleteFlag='0'
 		<if test="id!=null and id!=''">
 			and id=#{id}
@@ -25,6 +26,9 @@
 		</if>
 		<if test = "createAccount!=null and createAccount!=''">
 		   and o.createAccount=#{createAccount}
+		</if>
+		<if test = "insuredCurrency!=null and insuredCurrency!=''">
+		   and o.insuredCurrency=#{insuredCurrency}
 		</if>
 			order by o.createTime desc
 			limit #{offset},#{pageSize}
@@ -52,7 +56,9 @@
 		<if test = "createAccount!=null and createAccount!=''">
 		   and o.createAccount=#{createAccount}
 		</if>
-		
+		<if test = "insuredCurrency!=null and insuredCurrency!=''">
+		   and o.insuredCurrency=#{insuredCurrency}
+		</if>
 	</select>
 
 </mapper>
