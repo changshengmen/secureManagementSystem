@@ -2,18 +2,17 @@ package net.jeeshop.services.manage.secureProduct.dao.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Repository;
+
 import net.jeeshop.core.dao.BaseDao;
 import net.jeeshop.core.dao.page.PagerModel;
 import net.jeeshop.core.util.MathUtil;
 import net.jeeshop.services.common.userProduct;
-import net.jeeshop.services.manage.orderdetail.bean.Orderdetail;
 import net.jeeshop.services.manage.secureProduct.bean.SecureProduct;
 import net.jeeshop.services.manage.secureProduct.bean.SecureProductDetail;
 import net.jeeshop.services.manage.secureProduct.dao.SecureProductDao;
-
-import org.springframework.stereotype.Repository;
-
-import javax.annotation.Resource;
 
 @Repository("secureProductDaoManage")
 public class SecureProductDaoImpl implements SecureProductDao {
@@ -176,8 +175,8 @@ public class SecureProductDaoImpl implements SecureProductDao {
 		for (int i = 0; i < arr.length; i++) {
 			userProduct up = new userProduct();
 			up.setId(MathUtil.getUUID());
-			up.setUid(uid);
-			up.setPid(arr[i]);
+			up.setUser_id(uid);
+			up.setProduct_id(arr[i]);
 			try {
 				dao.insertByUUID("manage.secureProduct.insertUsersProduct", up);
 			} catch (Exception e) {
@@ -195,8 +194,7 @@ public class SecureProductDaoImpl implements SecureProductDao {
 	}
 
 	@Override
-	public List<String> selectIDList(String uid) {
-		// TODO Auto-generated method stub
-		return dao.selectList("manage.secureProduct.selectIDList",uid);
+	public List<userProduct> selectIDListFromUserProduct(userProduct e ) {
+		return dao.selectList("manage.secureProduct.selectIDList",e);
 	}
 }

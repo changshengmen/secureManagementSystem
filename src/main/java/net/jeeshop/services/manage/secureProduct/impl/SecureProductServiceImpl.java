@@ -1,21 +1,24 @@
 package net.jeeshop.services.manage.secureProduct.impl;
 import java.util.ArrayList;
 import java.util.List;
-import net.jeeshop.core.ServersManager;
-import net.jeeshop.core.dao.page.PagerModel;
-import net.jeeshop.services.manage.secureProduct.SecureProductService;
-import net.jeeshop.services.manage.secureProduct.bean.SecureProduct;
-import net.jeeshop.services.manage.secureProduct.bean.SecureProductDetail;
-import net.jeeshop.services.manage.secureProduct.dao.SecureProductDao;
-import net.jeeshop.services.manage.spec.SpecService;
-import net.jeeshop.services.manage.spec.bean.Spec;
+
+import javax.annotation.Resource;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import javax.annotation.Resource;
+import net.jeeshop.core.ServersManager;
+import net.jeeshop.core.dao.page.PagerModel;
+import net.jeeshop.services.common.userProduct;
+import net.jeeshop.services.manage.secureProduct.SecureProductService;
+import net.jeeshop.services.manage.secureProduct.bean.SecureProduct;
+import net.jeeshop.services.manage.secureProduct.bean.SecureProductDetail;
+import net.jeeshop.services.manage.secureProduct.dao.SecureProductDao;
+import net.jeeshop.services.manage.spec.SpecService;
+import net.jeeshop.services.manage.spec.bean.Spec;
 
 @Service("secureProductServiceManage")
 public class SecureProductServiceImpl extends ServersManager<SecureProduct, SecureProductDao> implements
@@ -226,9 +229,8 @@ SecureProductService {
 	}
 
 	@Override
-	public List<String> selectIDList(String uid) {
-		// TODO Auto-generated method stub
-		return dao.selectIDList(uid);
+	public List<userProduct> selectIDListFromUserProduct(userProduct e) {
+		return dao.selectIDListFromUserProduct(e);
 	}
 
 	

@@ -6,8 +6,8 @@ import net.jeeshop.core.dao.page.PagerModel;
 
 public class userProduct extends PagerModel implements Serializable{
 	private String id;
-	private String uid;
-	private String pid;
+	private String user_id;
+	private String product_id;
 	private String remark;
 	
 	public String getId() {
@@ -17,22 +17,9 @@ public class userProduct extends PagerModel implements Serializable{
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getUid() {
-		return uid;
-	}
-
-	public void setUid(String uid) {
-		this.uid = uid;
-	}
 
 
-	public String getPid() {
-		return pid;
-	}
 
-	public void setPid(String pid) {
-		this.pid = pid;
-	}
 
 
 
@@ -45,11 +32,24 @@ public class userProduct extends PagerModel implements Serializable{
 	}
 
 
+	public String getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+
+	public String getProduct_id() {
+		return product_id;
+	}
+
+	public void setProduct_id(String product_id) {
+		this.product_id = product_id;
+	}
 
 	public void clear() {
 		this.setId(null);
-		pid = null;
-		uid = null;
 		remark = null;
 
 	}
