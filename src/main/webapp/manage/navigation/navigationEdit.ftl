@@ -18,7 +18,13 @@
 			</tr>
 			<tr>
 				<td style="text-align: right;">打开方式</td>
-				<td style="text-align: left;">_blank
+				<td>
+					<select id="target" name="target" class="input-medium">
+							<option value="" ></option>
+						<#list dic_map as key>
+                            <option value="${key.key1}"<#if e.target?? && e.target=="${key.key1}">selected="selected" </#if> >${key.value}</option>
+						</#list>
+                    </select>
 					
 					<#--<!-- -->
 					<#--<s:select disabled="disabled" list="#{'_blank':'_blank','_self':'_self'}" -->

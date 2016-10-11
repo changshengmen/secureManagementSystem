@@ -42,7 +42,7 @@
 					<td style="display: none;">&nbsp;${item.id!""}</td>
 					<td>&nbsp;<a href="http://${item.http!""}" target="_blank">${item.name!""}</a></td>
 					<td>&nbsp;${item.http!""}</td>
-					<td>&nbsp;${item.target!""}</td>
+					<td>&nbsp;${item.target_name!""}</td>
 					<td>&nbsp;${item.position!""}</td>
 					<td>&nbsp;${item.order1!""}</td>
 					<td><a href="toEdit?id=${item.id}">编辑</a></td>
