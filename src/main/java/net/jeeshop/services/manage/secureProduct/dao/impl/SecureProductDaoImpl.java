@@ -171,7 +171,7 @@ public class SecureProductDaoImpl implements SecureProductDao {
 
 	@Override
 	public int addUsersBind(String ids, String uid) {
-		String arr[] = ids.substring(1, ids.length()).split(",");
+		String arr[] = ids.split(",");
 		int k = 0;
 		for (int i = 0; i < arr.length; i++) {
 			userProduct up = new userProduct();
@@ -192,5 +192,11 @@ public class SecureProductDaoImpl implements SecureProductDao {
 	public PagerModel selectProductPageList(SecureProduct e) {
 		return dao.selectPageList("manage.secureProduct.getAllProductsByUserId",
 				"manage.secureProduct.getProductsByUserIdPageCount", e);
+	}
+
+	@Override
+	public List<String> selectIDList(String uid) {
+		// TODO Auto-generated method stub
+		return dao.selectList("manage.secureProduct.selectIDList",uid);
 	}
 }

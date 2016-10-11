@@ -156,17 +156,21 @@
 		</div><!--end tab-->
 			<!--------------------------操作按钮模块------------------------------------->
 			<#if e.id??>
-			 	<button method="update" class="btn btn-success">
-                    <i class="icon-ok icon-white"></i> 保存
-                </button>
+				<#if checkDbPrivilege()>
+				 	<button method="update" class="btn btn-success">
+	                    <i class="icon-ok icon-white"></i> 保存
+	                </button>
+                </#if>
                 <button method="selectList?init=y" class="btn btn-success">
 	                <i class="icon-ok icon-white"></i>返回
 	        	</button>	
 			<#else>
 			<span style="margin-left:0px;">
-				<button method="insertSecureProduct" class="btn btn-success">
-	                <i class="icon-ok icon-white"></i>添加	
-	            </button>				           
+				<#if checkDbPrivilege()>
+					<button method="insertSecureProduct" class="btn btn-success">
+		                <i class="icon-ok icon-white"></i>添加	
+		            </button>
+		        </#if>				           
 			</span>	
 			<button onclick="javascript:history.back(-1)" class="btn btn-success">
 	                <i class="icon-ok icon-white"></i>返回

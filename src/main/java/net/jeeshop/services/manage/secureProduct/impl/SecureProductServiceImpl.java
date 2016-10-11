@@ -225,5 +225,11 @@ SecureProductService {
 		}		
 	}
 
+	@Override
+	public List<String> selectIDList(String uid) {
+		// TODO Auto-generated method stub
+		return dao.selectIDList(uid);
+	}
+
 	
 }

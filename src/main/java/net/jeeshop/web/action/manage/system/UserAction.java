@@ -272,7 +272,8 @@ public class UserAction extends BaseController<User>  {
         if(LoginUserHolder.getLoginUser() == null){
             return "redirect:/manage/user/login";
         }
-        return page_home;
+       // return page_home;
+        return "redirect:/manage/secureProduct/selectList?init=y";
     }
 	
 	private void loginLog(User u,String log) {

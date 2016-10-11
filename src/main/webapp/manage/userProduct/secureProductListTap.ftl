@@ -42,7 +42,7 @@ function bindProduct(){
 }
 </script>
 	<form action="${basepath}/manage/secureProduct" namespace="/manage" method="post" theme="simple">
-	
+	<input type="hidden" name="uid" value=${uid}>
 	<!----------------------------------------------按钮-------------------------------------------->
 	<table class="table table-bordere d table-condensed">
 			<tr><td >
@@ -73,7 +73,7 @@ function bindProduct(){
 				</tr>
 				 <#list pager.list as item>
 	   			<tr>
-		   			<input type="hidden" name="uid" value=${uid}>
+		   			
 					<td><input type="checkbox" name="id" value= /></td>
 					<td nowrap="nowrap" name="itemId">${item.id!""}</td>	
 					<td>&nbsp;${item.name!""}</td>

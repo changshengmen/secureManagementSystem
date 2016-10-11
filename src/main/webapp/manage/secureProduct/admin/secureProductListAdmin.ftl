@@ -119,7 +119,7 @@
 						<a href="toEditProduct?id=${item.id}">编辑</a>|
 						
 					</#if>
-					<a href="toEditProduct?id=${item.id}">查看</a>
+					<a href="toOrder?id=${item.id}">查看</a>
 					</td>
 				</tr>
             </#list>

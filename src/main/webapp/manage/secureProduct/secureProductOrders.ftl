@@ -15,7 +15,7 @@
 		 	<input type="hidden"  value="${e.currency!""}" name="currency"  data-rule="币种;currency;" size="10" maxlength="10"
 	                                                     id="currency" />
 		 	<!----------------------------------------------商品列表-------------------------------------------->
-			<table class="table table-bordered table-condensed table-hover>
+			<table class="table table-bordered table-condensed table-hover">				
 				<tr style="background-color: #dff0d8">
 					<td style="display: none;">保险编号</td>
 					<th nowrap="nowrap">保险名称</th>
