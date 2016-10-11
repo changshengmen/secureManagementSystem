@@ -6,7 +6,7 @@
 			e.setCreateAccount(LoginUserHolder.getLoginUser().getUsername());
 		}
 		
-3.下拉框改成键值对
+3.下拉框改成 配置型键值对
  sql 与keyValue表关联 通过 key 和 p_code 双重关联 做多表查询
 	que :表结构不匹配 mysql   修改数据库表编码格式 （error Illegal mix of collations (utf8_unicode_ci,IMPLICIT) and (utf8_general_ci,IMPLICIT) for operation '='）
 	ALTER TABLE t_ms_order CONVERT TO CHARACTER SET utf8 collate utf8_unicode_ci
