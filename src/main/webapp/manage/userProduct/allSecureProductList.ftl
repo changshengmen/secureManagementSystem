@@ -73,11 +73,14 @@ debugger;
 			var id_value=$("input[name='ids']")[i].value;
 			var is_checked=$("input[name='ids']")[i].checked;	
 			if(is_checked){
-				ids=ids+","+id_value;
+				if(!ids==""){
+					ids=ids+","+id_value;
+				}else{
+					ids=id_value;
+				}				
 			}
 		}
-	}
-	
+	}	
 	return ids;
 }
 
