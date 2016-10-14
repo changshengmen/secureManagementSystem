@@ -140,22 +140,24 @@ var keys=document.cookie.match(/[^ =;]+(?=\=)/g);
 		<table class="table table-bordered table-condensed table-hover">
 			<tr style="background-color: #dff0d8">
 				<th width="20"><input type="checkbox" id="firstCheckbox" /></th>
-				<th nowrap="nowrap">保险编号</th>
-					<th>保险名称</th>
-					<th>币种</th>
-					<th>总保险金额</th>
-					<th>总保险费</th>
-					<th>保险简介</th>
+				<th style="width:10%;">产品代码（险种）</th>				
+				<th style="width:15%;">产品名称</th>
+				<th style="width:10%;">保额币种</th>
+				<th style="width:15%;">保额合计</th>
+				<th style="width:10%;">保费币种</th>	
+				<th style="width:15%;">保费合计</th>
+				<th style="width:25%;">简介</th>		
 			</tr>
            <#list pager.list as item>
 				<tr>
 					<td><input type="checkbox" name="ids" 
 						value="${item.id!""}" /></td>
-					<td nowrap="nowrap">&nbsp;${item.id!""}</td>	
-					<td>&nbsp;${item.name!""}</td>
-					<td>&nbsp;${item.currency!""}</td>
-					<td>&nbsp;${item.amounts!""}</td>
-					<td>&nbsp;${item.premiums!""}</td>
+					<td >&nbsp;${item.CProdNo!""}</td>									
+					<td>&nbsp;${item.CProdName!""}</td>
+					<td>&nbsp;${item.NAmtRmbExch!""}</td>	
+					<td>&nbsp;${item.NAmt!""}</td>
+					<td>&nbsp;${item.NPrmRmbExch!""}</td>	
+					<td>&nbsp;${item.NPrm!""}</td>	
 					<td>&nbsp;${item.introduce!""}</td>
 				</tr>
             </#list>

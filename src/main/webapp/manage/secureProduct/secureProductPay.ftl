@@ -1,74 +1,151 @@
 <#import "/manage/tpl/pageBase.ftl" as page>
 <@page.pageBase currentMenu="保险产品管理">
+<style>
+#application {
+	border-bottom:1px solid #e78f08;
+	}
+</style>
+
 <form action="${basepath}/manage/secureProduct/selectList" id="form" name="form" namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">		
 	<div id="tabs">
-	           
-            <!--------------------------订单主产品信息模块-------------------------------->
-    <!--	<table class="table table-bordered table-condensed table-hover">
-				<tr style="background-color: #dff0d8">
-					<td style="display: none;">保险编号</td>
-					<th nowrap="nowrap">保险名称</th>
-					<th>币种</th>
-					<th>总保险金额</th>
-					<th>总保险费</th>
-					<th>特别约定</th>
-					<th>免责说明</th>
-					<th>保险简介</th>
-				</tr>
-				
-	   			<tr>
-					<td style="display: none;">${e.id!""}</td>	
-					<td>&nbsp;${e.name!""}</td>
-					<td>&nbsp;${e.currency!""}</td>
-					<td>&nbsp;${e.amounts!""}</td>
-					<td>&nbsp;${e.premiums!""}</td>
-					<td>&nbsp;${e.appointment!""}</td>
-					<td>&nbsp;${e.deductible!""}</td>
-					<td>&nbsp;${e.introduce!""}</td>
-				</tr>
-			</table>
-			-->
-            <!--------------------------订单主产品信息模块---------------------------------->
-		    
-		<!--------------------------订单子产品信息模块------------------------------------->		
-		<!--<table class="table">                 
-			<tr>
-			<th style="display: none;">id</th>
-			<td>子产品名称</td>
-			<td>保险金额</td>
-			<td>费率</td>
-			<td>保费</td> 
-			<td>备注</td> 
-			<td>保险金额的确定方式</td>		           				
-			</tr>
-	        <#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
-                <#list e.secureProductDetailList as item>
-					<tr>
-						<td style="display: none;"><input type="hidden" value="${item.id!""}" name="secureProductDetailList[${item_index}].id"/></td>
-						<td><input type="text"  value="${e.secureProductDetailList[item_index].subName!""}" name="secureProductDetailList[${item_index}].subName"  class="search-query input-small"/></td>
-						<td><input type="text"  value="${e.secureProductDetailList[item_index].amount!""}" name="secureProductDetailList[${item_index}].amount"  class="search-query input-small"/></td>
-						<td><input type="text"  value="${e.secureProductDetailList[item_index].rate!""}" name="secureProductDetailList[${item_index}].rate"  class="search-query input-small"/></td>
-						<td><input type="text"  value="${e.secureProductDetailList[item_index].premium!""}" name="secureProductDetailList[${item_index}].premium"  class="search-query input-small"/></td>
-						<td><input type="text"  value="${e.secureProductDetailList[item_index].remark!""}" name="secureProductDetailList[${item_index}].remark"  class="search-query input-small"/></td>
-						<td>
-                            <#assign map = {'0':'确定方式1','1':'确定方式2','2':'确定方式3','3':'确定方式4'}>
-                            <select id="sure_way" name="secureProductDetailList[${item_index}].sure_way" class="search-query input-medium">
-                                <#list map?keys as key>
-                                    <option value="${key}" <#if item.sure_way?? && item.sure_way==key>selected="selected" </#if>>${map[key]}</option>
-                                </#list>
-                            </select>
-                        </td>
-					</tr>
-                </#list>
-   		  </#if>
-        </table>
-        -->	
-            <!--------------------------订单订单子产品信息模块------------------------------------->
+		<ul>
+			<li><a href="#tabs-1">投/被保人基本信息</a></li>		
+		</ul>
+	<!--------------------------投保人模块------------------------------------->		
+		<div id="tabs-1" >
+		<input type="hidden" value="${e.id!""}" name="id" label="id" id="id"/>
+		<div class="row form-horizontal"-role="form">
+		 		
+			  <div class="form-group col-md-6">
+	                <label class="col-md-4 control-label">投保人代码</label>
+	                <div class="col-md-8"><input type="text"  value="${e.AppCode!""}" name="AppCode"  data-rule="产品名称;required;AppCode;" size="25" maxlength="10"
+	                                             id="AppCode" />&nbsp;<span style="color:red">*</span>
+	                </div>
+		      </div>
+		  	  <div class="form-group col-md-6">
+	                <label class="col-md-4 control-label">投保人名字</label>
+	                <div class="col-md-8"><input type="text"  value="${e.CProdName!""}" name="CProdName"  data-rule="产品名称;required;CProdName;" size="25" maxlength="10"
+	                                             id="CProdName" />&nbsp;<span style="color:red">*</span>
+	                </div>
+		      </div>
+		       <div class="form-group col-md-6">
+	                <label class="col-md-4 control-label">投保人性质/客户类型</label>
+	                <div class="col-md-8"><input type="text"  value="${e.NAmtRmbExch!""}" name="NAmtRmbExch"  data-rule="币种（默认值RMB）;required;NAmtRmbExch;" size="25" maxlength="10"
+	                                             id="NAmtRmbExch" />&nbsp;<span style="color:red">*</span>
+	                </div>
+		      </div>
+		      <div class="form-group col-md-6">
+	                <label class="col-md-4 control-label">邮箱</label>
+	                <div class="col-md-8"><input type="text"  value="${e.NPrm!""}" name="NPrm"  data-rule="总保险费;required;NPrm;" size="25" maxlength="10"
+	                                             id="NPrm" />&nbsp;<span style="color:red">*</span>
+	                </div>
+		      </div>	
+		       <div class="form-group col-md-6">
+	                <label class="col-md-4 control-label">证件类型</label>
+	                <div class="col-md-8"><input type="text"  value="${e.NAmt!""}" name="NAmt"  data-rule="总保险金额;required;NAmt;" size="25" maxlength="10"
+	                                             id="NAmt" />&nbsp;<span style="color:red">*</span>
+	                </div>
+		      </div>
+		      <div class="form-group col-md-6">
+	                <label class="col-md-4 control-label">证件号码</label>
+	                <div class="col-md-8"><input type="text"  value="${e.NPrmRmbExch!""}" name="NPrmRmbExch"  data-rule="总保险费;required;NPrmRmbExch;" size="25" maxlength="10"
+	                                             id="NPrmRmbExch" />&nbsp;<span style="color:red">*</span>
+	                </div>
+		      </div>
+		       <div class="form-group col-md-6">
+	                <label class="col-md-4 control-label">通讯地址</label>
+	                <div class="col-md-8"><input type="text"  value="${e.NPrm!""}" name="NPrm"  data-rule="总保险费;required;NPrm;" size="25" maxlength="10"
+	                                             id="NPrm" />&nbsp;<span style="color:red">*</span>
+	                </div>
+		      </div>	
+		      
+		      <div class="form-group col-md-6">
+	                <label class="col-md-4 control-label">联系人</label>
+	                <div class="col-md-8"><input type="text"  value="${e.NPrm!""}" name="NPrm"  data-rule="总保险费;required;NPrm;" size="25" maxlength="10"
+	                                             id="NPrm" />&nbsp;<span style="color:red">*</span>
+	                </div>
+		      </div>	
+		      <div class="form-group col-md-6">
+	                <label class="col-md-4 control-label">联系电话</label>
+	                <div class="col-md-8"><input type="text"  value="${e.NPrm!""}" name="NPrm"  data-rule="总保险费;required;NPrm;" size="25" maxlength="10"
+	                                             id="NPrm" />&nbsp;<span style="color:red">*</span>
+	                </div>
+		      </div>	
+		      	       
+		    </div>
+		</div>
+	<!--------------------------投保人模块------------------------------------->
+   		<span style="margin-left:2px;">
+	                      <button id="pay" class="btn btn-primary">
+	               			信息同步
+	            </button>
+		      </span>
+		<!--------------------------被保人模块------------------------------------->		
+		<div id="tabs-1" >
+		<input type="hidden" value="${e.id!""}" name="id" label="id" id="id"/>
+		<div class="row form-horizontal"-role="form">
+		
+			  <div class="form-group col-md-6">
+	                <label class="col-md-4 control-label">被保人代码</label>
+	                <div class="col-md-8"><input type="text"  value="${e.AppCode!""}" name="AppCode"  data-rule="产品名称;required;AppCode;" size="25" maxlength="10"
+	                                             id="AppCode" />&nbsp;<span style="color:red">*</span>
+	                </div>
+		      </div>
+		  	  <div class="form-group col-md-6">
+	                <label class="col-md-4 control-label">被保人名字</label>
+	                <div class="col-md-8"><input type="text"  value="${e.CProdName!""}" name="CProdName"  data-rule="产品名称;required;CProdName;" size="25" maxlength="10"
+	                                             id="CProdName" />&nbsp;<span style="color:red">*</span>
+	                </div>
+		      </div>
+		       <div class="form-group col-md-6">
+	                <label class="col-md-4 control-label">被保人性质/客户类型</label>
+	                <div class="col-md-8"><input type="text"  value="${e.NAmtRmbExch!""}" name="NAmtRmbExch"  data-rule="币种（默认值RMB）;required;NAmtRmbExch;" size="25" maxlength="10"
+	                                             id="NAmtRmbExch" />&nbsp;<span style="color:red">*</span>
+	                </div>
+		      </div>
+		      <div class="form-group col-md-6">
+	                <label class="col-md-4 control-label">邮箱</label>
+	                <div class="col-md-8"><input type="text"  value="${e.NPrm!""}" name="NPrm"  data-rule="总保险费;required;NPrm;" size="25" maxlength="10"
+	                                             id="NPrm" />&nbsp;<span style="color:red">*</span>
+	                </div>
+		      </div>	
+		       <div class="form-group col-md-6">
+	                <label class="col-md-4 control-label">证件类型</label>
+	                <div class="col-md-8"><input type="text"  value="${e.NAmt!""}" name="NAmt"  data-rule="总保险金额;required;NAmt;" size="25" maxlength="10"
+	                                             id="NAmt" />&nbsp;<span style="color:red">*</span>
+	                </div>
+		      </div>
+		      <div class="form-group col-md-6">
+	                <label class="col-md-4 control-label">证件号码</label>
+	                <div class="col-md-8"><input type="text"  value="${e.NPrmRmbExch!""}" name="NPrmRmbExch"  data-rule="总保险费;required;NPrmRmbExch;" size="25" maxlength="10"
+	                                             id="NPrmRmbExch" />&nbsp;<span style="color:red">*</span>
+	                </div>
+		      </div>
+		       <div class="form-group col-md-6">
+	                <label class="col-md-4 control-label">通讯地址</label>
+	                <div class="col-md-8"><input type="text"  value="${e.NPrm!""}" name="NPrm"  data-rule="总保险费;required;NPrm;" size="25" maxlength="10"
+	                                             id="NPrm" />&nbsp;<span style="color:red">*</span>
+	                </div>
+		      </div>	
+		      
+		      <div class="form-group col-md-6">
+	                <label class="col-md-4 control-label">联系人</label>
+	                <div class="col-md-8"><input type="text"  value="${e.NPrm!""}" name="NPrm"  data-rule="总保险费;required;NPrm;" size="25" maxlength="10"
+	                                             id="NPrm" />&nbsp;<span style="color:red">*</span>
+	                </div>
+		      </div>	
+		      <div class="form-group col-md-6">
+	                <label class="col-md-4 control-label">联系电话</label>
+	                <div class="col-md-8"><input type="text"  value="${e.NPrm!""}" name="NPrm"  data-rule="总保险费;required;NPrm;" size="25" maxlength="10"
+	                                             id="NPrm" />&nbsp;<span style="color:red">*</span>
+	                </div>
+		      </div>	       
+		    </div>
+		</div>
+            <!--------------------------被保人模块------------------------------------->
  
 			<!--------------------------start-tabs-3---------------------------------------->
-			客户名称：<input type="text" />
-			性别：<input type="text" />
-			家庭住址：<input type="text" />			
+				
 			<!--------------------------end-tabs-3------------------------------------------>			
 			<!--------------------------start-tabs-4---------------------------------------->
 			

@@ -24,11 +24,11 @@
 		<table class="table table-bordered table-condensed">
 			<tr>
 				<td style="text-align: right;">商品编号</td>
-				<td style="text-align: left;"><input type="text" name="id"  class="search-query input-small"
-						id="id" /></td>
+				<td style="text-align: left;"><input type="text" name="CProdNo"  class="search-query input-small"
+						id="CProdNo" /></td>
 				<td style="text-align: right;">商品名称</td>
-				<td style="text-align: left;" ><input type="text" name="name"  class="input-small"
-						id="name" /></td>					
+				<td style="text-align: left;" ><input type="text" name="CProdName"  class="input-small"
+						id="CProdName" /></td>					
 			</tr>
 			<tr>
 				<td style="text-align: right;">录入时间</td>
@@ -72,7 +72,6 @@
                     </#if>
 
                     <#if checkDbPrivilege("secureProduct/updateUp")>
-<!-- 							<i class="icon-arrow-up icon-white"></i> 上架 -->
 						<button method="updateUp" class="btn btn-warning" onclick="return submitIDs(this,'确定上架选择的记录?');">
 							<i class="icon-arrow-up icon-white"></i> 上架
 						</button>
@@ -89,23 +88,23 @@
 
 		<table id="t_secure" class="table table-bordered table-condensed table-hover" style="text-align: center;">
 			<tr style="background-color: #dff0d8">				
-				<th style="width:10%;text-align: center">保险编号</th>				
-				<th style="width:10%;text-align: center">保险名称</th>
-				<th style="width:10%;text-align: center">币种</th>
-				<th style="width:15%;text-align: center">总保险金额</th>
-				<th style="width:15%;text-align: center">总保险费</th>	
-				<th style="width:20%;text-align: center">保险简介</th>					
+				<th style="width:10%;text-align: center">产品代码（险种）</th>				
+				<th style="width:15%;text-align: center">产品名称</th>
+				<th style="width:15%;text-align: center">保额币种</th>
+				<th style="width:15%;text-align: center">保额合计</th>
+				<th style="width:15%;text-align: center">保费币种</th>	
+				<th style="width:15%;text-align: center">保费合计</th>									
 				<th style="width:5%">状态</th>				
 				<th style="width:10%;text-align: center">操作</th>
 			</tr>
             <#list pager.list as item>
 				<tr>					
-					<td >&nbsp;${item.id!""}</td>									
-					<td>&nbsp;${item.name!""}</td>
-					<td>&nbsp;${item.currency!""}</td>	
-					<td>&nbsp;${item.amounts!""}</td>
-					<td>&nbsp;${item.premiums!""}</td>	
-					<td>&nbsp;${item.introduce!""}</td>			
+					<td >&nbsp;${item.CProdNo!""}</td>									
+					<td>&nbsp;${item.CProdName!""}</td>
+					<td>&nbsp;${item.NAmtRmbExch!""}</td>	
+					<td>&nbsp;${item.NAmt!""}</td>
+					<td>&nbsp;${item.NPrmRmbExch!""}</td>	
+					<td>&nbsp;${item.NPrm!""}</td>			
 					<td>&nbsp;
 						<#if item.status??&&item.status==1>
 							<img alt="已上架" src="${basepath}/resource/images/action_check.gif">
@@ -119,7 +118,8 @@
 						<a href="toEditProduct?id=${item.id}">编辑</a>|
 						
 					</#if>
-					<a href="toOrder?id=${item.id}">查看</a>
+					<a href="toOrder?id=${item.id}">查看</a>|
+					<a href="toPayPage?id=${item.id}">下单</a>
 					</td>
 				</tr>
             </#list>

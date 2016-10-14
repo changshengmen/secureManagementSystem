@@ -5,7 +5,7 @@
 		<ul>
 			<li><a href="#tabs-1">保险主产品基本信息</a></li>	
 			<li><a href="#tabs-2">保险子产品基本信息</a></li>
-			<li><a href="#tabs-3">保险条款</a></li>				
+			<!--<li><a href="#tabs-3">保险条款</a></li>-->				
 			<!--<li><a href="#tabs-4">本地上传图片</a></li>-->	
 		</ul>
 		<!--------------------------主产品信息添加模块------------------------------------->		
@@ -17,24 +17,24 @@
 		 	<!----------------------------------------------商品列表-------------------------------------------->
 			<table class="table table-bordered table-condensed table-hover">				
 				<tr style="background-color: #dff0d8">
-					<td style="display: none;">保险编号</td>
-					<th nowrap="nowrap">保险名称</th>
-					<th>币种</th>
-					<th>总保险金额</th>
-					<th>总保险费</th>
-					<th>特别约定</th>
-					<th>免责说明</th>
-					<th>保险简介</th>
+					<td style="display: none;">id</td>
+					<th nowrap="nowrap">产品代码（险种）</th>
+					<th>产品名称</th>
+					<th>保额币种</th>
+					<th>保额合计</th>
+					<th>保费币种</th>
+					<th>保费合计</th>
+					<th>简介</th>					
 				</tr>
 	   			<tr>
 					<td style="display: none;">${e.id!""}</td>	
-					<td>&nbsp;${e.name!""}</td>
-					<td>&nbsp;${e.currency!""}</td>
-					<td>&nbsp;${e.amounts!""}</td>
-					<td>&nbsp;${e.premiums!""}</td>
-					<td>&nbsp;${e.appointment!""}</td>
-					<td>&nbsp;${e.deductible!""}</td>
-					<td>&nbsp;${e.introduce!""}</td>
+					<td style="width:10%;">${e.CProdNo!""}</td>
+					<td style="width:20%;">${e.CProdName!""}</td>
+					<td style="width:10%;">${e.NAmtRmbExch!""}</td>
+					<td style="width:15%;">${e.NAmt!""}</td>
+					<td style="width:10%;">${e.NPrmRmbExch!""}</td>
+					<td style="width:15%;">${e.NPrm!""}</td>
+					<td style="width:120%;">${e.introduce!""}</td>
 				</tr>
 			</table>
            </div>
@@ -76,9 +76,10 @@
             <!--------------------------end子产品信息模块------------------------------------->
 		  
 			<!--------------------------start-tabs-3------------------------------------->
-			<div id="tabs-3">
+			<!--<div id="tabs-3">
 				${e.insuranceClause!""}
-			</div>				
+			</div>	
+			-->			
 			<!--------------------------end-tabs-3------------------------------------->		
 			<!--------------------------start-tabs-4------------------------------------->
 			<!--<div id="tabs-4">

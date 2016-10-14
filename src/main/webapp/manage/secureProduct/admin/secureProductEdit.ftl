@@ -5,38 +5,50 @@
 		<ul>
 			<li><a href="#tabs-1">保险主产品基本信息</a></li>	
 			<li><a href="#tabs-2">保险子产品基本信息</a></li>
-			<li><a href="#tabs-3">保险条款</a></li>				
+		<!--	<li><a href="#tabs-3">保险条款</a></li>		-->		
 			<!--<li><a href="#tabs-4">本地上传图片</a></li>-->	
 		</ul>
 		<!--------------------------主产品信息添加模块------------------------------------->		
 		<div id="tabs-1">
 		 	<input type="hidden" value="${e.id!""}" name="id" label="id" id="id"/>
 			<div class="row form-horizontal"-role="form">
+				  <div class="form-group col-md-6">
+	                        <label class="col-md-4 control-label">产品代码（险种）</label>
+	                        <div class="col-md-8"><input type="text"  value="${e.CProdNo!""}" name="CProdNo"  data-rule="产品名称;required;CProdNo;" size="10" maxlength="10"
+	                                                     id="CProdNo" />
+	                        </div>
+	              </div>
 			  	  <div class="form-group col-md-6">
 	                        <label class="col-md-4 control-label">产品名称</label>
-	                        <div class="col-md-8"><input type="text"  value="${e.name!""}" name="name"  data-rule="产品名称;required;price;" size="10" maxlength="10"
-	                                                     id="name" />
+	                        <div class="col-md-8"><input type="text"  value="${e.CProdName!""}" name="CProdName"  data-rule="产品名称;required;CProdName;" size="10" maxlength="10"
+	                                                     id="CProdName" />
 	                        </div>
 	              </div>
 	               <div class="form-group col-md-6">
-	                        <label class="col-md-4 control-label">币种</label>
-	                        <div class="col-md-8"><input type="text"  value="${e.currency!""}" name="currency"  data-rule="币种（默认值RMB）;required;currency;" size="10" maxlength="10"
-	                                                     id="currency" />
+	                        <label class="col-md-4 control-label">保额币种</label>
+	                        <div class="col-md-8"><input type="text"  value="${e.NAmtRmbExch!""}" name="NAmtRmbExch"  data-rule="币种（默认值RMB）;required;NAmtRmbExch;" size="10" maxlength="10"
+	                                                     id="NAmtRmbExch" />
 	                        </div>
 	              </div>
 	               <div class="form-group col-md-6">
-	                        <label class="col-md-4 control-label">总保险金额</label>
-	                        <div class="col-md-8"><input type="text"  value="${e.amounts!""}" name="amounts"  data-rule="总保险金额;required;amounts;" size="10" maxlength="10"
-	                                                     id="amounts" />
+	                        <label class="col-md-4 control-label">保额合计</label>
+	                        <div class="col-md-8"><input type="text"  value="${e.NAmt!""}" name="NAmt"  data-rule="总保险金额;required;NAmt;" size="10" maxlength="10"
+	                                                     id="NAmt" />
 	                        </div>
 	              </div>
 	              <div class="form-group col-md-6">
-	                        <label class="col-md-4 control-label">总保险费</label>
-	                        <div class="col-md-8"><input type="text"  value="${e.premiums!""}" name="premiums"  data-rule="总保险费;required;premiums;" size="10" maxlength="10"
-	                                                     id="premiums" />
+	                        <label class="col-md-4 control-label">保费币种</label>
+	                        <div class="col-md-8"><input type="text"  value="${e.NPrmRmbExch!""}" name="NPrmRmbExch"  data-rule="总保险费;required;NPrmRmbExch;" size="10" maxlength="10"
+	                                                     id="NPrmRmbExch" />
 	                        </div>
 	              </div>
-	                <div class="form-group col-md-12">
+	               <div class="form-group col-md-6">
+	                        <label class="col-md-4 control-label">保费合计</label>
+	                        <div class="col-md-8"><input type="text"  value="${e.NPrm!""}" name="NPrm"  data-rule="总保险费;required;NPrm;" size="10" maxlength="10"
+	                                                     id="NPrm" />
+	                        </div>
+	              </div>
+	<!--                <div class="form-group col-md-12">
 	                       <label class="col-md-2 control-label">特别约定</label>
 	                        <div class="col-md-10">
 								<textarea name="appointment" class="form-control" rows="3" id="appointment"
@@ -47,14 +59,15 @@
 	                        <label class="col-md-2 control-label">免责说明</label>
 	                        <div class="col-md-10">
 								<textarea name="deductible" class="form-control" rows="3" id="deductible"
-										  data-rule="免责说明;required;deductible;length[4~500];">${e.deductible!""}</textarea>
+										  data-rule="免责说明;deductible;length[4~500];">${e.deductible!""}</textarea>
 	                        </div>
 	               </div>
+	               -->
 	                <div class="form-group col-md-12">
 	                        <label class="col-md-2 control-label">产品简介</label>
 	                        <div class="col-md-10">
 								<textarea name="introduce" class="form-control" rows="3" id="introduce"
-										  data-rule="免责说明;required;introduce;length[4~500];">${e.introduce!""}</textarea>
+										  data-rule="产品简介;introduce;length[4~500];">${e.introduce!""}</textarea>
 	                        </div>
 	               </div>
 	               
@@ -118,12 +131,15 @@
            		  </table>          	 	
 			</div>	
             <!--------------------------end子产品信息添加模块------------------------------------->
-		    
-			<!--------------------------start-tabs-3------------------------------------->
+		    <!--------------------------start-tabs-3------------------------------------->
+		    <!--
+			
 			<div id="tabs-3">
 				<textarea data-rule="保险条款;required;insuranceClause;" id="insuranceClause" name="insuranceClause" style="width:100%;height:500px;visibility:hidden;">${e.insuranceClause!""}</textarea>
-			</div>				
-			<!--------------------------end-tabs-3------------------------------------->			
+			</div>	
+			-->				
+			<!--------------------------end-tabs-3------------------------------------->
+					
 			<!--------------------------start-tabs-4------------------------------------->
 			<!--<div id="tabs-4">
 					<div>
@@ -232,80 +248,7 @@ function catalogChange(obj){
 	}
 }
 </script>
-<script>
-		KindEditor.ready(function(K) {
-				var uploadbutton = K.uploadbutton({
-					button : K('#uploadButton')[0],
-					fieldName : 'imgFile',
-					url : '${basepath}/editor/upload?dir=image',
-					afterUpload : function(data) {
-						if (data.error === 0) {
-							var url = K.formatUrl(data.url, 'absolute');
-							K('#url').val(url);
-						} else {
-							alert(data.message);
-						}
-					},
-					afterError : function(str) {
-						alert('自定义错误信息: ' + str);
-					}
-				});
-				uploadbutton.fileBox.change(function(e) {
-					uploadbutton.submit();
-				});
-			});
-</script>
-<script>
-	var editor;
-	KindEditor.ready(function(K) {
-		editor = K.create('textarea[name="insuranceClause"]', {
-			allowFileManager : true,
-            uploadJson : '${basepath}/editor/upload',
-            fileManagerJson : '${basepath}/editor/fileManager'
-		});
-				
-	});
 
-	
-	function addTrFunc(){
-	alert("addTrFunc函数");
-		var cc = $("#firstTr").clone();
-		$("#firstTr").after(cc);
-		
-		cc.find("a").show();
-	}
-	
-	function removeThis(t){
-		$(t).parent().parent().remove();
-		return false;
-	}
-</script>
-
-<script>
-KindEditor.ready(function(K) {
-	var editor = K.editor({
-		fileManagerJson : '${basepath}/editor/fileManager'
-	});
-	K('input[name=filemanager]').click(function() {
-	
-		var imagesInputObj = $(this).parent().children("input[ccc=imagesInput]");
-		editor.loadPlugin('filemanager', function() {
-			editor.plugin.filemanagerDialog({
-				viewType : 'VIEW',
-				dirName : '',
-				clickFn : function(url, title) {
-					//K('#picture').val(url);
-					arr=url.split("/");	
-					imagesInputObj.val(arr[5]);
-					editor.hideDialog();
-					clearRootImagePath(imagesInputObj);//$("#picture"));
-				}
-			});
-		});
-	});
-	
-});
-</script>
 		
 	 <link rel="stylesheet" href="${basepath}/resource/uploadify/uploadify.css"  type="text/css">
 	 <script type="text/javascript" src="${basepath}/resource/uploadify/jquery.uploadify.min.js"></script>
