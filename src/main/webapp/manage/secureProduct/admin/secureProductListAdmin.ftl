@@ -23,10 +23,10 @@
 	<form action="${basepath}/manage/secureProduct" namespace="/manage" method="post" theme="simple">		
 		<table class="table table-bordered table-condensed">
 			<tr>
-				<td style="text-align: right;">商品编号</td>
+				<td style="text-align: right;">产品代码</td>
 				<td style="text-align: left;"><input type="text" name="CProdNo"  class="search-query input-small"
 						id="CProdNo" /></td>
-				<td style="text-align: right;">商品名称</td>
+				<td style="text-align: right;">产品名称</td>
 				<td style="text-align: left;" ><input type="text" name="CProdName"  class="input-small"
 						id="CProdName" /></td>					
 			</tr>
@@ -87,7 +87,8 @@
 		</table>
 
 		<table id="t_secure" class="table table-bordered table-condensed table-hover" style="text-align: center;">
-			<tr style="background-color: #dff0d8">				
+			<tr style="background-color: #dff0d8">
+			<th style="width:5%;text-align: center"><input type="checkbox" id="firstCheckbox" /></th>				
 				<th style="width:10%;text-align: center">产品代码（险种）</th>				
 				<th style="width:15%;text-align: center">产品名称</th>
 				<th style="width:15%;text-align: center">保额币种</th>
@@ -98,7 +99,9 @@
 				<th style="width:10%;text-align: center">操作</th>
 			</tr>
             <#list pager.list as item>
-				<tr>					
+				<tr>		
+				<td><input type="checkbox" name="ids"
+						value="${item.id!""}" /></td>			
 					<td >&nbsp;${item.CProdNo!""}</td>									
 					<td>&nbsp;${item.CProdName!""}</td>
 					<td>&nbsp;${item.NAmtRmbExch!""}</td>	

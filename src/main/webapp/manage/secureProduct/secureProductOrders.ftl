@@ -113,9 +113,9 @@
 		</div><!--end tab-->
 			<!--------------------------操作按钮模块------------------------------------->
 			<#if e.id??>
-			 	<button method="toPayPage" class="btn btn-success">
-                <i class="icon-ok icon-white"></i> 下单
-            </button>   
+			 	<a href="toPayPage?id=${e.id}" class="btn btn-success">下单</a> 
+               
+           
                 <button method="selectList?init=y" class="btn btn-success">
 	                <i class="icon-ok icon-white"></i>返回
 	        	</button>	
