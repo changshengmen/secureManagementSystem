@@ -4,8 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.commons.lang.time.DateUtils;
-
 public class DateTimeUtil {
 	public static void main(String[] args) throws Exception {
 		
@@ -115,4 +113,16 @@ public class DateTimeUtil {
         return null;
 	}
 	
+	/**
+	* @Description: TODO(获取当前时间字符串格式) 
+	* @author lyx
+	* @date 2016年10月14日 下午2:02:51 
+	* @return String    返回类型 
+	* @throws
+	 */
+	public static String getDateNowByExpression(String expression) {
+		Date dt = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat(expression);
+		return sdf.format(dt);
+	}
 }
