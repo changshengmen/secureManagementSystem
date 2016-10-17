@@ -1,0 +1,1 @@
+package net.jeeshop.services.manage.NvhlBaseVO;import net.jeeshop.core.Services;import net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO;import net.jeeshop.services.manage.secureOrder.bean.SecureOrder;/** * 保险订单管理 * @author lin * */public interface NvhlBaseService extends Services<NvhlBaseVO> {}

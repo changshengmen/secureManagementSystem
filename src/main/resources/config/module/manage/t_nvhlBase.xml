@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- create by autoCode,v1.0.0 -->
+<mapper namespace="manage.NvhlBase">
+	<!-- 保险订单查询 -->
+	<select id="manage.NvhlBase.selectPageList"
+		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO"
+		resultType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO">
+		select n.SerialNumber id,DATEDIFF(NOW(),n.TInsrncEndTm) expire_days, n.* from nvhlbasevo n where 1=1
+		<if test="createAccount!=null and createAccount!=''">
+			and createAccount=#{createAccount}
+		</if>
+		order by TInsrncEndTm 	
+			limit #{offset},#{pageSize}
+	</select>
+
+	<!-- 保险订单查询分页 -->
+	<select id="manage.NvhlBase.selectPageCount"
+		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO"
+		resultType="java.lang.Integer">
+		select count(*) from nvhlbasevo  d where 1=1
+		<if test="createAccount!=null and createAccount!=''">
+			and createAccount=#{createAccount}
+		</if>
+	</select>
+	
+	
+	<insert id="manage.NvhlBase.insertNvhlBase"
+		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into nvhlbasevo(SerialNumber,CDptCde,SysRes,CBsnsTyp,CChaType,CChaSubtype,FinTyp,CProdNo,CCiMrk,NAmtRmbExch,NAmt,NPrmRmbExch,NPrm,
+         TAppTm,TInsrncBgnTm,TInsrncEndTm,CGrpMrk,EfcManualFlag,CPlyTyp,CNeedfeeFlag,ICopyNum,createAccount,createTime)
+         values(#{id},#{CDptCde},#{SysRes},#{CBsnsTyp},#{CChaType},#{CChaSubtype},#{FinTyp},#{CProdNo},#{CCiMrk},#{NAmtRmbExch},#{NAmt},#{NPrmRmbExch},#{NPrm},#{TAppTm}
+  		,#{TInsrncBgnTm},#{TInsrncEndTm},#{CGrpMrk},#{EfcManualFlag},#{CPlyTyp},#{CNeedfeeFlag},#{ICopyNum},#{createAccount},#{createTime})
+	</insert>
+</mapper>

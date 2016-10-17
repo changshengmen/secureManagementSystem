@@ -1,0 +1,1 @@
+package net.jeeshop.services.manage.NvhlBaseVO.dao;import net.jeeshop.core.DaoManager;import net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO;/** * 保险订单管理 * @author lin * */public interface NvhlBaseDao extends DaoManager<NvhlBaseVO> {}
