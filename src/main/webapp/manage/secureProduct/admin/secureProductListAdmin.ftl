@@ -91,12 +91,12 @@
 			<th style="width:5%;text-align: center"><input type="checkbox" id="firstCheckbox" /></th>				
 				<th style="width:10%;text-align: center">产品代码（险种）</th>				
 				<th style="width:15%;text-align: center">产品名称</th>
-				<th style="width:15%;text-align: center">保额币种</th>
+				<th style="width:10%;text-align: center">保额币种</th>
 				<th style="width:15%;text-align: center">保额合计</th>
-				<th style="width:15%;text-align: center">保费币种</th>	
+				<th style="width:10%;text-align: center">保费币种</th>	
 				<th style="width:15%;text-align: center">保费合计</th>									
 				<th style="width:5%">状态</th>				
-				<th style="width:10%;text-align: center">操作</th>
+				<th style="width:20%;text-align: center">操作</th>
 			</tr>
             <#list pager.list as item>
 				<tr>		

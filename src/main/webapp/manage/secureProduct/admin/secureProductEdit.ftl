@@ -13,56 +13,42 @@
 		 	<input type="hidden" value="${e.id!""}" name="id" label="id" id="id"/>
 			<div class="row form-horizontal"-role="form">
 				  <div class="form-group col-md-6">
-	                        <label class="col-md-4 control-label">产品代码（险种）</label>
-	                        <div class="col-md-8"><input type="text"  value="${e.CProdNo!""}" name="CProdNo"  data-rule="产品名称;required;CProdNo;" size="10" maxlength="10"
+	                        <label class="col-md-4 control-label">产品代码(险种)</label>
+	                        <div class="col-md-8"><input type="text"  value="${e.CProdNo!""}" name="CProdNo"  data-rule="产品名称;required;CProdNo;" size="25" maxlength="10"
 	                                                     id="CProdNo" />
 	                        </div>
 	              </div>
 			  	  <div class="form-group col-md-6">
 	                        <label class="col-md-4 control-label">产品名称</label>
-	                        <div class="col-md-8"><input type="text"  value="${e.CProdName!""}" name="CProdName"  data-rule="产品名称;required;CProdName;" size="10" maxlength="10"
+	                        <div class="col-md-8"><input type="text"  value="${e.CProdName!""}" name="CProdName"  data-rule="产品名称;required;CProdName;" size="25" maxlength="10"
 	                                                     id="CProdName" />
 	                        </div>
 	              </div>
 	               <div class="form-group col-md-6">
 	                        <label class="col-md-4 control-label">保额币种</label>
-	                        <div class="col-md-8"><input type="text"  value="${e.NAmtRmbExch!""}" name="NAmtRmbExch"  data-rule="币种（默认值RMB）;required;NAmtRmbExch;" size="10" maxlength="10"
+	                        <div class="col-md-8"><input type="text"  value="${e.NAmtRmbExch!""}" name="NAmtRmbExch"  data-rule="币种（默认值RMB）;required;NAmtRmbExch;" size="25" maxlength="10"
 	                                                     id="NAmtRmbExch" />
 	                        </div>
 	              </div>
 	               <div class="form-group col-md-6">
 	                        <label class="col-md-4 control-label">保额合计</label>
-	                        <div class="col-md-8"><input type="text"  value="${e.NAmt!""}" name="NAmt"  data-rule="总保险金额;required;NAmt;" size="10" maxlength="10"
+	                        <div class="col-md-8"><input type="text"  value="${e.NAmt!""}" name="NAmt"  data-rule="总保险金额;required;NAmt;" size="25" maxlength="10"
 	                                                     id="NAmt" />
 	                        </div>
 	              </div>
 	              <div class="form-group col-md-6">
 	                        <label class="col-md-4 control-label">保费币种</label>
-	                        <div class="col-md-8"><input type="text"  value="${e.NPrmRmbExch!""}" name="NPrmRmbExch"  data-rule="总保险费;required;NPrmRmbExch;" size="10" maxlength="10"
+	                        <div class="col-md-8"><input type="text"  value="${e.NPrmRmbExch!""}" name="NPrmRmbExch"  data-rule="总保险费;required;NPrmRmbExch;" size="25" maxlength="10"
 	                                                     id="NPrmRmbExch" />
 	                        </div>
 	              </div>
 	               <div class="form-group col-md-6">
 	                        <label class="col-md-4 control-label">保费合计</label>
-	                        <div class="col-md-8"><input type="text"  value="${e.NPrm!""}" name="NPrm"  data-rule="总保险费;required;NPrm;" size="10" maxlength="10"
+	                        <div class="col-md-8"><input type="text"  value="${e.NPrm!""}" name="NPrm"  data-rule="总保险费;required;NPrm;" size="25" maxlength="10"
 	                                                     id="NPrm" />
 	                        </div>
 	              </div>
-	<!--                <div class="form-group col-md-12">
-	                       <label class="col-md-2 control-label">特别约定</label>
-	                        <div class="col-md-10">
-								<textarea name="appointment" class="form-control" rows="3" id="appointment"
-										  data-rule="特别约定;required;appointment;length[4~500];">${e.appointment!""}</textarea>
-	                        </div>
-	               </div>
-				   <div class="form-group col-md-12">
-	                        <label class="col-md-2 control-label">免责说明</label>
-	                        <div class="col-md-10">
-								<textarea name="deductible" class="form-control" rows="3" id="deductible"
-										  data-rule="免责说明;deductible;length[4~500];">${e.deductible!""}</textarea>
-	                        </div>
-	               </div>
-	               -->
+	
 	                <div class="form-group col-md-12">
 	                        <label class="col-md-2 control-label">产品简介</label>
 	                        <div class="col-md-10">
@@ -177,9 +163,9 @@
 	                    <i class="icon-ok icon-white"></i> 保存
 	                </button>
                 </#if>
-                <button method="selectList?init=y" class="btn btn-success">
+                <button onclick="javascript:history.back(-1)" class="btn btn-success">
 	                <i class="icon-ok icon-white"></i>返回
-	        	</button>	
+	        </button>	
 			<#else>
 			<span style="margin-left:0px;">
 				<#if checkDbPrivilege()>
