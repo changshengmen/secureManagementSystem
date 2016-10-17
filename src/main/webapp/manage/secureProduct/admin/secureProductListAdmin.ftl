@@ -85,7 +85,6 @@
 				</td>
 			</tr>
 		</table>
-
 		<table id="t_secure" class="table table-bordered table-condensed table-hover" style="text-align: center;">
 			<tr style="background-color: #dff0d8">
 			<th style="width:5%;text-align: center"><input type="checkbox" id="firstCheckbox" /></th>				
