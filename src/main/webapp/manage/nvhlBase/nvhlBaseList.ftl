@@ -31,30 +31,51 @@
 </style>
 <script type="text/javascript">
 	$(function() {
-		var dt = $("#expireDate").text();
-	
+		$("#clearContent").click(function(){//清空查询信息
+		  $(".selectArea").each(function(){
+		    $(this).val("");
+		  })
+		  return false;
+		})
 	});
+	
+	
+	
 </script>
 	<form action="${basepath}/manage/NvhlBase" method="post" theme="simple">
 		<table class="table table-bordered">
-		
+		<tr>
+		<td style="text-align: right;">险种名称</td>
+		<td style="text-align: left;width:30px" ><input class="selectArea" type="text" name="CProdName"  class="input-small"
+						id="CProdName" /></td>	
+				<td style="text-align: right;">保险止期</td>
+				<td style="text-align: left;">
+					<input class="selectArea" id="d4311" type="text" name="TInsrncEndTmStartDate"
+					value="${e.TInsrncEndTmStartDate!""}"
+					onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'d4312\')||\'2020-10-01\'}'})"/>
+					~ 
+					<input class="selectArea" id="d4312" type="text" name="TInsrncEndTmEndDate"
+					value="${e.TInsrncEndTmEndDate!""}"
+					onFocus="WdatePicker({minDate:'#F{$dp.$D(\'d4311\')}',maxDate:'2020-10-01'})"/>
+				</td>	
+				<td><button class="btn btn-danger" id="clearContent">
+							<i class="icon-search icon-white"></i> 清空
+						</button></td>				
+		</tr>
 			<tr>
-				<td colspan="14">
+				<td colspan="14" id="selectArea">
 
 						<button method="selectList" class="btn btn-primary" onclick="selectList(this)">
 							<i class="icon-search icon-white"></i> 查询
 						</button>
 						
-							<a href="toAdd" class="btn btn-success">
-							<i class="icon-plus-sign icon-white"></i> 添加
-						</a>
 				</td>
 			</tr>
 		</table>
 				
 		<table class="table table-bordered table-hover">
 			<tr style="background-color: #dff0d8">
-				<th>流水号</th>
+				<th>险种名称</th>
 				<th>产品代码</th>
 				<th>保额合计</th>
 				<th>保费合计</th>
@@ -64,7 +85,7 @@
 			</tr>
 			<#list pager.list as item>
 				<tr>
-					<td>${item.id!""}</td>
+					<td>${item.CProdName!""}</td>
 					<td>${item.CProdNo!""}</td>
 					<td>${item.NAmt!""}</td>
 					<td>${item.NPrm!""}</td>
