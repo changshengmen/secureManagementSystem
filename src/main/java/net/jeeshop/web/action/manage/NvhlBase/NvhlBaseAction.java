@@ -37,26 +37,4 @@ public class NvhlBaseAction  extends BaseController<NvhlBaseVO>{
 		this.nvhlBaseService = nvhlBaseService;
 	}
 	
-	public String toAdd(@ModelAttribute("e") NvhlBaseVO e, ModelMap model) throws Exception {
-		NvhlBaseVO baseVo = new NvhlBaseVO();
-		Date dt = new Date();
-		UUID uuid = UUID.randomUUID();
-		baseVo.setId(uuid.toString());
-		baseVo.setCDptCde("jgdm");
-		baseVo.setSysRes("xtly");
-		baseVo.setCBsnsTyp("19002");
-		baseVo.setCChaType("1900201");
-		baseVo.setCChaSubtype("1900201001");
-		baseVo.setCProdNo("010001");
-		baseVo.setNAmt(Double.valueOf("1200"));
-		baseVo.setNPrm(Double.valueOf("160000"));
-		baseVo.setTAppTm(DateTimeUtil.getDateNowByExpression("yyyy-MM-dd hh:mm"));
-		baseVo.setTInsrncBgnTm(DateTimeUtil.getDateNowByExpression("yyyy-MM-dd hh:mm"));
-		baseVo.setTInsrncEndTm(DateTimeUtil.getDateNowByExpression("yyyy-MM-dd hh:mm"));
-		baseVo.setCreateAccount(LoginUserHolder.getLoginUser().getId());
-		baseVo.setCreateTime(DateTimeUtil.getDateNowByExpression("yyyy-MM-dd hh:mm"));
-		int i = nvhlBaseService.insert(baseVo);
-	    return page_toList;
-	}
-
 }
