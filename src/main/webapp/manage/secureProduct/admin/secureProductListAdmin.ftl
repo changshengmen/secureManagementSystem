@@ -20,6 +20,7 @@
     text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:Rhidden;一起使用*/  
 }  
 </style>
+
 	<form action="${basepath}/manage/secureProduct" namespace="/manage" method="post" theme="simple">		
 		<table class="table table-bordered table-condensed">
 			<tr>
@@ -49,6 +50,7 @@
                         <#list map?keys as key>
                             <option value="${key}" <#if e.status?? && e.status==key?eval>selected="selected" </#if>>${map[key]}</option>
                         </#list>
+                     </select>
 				</td>						
 			</tr>
 			<tr>
@@ -140,4 +142,5 @@
 		</div>
 
 	</form>
+
 </@page.pageBase>

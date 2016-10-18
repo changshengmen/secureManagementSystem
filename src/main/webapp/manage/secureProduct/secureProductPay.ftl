@@ -6,140 +6,214 @@
 	}
 </style>
 
-<form action="${basepath}/manage/secureProduct/selectList" id="form" name="form" namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">		
+<form action="${basepath}/manage/secureProduct" id="form" name="form" namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">		
 	<div id="tabs">
 		<ul>
-			<li><a href="#tabs-1">投/被保人基本信息</a></li>		
+			<li><a href="#tabs-1">投保人基本信息</a></li>
+			<li><a href="#tabs-2">被保人基本信息</a></li>			
 		</ul>
 	<!--------------------------投保人模块------------------------------------->		
 		<div id="tabs-1" >
-		<input type="hidden" value="${e.id!""}" name="id" label="id" id="id"/>
+		<input type="hidden" value="${secure.id!""}" name="id" label="id" id="id"/>
+		<input type="hidden" value="${secure.CProdName!""}" name="CProdName"  id="CProdName"/>
+		<input type="hidden" value="${secure.CProdNo!""}" name="CProdNo"  id="CProdNo"/>
 		<div class="row form-horizontal"-role="form">
 		 		
 			  <div class="form-group col-md-6">
-	                <label class="col-md-4 control-label">投保人代码</label>
-	                <div class="col-md-8"><input type="text"  value="${e.AppCode!""}" name="AppCode"  data-rule="产品名称;required;AppCode;" size="25" maxlength="10"
-	                                             id="AppCode" />&nbsp;<span style="color:red">*</span>
+	                <label class="col-md-4 control-label">企业代码</label>
+	                <div class="col-md-8"><input type="text"  value="${AppCde!""}" name="AppCde"  data-rule="产品名称;NvhlApplicantVO.AppCode;" size="25" maxlength="10"
+	                                             id="CodeA" />&nbsp;<span style="color:red">*</span>
 	                </div>
 		      </div>
 		  	  <div class="form-group col-md-6">
-	                <label class="col-md-4 control-label">投保人名字</label>
-	                <div class="col-md-8"><input type="text"  value="${e.CProdName!""}" name="CProdName"  data-rule="产品名称;required;CProdName;" size="25" maxlength="10"
-	                                             id="CProdName" />&nbsp;<span style="color:red">*</span>
+	                <label class="col-md-4 control-label">企业名字</label>
+	                <div class="col-md-8"><input type="text"  value="${AppName!""}" name="AppName"  data-rule="产品名称;AppName;" size="25" maxlength="10"
+	                                             id="NameA" />&nbsp;<span style="color:red">*</span>
 	                </div>
 		      </div>
 		       <div class="form-group col-md-6">
-	                <label class="col-md-4 control-label">投保人性质/客户类型</label>
-	                <div class="col-md-8"><input type="text"  value="${e.NAmtRmbExch!""}" name="NAmtRmbExch"  data-rule="币种（默认值RMB）;required;NAmtRmbExch;" size="25" maxlength="10"
-	                                             id="NAmtRmbExch" />&nbsp;<span style="color:red">*</span>
-	                </div>
+	                <label class="col-md-4 control-label">投保企业性质</label>
+	               <!-- <div class="col-md-8"><input type="text"  value="${ClntMrk!""}" name="ClntMrk"  data-rule="币种（默认值RMB）;NAmtRmbExch;" size="25" maxlength="10"
+	                                             id="ClntMrkA" />&nbsp;<span style="color:red">*</span>
+	                </div>-->
+	                <#assign map = {"1":'自然人',"0":'非自然人'}>
+	                         <select id="ClntMrkA" name="ClntMrk" class="input-medium" style="margin-left:16px;">
+                        		<#list map?keys as key>
+                            		<option value="${key}" <#if ClntMrk?? && ClntMrk==key?eval>selected="selected" </#if>>${map[key]}</option>
+                        		</#list>
+                    </select>
 		      </div>
 		      <div class="form-group col-md-6">
 	                <label class="col-md-4 control-label">邮箱</label>
-	                <div class="col-md-8"><input type="text"  value="${e.NPrm!""}" name="NPrm"  data-rule="总保险费;required;NPrm;" size="25" maxlength="10"
-	                                             id="NPrm" />&nbsp;<span style="color:red">*</span>
+	                <div class="col-md-8"><input type="text"  value="${Email!""}" name="Email"  data-rule="总保险费;NPrm;" size="25" maxlength="10"
+	                                             id="EmailA" />&nbsp;<span style="color:red">*</span>
 	                </div>
 		      </div>	
 		       <div class="form-group col-md-6">
 	                <label class="col-md-4 control-label">证件类型</label>
-	                <div class="col-md-8"><input type="text"  value="${e.NAmt!""}" name="NAmt"  data-rule="总保险金额;required;NAmt;" size="25" maxlength="10"
-	                                             id="NAmt" />&nbsp;<span style="color:red">*</span>
-	                </div>
+	               <!-- <div class="col-md-8"><input type="text"  value="${CertfCls!""}" name="CertfCls"  data-rule="总保险金额;NAmt;" size="25" maxlength="10"
+	                                             id="CertfClsA" />&nbsp;<span style="color:red">*</span>
+	                </div>-->
+	                  <#assign map = {"110001":'组织机构代码',"110002":'工商注册号码',"110009",'其他'}>
+	                         <select id="CertfClsA" name="CertfCls" class="input-medium" style="margin-left:16px;">
+                        		<#list map?keys as key>
+                            		<option value="${key}" <#if CertfCls?? && CertfCls==key?eval>selected="selected" </#if>>${map[key]}</option>
+                        		</#list>
+                    </select>
 		      </div>
 		      <div class="form-group col-md-6">
 	                <label class="col-md-4 control-label">证件号码</label>
-	                <div class="col-md-8"><input type="text"  value="${e.NPrmRmbExch!""}" name="NPrmRmbExch"  data-rule="总保险费;required;NPrmRmbExch;" size="25" maxlength="10"
-	                                             id="NPrmRmbExch" />&nbsp;<span style="color:red">*</span>
+	                <div class="col-md-8"><input type="text"  value="${CertfCde!""}" name="CertfCde"  data-rule="总保险费;CertfCde;" size="25" maxlength="10"
+	                                             id="CertfCdeA" />&nbsp;<span style="color:red">*</span>
 	                </div>
 		      </div>
 		       <div class="form-group col-md-6">
 	                <label class="col-md-4 control-label">通讯地址</label>
-	                <div class="col-md-8"><input type="text"  value="${e.NPrm!""}" name="NPrm"  data-rule="总保险费;required;NPrm;" size="25" maxlength="10"
-	                                             id="NPrm" />&nbsp;<span style="color:red">*</span>
+	                <div class="col-md-8"><input type="text"  value="${ClntAddr!""}" name="ClntAddr"  data-rule="总保险费;ClntAddr;" size="25" maxlength="10"
+	                                             id="ClntAddrA" />&nbsp;<span style="color:red">*</span>
 	                </div>
 		      </div>	
-		      
-		      <div class="form-group col-md-6">
-	                <label class="col-md-4 control-label">联系人</label>
-	                <div class="col-md-8"><input type="text"  value="${e.NPrm!""}" name="NPrm"  data-rule="总保险费;required;NPrm;" size="25" maxlength="10"
-	                                             id="NPrm" />&nbsp;<span style="color:red">*</span>
-	                </div>
-		      </div>	
+
 		      <div class="form-group col-md-6">
 	                <label class="col-md-4 control-label">联系电话</label>
-	                <div class="col-md-8"><input type="text"  value="${e.NPrm!""}" name="NPrm"  data-rule="总保险费;required;NPrm;" size="25" maxlength="10"
-	                                             id="NPrm" />&nbsp;<span style="color:red">*</span>
+	                <div class="col-md-8"><input type="text"  value="${Mobile!""}" name="Mobile"  data-rule="总保险费;NPrm;" size="25" maxlength="10"
+	                                             id="MobileA" />&nbsp;<span style="color:red">*</span>
+	                </div>
+		      </div>
+		       <div class="form-group col-md-6">
+	                <label class="col-md-4 control-label">邮编</label>
+	                <div class="col-md-8"><input type="text"  value="${ZipCde!""}" name="ZipCde"  data-rule="总保险费;ZipCde;" size="25" maxlength="10"
+	                                             id="ZipCdeA" />&nbsp;<span style="color:red">*</span>
+	           </div>
+		      </div>
+		       <div class="form-group col-md-6">
+	                <label class="col-md-4 control-label">客户等级</label>
+	                <div class="col-md-8"><input type="text"  value="${CusRiskLvl!""}" name="CusRiskLvl"  data-rule="总保险费;CusRiskLvl;" size="25" maxlength="10"
+	                                             id="CusRiskLvlA" />&nbsp;<span style="color:red">*</span>
+	                </div>
+		      </div>
+		        <div class="form-group col-md-6">
+	                <label class="col-md-4 control-label">反洗钱客户风险等级</label>
+	                <div class="col-md-8"><input type="text"  value="${CustRiskRank!""}" name="CustRiskRank"  data-rule="总保险费;CustRiskRank;" size="25" maxlength="10"
+	                                             id="CustRiskRankA" />&nbsp;<span style="color:red">*</span>
+	                </div>
+		      </div>
+		           <div class="form-group col-md-12">
+	                <label class="col-md-2 control-label">投保日期</label>
+	                <div class="col-md-10">
+	                	<input id="d4311" type="text" name="TAppTm"
+							value="${TAppTm!""}" 
+							onFocus="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'d4312\')||\'2020-10-01\'}'})"/>
+							&nbsp;<span style="color:red">*</span>
+	                </div>
+		      </div>
+		      <div class="form-group col-md-12">
+	                <label class="col-md-2 control-label">保险起期</label>
+	                <div class="col-md-10">
+	                	<input id="d4311" type="text" name="TInsrncBgnTm"
+							value="${TInsrncBgnTm!""}"
+							onFocus="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'d4312\')||\'2020-10-01\'}'})"/>
+							&nbsp;<span style="color:red">*</span>
+	                </div>
+		      </div>
+		        <div class="form-group col-md-12">
+	                <label class="col-md-2 control-label">保险止期</label>
+	                <div class="col-md-10">
+	                	<input id="d4311" type="text" name="TInsrncEndTm"
+							value="${TInsrncEndTm!""}"
+							onFocus="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'d4312\')||\'2020-10-01\'}'})"/>
+						&nbsp;<span style="color:red">*</span>
 	                </div>
 		      </div>	
 		      	       
 		    </div>
 		</div>
 	<!--------------------------投保人模块------------------------------------->
-   		<span style="margin-left:2px;">
-	                      <button id="pay" class="btn btn-primary">
-	               			信息同步
-	            </button>
-		      </span>
-		<!--------------------------被保人模块------------------------------------->		
-		<div id="tabs-1" >
-		<input type="hidden" value="${e.id!""}" name="id" label="id" id="id"/>
-		<div class="row form-horizontal"-role="form">
 		
+		<!--------------------------被保人模块------------------------------------->		
+		<div id="tabs-2">
+		
+		<div class="row form-horizontal"-role="form">
+
+		       <div class="form-group col-md-12">
+		        <input type="button" id="copyInfo" value="信息同步" class="btn btn-primary "/>  
+	               
+		      </div>
 			  <div class="form-group col-md-6">
-	                <label class="col-md-4 control-label">被保人代码</label>
-	                <div class="col-md-8"><input type="text"  value="${e.AppCode!""}" name="AppCode"  data-rule="产品名称;required;AppCode;" size="25" maxlength="10"
-	                                             id="AppCode" />&nbsp;<span style="color:red">*</span>
+	                <label class="col-md-4 control-label">被保企业代码</label>
+	                <div class="col-md-8"><input type="text"  value="${InsuredCde!""}" name="InsuredCde"  data-rule="产品名称;AppCode;" size="25" maxlength="10"
+	                                             id="Code" />&nbsp;<span style="color:red">*</span>
 	                </div>
 		      </div>
 		  	  <div class="form-group col-md-6">
-	                <label class="col-md-4 control-label">被保人名字</label>
-	                <div class="col-md-8"><input type="text"  value="${e.CProdName!""}" name="CProdName"  data-rule="产品名称;required;CProdName;" size="25" maxlength="10"
-	                                             id="CProdName" />&nbsp;<span style="color:red">*</span>
+	                <label class="col-md-4 control-label">被保企业名字</label>
+	                <div class="col-md-8"><input type="text"  value="${CProdName!""}" name="CProdName"  data-rule="产品名称;CProdName;" size="25" maxlength="10"
+	                                             id="Name" />&nbsp;<span style="color:red">*</span>
 	                </div>
 		      </div>
 		       <div class="form-group col-md-6">
-	                <label class="col-md-4 control-label">被保人性质/客户类型</label>
-	                <div class="col-md-8"><input type="text"  value="${e.NAmtRmbExch!""}" name="NAmtRmbExch"  data-rule="币种（默认值RMB）;required;NAmtRmbExch;" size="25" maxlength="10"
-	                                             id="NAmtRmbExch" />&nbsp;<span style="color:red">*</span>
-	                </div>
+	                <label class="col-md-4 control-label">被保企业性质</label>
+	                 <#assign map = {"1":'自然人',"0":'非自然人'}>
+	                         <select id="ClntMrk" name="ClntMrk" class="input-medium" style="margin-left:16px;">
+                        		<#list map?keys as key>
+                            		<option value="${key}" <#if ClntMrk?? && ClntMrk==key?eval>selected="selected" </#if>>${map[key]}</option>
+                        		</#list>
+                    </select>
 		      </div>
 		      <div class="form-group col-md-6">
 	                <label class="col-md-4 control-label">邮箱</label>
-	                <div class="col-md-8"><input type="text"  value="${e.NPrm!""}" name="NPrm"  data-rule="总保险费;required;NPrm;" size="25" maxlength="10"
-	                                             id="NPrm" />&nbsp;<span style="color:red">*</span>
+	                <div class="col-md-8"><input type="text"  value="${CEmail!""}" name="CEmail"  data-rule="总保险费;NPrm;" size="25" maxlength="10"
+	                                             id="Email" />&nbsp;<span style="color:red">*</span>
 	                </div>
 		      </div>	
 		       <div class="form-group col-md-6">
 	                <label class="col-md-4 control-label">证件类型</label>
-	                <div class="col-md-8"><input type="text"  value="${e.NAmt!""}" name="NAmt"  data-rule="总保险金额;required;NAmt;" size="25" maxlength="10"
-	                                             id="NAmt" />&nbsp;<span style="color:red">*</span>
-	                </div>
+	                 <#assign map = {"110001":'组织机构代码',"110002":'工商注册号码',"110009",'其他'}>
+	                         <select id="CertfCls" name="CertfCls" class="input-medium" style="margin-left:16px;">
+                        		<#list map?keys as key>
+                            		<option value="${key}" <#if CertfCls?? && CertfCls==key?eval>selected="selected" </#if>>${map[key]}</option>
+                        		</#list>
+                    </select>
 		      </div>
 		      <div class="form-group col-md-6">
 	                <label class="col-md-4 control-label">证件号码</label>
-	                <div class="col-md-8"><input type="text"  value="${e.NPrmRmbExch!""}" name="NPrmRmbExch"  data-rule="总保险费;required;NPrmRmbExch;" size="25" maxlength="10"
-	                                             id="NPrmRmbExch" />&nbsp;<span style="color:red">*</span>
+	                <div class="col-md-8"><input type="text"  value="${CCertfCde!""}" name="CCertfCde"  data-rule="总保险费;CCertfCde;" size="25" maxlength="10"
+	                                             id="CertfCde" />&nbsp;<span style="color:red">*</span>
 	                </div>
 		      </div>
 		       <div class="form-group col-md-6">
 	                <label class="col-md-4 control-label">通讯地址</label>
-	                <div class="col-md-8"><input type="text"  value="${e.NPrm!""}" name="NPrm"  data-rule="总保险费;required;NPrm;" size="25" maxlength="10"
-	                                             id="NPrm" />&nbsp;<span style="color:red">*</span>
+	                <div class="col-md-8"><input type="text"  value="${ClntAddr!""}" name="ClntAddr"  data-rule="总保险费;ClntAddr;" size="25" maxlength="10"
+	                                             id="ClntAddr" />&nbsp;<span style="color:red">*</span>
 	                </div>
 		      </div>	
-		      
-		      <div class="form-group col-md-6">
-	                <label class="col-md-4 control-label">联系人</label>
-	                <div class="col-md-8"><input type="text"  value="${e.NPrm!""}" name="NPrm"  data-rule="总保险费;required;NPrm;" size="25" maxlength="10"
-	                                             id="NPrm" />&nbsp;<span style="color:red">*</span>
-	                </div>
-		      </div>	
+
 		      <div class="form-group col-md-6">
 	                <label class="col-md-4 control-label">联系电话</label>
-	                <div class="col-md-8"><input type="text"  value="${e.NPrm!""}" name="NPrm"  data-rule="总保险费;required;NPrm;" size="25" maxlength="10"
-	                                             id="NPrm" />&nbsp;<span style="color:red">*</span>
+	                <div class="col-md-8"><input type="text"  value="${Mobile!""}" name="Mobile"  data-rule="总保险费;Mobile;" size="25" maxlength="10"
+	                                             id="Mobile" />&nbsp;<span style="color:red">*</span>
 	                </div>
-		      </div>	       
+		      </div>	
+		      <div class="form-group col-md-6">
+	                <label class="col-md-4 control-label">邮编</label>
+	                <div class="col-md-8"><input type="text"  value="${ZipCde!""}" name="ZipCde"  data-rule="总保险费;ZipCde;" size="25" maxlength="10"
+	                                             id="ZipCde" />&nbsp;<span style="color:red">*</span>
+	                 </div>
+	           </div>
+		      <div class="form-group col-md-6">
+	                <label class="col-md-4 control-label">客户等级</label>
+	                <div class="col-md-8"><input type="text"  value="${CusRiskLvl!""}" name="CusRiskLvl"  data-rule="总保险费;required;CusRiskLvl;" size="25" maxlength="10"
+	                                             id="CusRiskLvl" />&nbsp;<span style="color:red">*</span>
+	                </div>
+		      </div>
+		        <div class="form-group col-md-6">
+	                <label class="col-md-4 control-label">反洗钱客户风险等级</label>
+	                <div class="col-md-8"><input type="text"  value="${CustRiskRank!""}" name="CustRiskRank"  data-rule="总保险费;CustRiskRank;" size="25" maxlength="10"
+	                                             id="CustRiskRank" />&nbsp;<span style="color:red">*</span>
+	                </div>
+		      </div>
+		  
+		     	       
 		    </div>
 		</div>
             <!--------------------------被保人模块------------------------------------->
@@ -153,8 +227,9 @@
 																
 	</div><!--end tab-->
 			<!--------------------------操作按钮模块------------------------------------->
+			<br>
 			<span style="margin-left:0px;">
-				<button class="btn btn-success">
+				<button method="toPay" class="btn btn-success">
 	                <i class="icon-ok icon-white"></i>支付
 	            </button>
 				<button onclick='javascript:history.back(-1);' class="btn btn-success">
@@ -168,6 +243,15 @@
 $(function() {
 	$( "#tabs" ).tabs({
 	});	
+	$("#copyInfo").click(function(){
+	var source=["CodeA","NameA","ClntMrkA","EmailA","CertfClsA","CertfCdeA","ClntAddrA","MobileA","ZipCdeA","CusRiskLvlA","CustRiskRankA"];	
+		$.each(source, function(i, n){
+		var sourceVal=document.getElementById(n).value;
+		var destinationName=n.substring(0,n.length-1);
+		document.getElementById(destinationName).value=sourceVal;
+		});
+
+  	});	
 	selectDefaultCatalog();
 });
 
