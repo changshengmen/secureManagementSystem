@@ -50,8 +50,8 @@
 		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO"
 		useGeneratedKeys="true" keyProperty="id">
 		insert into nvhlbasevo(SerialNumber,CDptCde,SysRes,CBsnsTyp,CChaType,CChaSubtype,FinTyp,CProdNo,CCiMrk,NAmtRmbExch,NAmt,NPrmRmbExch,NPrm,
-         TAppTm,TInsrncBgnTm,TInsrncEndTm,CGrpMrk,EfcManualFlag,CPlyTyp,CNeedfeeFlag,ICopyNum,createAccount,createTime)
+         TAppTm,TInsrncBgnTm,TInsrncEndTm,CGrpMrk,EfcManualFlag,CPlyTyp,CNeedfeeFlag,ICopyNum,createAccount,createTime,status,CProdName)
          values(#{id},#{CDptCde},#{SysRes},#{CBsnsTyp},#{CChaType},#{CChaSubtype},#{FinTyp},#{CProdNo},#{CCiMrk},#{NAmtRmbExch},#{NAmt},#{NPrmRmbExch},#{NPrm},#{TAppTm}
-  		,#{TInsrncBgnTm},#{TInsrncEndTm},#{CGrpMrk},#{EfcManualFlag},#{CPlyTyp},#{CNeedfeeFlag},#{ICopyNum},#{createAccount},#{createTime})
+  		,#{TInsrncBgnTm},#{TInsrncEndTm},#{CGrpMrk},#{EfcManualFlag},#{CPlyTyp},#{CNeedfeeFlag},#{ICopyNum},#{createAccount},#{createTime},#{status},#{CProdName})
 	</insert>
 </mapper>

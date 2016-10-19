@@ -43,11 +43,11 @@
 				<td style="width:100px">入保时间</td>
                 <td ><input id="d4311" class="Wdate search-query input-small" style="width:50px" type="text" name="purchaseStartDate"
                            value="${e.purchaseStartDate!""}"
-                           onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'d4312\')||\'2030-10-01\'}'})"/>
+                           onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'d4312\')||\'2030-10-01\'}'})"/>
                     ~
                     <input id="d4312" class="Wdate search-query input-small" style="width:80px" type="text" name="purchaseEndDate"
                            value="${e.purchaseEndDate!""}"
-                           onFocus="WdatePicker({minDate:'#F{$dp.$D(\'d4311\')}',maxDate:'2030-10-01'})"/>
+                           onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'d4312\')||\'2030-10-01\'}'})"/>
                 </td>
                 
 			</tr>

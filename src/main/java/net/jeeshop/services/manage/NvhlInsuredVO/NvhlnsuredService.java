@@ -1,0 +1,1 @@
+package net.jeeshop.services.manage.NvhlInsuredVO;import net.jeeshop.core.Services;import net.jeeshop.services.manage.NvhlInsuredVO.bean.NvhlInsuredVO;/** * 保险订单管理 * @author lin * */public interface NvhlnsuredService extends Services<NvhlInsuredVO> {}
