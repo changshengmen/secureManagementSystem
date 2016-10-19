@@ -1,14 +1,16 @@
 package net.jeeshop.services.common;
 
+import java.util.Map;
+
 public class telTradeRequestVO {
 	private String subtransNo = "";
 	private String transDate;
 	private String transType;
 	private pageRecord pageRecord;
-	private String dataTranArea;
+	private Map dataTranArea;
 	private String transTime;
 	private String transNo;
-
+    
 	public String getSubtransNo() {
 		return subtransNo;
 	}
@@ -41,11 +43,11 @@ public class telTradeRequestVO {
 		this.pageRecord = pageRecord;
 	}
 
-	public String getDataTranArea() {
+	public Map getDataTranArea() {
 		return dataTranArea;
 	}
 
-	public void setDataTranArea(String dataTranArea) {
+	public void setDataTranArea(Map dataTranArea) {
 		this.dataTranArea = dataTranArea;
 	}
 
