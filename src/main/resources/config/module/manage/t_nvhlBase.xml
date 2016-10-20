@@ -45,13 +45,42 @@
 		
 	</select>
 	
-	
+	<!-- 插入 基本信息 NvhlBase-->
 	<insert id="manage.NvhlBase.insertNvhlBase"
 		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO"
 		useGeneratedKeys="true" keyProperty="id">
 		insert into nvhlbasevo(SerialNumber,CDptCde,SysRes,CBsnsTyp,CChaType,CChaSubtype,FinTyp,CProdNo,CCiMrk,NAmtRmbExch,NAmt,NPrmRmbExch,NPrm,
-         TAppTm,TInsrncBgnTm,TInsrncEndTm,CGrpMrk,EfcManualFlag,CPlyTyp,CNeedfeeFlag,ICopyNum,createAccount,createTime,status,CProdName)
+         TAppTm,TInsrncBgnTm,TInsrncEndTm,CGrpMrk,EfcManualFlag,CPlyTyp,CNeedfeeFlag,ICopyNum,createAccount,createTime,CProdName)
          values(#{id},#{CDptCde},#{SysRes},#{CBsnsTyp},#{CChaType},#{CChaSubtype},#{FinTyp},#{CProdNo},#{CCiMrk},#{NAmtRmbExch},#{NAmt},#{NPrmRmbExch},#{NPrm},#{TAppTm}
-  		,#{TInsrncBgnTm},#{TInsrncEndTm},#{CGrpMrk},#{EfcManualFlag},#{CPlyTyp},#{CNeedfeeFlag},#{ICopyNum},#{createAccount},#{createTime},#{status},#{CProdName})
+  		,#{TInsrncBgnTm},#{TInsrncEndTm},#{CGrpMrk},#{EfcManualFlag},#{CPlyTyp},#{CNeedfeeFlag},#{ICopyNum},#{createAccount},#{createTime},#{CProdName})
+	</insert>
+	<!--插入 投保人NvhlApplicantVO  -->
+	<insert id="manage.NvhlBase.insertNvhlApplication"
+		parameterType="net.jeeshop.services.manage.NvhlApplicantVO.bean.NvhlApplicantVO"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into nvhlapplicantvo(
+		AppCde,AppName,ClntMrk,CertfCls,CertfCde,ClntAddr,		
+		ZipCde,Email,Mobile,Country,Province,
+		City,Area,Stree,CusRiskLvl,CustRiskRank		
+		)
+         values(
+         #{AppCde},#{AppNme},#{T_ClntMrk},#{T_CertfCls},#{T_CertfCde},#{T_ClntAddr},
+         #{T_ZipCde},#{T_Email},#{T_Mobile},#{T_Country},#{Province},
+        #{City},#{Area},#{Stree},#{T_CusRiskLvl},#{T_CustRiskRank})
+	</insert>
+	<!-- 插入 被保人NvhlInsuredVO -->
+	<insert id="manage.NvhlBase.insertNvhlInsured"
+		parameterType="net.jeeshop.services.manage.NvhlInsuredVO.bean.NvhlInsuredVO"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into nvhlinsuredvo(
+		InsuredCde,InsuredNme,ClntMrk,CCertfCls,CCertfCde,
+		ClntAddr,ZipCde,CEmail,Mobile,Country,
+		Province,City,Area,Stree,CusRiskLvl,
+		CustRiskRank)
+         values(
+         #{InsuredCde},#{InsuredNme},#{B_ClntMrk},#{B_CCertfCls},#{B_CCertfCde},
+         #{B_ClntAddr},#{B_ZipCde},#{CEmail},#{Mobile},#{Country},
+         #{Province},#{City},#{Area},#{Stree},#{CusRiskLvl},
+         #{CustRiskRank})
 	</insert>
 </mapper>

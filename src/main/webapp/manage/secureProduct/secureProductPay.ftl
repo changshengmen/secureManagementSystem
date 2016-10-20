@@ -28,7 +28,21 @@
 	                                             id="Name" />&nbsp;<span style="color:red">*</span>
 	          		 </td>
 	           </tr>
-	           
+	            <tr>
+	           		<td style="text-align: right;">客户类型</td>
+	        		<td><#assign map = {"1":'自然人',"0":'非自然人'}>
+	                    <select id="ClntMrk" name="T_ClntMrk" class="input-medium" style="width:150px">
+                        		<#list map?keys as key>
+                            		<option value="${key}">${map[key]}</option>
+                        		</#list>
+                   		</select>
+	           		 </td>
+	          		 <td style="text-align: right;">通讯地址</td>
+	        		 <td> <input type="text"   value="wad阿瓦蒂" name="T_ClntAddr" data-rule="通讯地址;required;name;length[0~44];"
+	                                             id="ClntAddr" />&nbsp;<span style="color:red">*</span>
+	                 </td>
+	           		
+	           </tr>
 	           <tr>
 	           		<td style="text-align: right;">证件类型</td>
 	        		<td><#assign map = {"110001":'组织机构代码',"110002":'工商注册号码',"110009",'其他'}>
@@ -38,58 +52,50 @@
                         		</#list>
                    		</select>
 	           		 </td>
-	          		 <td style="text-align: right;">客户风险等级</td>
-	        		 <td> <#assign map = {"915102":'低风险客户',"915103":'高风险客户',"915106":'中等风险客户'}>
-	                         <select id="CusRiskLvl" name="T_CusRiskLvl" class="input-medium">
-                        		<#list map?keys as key>
-                            		<option value="${key}" <#if CusRiskLvl?? && CusRiskLvl==key?eval>selected="selected" </#if>>${map[key]}</option>
-                        		</#list>
-                        	 </select>
-                    </td>
-	           		
-	           </tr>
-	           <tr>
-	           <td style="text-align: right;">反洗钱客户风险等级</td>
-	        		<td> <#assign map = {"925105":'普通',"925106":'关注级',"925107":'特别关注级',"925108":'高度关注级'}>
-		                         <select id="CustRiskRank" name="T_CustRiskRank" class="input-medium" >
-                        			<#list map?keys as key>
-                            			<option value="${key}" <#if CustRiskRank?? && CustRiskRank==key?eval>selected="selected" </#if>>${map[key]}</option>
-                        			</#list>
-                    			</select>
-	           		</td>
-	          		 <td style="text-align: right;">证件号码</td>
-	        		 <td><input type="text"  value="456" name="T_CCertfCde"  data-rule="证件号码;required;name;length[0~44];" 
+	           		 <td style="text-align: right;">证件号码</td>
+	        		 <td><input type="text"  value="456" name="T_CertfCde"  data-rule="证件号码;required;name;length[0~44];" 
 	                                             id="CertfCde" />&nbsp;<span style="color:red">*</span>
-	           		 </td>
+	           		 </td>            		
 	           </tr>
-	           
-	           <tr>
-	           		 <td style="text-align: right;">联系人</td>
-	                 <td><input type="text"  value="456" name="T_CCntrNme"  data-rule="联系人;required;name;length[0~44];" 
-	                                             id="CCntrNme" />&nbsp;<span style="color:red">*</span>
+	             <tr>
+	           		 <td style="text-align: right;">邮箱</td>
+	        		 <td><input type="text"  value="123@qq.com" name="T_Email" data-rule="邮箱;required;name;length[0~44];email:true;"
+	                                             id="Email" />&nbsp;<span style="color:red">*</span>
 	                 </td>
+	                 <td style="text-align: right;">邮编</td>
+	        	     <td><input type="text"  value="009533" name="T_ZipCde"id="ZipCde" />
+	                 </td>
+	           <tr>
+	            
+	           <tr>
 	                 <td style="text-align: right;">联系电话</td>
 	        	     <td><input type="text"  value="456" name="T_Mobile"  data-rule="联系电话;required;name;length[0~44];" maxlength="11"
 	                                             id="Mobile" />&nbsp;<span style="color:red">*</span>
 	                 </td>
-	           <tr>
-	           
-	           <tr>
-	           		 <td style="text-align: right;">邮箱</td>
-	        		 <td><input type="text"  value="123@qq.com" name="T_CEmail" data-rule="邮箱;required;name;length[0~44];email:true;"
-	                                             id="Email" />&nbsp;<span style="color:red">*</span>
-	                 </td>
-	                 <td style="text-align: right;">邮编</td>
-	        	     <td><input type="text"  value="009533" name="T_ZipCde"  
-	                                             id="ZipCde" />
+	                  <td style="text-align: right;">国籍</td>
+	        	     <td><input type="text"  value="456" name="T_Country"  data-rule="联系电话;required;Country;length[0~44];" maxlength="11"
+	                                             id="Country" />&nbsp;<span style="color:red">*</span>
 	                 </td>
 	           <tr>
-	           
 	           <tr>
-	           		 <td style="text-align: right;">通讯地址</td>
-	        		 <td> <input type="text"   value="wad阿瓦蒂" name="T_ClntAddr" data-rule="通讯地址;required;name;length[0~44];"
-	                                             id="ClntAddr" />&nbsp;<span style="color:red">*</span>
-	                 </td>
+		           <td style="text-align: right;">客户风险等级</td>
+		        		 <td> <#assign map = {"915102":'低风险客户',"915103":'高风险客户',"915106":'中等风险客户'}>
+		                         <select id="CusRiskLvl" name="T_CusRiskLvl" class="input-medium">
+	                        		<#list map?keys as key>
+	                            		<option value="${key}" <#if CusRiskLvl?? && CusRiskLvl==key?eval>selected="selected" </#if>>${map[key]}</option>
+	                        		</#list>
+	                        	 </select>
+	                    </td>
+		           <td style="text-align: right;">反洗钱客户风险等级</td>
+		        		<td> <#assign map = {"925105":'普通',"925106":'关注级',"925107":'特别关注级',"925108":'高度关注级'}>
+			                         <select id="CustRiskRank" name="T_CustRiskRank" class="input-medium" >
+	                        			<#list map?keys as key>
+	                            			<option value="${key}" <#if CustRiskRank?? && CustRiskRank==key?eval>selected="selected" </#if>>${map[key]}</option>
+	                        			</#list>
+	                    			</select>
+		           	</td>          		
+	           </tr>           
+	           <tr>	           		
 	                  <td style="text-align: right;">投保日期</td>
 	        		  <td> <input id="d4311" type="text" name="TAppTm" style="line-height:3px"
 							value="${TAppTm!""}"   class="Wdate search-query input-small"
@@ -137,7 +143,22 @@
 	                                             id="NameA" />&nbsp;<span style="color:red">*</span>
 	          		 </td>
 	           </tr>
-	           
+	            
+	           <tr>
+	           		<td style="text-align: right;">客户类型</td>
+	        		<td><#assign map = {"1":'自然人',"0":'非自然人'}>
+	                    <select id="ClntMrkA" name="B_ClntMrk" class="input-medium" style="width:150px">
+                        		<#list map?keys as key>
+                            		<option value="${key}">${map[key]}</option>
+                        		</#list>
+                   		</select>
+	           		 </td>
+	          		 <td style="text-align: right;">通讯地址</td>
+	        		 <td > <input type="text"   value="${B_ClntAddr!""}" name="B_ClntAddr" data-rule="通讯地址;required;name;length[0~44];"
+	                                             id="ClntAddrA" />&nbsp;<span style="color:red">*</span>
+	                 </td>
+	           		
+	           </tr>
 	           <tr>
 	           		<td style="text-align: right;">证件类型</td>
 	        		<td><#assign map = {"110001":'组织机构代码',"110002":'工商注册号码',"110009",'其他'}>
@@ -147,60 +168,57 @@
                         		</#list>
                    		</select>
 	           		 </td>
-	          		 <td style="text-align: right;">客户风险等级</td>
+	          		 <td style="text-align: right;">证件号码</td>
+	        		 <td><input type="text"  value="${CCertfCde!""}" name="B_CCertfCde"  data-rule="证件号码;required;name;length[0~44];" 
+	                                             id="CertfCdeA" />&nbsp;<span style="color:red">*</span>
+	           		 </td>
+	           		
+	           </tr>
+	             <tr>
+	           		
+	                 <td style="text-align: right;">邮编</td>
+	        	     <td><input type="text"  value="${B_ZipCde!""}" name="B_ZipCde"  
+	                                             id="ZipCdeA" />
+	                 </td>
+	                  <td style="text-align: right;">邮箱</td>
+	        		 <td><input type="text"  value="${CEmail!""}" name="CEmail" data-rule="邮箱;required;name;length[0~44];email:true;"
+	                                             id="EmailA" />&nbsp;<span style="color:red">*</span>
+	                 </td>
+	           <tr>
+	           
+	           
+	           <tr>
+	           		<td style="text-align: right;">联系电话</td>
+	        	     <td><input type="text"  value="${Mobile!""}" name="Mobile" data-rule="联系电话;required;name;length[0~44];" maxlength="11"
+	                                             id="MobileA" />&nbsp;<span style="color:red">*</span>
+	                 </td>
+	           		<td style="text-align: right;">国籍</td>
+	        		 <td > <input type="text"   value="${B_Country!""}" name="Country" data-rule="通讯地址;required;name;length[0~44];"
+	                                             id="CountryA" />&nbsp;<span style="color:red">*</span>
+	                 </td>
+	           		
+	                 
+	           <tr>
+	           <tr>
+	            <td style="text-align: right;">客户风险等级</td>
 	        		 <td> <#assign map = {"915102":'低风险客户',"915103":'高风险客户',"915106":'中等风险客户'}>
-	                         <select id="CusRiskLvlA" name="B_CusRiskLvl" class="input-medium">
+	                         <select id="CusRiskLvlA" name="CusRiskLvl" class="input-medium">
                         		<#list map?keys as key>
                             		<option value="${key}" <#if CusRiskLvl?? && CusRiskLvl==key?eval>selected="selected" </#if>>${map[key]}</option>
                         		</#list>
                         	 </select>
                     </td>
-	           		
-	           </tr>
-	           <tr>
-	           <td style="text-align: right;">反洗钱客户风险等级</td>
+	          		 <td style="text-align: right;">反洗钱客户风险等级</td>
 	        		<td> <#assign map = {"925105":'普通',"925106":'关注级',"925107":'特别关注级',"925108":'高度关注级'}>
-		                         <select id="CustRiskRankA" name="insuredVO.CustRiskRank" class="input-medium" >
+		                         <select id="CustRiskRankA" name="CustRiskRank" class="input-medium" >
                         			<#list map?keys as key>
                             			<option value="${key}" <#if CustRiskRank?? && CustRiskRank==key?eval>selected="selected" </#if>>${map[key]}</option>
                         			</#list>
                     			</select>
 	           		</td>
-	          		 <td style="text-align: right;">证件号码</td>
-	        		 <td><input type="text"  value="${CCertfCde!""}" name="insuredVO.CCertfCde"  data-rule="证件号码;required;name;length[0~44];" 
-	                                             id="CertfCdeA" />&nbsp;<span style="color:red">*</span>
-	           		 </td>
+	          		
 	           </tr>
-	           
-	           <tr>
-	           		 <td style="text-align: right;">联系人</td>
-	                 <td><input type="text"  value="${CCntrNme!""}" name="insuredVO.CCntrNme"  data-rule="联系人;required;name;length[0~44];" 
-	                                             id="CCntrNmeA" />&nbsp;<span style="color:red">*</span>
-	                 </td>
-	                 <td style="text-align: right;">联系电话</td>
-	        	     <td><input type="text"  value="${Mobile!""}" name="insuredVO.Mobile"  data-rule="联系电话;required;name;length[0~44];" maxlength="11"
-	                                             id="MobileA" />&nbsp;<span style="color:red">*</span>
-	                 </td>
-	           <tr>
-	           
-	           <tr>
-	           		 <td style="text-align: right;">邮箱</td>
-	        		 <td><input type="text"  value="${CEmail!""}" name="insuredVO.CEmail" data-rule="邮箱;required;name;length[0~44];email:true;"
-	                                             id="EmailA" />&nbsp;<span style="color:red">*</span>
-	                 </td>
-	                 <td style="text-align: right;">邮编</td>
-	        	     <td><input type="text"  value="${B_ZipCde!""}" name="insuredVO.ZipCde"  
-	                                             id="ZipCdeA" />
-	                 </td>
-	           <tr>
-	           
-	           <tr>
-	           		 <td style="text-align: right;">通讯地址</td>
-	        		 <td > <input type="text"   value="${B_ClntAddr!""}" name="insuredVO.ClntAddr" data-rule="通讯地址;required;name;length[0~44];"
-	                                             id="ClntAddrA" />&nbsp;<span style="color:red">*</span>
-	                 </td>
-	           </tr>
-	           
+          
 	           </table>
 		  	 <!------------------table ending---------------------------------->
 		    </div>
@@ -210,7 +228,7 @@
 			<!--------------------------操作按钮模块------------------------------------->
 			
 			<div style="margin-top:5px"><span style="">
-				<button method="toPay" class="btn btn-success">
+				<button method="toPay"+secure.id class="btn btn-success">
 	                <i class="icon-ok icon-white"></i>支付
 	            </button>
 				<button onclick='javascript:history.back(-1);' class="btn btn-warning">
@@ -227,8 +245,10 @@ $(function() {
 	});	
 	//信息同步（按钮） 时从投保人信息自动带出被保人
 	$("#copyInfo").click(function(){
-		var source=["CodeA","NameA","ClntMrkA","EmailA","CertfClsA","CertfCdeA","ClntAddrA","MobileA","ZipCdeA","CusRiskLvlA","CustRiskRankA","CCntrNmeA"];	
+	
+		var source=["CodeA","NameA","ClntMrkA","CountryA","EmailA","CertfClsA","CertfCdeA","ClntAddrA","MobileA","ZipCdeA","CusRiskLvlA","CustRiskRankA","CCntrNmeA"];	
 		$.each(source,function(i,n){
+		debugger;
 			if($("#"+n.substring(0,n.length-1))){
 				  var formerVal = $("#"+n.substring(0,n.length-1)).val();
 				  $("#"+n).val(formerVal);

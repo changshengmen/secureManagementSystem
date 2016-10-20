@@ -29,7 +29,7 @@
 	                        <#assign map = {"01":'人民币',"02":'港币',"03":'美元',"04":'英镑',"12",'欧元'}>
 	                         <select id="NAmtRmbExch" name="NAmtRmbExch" class="input-medium" style="margin-left:16px;">
                         		<#list map?keys as key>
-                            		<option value="${key}" <#if e.NAmtRmbExch?? && e.NAmtRmbExch==key?eval>selected="selected" </#if>>${map[key]}</option>
+                            		<option value="${key}" <#if e.NAmtRmbExch?? && e.NAmtRmbExch?number==key?eval>selected="selected" </#if>>${map[key]}</option>
                         		</#list>
                      		</select>
 	                      <!--  <div class="col-md-8"><input type="text"  value="${e.NAmtRmbExch!""}" name="NAmtRmbExch"  data-rule="币种（默认值RMB）;required;NAmtRmbExch;" size="25" maxlength="10"
@@ -38,7 +38,7 @@
 	              </div>
 	               <div class="form-group col-md-6">
 	                        <label class="col-md-4 control-label">保额合计</label>
-	                        <div class="col-md-8"><input type="text"  value="${e.NAmt!""}" name="NAmt"  data-rule="总保险金额;required;NAmt;" size="25" maxlength="10"
+	                        <div class="col-md-8"><input type="text" value="${e.NAmt!""}" name="NAmt"  data-rule="总保险金额;required;NAmt;" size="25" maxlength="10"
 	                                                     id="NAmt" />
 	                        </div>
 	              </div>
@@ -47,7 +47,7 @@
 	                         <#assign map = {"01":'人民币',"02":'港币',"03":'美元',"04":'英镑',"12",'欧元'}>
 	                         <select id="NAmtRmbExch" name="NAmtRmbExch" class="input-medium" style="margin-left:16px;">
                         		<#list map?keys as key>
-                            		<option value="${key}" <#if e.NAmtRmbExch?? && e.NAmtRmbExch==key?eval>selected="selected" </#if>>${map[key]}</option>
+                            		<option value="${key}" <#if e.NAmtRmbExch?? && e.NAmtRmbExch?number==key?eval>selected="selected" </#if>>${map[key]}</option>
                         		</#list>
                      		</select>
 	                      <!--  <div class="col-md-8"><input type="text"  value="${e.NPrmRmbExch!""}" name="NPrmRmbExch"  data-rule="总保险费;required;NPrmRmbExch;" size="25" maxlength="10"

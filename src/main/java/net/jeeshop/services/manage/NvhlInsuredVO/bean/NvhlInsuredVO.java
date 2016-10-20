@@ -14,7 +14,8 @@ public class NvhlInsuredVO  extends QueryModel implements Serializable {
 	private String B_ClntAddr;// 通讯地址
 	private String B_ZipCde;// 邮编
 	private String CEmail;// Email
-	private String Mobile;// 移动电话
+	private String Mobile;// 移动电话	
+	private String Country;// 国籍
 	private String Province;// 省
 	private String City;// 市
 	private String Area;// 区
@@ -79,6 +80,12 @@ public class NvhlInsuredVO  extends QueryModel implements Serializable {
 	}
 	public void setMobile(String mobile) {
 		Mobile = mobile;
+	}
+	public String getCountry() {
+		return Country;
+	}
+	public void setCountry(String country) {
+		Country = country;
 	}
 	public String getProvince() {
 		return Province;
