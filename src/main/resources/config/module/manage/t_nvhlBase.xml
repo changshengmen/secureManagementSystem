@@ -64,9 +64,9 @@
 		City,Area,Stree,CusRiskLvl,CustRiskRank		
 		)
          values(
-         #{AppCde},#{AppNme},#{T_ClntMrk},#{T_CertfCls},#{T_CertfCde},#{T_ClntAddr},
-         #{T_ZipCde},#{T_Email},#{T_Mobile},#{T_Country},#{Province},
-        #{City},#{Area},#{Stree},#{T_CusRiskLvl},#{T_CustRiskRank})
+         #{AppCde},#{AppNme},#{ClntMrk},#{CertfCls},#{CertfCde},#{ClntAddr},
+         #{ZipCde},#{Email},#{Mobile},#{Country},#{Province},
+        #{City},#{Area},#{Stree},#{CusRiskLvl},#{CustRiskRank})
 	</insert>
 	<!-- 插入 被保人NvhlInsuredVO -->
 	<insert id="manage.NvhlBase.insertNvhlInsured"
@@ -78,8 +78,8 @@
 		Province,City,Area,Stree,CusRiskLvl,
 		CustRiskRank)
          values(
-         #{InsuredCde},#{InsuredNme},#{B_ClntMrk},#{B_CCertfCls},#{B_CCertfCde},
-         #{B_ClntAddr},#{B_ZipCde},#{CEmail},#{Mobile},#{Country},
+         #{InsuredCde},#{InsuredNme},#{ClntMrk},#{CCertfCls},#{CCertfCde},
+         #{ClntAddr},#{ZipCde},#{CEmail},#{Mobile},#{Country},
          #{Province},#{City},#{Area},#{Stree},#{CusRiskLvl},
          #{CustRiskRank})
 	</insert>

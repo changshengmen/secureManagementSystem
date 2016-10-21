@@ -8,11 +8,11 @@ public class NvhlInsuredVO  extends QueryModel implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String InsuredCde;// 被保人编码
 	private int InsuredNme;// 被保人名称
-	private String B_ClntMrk;// 被保人性质
-	private String B_CCertfCls;// 证件类型
-	private String B_CCertfCde;// 证件号码
-	private String B_ClntAddr;// 通讯地址
-	private String B_ZipCde;// 邮编
+	private String ClntMrk;// 被保人性质
+	private String CCertfCls;// 证件类型
+	private String CCertfCde;// 证件号码
+	private String ClntAddr;// 通讯地址
+	private String ZipCde;// 邮编
 	private String CEmail;// Email
 	private String Mobile;// 移动电话	
 	private String Country;// 国籍
@@ -39,35 +39,35 @@ public class NvhlInsuredVO  extends QueryModel implements Serializable {
 		InsuredNme = insuredNme;
 	}
 	
-	public String getB_ClntMrk() {
-		return B_ClntMrk;
+	public String getClntMrk() {
+		return ClntMrk;
 	}
-	public void setB_ClntMrk(String b_ClntMrk) {
-		B_ClntMrk = b_ClntMrk;
+	public void setClntMrk(String clntMrk) {
+		ClntMrk = clntMrk;
 	}
-	public String getB_CCertfCls() {
-		return B_CCertfCls;
+	public String getCCertfCls() {
+		return CCertfCls;
 	}
-	public void setB_CCertfCls(String b_CCertfCls) {
-		B_CCertfCls = b_CCertfCls;
+	public void setCCertfCls(String cCertfCls) {
+		CCertfCls = cCertfCls;
 	}
-	public String getB_CCertfCde() {
-		return B_CCertfCde;
+	public String getCCertfCde() {
+		return CCertfCde;
 	}
-	public void setB_CCertfCde(String b_CCertfCde) {
-		B_CCertfCde = b_CCertfCde;
+	public void setCCertfCde(String cCertfCde) {
+		CCertfCde = cCertfCde;
 	}
-	public String getB_ClntAddr() {
-		return B_ClntAddr;
+	public String getClntAddr() {
+		return ClntAddr;
 	}
-	public void setB_ClntAddr(String b_ClntAddr) {
-		B_ClntAddr = b_ClntAddr;
+	public void setClntAddr(String clntAddr) {
+		ClntAddr = clntAddr;
 	}
-	public String getB_ZipCde() {
-		return B_ZipCde;
+	public String getZipCde() {
+		return ZipCde;
 	}
-	public void setB_ZipCde(String b_ZipCde) {
-		B_ZipCde = b_ZipCde;
+	public void setZipCde(String zipCde) {
+		ZipCde = zipCde;
 	}
 	public String getCEmail() {
 		return CEmail;
