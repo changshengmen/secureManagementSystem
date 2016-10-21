@@ -135,11 +135,11 @@
 		    	<table class="table table-bordered table-condensed" id="insureTable">
 				<tr>
 					<td style="text-align: right;" >被保企业代码</td>
-	       			<td><input type="text"  value="${InsuredCde!""}" name="InsuredCde"  data-rule="被保企业代码;required;name;length[0~44];"
+	       			<td><input type="text" name="InsuredCde"  data-rule="被保企业代码;required;name;length[0~44];"
 	                                             id="CodeA" />&nbsp;<span style="color:red">*</span>
 	          		</td>
 	           		<td style="text-align: right;">被保企业名称</td>
-	        		<td><input type="text"  value="${InsuredNme!""}" name="InsuredNme"  data-rule="被保企业名称;required;name;length[0~44];"
+	        		<td><input type="text" name="InsuredNme"  data-rule="被保企业名称;required;name;length[0~44];"
 	                                             id="NameA" />&nbsp;<span style="color:red">*</span>
 	          		 </td>
 	           </tr>
@@ -154,22 +154,21 @@
                    		</select>
 	           		 </td>
 	          		 <td style="text-align: right;">通讯地址</td>
-	        		 <td > <input type="text"   value="${B_ClntAddr!""}" name="B_ClntAddr" data-rule="通讯地址;required;name;length[0~44];"
+	        		 <td > <input type="text" name="B_ClntAddr" data-rule="通讯地址;required;name;length[0~44];"
 	                                             id="ClntAddrA" />&nbsp;<span style="color:red">*</span>
-	                 </td>
-	           		
+	                 </td>	           		
 	           </tr>
 	           <tr>
 	           		<td style="text-align: right;">证件类型</td>
 	        		<td><#assign map = {"110001":'组织机构代码',"110002":'工商注册号码',"110009",'其他'}>
-	                    <select id="CertfClsA" name="B_CertfCls" class="input-medium" style="width:150px">
+	                    <select id="CertfClsA" name="B_CCertfCls" class="input-medium" style="width:150px">
                         		<#list map?keys as key>
-                            		<option value="${key}" <#if CertfCls?? && CertfCls==key?eval>selected="selected" </#if>>${map[key]}</option>
+                            		<option value="${key}">${map[key]}</option>
                         		</#list>
                    		</select>
 	           		 </td>
 	          		 <td style="text-align: right;">证件号码</td>
-	        		 <td><input type="text"  value="${CCertfCde!""}" name="B_CCertfCde"  data-rule="证件号码;required;name;length[0~44];" 
+	        		 <td><input type="text" name="B_CCertfCde"  data-rule="证件号码;required;name;length[0~44];" 
 	                                             id="CertfCdeA" />&nbsp;<span style="color:red">*</span>
 	           		 </td>
 	           		
@@ -177,42 +176,38 @@
 	             <tr>
 	           		
 	                 <td style="text-align: right;">邮编</td>
-	        	     <td><input type="text"  value="${B_ZipCde!""}" name="B_ZipCde"  
-	                                             id="ZipCdeA" />
+	        	     <td><input type="text" name="B_ZipCde"id="ZipCdeA" />
 	                 </td>
 	                  <td style="text-align: right;">邮箱</td>
-	        		 <td><input type="text"  value="${CEmail!""}" name="CEmail" data-rule="邮箱;required;name;length[0~44];email:true;"
+	        		 <td><input type="text" name="B_CEmail" data-rule="邮箱;required;name;length[0~44];email:true;"
 	                                             id="EmailA" />&nbsp;<span style="color:red">*</span>
 	                 </td>
+	           <tr>	      	           
 	           <tr>
-	           
-	           
-	           <tr>
-	           		<td style="text-align: right;">联系电话</td>
-	        	     <td><input type="text"  value="${Mobile!""}" name="Mobile" data-rule="联系电话;required;name;length[0~44];" maxlength="11"
+	            <td style="text-align: right;">联系电话</td>
+	        	     <td><input type="text" name="B_Mobile"  data-rule="联系电话;required;name;length[0~44];" maxlength="11"
 	                                             id="MobileA" />&nbsp;<span style="color:red">*</span>
 	                 </td>
-	           		<td style="text-align: right;">国籍</td>
-	        		 <td > <input type="text"   value="${B_Country!""}" name="Country" data-rule="通讯地址;required;name;length[0~44];"
-	                                             id="CountryA" />&nbsp;<span style="color:red">*</span>
-	                 </td>
 	           		
-	                 
+	           		<td style="text-align: right;">国籍</td>
+	        		 <td > <input type="text" name="B_Country" data-rule="通讯地址;required;name;length[0~44];"
+	                                             id="CountryA" />&nbsp;<span style="color:red">*</span>
+	                 </td>	      	                 
 	           <tr>
 	           <tr>
 	            <td style="text-align: right;">客户风险等级</td>
 	        		 <td> <#assign map = {"915102":'低风险客户',"915103":'高风险客户',"915106":'中等风险客户'}>
-	                         <select id="CusRiskLvlA" name="CusRiskLvl" class="input-medium">
+	                         <select id="CusRiskLvlA" name="B_CusRiskLvl" class="input-medium">
                         		<#list map?keys as key>
-                            		<option value="${key}" <#if CusRiskLvl?? && CusRiskLvl==key?eval>selected="selected" </#if>>${map[key]}</option>
+                            		<option value="${key}">${map[key]}</option>
                         		</#list>
                         	 </select>
                     </td>
 	          		 <td style="text-align: right;">反洗钱客户风险等级</td>
 	        		<td> <#assign map = {"925105":'普通',"925106":'关注级',"925107":'特别关注级',"925108":'高度关注级'}>
-		                         <select id="CustRiskRankA" name="CustRiskRank" class="input-medium" >
+		                         <select id="CustRiskRankA" name="B_CustRiskRank" class="input-medium" >
                         			<#list map?keys as key>
-                            			<option value="${key}" <#if CustRiskRank?? && CustRiskRank==key?eval>selected="selected" </#if>>${map[key]}</option>
+                            			<option value="${key}">${map[key]}</option>
                         			</#list>
                     			</select>
 	           		</td>
@@ -244,11 +239,9 @@ $(function() {
 	$( "#tabs" ).tabs({
 	});	
 	//信息同步（按钮） 时从投保人信息自动带出被保人
-	$("#copyInfo").click(function(){
-	
+	$("#copyInfo").click(function(){	
 		var source=["CodeA","NameA","ClntMrkA","CountryA","EmailA","CertfClsA","CertfCdeA","ClntAddrA","MobileA","ZipCdeA","CusRiskLvlA","CustRiskRankA","CCntrNmeA"];	
 		$.each(source,function(i,n){
-		debugger;
 			if($("#"+n.substring(0,n.length-1))){
 				  var formerVal = $("#"+n.substring(0,n.length-1)).val();
 				  $("#"+n).val(formerVal);
