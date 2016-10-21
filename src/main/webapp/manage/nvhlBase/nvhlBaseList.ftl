@@ -91,15 +91,20 @@
 					<td>${item.NPrm!""}</td>
 					<td>${item.TAppTm!""}</td>
 					<td>${item.TInsrncBgnTm!""}</td>
-					
+					<#if item.TInsrncEndTm??>
 					<!--如果超期天数为负数 则高亮显示-->
 					<#if item.expire_days gt 0> <!--大于等于0 表示已过期-->
-					<td id="expireDate" bgcolor="#CC0000">${item.TInsrncEndTm!""}</td>
+					<td id="expireDate" bgcolor="#FF8888">${item.TInsrncEndTm!""}</td>
 					<#elseif  item.expire_days lte -30> <!--小于等于30 表示 距离截止日期一个月以上-->
 					<td id="expireDate">${item.TInsrncEndTm!""}</td>
 					<#else>   <!--一个月之内到期-->
-					<td id="expireDate"  bgcolor="#FF8800" >${item.TInsrncEndTm!""}</td>
+					<td id="expireDate"  bgcolor="#FFBB66" >${item.TInsrncEndTm!""}</td>
 					</#if> 
+					<#else>
+					<td></td>
+					</#if>
+					
+					
 					
 			</tr>
 			</#list>
