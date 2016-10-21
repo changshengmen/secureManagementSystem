@@ -1,16 +1,26 @@
 package net.jeeshop.services.common;
 
 import java.util.Map;
+import net.jeeshop.services.manage.pageRecord.bean.PageRecord;
 
 public class telTradeRequestVO {
+	private String tid;
 	private String subtransNo = "";
 	private String transDate;
 	private String transType;
-	private pageRecord pageRecord;
+	private PageRecord pageRecord;
 	private Map dataTranArea;
 	private String transTime;
 	private String transNo;
-    
+	
+	public String getTid() {
+		return tid;
+	}
+
+	public void setTid(String tid) {
+		this.tid = tid;
+	}
+
 	public String getSubtransNo() {
 		return subtransNo;
 	}
@@ -35,11 +45,12 @@ public class telTradeRequestVO {
 		this.transType = transType;
 	}
 
-	public pageRecord getPageRecord() {
+	
+	public PageRecord getPageRecord() {
 		return pageRecord;
 	}
 
-	public void setPageRecord(pageRecord pageRecord) {
+	public void setPageRecord(PageRecord pageRecord) {
 		this.pageRecord = pageRecord;
 	}
 

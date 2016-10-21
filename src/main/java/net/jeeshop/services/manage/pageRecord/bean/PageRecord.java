@@ -4,23 +4,24 @@ import java.io.Serializable;
 
 public class PageRecord implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private String cursorPos;//
-	private String orderField;//
-	private String orderFlag;//
-	private String pageFlag;// 
-	private String pageLNum;// 
-	private String retCount;// 	
-	public String getCursorPos() {
-		return cursorPos;
+	private int retCount = 0; 
+	private int pageFlag = 0;
+	private String orderFlag = "ASC";
+	private int pageLNum = 0; 
+	private int cursorPos = 0; 
+	private String orderField = "";
+	
+	public int getRetCount() {
+		return retCount;
 	}
-	public void setCursorPos(String cursorPos) {
-		this.cursorPos = cursorPos;
+	public void setRetCount(int retCount) {
+		this.retCount = retCount;
 	}
-	public String getOrderField() {
-		return orderField;
+	public int getPageFlag() {
+		return pageFlag;
 	}
-	public void setOrderField(String orderField) {
-		this.orderField = orderField;
+	public void setPageFlag(int pageFlag) {
+		this.pageFlag = pageFlag;
 	}
 	public String getOrderFlag() {
 		return orderFlag;
@@ -28,24 +29,23 @@ public class PageRecord implements Serializable {
 	public void setOrderFlag(String orderFlag) {
 		this.orderFlag = orderFlag;
 	}
-	public String getPageFlag() {
-		return pageFlag;
-	}
-	public void setPageFlag(String pageFlag) {
-		this.pageFlag = pageFlag;
-	}
-	public String getPageLNum() {
+	public int getPageLNum() {
 		return pageLNum;
 	}
-	public void setPageLNum(String pageLNum) {
+	public void setPageLNum(int pageLNum) {
 		this.pageLNum = pageLNum;
 	}
-	public String getRetCount() {
-		return retCount;
+	public int getCursorPos() {
+		return cursorPos;
 	}
-	public void setRetCount(String retCount) {
-		this.retCount = retCount;
+	public void setCursorPos(int cursorPos) {
+		this.cursorPos = cursorPos;
 	}
-	
+	public String getOrderField() {
+		return orderField;
+	}
+	public void setOrderField(String orderField) {
+		this.orderField = orderField;
+	} 
 	
 }

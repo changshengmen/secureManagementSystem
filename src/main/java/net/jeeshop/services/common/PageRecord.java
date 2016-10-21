@@ -5,7 +5,7 @@ package net.jeeshop.services.common;
  * @author lin
  *
  */
-public class pageRecord {
+public class PageRecord {
 	private int retCount = 0; 
 	private int pageFlag = 0;
 	private String orderFlag = "ASC";
