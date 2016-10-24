@@ -530,9 +530,11 @@ public class UserAction extends BaseController<User>  {
     @RequestMapping("toEdit")
 	public String toEdit(@ModelAttribute("e") User e, ModelMap model) throws Exception {
         model.addAttribute("roleList", roleService.selectList(null));
-
-		e = getService().selectOne(e);
-        model.addAttribute("e", e);
+        if(e.getId() != "" && e.getId()!=null){
+        	e = getService().selectOne(e);
+        	model.addAttribute("e", e);
+        }
+        return page_toEdit;
 //		if(getRequest().getParameter("id")==null){
 //			e.clear();
 //		}else{
@@ -540,7 +542,7 @@ public class UserAction extends BaseController<User>  {
 //			e = getServer().selectOne(e);
 //		}
 		
-		return page_toEdit;
+		
 	}
 	
 	/**

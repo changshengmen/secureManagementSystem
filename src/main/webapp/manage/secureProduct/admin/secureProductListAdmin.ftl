@@ -90,7 +90,7 @@
 		<table id="t_secure" class="table table-bordered table-condensed table-hover" style="text-align: center;">
 			<tr style="background-color: #dff0d8">
 			<th style="width:5%;text-align: center"><input type="checkbox" id="firstCheckbox" /></th>				
-				<th style="width:10%;text-align: center">产品代码（险种）</th>				
+				<th style="width:10%;text-align: center">产品代码</th>				
 				<th style="width:15%;text-align: center">产品名称</th>
 				<th style="width:10%;text-align: center">保额币种</th>
 				<th style="width:15%;text-align: center">保额合计</th>

@@ -56,7 +56,7 @@
 				                        <input type="text" name="username" id="username"  data-rule="帐号:required;username;length[4~20];remote[unique]">
 				                    <#else >
 				                        <input type="text" name="username" id="username" value="${e.username!""}">
-				                        ${e.username}
+				                        ${e.username!""}
 				                    </#if>
 								</td>
 							</tr>
