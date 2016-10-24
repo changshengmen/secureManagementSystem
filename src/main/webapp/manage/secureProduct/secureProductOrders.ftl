@@ -126,11 +126,12 @@
 																
 		</div><!--end tab-->
 			<!--------------------------操作按钮模块------------------------------------->
+			<br>
 			<#if e.id??>
 			 	<a href="toPayPage?id=${e.id}" class="btn btn-success">下单</a> 
                
            
-                <button method="selectList?init=y" class="btn btn-success">
+                <button method="selectList?init=y" class="btn btn-warning">
 	                <i class="icon-ok icon-white"></i>返回
 	        	</button>	
 			

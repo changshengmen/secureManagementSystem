@@ -50,9 +50,9 @@
 		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO"
 		useGeneratedKeys="true" keyProperty="id">
 		insert into nvhlbasevo(SerialNumber,CDptCde,SysRes,CBsnsTyp,CChaType,CChaSubtype,FinTyp,CProdNo,CCiMrk,NAmtRmbExch,NAmt,NPrmRmbExch,NPrm,
-         TAppTm,TInsrncBgnTm,TInsrncEndTm,CGrpMrk,EfcManualFlag,CPlyTyp,CNeedfeeFlag,ICopyNum,createAccount,createTime,CProdName)
+         TAppTm,TInsrncBgnTm,TInsrncEndTm,CGrpMrk,EfcManualFlag,CPlyTyp,CNeedfeeFlag,ICopyNum,createAccount,createTime,CProdName,status,deleteFlag)
          values(#{id},#{CDptCde},#{SysRes},#{CBsnsTyp},#{CChaType},#{CChaSubtype},#{FinTyp},#{CProdNo},#{CCiMrk},#{NAmtRmbExch},#{NAmt},#{NPrmRmbExch},#{NPrm},#{TAppTm}
-  		,#{TInsrncBgnTm},#{TInsrncEndTm},#{CGrpMrk},#{EfcManualFlag},#{CPlyTyp},#{CNeedfeeFlag},#{ICopyNum},#{createAccount},#{createTime},#{CProdName})
+  		,#{TInsrncBgnTm},#{TInsrncEndTm},#{CGrpMrk},#{EfcManualFlag},#{CPlyTyp},#{CNeedfeeFlag},#{ICopyNum},#{createAccount},now(),#{CProdName},#{status},#{deleteFlag})
 	</insert>
 	<!--插入 投保人NvhlApplicantVO  -->
 	<insert id="manage.NvhlBase.insertNvhlApplication"

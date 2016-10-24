@@ -20,11 +20,11 @@
 			 <table class="table table-bordered table-condensed">
 				<tr>
 					<td style="text-align: right;">投保企业代码</td>
-	       			<td><input type="text" name="AppCde"  data-rule="被保企业代码;required;name;length[0~44];"
+	       			<td><input type="text" name="AppCde"  data-rule="投保企业代码;required;length[0~44];"
 	                                             id="Code" />&nbsp;<span style="color:red">*</span>
 	          		</td>
 	           		<td style="text-align: right;">投保企业名称</td>
-	        		<td><input type="text" name="AppNme"  data-rule="被保企业名称;required;name;length[0~44];"
+	        		<td><input type="text" name="AppNme"  data-rule="投保企业名称;required;length[0~44];"
 	                                             id="Name" />&nbsp;<span style="color:red">*</span>
 	          		 </td>
 	           </tr>
@@ -38,7 +38,7 @@
                    		</select>
 	           		 </td>
 	          		 <td style="text-align: right;">通讯地址</td>
-	        		 <td> <input type="text" name="T_ClntAddr" data-rule="通讯地址;required;name;length[0~44];"
+	        		 <td> <input type="text" name="T_ClntAddr" data-rule="通讯地址;required;length[0~44];"
 	                                             id="ClntAddr" />&nbsp;<span style="color:red">*</span>
 	                 </td>
 	           		
@@ -53,13 +53,13 @@
                    		</select>
 	           		 </td>
 	           		 <td style="text-align: right;">证件号码</td>
-	        		 <td><input type="text" name="T_CertfCde"  data-rule="证件号码;required;name;length[0~44];" 
+	        		 <td><input type="text" name="T_CertfCde"  data-rule="证件号码;required;length[0~44];" 
 	                                             id="CertfCde" />&nbsp;<span style="color:red">*</span>
 	           		 </td>            		
 	           </tr>
 	             <tr>
 	           		 <td style="text-align: right;">邮箱</td>
-	        		 <td><input type="text" name="T_Email" data-rule="邮箱;required;name;length[0~44];email:true;"
+	        		 <td><input type="text" name="T_Email" data-rule="邮箱;required;length[0~44];email:true;"
 	                                             id="Email" />&nbsp;<span style="color:red">*</span>
 	                 </td>
 	                 <td style="text-align: right;">邮编</td>
@@ -69,11 +69,11 @@
 	            
 	           <tr>
 	                 <td style="text-align: right;">联系电话</td>
-	        	     <td><input type="text" name="T_Mobile"  data-rule="联系电话;required;name;length[0~44];" maxlength="11"
+	        	     <td><input type="text" name="T_Mobile"  data-rule="联系电话;required;length[0~44];" maxlength="11"
 	                                             id="Mobile" />&nbsp;<span style="color:red">*</span>
 	                 </td>
 	                  <td style="text-align: right;">国籍</td>
-	        	     <td><input type="text" name="T_Country"  data-rule="联系电话;required;Country;length[0~44];" maxlength="11"
+	        	     <td><input type="text" name="T_Country"  data-rule="联系电话;required;length[0~44];" maxlength="11"
 	                                             id="Country" />&nbsp;<span style="color:red">*</span>
 	                 </td>
 	           <tr>
@@ -102,17 +102,16 @@
 							onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2100-03-10 20:59:30' })"/>
 							&nbsp;<span style="color:red">*</span>
 					  </td>
-	           </tr>
-	            <tr>
-	           		 <td style="text-align: right;">保险起期</td>
+					  <td style="text-align: right;">保险起期</td>
 	        		 <td> <input id="TInsrncBgnTm" type="text" name="TInsrncBgnTm" style="line-height:3px"
 							class="Wdate search-query input-small" 
 							onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2100-03-10 20:59:30' })"/>
 							&nbsp;<span style="color:red">*</span>
 					 </td>
+	           </tr>
+	            <tr>	           		 
 	                  <td style="text-align: right;">保险止期</td>
-	        		  <td>  
-	        		  <!-- data-rule="保险止期;required;name;length[0~44];"-->
+	        		  <td colspan="3">  	        		  
 						<input id="TInsrncEndTm" style="line-height:3px" class="Wdate search-query input-small" name="TInsrncEndTm" type="text"
 						 onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2100-03-10 20:59:30' })" />
 						&nbsp;<span style="color:red">*</span>
@@ -135,11 +134,11 @@
 		    	<table class="table table-bordered table-condensed" id="insureTable">
 				<tr>
 					<td style="text-align: right;" >被保企业代码</td>
-	       			<td><input type="text" name="InsuredCde"  data-rule="被保企业代码;required;name;length[0~44];"
+	       			<td><input type="text" name="InsuredCde"  data-rule="被保企业代码;required;length[0~44];"
 	                                             id="CodeA" />&nbsp;<span style="color:red">*</span>
 	          		</td>
 	           		<td style="text-align: right;">被保企业名称</td>
-	        		<td><input type="text" name="InsuredNme"  data-rule="被保企业名称;required;name;length[0~44];"
+	        		<td><input type="text" name="InsuredNme"  
 	                                             id="NameA" />&nbsp;<span style="color:red">*</span>
 	          		 </td>
 	           </tr>
@@ -154,7 +153,7 @@
                    		</select>
 	           		 </td>
 	          		 <td style="text-align: right;">通讯地址</td>
-	        		 <td > <input type="text" name="B_ClntAddr" data-rule="通讯地址;required;name;length[0~44];"
+	        		 <td > <input type="text" name="B_ClntAddr" data-rule="通讯地址;required;length[0~44];"
 	                                             id="ClntAddrA" />&nbsp;<span style="color:red">*</span>
 	                 </td>	           		
 	           </tr>
@@ -168,7 +167,7 @@
                    		</select>
 	           		 </td>
 	          		 <td style="text-align: right;">证件号码</td>
-	        		 <td><input type="text" name="B_CCertfCde"  data-rule="证件号码;required;name;length[0~44];" 
+	        		 <td><input type="text" name="B_CCertfCde"  data-rule="证件号码;required;length[0~44];" 
 	                                             id="CertfCdeA" />&nbsp;<span style="color:red">*</span>
 	           		 </td>
 	           		
@@ -179,18 +178,18 @@
 	        	     <td><input type="text" name="B_ZipCde"id="ZipCdeA" />
 	                 </td>
 	                  <td style="text-align: right;">邮箱</td>
-	        		 <td><input type="text" name="B_CEmail" data-rule="邮箱;required;name;length[0~44];email:true;"
+	        		 <td><input type="text" name="B_CEmail" data-rule="邮箱;required;length[0~44];email:true;"
 	                                             id="EmailA" />&nbsp;<span style="color:red">*</span>
 	                 </td>
 	           <tr>	      	           
 	           <tr>
 	            <td style="text-align: right;">联系电话</td>
-	        	     <td><input type="text" name="B_Mobile"  data-rule="联系电话;required;name;length[0~44];" maxlength="11"
+	        	     <td><input type="text" name="B_Mobile"  data-rule="联系电话;required;length[0~44];" maxlength="11"
 	                                             id="MobileA" />&nbsp;<span style="color:red">*</span>
 	                 </td>
 	           		
 	           		<td style="text-align: right;">国籍</td>
-	        		 <td > <input type="text" name="B_Country" data-rule="通讯地址;required;name;length[0~44];"
+	        		 <td > <input type="text" name="B_Country" data-rule="通讯地址;required;length[0~44];"
 	                                             id="CountryA" />&nbsp;<span style="color:red">*</span>
 	                 </td>	      	                 
 	           <tr>
@@ -248,6 +247,7 @@ $(function() {
 			if($("#"+n.substring(0,n.length-1))){
 				  var formerVal = $("#"+n.substring(0,n.length-1)).val();
 				  $("#"+n).val(formerVal);
+				   $("#"+n).focus();			  
 		    }
 		})
   	});	

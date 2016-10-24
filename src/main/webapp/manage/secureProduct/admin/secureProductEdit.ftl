@@ -177,13 +177,14 @@
 																
 		</div><!--end tab-->
 			<!--------------------------操作按钮模块------------------------------------->
+			<br>
 			<#if e.id??>
 				<#if checkDbPrivilege()>
 				 	<button method="update" class="btn btn-success">
 	                    <i class="icon-ok icon-white"></i> 修改
 	                </button>
                 </#if>
-                <button onclick="javascript:history.back(-1)" class="btn btn-success">
+                <button onclick="javascript:history.back(-1)" class="btn btn-warning"">
 	                <i class="icon-ok icon-white"></i>返回
 	        </button>	
 			<#else>
@@ -194,7 +195,7 @@
 		            </button>
 		        </#if>				           
 			</span>	
-			<button onclick="javascript:history.back(-1)" class="btn btn-success">
+			<button onclick="javascript:history.back(-1)" class="btn btn-warning">
 	                <i class="icon-ok icon-white"></i>返回
 	        </button>
 			</#if>
