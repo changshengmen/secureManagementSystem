@@ -49,7 +49,6 @@ debugger;
 })
 //保存ids到cookies中
 function saveIDS(ids){
-debugger;
 	var id_len=$("input[name='ids']").length;
 	if(!ids==""){
 	//如果ids开始的时候不是空，没选中就删，选中就判断是否有重复，没重复就加。
@@ -86,7 +85,6 @@ debugger;
 
 //绑定
 function bind(){
-debugger;
 	ids=$.cookie('cookieIDS');
 	ids=saveIDS(ids);
 	var oldIDS='oldIDS';
@@ -99,7 +97,7 @@ debugger;
 }
 //删除cookies
 function clearCookie(name){ 
-var keys=document.cookie.match(/[^ =;]+(?=\=)/g); 
+	var keys=document.cookie.match(/[^ =;]+(?=\=)/g); 
 	if (keys) { 
 		for (var i = keys.length; i--;){ 
 			if(keys[i]==name){
@@ -115,9 +113,9 @@ var keys=document.cookie.match(/[^ =;]+(?=\=)/g);
 		
 		<table class="table table-bordered table-condensed">
 		
-					<td  style="text-align: right;line-height:35px;font-weight:bold">商品名称</td>
+					<td  style="text-align: right;line-height:35px;font-weight:bold">产品名称</td>
 						<td style="text-align: left;"  >
-						<input type="text"  value="${e.name!""}" name="name"  class="input-small" id="name" />&nbsp;&nbsp;&nbsp;
+						<input type="text"  value="${e.CProdName!""}" name="CProdName"  class="input-small" id="CProdName" />&nbsp;&nbsp;&nbsp;
 						<button method="getAllProduct" class="btn btn-primary" onclick="selectList(this)">
 							<i class="icon-search icon-white"></i> 查询
 						</button>
