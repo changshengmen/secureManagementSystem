@@ -20,11 +20,11 @@
 			 <table class="table table-bordered table-condensed">
 				<tr>
 					<td style="text-align: right;">投保企业代码</td>
-	       			<td><input type="text"  value="123" name="AppCde"  data-rule="被保企业代码;required;name;length[0~44];"
+	       			<td><input type="text" name="AppCde"  data-rule="被保企业代码;required;name;length[0~44];"
 	                                             id="Code" />&nbsp;<span style="color:red">*</span>
 	          		</td>
 	           		<td style="text-align: right;">投保企业名称</td>
-	        		<td><input type="text"  value="123" name="AppNme"  data-rule="被保企业名称;required;name;length[0~44];"
+	        		<td><input type="text" name="AppNme"  data-rule="被保企业名称;required;name;length[0~44];"
 	                                             id="Name" />&nbsp;<span style="color:red">*</span>
 	          		 </td>
 	           </tr>
@@ -38,7 +38,7 @@
                    		</select>
 	           		 </td>
 	          		 <td style="text-align: right;">通讯地址</td>
-	        		 <td> <input type="text"   value="wad阿瓦蒂" name="T_ClntAddr" data-rule="通讯地址;required;name;length[0~44];"
+	        		 <td> <input type="text" name="T_ClntAddr" data-rule="通讯地址;required;name;length[0~44];"
 	                                             id="ClntAddr" />&nbsp;<span style="color:red">*</span>
 	                 </td>
 	           		
@@ -53,27 +53,27 @@
                    		</select>
 	           		 </td>
 	           		 <td style="text-align: right;">证件号码</td>
-	        		 <td><input type="text"  value="456" name="T_CertfCde"  data-rule="证件号码;required;name;length[0~44];" 
+	        		 <td><input type="text" name="T_CertfCde"  data-rule="证件号码;required;name;length[0~44];" 
 	                                             id="CertfCde" />&nbsp;<span style="color:red">*</span>
 	           		 </td>            		
 	           </tr>
 	             <tr>
 	           		 <td style="text-align: right;">邮箱</td>
-	        		 <td><input type="text"  value="123@qq.com" name="T_Email" data-rule="邮箱;required;name;length[0~44];email:true;"
+	        		 <td><input type="text" name="T_Email" data-rule="邮箱;required;name;length[0~44];email:true;"
 	                                             id="Email" />&nbsp;<span style="color:red">*</span>
 	                 </td>
 	                 <td style="text-align: right;">邮编</td>
-	        	     <td><input type="text"  value="009533" name="T_ZipCde"id="ZipCde" />
+	        	     <td><input type="text" name="T_ZipCde"id="ZipCde" />
 	                 </td>
 	           <tr>
 	            
 	           <tr>
 	                 <td style="text-align: right;">联系电话</td>
-	        	     <td><input type="text"  value="456" name="T_Mobile"  data-rule="联系电话;required;name;length[0~44];" maxlength="11"
+	        	     <td><input type="text" name="T_Mobile"  data-rule="联系电话;required;name;length[0~44];" maxlength="11"
 	                                             id="Mobile" />&nbsp;<span style="color:red">*</span>
 	                 </td>
 	                  <td style="text-align: right;">国籍</td>
-	        	     <td><input type="text"  value="456" name="T_Country"  data-rule="联系电话;required;Country;length[0~44];" maxlength="11"
+	        	     <td><input type="text" name="T_Country"  data-rule="联系电话;required;Country;length[0~44];" maxlength="11"
 	                                             id="Country" />&nbsp;<span style="color:red">*</span>
 	                 </td>
 	           <tr>
@@ -97,23 +97,23 @@
 	           </tr>           
 	           <tr>	           		
 	                  <td style="text-align: right;">投保日期</td>
-	        		  <td> <input id="d4311" type="text" name="TAppTm" style="line-height:3px"
-							value="${TAppTm!""}"   class="Wdate search-query input-small"
+	        		  <td> <input id="TAppTm" type="text" name="TAppTm" style="line-height:3px"
+							class="Wdate search-query input-small"
 							onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2100-03-10 20:59:30' })"/>
 							&nbsp;<span style="color:red">*</span>
 					  </td>
 	           </tr>
 	            <tr>
 	           		 <td style="text-align: right;">保险起期</td>
-	        		 <td> <input id="d4311" type="text" name="TInsrncBgnTm" style="line-height:3px"
-							value="${TInsrncBgnTm!""}"  class="Wdate search-query input-small" 
+	        		 <td> <input id="TInsrncBgnTm" type="text" name="TInsrncBgnTm" style="line-height:3px"
+							class="Wdate search-query input-small" 
 							onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2100-03-10 20:59:30' })"/>
 							&nbsp;<span style="color:red">*</span>
 					 </td>
 	                  <td style="text-align: right;">保险止期</td>
 	        		  <td>  
 	        		  <!-- data-rule="保险止期;required;name;length[0~44];"-->
-						<input style="line-height:3px" class="Wdate search-query input-small" name="TInsrncEndTm" value="${TInsrncEndTm!""}"  type="text"
+						<input id="TInsrncEndTm" style="line-height:3px" class="Wdate search-query input-small" name="TInsrncEndTm" type="text"
 						 onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2100-03-10 20:59:30' })" />
 						&nbsp;<span style="color:red">*</span>
 					  </td>
@@ -237,7 +237,10 @@
 <script>
 $(function() {
 	$( "#tabs" ).tabs({
-	});	
+	});
+	//设置投保日期为当前时间	
+	//alert(new Date());
+	//$("#TAppTm").val(new Date(), "yyyy-MM-dd")); 
 	//信息同步（按钮） 时从投保人信息自动带出被保人
 	$("#copyInfo").click(function(){	
 		var source=["CodeA","NameA","ClntMrkA","CountryA","EmailA","CertfClsA","CertfCdeA","ClntAddrA","MobileA","ZipCdeA","CusRiskLvlA","CustRiskRankA","CCntrNmeA"];	

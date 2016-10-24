@@ -30,9 +30,23 @@
 					<td style="display: none;">${e.id!""}</td>	
 					<td style="width:10%;">${e.CProdNo!""}</td>
 					<td style="width:20%;">${e.CProdName!""}</td>
-					<td style="width:10%;">${e.NAmtRmbExch!""}</td>
+					<td style="width:10%;">
+						 <#assign map = {"01":'人民币',"02":'港币',"03":'美元',"04":'英镑',"12",'欧元'}>
+						 <#list map?keys as key>
+						  <#if e.NAmtRmbExch?? && e.NAmtRmbExch==key>
+						  ${map[key]}
+						  </#if>
+						 </#list>	
+					 </td>
 					<td style="width:15%;">${e.NAmt!""}</td>
-					<td style="width:10%;">${e.NPrmRmbExch!""}</td>
+					<td style="width:10%;">
+						<#assign map = {"01":'人民币',"02":'港币',"03":'美元',"04":'英镑',"12",'欧元'}>
+						 <#list map?keys as key>
+						  <#if e.NPrmRmbExch?? && e.NPrmRmbExch==key>
+						  ${map[key]}
+						  </#if>
+						 </#list>
+					 </td>
 					<td style="width:15%;">${e.NPrm!""}</td>
 					<td style="width:120%;">${e.introduce!""}</td>
 				</tr>

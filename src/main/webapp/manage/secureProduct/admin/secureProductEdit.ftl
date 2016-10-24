@@ -1,5 +1,12 @@
 <#import "/manage/tpl/pageBase.ftl" as page>
 <@page.pageBase currentMenu="保险产品管理">
+<#if e.id??>
+    <#assign formAction="111">
+<#assign insertAction=false />
+<#else >
+<#assign formAction="insert">
+    <#assign insertAction=true />
+</#if>
 <form action="${basepath}/manage/secureProduct" id="form" name="form" namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">		
 	<div id="tabs">
 		<ul>
@@ -89,8 +96,10 @@
 	                    <#list e.secureProductDetailList as item>
 							<tr>
 								<td style="display: none;"><input type="hidden" value="${item.id!""}" name="secureProductDetailList[${item_index}].id"/></td>
-								<td><input type="text"  value="${e.secureProductDetailList[item_index].subName!""}" name="secureProductDetailList[${item_index}].subName"  class="search-query input-small"/></td>
-								<td><input type="text"  value="${e.secureProductDetailList[item_index].amount!""}" name="secureProductDetailList[${item_index}].amount"  class="search-query input-small"/></td>
+								<td><input type="text"  value="${e.secureProductDetailList[item_index].subName!""}" name="secureProductDetailList[${item_index}].subName" 
+									 class="search-query input-small"/></td>
+								<td><input type="text"  value="${e.secureProductDetailList[item_index].amount!""}" name="secureProductDetailList[${item_index}].amount"  
+								class="search-query input-small"/></td>
 								<td><input type="text"  value="${e.secureProductDetailList[item_index].rate!""}" name="secureProductDetailList[${item_index}].rate"  class="search-query input-small"/></td>
 								<td><input type="text"  value="${e.secureProductDetailList[item_index].premium!""}" name="secureProductDetailList[${item_index}].premium"  class="search-query input-small"/></td>
 								<td><input type="text"  value="${e.secureProductDetailList[item_index].remark!""}" name="secureProductDetailList[${item_index}].remark"  class="search-query input-small"/></td>
@@ -106,13 +115,12 @@
 	                    </#list>
 					<#else>           
             	    <#list [1,2,3,4] as item>					
-						<tr>
-							
+						<tr>							
 							<td style="display: none;"><input type="hidden" name="secureProductDetailList[${item_index}].id"/></td>
-							<td><input type="text" name="secureProductDetailList[${item_index}].subName"  class="search-query input-small"/></td>
-							<td><input type="text" name="secureProductDetailList[${item_index}].amount"  class="search-query input-small"/></td>
-							<td><input type="text" name="secureProductDetailList[${item_index}].rate"  class="search-query input-small"/></td>
-							<td><input type="text" name="secureProductDetailList[${item_index}].premium"  class="search-query input-small"/></td>
+							<td><input type="text" name="secureProductDetailList[${item_index}].subName"  class="search-query input-small"data-rule="子产品名称;subName;"/></td>
+							<td><input type="text" name="secureProductDetailList[${item_index}].amount"  class="search-query input-small"data-rule="保险金额;integer;amount;"/></td>
+							<td><input type="text" name="secureProductDetailList[${item_index}].rate"  class="search-query input-small"data-rule="费率;integer;subName;"/></td>
+							<td><input type="text" name="secureProductDetailList[${item_index}].premium"  class="search-query input-small"data-rule="保费;integer;subName;"/></td>
 							<td><input type="text" name="secureProductDetailList[${item_index}].remark"  class="search-query input-small"/></td>
 							<td>
 	                            <#assign map = {'0':'确定方式1','1':'确定方式2','2':'确定方式3','3':'确定方式4'}>
@@ -172,7 +180,7 @@
 			<#if e.id??>
 				<#if checkDbPrivilege()>
 				 	<button method="update" class="btn btn-success">
-	                    <i class="icon-ok icon-white"></i> 保存
+	                    <i class="icon-ok icon-white"></i> 修改
 	                </button>
                 </#if>
                 <button onclick="javascript:history.back(-1)" class="btn btn-success">
@@ -182,7 +190,7 @@
 			<span style="margin-left:0px;">
 				<#if checkDbPrivilege()>
 					<button method="insertSecureProduct" class="btn btn-success">
-		                <i class="icon-ok icon-white"></i>添加	
+		                <i class="icon-ok icon-white"></i>新增	
 		            </button>
 		        </#if>				           
 			</span>	
