@@ -62,12 +62,12 @@
 		insert into nvhlapplicantvo(
 		AppCde,AppName,ClntMrk,CertfCls,CertfCde,ClntAddr,		
 		ZipCde,Email,Mobile,Country,Province,
-		City,Area,Stree,CusRiskLvl,CustRiskRank		
+		City,Area,Stree,CusRiskLvl,CustRiskRank,createAccount,createtime		
 		)
          values(
          #{AppCde},#{AppNme},#{ClntMrk},#{CertfCls},#{CertfCde},#{ClntAddr},
          #{ZipCde},#{Email},#{Mobile},#{Country},#{Province},
-        #{City},#{Area},#{Stree},#{CusRiskLvl},#{CustRiskRank})
+        #{City},#{Area},#{Stree},#{CusRiskLvl},#{CustRiskRank},#{createAccount},now())
 	</insert>
 	<!-- 插入 被保人NvhlInsuredVO -->
 	<insert id="manage.NvhlBase.insertNvhlInsured"
