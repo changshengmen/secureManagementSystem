@@ -77,6 +77,7 @@
 			<tr style="background-color: #dff0d8">
 				<th>险种名称</th>
 				<th>产品代码</th>
+				<th>投保企业</th>
 				<th>保额合计</th>
 				<th>保费合计</th>
 				<th>投保日期</th>
@@ -87,6 +88,7 @@
 				<tr>
 					<td>${item.CProdName!""}</td>
 					<td>${item.CProdNo!""}</td>
+					<td>${item.appnme!""}</td>
 					<td>${item.NAmt!""}</td>
 					<td>${item.NPrm!""}</td>
 					<td>${item.TAppTm!""}</td>
@@ -103,9 +105,6 @@
 					<#else>
 					<td></td>
 					</#if>
-					
-					
-					
 			</tr>
 			</#list>
 			<tr>

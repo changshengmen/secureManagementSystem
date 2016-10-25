@@ -55,15 +55,15 @@
             <!--------------------------主产品信息添加模块------------------------------------->
         <!--------------------------start子产品信息模块------------------------------------->
             <div id="tabs-2"> 
-            	<table class="table" table-bordered table-condensed table-hover">                 
+            	<table class="table" table-bordered table-condensed table-hover" id="childTable">                 
      				<tr style="background-color: #dff0d8">
      				<td style="display: none;">保险编号</td>
-     				<td>子产品名称</td>
-     				<td>保险金额</td>
-     				<td>费率</td>
-     				<td>保费</td> 
-     				<td>备注</td> 	
-     				<td>保险金额的确定方式</td>	           				
+     				<td style=" font-weight: bold;">子产品名称</td>
+     				<td style=" font-weight: bold;">保险金额</td>
+     				<td style=" font-weight: bold;">费率</td>
+     				<td style=" font-weight: bold;">保费</td> 
+     				<td style=" font-weight: bold;">备注</td> 	
+     				<td style=" font-weight: bold;">保险金额的确定方式</td>	           				
      				</tr>
         	        <#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
 	                    <#list e.secureProductDetailList as item>
@@ -139,6 +139,13 @@
 						
 			<!--------------------------操作按钮模块------------------------------------->	
 </form>
+
+<script type="text/css">
+#childTable td{
+  font-weight: bold;
+}
+
+</script>
 
 <script>
 $(function() {

@@ -30,7 +30,7 @@
 	           </tr>
 	            <tr>
 	           		<td style="text-align: right;">客户类型</td>
-	        		<td><#assign map = {"1":'自然人',"0":'非自然人'}>
+	        		<td><#assign map = {"0":'非自然人',"1":'自然人'}>
 	                    <select id="ClntMrk" name="T_ClntMrk" class="input-medium" style="width:150px">
                         		<#list map?keys as key>
                             		<option value="${key}">${map[key]}</option>
@@ -69,7 +69,7 @@
 	            
 	           <tr>
 	                 <td style="text-align: right;">联系电话</td>
-	        	     <td><input type="text" name="T_Mobile"  data-rule="联系电话;required;length[0~44];" maxlength="11"
+	        	     <td><input type="text" name="T_Mobile"  data-rule="联系电话;required;integer" maxlength="11"
 	                                             id="Mobile" />&nbsp;<span style="color:red">*</span>
 	                 </td>
 	                  <td style="text-align: right;">国籍</td>
@@ -98,13 +98,13 @@
 	           <tr>	           		
 	                  <td style="text-align: right;">投保日期</td>
 	        		  <td> <input id="TAppTm" type="text" name="TAppTm" style="line-height:3px"
-							class="Wdate search-query input-small"
+							class="Wdate search-query input-small"  data-rule="投保日期;required;"
 							onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2100-03-10 20:59:30' })"/>
 							&nbsp;<span style="color:red">*</span>
 					  </td>
 					  <td style="text-align: right;">保险起期</td>
 	        		 <td> <input id="TInsrncBgnTm" type="text" name="TInsrncBgnTm" style="line-height:3px"
-							class="Wdate search-query input-small" 
+							class="Wdate search-query input-small" data-rule="保险起期;required;"
 							onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2100-03-10 20:59:30' })"/>
 							&nbsp;<span style="color:red">*</span>
 					 </td>
@@ -112,7 +112,7 @@
 	            <tr>	           		 
 	                  <td style="text-align: right;">保险止期</td>
 	        		  <td colspan="3">  	        		  
-						<input id="TInsrncEndTm" style="line-height:3px" class="Wdate search-query input-small" name="TInsrncEndTm" type="text"
+						<input id="TInsrncEndTm" style="line-height:3px" class="Wdate search-query input-small" name="TInsrncEndTm" type="text" data-rule="保险止期;required;"
 						 onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2100-03-10 20:59:30' })" />
 						&nbsp;<span style="color:red">*</span>
 					  </td>
@@ -145,7 +145,7 @@
 	            
 	           <tr>
 	           		<td style="text-align: right;">客户类型</td>
-	        		<td><#assign map = {"1":'自然人',"0":'非自然人'}>
+	        		<td><#assign map = {"0":'非自然人',"1":'自然人'}>
 	                    <select id="ClntMrkA" name="B_ClntMrk" class="input-medium" style="width:150px">
                         		<#list map?keys as key>
                             		<option value="${key}">${map[key]}</option>
@@ -153,7 +153,7 @@
                    		</select>
 	           		 </td>
 	          		 <td style="text-align: right;">通讯地址</td>
-	        		 <td > <input type="text" name="B_ClntAddr" data-rule="通讯地址;required;length[0~44];"
+	        		 <td > <input type="text" name="B_ClntAddr" data-rule="通讯地址;required;length[0~100];"
 	                                             id="ClntAddrA" />&nbsp;<span style="color:red">*</span>
 	                 </td>	           		
 	           </tr>
@@ -184,12 +184,12 @@
 	           <tr>	      	           
 	           <tr>
 	            <td style="text-align: right;">联系电话</td>
-	        	     <td><input type="text" name="B_Mobile"  data-rule="联系电话;required;length[0~44];" maxlength="11"
+	        	     <td><input type="text" name="B_Mobile"  data-rule="联系电话;required;integer;" maxlength="11"
 	                                             id="MobileA" />&nbsp;<span style="color:red">*</span>
 	                 </td>
 	           		
 	           		<td style="text-align: right;">国籍</td>
-	        		 <td > <input type="text" name="B_Country" data-rule="通讯地址;required;length[0~44];"
+	        		 <td > <input type="text" name="B_Country" data-rule="通讯地址;required;length[0~100];"
 	                                             id="CountryA" />&nbsp;<span style="color:red">*</span>
 	                 </td>	      	                 
 	           <tr>

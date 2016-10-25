@@ -6,7 +6,8 @@
 	<select id="manage.NvhlBase.selectPageList"
 		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO"
 		resultType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO">
-		select n.SerialNumber id,IFNULL(DATEDIFF(NOW(),n.TInsrncEndTm),'') expire_days, n.* from nvhlbasevo n where 1=1
+		select n.SerialNumber id,IFNULL(DATEDIFF(NOW(),n.TInsrncEndTm),'') expire_days, n.*,a.AppName AppNme ,i.InsuredNme InsuredNme from nvhlbasevo n ,nvhlapplicantvo a,nvhlinsuredvo i  where 1=1
+		and n.AppCde = a.AppCde and n.InsuredCde=i.InsuredCde
 		<if test="createAccount!=null and createAccount!=''">
 			and createAccount=#{createAccount}
 		</if>
@@ -49,9 +50,9 @@
 	<insert id="manage.NvhlBase.insertNvhlBase"
 		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO"
 		useGeneratedKeys="true" keyProperty="id">
-		insert into nvhlbasevo(SerialNumber,CDptCde,SysRes,CBsnsTyp,CChaType,CChaSubtype,FinTyp,CProdNo,CCiMrk,NAmtRmbExch,NAmt,NPrmRmbExch,NPrm,
+		insert into nvhlbasevo(SerialNumber,CDptCde,SysRes,CBsnsTyp,CChaType,CChaSubtype,FinTyp,CProdNo,AppCde,InsuredCde,CCiMrk,NAmtRmbExch,NAmt,NPrmRmbExch,NPrm,
          TAppTm,TInsrncBgnTm,TInsrncEndTm,CGrpMrk,EfcManualFlag,CPlyTyp,CNeedfeeFlag,ICopyNum,createAccount,createTime,CProdName,status,deleteFlag)
-         values(#{id},#{CDptCde},#{SysRes},#{CBsnsTyp},#{CChaType},#{CChaSubtype},#{FinTyp},#{CProdNo},#{CCiMrk},#{NAmtRmbExch},#{NAmt},#{NPrmRmbExch},#{NPrm},#{TAppTm}
+         values(#{id},#{CDptCde},#{SysRes},#{CBsnsTyp},#{CChaType},#{CChaSubtype},#{FinTyp},#{CProdNo},#{AppCde},#{InsuredCde},#{CCiMrk},#{NAmtRmbExch},#{NAmt},#{NPrmRmbExch},#{NPrm},#{TAppTm}
   		,#{TInsrncBgnTm},#{TInsrncEndTm},#{CGrpMrk},#{EfcManualFlag},#{CPlyTyp},#{CNeedfeeFlag},#{ICopyNum},#{createAccount},now(),#{CProdName},#{status},#{deleteFlag})
 	</insert>
 	<!--插入 投保人NvhlApplicantVO  -->

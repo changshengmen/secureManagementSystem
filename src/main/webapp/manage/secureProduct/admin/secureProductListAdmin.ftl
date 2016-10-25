@@ -31,7 +31,7 @@
 				<td style="text-align: left;" ><input type="text" name="CProdName"  class="input-small"
 						id="CProdName" /></td>					
 			</tr>
-	<!--	<tr>
+	<!--------------------------------------------------------	<tr>
 				<td style="text-align: right;">录入时间</td>
 				<td style="text-align: left;">
 					<input id="d4311" type="text" name="startDate"
@@ -52,10 +52,10 @@
                         </#list>
                      </select>
 				</td>						
-			</tr>-->
+			</tr>---------------------------------------------------------------->
 			<tr>
 				<td colspan="20">
-                    <#if checkDbPrivilege("secureProduct/selectList")>
+                    <#if checkPrivilege("secureProduct/selectList")>
 						<button method="selectList" class="btn btn-primary" onclick="selectList(this)">
 							<i class="icon-search icon-white"></i> 查询
 						</button>
