@@ -83,6 +83,7 @@
 				<th>投保日期</th>
 				<th>保险起期</th>
 				<th>保险止期</th>
+				<th>业务员</th>
 			</tr>
 			<#list pager.list as item>
 				<tr>
@@ -105,6 +106,7 @@
 					<#else>
 					<td></td>
 					</#if>
+					<td>${item.username!""}</td>
 			</tr>
 			</#list>
 			<tr>
