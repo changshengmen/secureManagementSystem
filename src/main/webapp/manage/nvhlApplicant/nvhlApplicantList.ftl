@@ -21,36 +21,27 @@
 }  
 </style>
 
-	<form action="${basepath}/manage/nvhlApplicantVO" namespace="/manage" method="post" theme="simple">		
-		 <table class="table table-bordered table-condensed table-hover">
-	 
-			<tr>
-				<td style="text-align: right;">产品代码</td>
-				<td style="text-align: left;"><input type="text" name="AppCde"  class="search-query input-small"
-						id="CProdNo" /></td>
-				<td style="text-align: right;">产品名称</td>
-				<td style="text-align: left;" ><input type="text" name="AppNme"  class="input-small"
-						id="CProdName" /></td>					
-			</tr>
-			
-		<tr style="background-color: #dff0d8">
-				<td style="text-align: right;">投保企业代码</td>
-		</tr>
+	<form action="${basepath}/manage/nvhlApplicantVO" method="post" theme="simple">		
 		
-		 <#list pager.list as item>	
-	 
-			<tr>
-   			<td>&nbsp;${item.AppCde!""}</td>
-   			<td>&nbsp;${item.CertfCls!""}</td>
-    		</tr>
-      	 </#list>
-
-			<tr>
-				<td colspan="70" style="text-align: center;">
-                    <#include "/manage/system/pager.ftl"/></td>
+				
+		<table class="table table-bordered table-hover">
+			<tr style="background-color: #dff0d8">
+				<th>险种名称</th>
+				<th>产品代码</th>
+				<th>投保企业</th>
 			</tr>
-			
-       </table>
+			<#list pager.list as a>
+				<tr>
+					<td>${a.id}</td>
+					<td>${a.updatetime!""}</td>
+					<td>${a.ClntMrk!""}</td>
+			</tr>
+			</#list>
+			<tr>
+				<td colspan="55" style="text-align: center;">
+					<#include "/manage/system/pager.ftl"/></td>
+			</tr>
+		</table>
 	</form>
 
 </@page.pageBase>
