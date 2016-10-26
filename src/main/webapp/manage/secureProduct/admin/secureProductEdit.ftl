@@ -89,8 +89,8 @@
      				<td>保险金额</td>
      				<td>费率</td>
      				<td>保费</td> 
-     				<td>备注</td> 
-     				<td>保险金额的确定方式</td>		           				
+     				<td>保险金额的确定方式</td>	
+     				<td>备注</td> 	           				
      				</tr>
         	        <#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
 	                    <#list e.secureProductDetailList as item>
@@ -102,7 +102,6 @@
 								class="search-query input-small"/></td>
 								<td><input type="text"  value="${e.secureProductDetailList[item_index].rate!""}" name="secureProductDetailList[${item_index}].rate"  class="search-query input-small"/></td>
 								<td><input type="text"  value="${e.secureProductDetailList[item_index].premium!""}" name="secureProductDetailList[${item_index}].premium"  class="search-query input-small"/></td>
-								<td><input type="text"  value="${e.secureProductDetailList[item_index].remark!""}" name="secureProductDetailList[${item_index}].remark"  class="search-query input-small"/></td>
 								<td>
 	                                <#assign map = {'0':'市场价值'}>
 	                                <select id="sure_way" name="secureProductDetailList[${item_index}].sure_way" class="search-query input-medium">
@@ -111,6 +110,7 @@
 	                                    </#list>
 	                                </select>
 	                            </td>
+	                            	<td><input type="text"  value="${e.secureProductDetailList[item_index].remark!""}" name="secureProductDetailList[${item_index}].remark"  class="search-query input-small"/></td>
 							</tr>
 	                    </#list>
 					<#else>           
@@ -123,7 +123,7 @@
 							<td><input type="text" name="secureProductDetailList[${item_index}].premium"  class="search-query input-small"data-rule="保费;integer;subName;"/></td>
 							<td><input type="text" name="secureProductDetailList[${item_index}].remark"  class="search-query input-small"/></td>
 							<td>
-	                            <#assign map = {'0':'确定方式1','1':'确定方式2','2':'确定方式3','3':'确定方式4'}>
+	                            <#assign map = {'0':'市场价值'}>
 	                            <select id="sure_way" name="secureProductDetailList[${item_index}].sure_way" class="search-query input-medium">
 	                                <#list map?keys as key>
 	                                    <option value="${key}">${map[key]}</option>
