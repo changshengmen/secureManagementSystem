@@ -137,7 +137,7 @@
 						<a href="toEditProduct?id=${item.id}">编辑</a>|
 						
 					</#if>
-					<a href="toOrder?id=${item.id}">查看</a>|
+					<a href="toOrder?id=${item.id}&CProdNo=${item.CProdNo}">查看</a>|
 					<a href="toPayPage?id=${item.id}&CProdNo=${item.CProdNo}">下单</a>
 					</td>
 				</tr>

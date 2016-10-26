@@ -128,7 +128,7 @@
 			<!--------------------------操作按钮模块------------------------------------->
 			<br>
 			<#if e.id??>
-			 	<a href="toPayPage?id=${e.id}" class="btn btn-success">下单</a> 
+			 	<a href="toPayPage?id=${e.id}&&CProdNo=${e.CProdNo}" class="btn btn-success">下单</a> 
                
            
                 <button method="selectList?init=y" class="btn btn-warning">
