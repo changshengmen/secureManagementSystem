@@ -11,6 +11,9 @@
 		<if test="createAccount!=null and createAccount!=''">
 			and n.createAccount=#{createAccount}
 		</if>
+		<if test="AppCde !=null and AppCde !=''">
+			and n.AppCde=#{AppCde}
+		</if>
 		<if test="TInsrncEndTmStartDate!=null and TInsrncEndTmStartDate!=''">
 			and TInsrncEndTm &gt;= #{TInsrncEndTmStartDate}
 		</if>

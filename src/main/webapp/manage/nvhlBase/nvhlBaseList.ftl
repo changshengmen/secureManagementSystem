@@ -51,11 +51,11 @@
 				<td style="text-align: right;">保险止期</td>
 				<td style="text-align: left;">
 					<input class="selectArea" id="d4311" type="text" name="TInsrncEndTmStartDate"
-					value="${e.TInsrncEndTmStartDate!""}"
+					
 					onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'d4312\')||\'2020-10-01\'}'})"/>
 					~ 
 					<input class="selectArea" id="d4312" type="text" name="TInsrncEndTmEndDate"
-					value="${e.TInsrncEndTmEndDate!""}"
+					
 					onFocus="WdatePicker({minDate:'#F{$dp.$D(\'d4311\')}',maxDate:'2020-10-01'})"/>
 				</td>	
 				<td><button class="btn btn-danger" id="clearContent">
