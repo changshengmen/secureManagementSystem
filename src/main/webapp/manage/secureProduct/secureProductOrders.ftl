@@ -20,16 +20,25 @@
 					<td style="display: none;">id</td>
 					<th nowrap="nowrap">产品代码（险种）</th>
 					<th>产品名称</th>
-					<th>保额币种</th>
-					<th>保额合计</th>
 					<th>保费币种</th>
 					<th>保费合计</th>
+					<th>保额币种</th>
+					<th>保额合计</th>
 					<th>简介</th>					
 				</tr>
 	   			<tr>
 					<td style="display: none;">${e.id!""}</td>	
 					<td style="width:10%;">${e.CProdNo!""}</td>
 					<td style="width:20%;">${e.CProdName!""}</td>
+						<td style="width:10%;">
+						<#assign map = {"01":'人民币',"02":'港币',"03":'美元',"04":'英镑',"12",'欧元'}>
+						 <#list map?keys as key>
+						  <#if e.NPrmRmbExch?? && e.NPrmRmbExch==key>
+						  ${map[key]}
+						  </#if>
+						 </#list>
+					 </td>
+					<td style="width:15%;">${e.NPrm!""}</td>
 					<td style="width:10%;">
 						 <#assign map = {"01":'人民币',"02":'港币',"03":'美元',"04":'英镑',"12",'欧元'}>
 						 <#list map?keys as key>
@@ -39,15 +48,7 @@
 						 </#list>	
 					 </td>
 					<td style="width:15%;">${e.NAmt!""}</td>
-					<td style="width:10%;">
-						<#assign map = {"01":'人民币',"02":'港币',"03":'美元',"04":'英镑',"12",'欧元'}>
-						 <#list map?keys as key>
-						  <#if e.NPrmRmbExch?? && e.NPrmRmbExch==key>
-						  ${map[key]}
-						  </#if>
-						 </#list>
-					 </td>
-					<td style="width:15%;">${e.NPrm!""}</td>
+				
 					<td style="width:120%;">${e.introduce!""}</td>
 				</tr>
 			</table>
@@ -58,22 +59,21 @@
             	<table class="table" table-bordered table-condensed table-hover" id="childTable">                 
      				<tr style="background-color: #dff0d8">
      				<td style="display: none;">保险编号</td>
-     				<td style=" font-weight: bold;">子产品名称</td>
-     				<td style=" font-weight: bold;">保险金额</td>
+     				<td style=" font-weight: bold;">标的名称</td>
+     					<td style=" font-weight: bold;">保费</td> 
+     				<td style=" font-weight: bold;">保额</td>
      				<td style=" font-weight: bold;">费率</td>
-     				<td style=" font-weight: bold;">保费</td> 
+     			<td style=" font-weight: bold;">保险金额的确定方式</td>	  
      				<td style=" font-weight: bold;">备注</td> 	
-     				<td style=" font-weight: bold;">保险金额的确定方式</td>	           				
      				</tr>
         	        <#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
 	                    <#list e.secureProductDetailList as item>
 							<tr>
 								<td style="display: none;"><input type="hidden" value="${item.id!""}" name="secureProductDetailList[${item_index}].id"/></td>
 								<td>${e.secureProductDetailList[item_index].subName!""}</td>
+								<td>${e.secureProductDetailList[item_index].premium!""}</td>
 								<td>${e.secureProductDetailList[item_index].amount!""}</td>
 								<td>${e.secureProductDetailList[item_index].rate!""}</td>
-								<td>${e.secureProductDetailList[item_index].premium!""}</td>
-								<td>${e.secureProductDetailList[item_index].remark!""}</td>
 								<td>
 	                                <#assign map = {'0':'确定方式1','1':'确定方式2','2':'确定方式3','3':'确定方式4'}>	                             
 	                                    <select id="sure_way" name="secureProductDetailList[${item_index}].sure_way" class="search-query input-medium">
@@ -82,6 +82,7 @@
 	                                    </#list>
 	                                </select>	                                
 	                            </td>
+	                            <td>${e.secureProductDetailList[item_index].remark!""}</td>
 							</tr>
 	                    </#list>
 				     </#if>
@@ -278,126 +279,6 @@ KindEditor.ready(function(K) {
 	 <script type="text/javascript" src="${basepath}/resource/uploadify/jquery.uploadify.min.js"></script>
 	 
 	 <script type="text/javascript">
-	$(document).ready(function() {
 	
-		ajaxLoadImgList();
-		
-		var url = '${basepath}/uploadify.do';
-		
-		$("#uploadify").uploadify({
-		
-		   'auto'           : false,
-           'swf'        	 : '${basepath}/resource/uploadify/uploadify.swf',
-           'uploader'       : url,//后台处理的请求
-           'queueID'        : 'fileQueue',//与下面的id对应
-           'queueSizeLimit' :5,
-           'fileTypeDesc'   : '图片文件' , //出现在上传对话框中的文件类型描述,
-           'fileTypeExts' : '*.jpg;*.bmp;*.png;*.gif', //控制可上传文件的扩展名，启用本项时需同时声明filedesc
-           'multi'          : true,
-           'buttonText'     : '本地上传',         
-           onUploadSuccess:function(file, data, response){
-           
-				alert("上传成功,data="+data+",file="+file+",response="+response);  
-				    
-//				ajaxLoadImgList();
-		  
-			   if(data.error == '1') {
-				   alert("上传失败：\n失败原因:" + data.msg);
-			   } else {
-			       previewImg(data);
-				   imgArr=data.split("/");
-				   var imgSrc=imgArr[6]+"/"+imgArr[7];
-				   $("#picture_url").val(imgSrc);
-				   $("#productImg").attr("src",data);	
-			   }
-           },
-           
-           onUploadError:function(file, errorCode, errorMsg) {
-        	   alert("上传失败,data="+data+",file="+file+",response="+response);   
-           }
-	 	});
-	});
-	
-	
-	//ajax加载内容图片列表
-	function ajaxLoadImgList(){
-	
-		if($("#id").val()==''){
-			 $("#fileListDiv").html("");
-			 return;
-		}
-		
-		 $("#fileListDiv").html("");
-		var _url = "ajaxLoadImgList?id="+$("#id").val();
-		$.ajax({
-		  type: 'POST',
-		  url: _url,
-		  data: {},
-		  success: function(data){
-			  var _tableHtml = "<table class='table table-bordered' style='border:0px solid red;'>";
-				  _tableHtml += "<tr style='background-color: #dff0'>";
-				  _tableHtml += "<td>图片地址</td><td>设为默认图片</td><td>操作</td>";
-				  _tableHtml += "</tr>";
-			  $.each(data,function(i,row){
-				  _tableHtml += "<tr>";
-				  var str = "<a target='_blank' href='"+row+"'>"+row+"</a>";
-				  _tableHtml += "<td>"+str+"</td><td><input type='radio' onclick='setProductImageToDefault(\""+row+"\")' name='abcdef123'/></td><td><input type='button' Class='btn btn-danger' value='删除' onclick='deleteImageByProductID(\""+row+"\")'/></td>";
-				  _tableHtml += "</tr>";
-				  //$("#fileListDiv").append("<a target='_blank' href='"+row+"'>"+row+"</a><br>");
-			  });
-			  _tableHtml += "</table>";
-			  $("#fileListDiv").append(_tableHtml);
-		  },
-		  dataType: "json",
-		  error:function(){
-			alert("加载图片列表失败！");
-		  }
-		});
-	}
-	
-	//产品图片设置为默认图片
-	function setProductImageToDefault(imageUrl){
-		var _url = "setProductImageToDefault?id="+$("#id").val()+"&imageUrl="+imageUrl;
-		$.ajax({
-		  type: 'POST',
-		  url: _url,
-		  data: {},
-		  success: function(data){
-			  //alert("设置成功!");
-			  $("#showMessage").append("设置成功！").fadeTo(2000, 1, function(){
-				   //alert("Animation Done.");
-				   $("#showMessage").html("").hide();
-			  });
-		  },
-		  dataType: "text",
-		  error:function(){
-			alert("设置失败！");
-		  }
-		});
-	}
-	
-	//产品图片设置为默认图片
-	function deleteImageByProductID(imageUrl){
-		if(!confirm("确定删除选择的记录?")){
-			return ;
-		}
-		var _url = "deleteImageByProductID?id="+$("#id").val()+"&imageUrl="+imageUrl;
-		$.ajax({
-		  type: 'POST',
-		  url: _url,
-		  data: {},
-		  success: function(data){
-				  	ajaxLoadImgList();
-			  //$("#showMessage").append("删除成功！").fadeTo(2000, 1, function(){
-				//   $("#showMessage").html("").hide();
-			  //});
-			  
-		  },
-		  dataType: "text",
-		  error:function(){
-			alert("删除失败！");
-		  }
-		});
-	}
 	</script>
 </@page.pageBase>
