@@ -82,13 +82,14 @@
 						<#if checkDbPrivilege()>
 							<a href="toEdit?id=${item.id}">编辑</a>|						
 						</#if>
-						<a href="selectSecureProduct?appCde=${item.appCdePlay}">查看记录</a>
+						<a href="selectSecureProduct?appCde=${item.appCdePlay}">查看订单</a>
 					</td>			
 				</tr>
             </#list>
 			<tr>
 				<td colspan="70" style="text-align: center;">
-                    <#include "/manage/system/pager.ftl"/></td>
+                    <#include "/manage/system/pager.ftl"/>
+                </td>
 			</tr>
 		</table>
 	</form>

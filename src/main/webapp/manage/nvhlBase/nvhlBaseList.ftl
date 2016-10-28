@@ -31,6 +31,11 @@
 </style>
 <script type="text/javascript">
 	$(function() {
+	  //如果从客户页面跳转进来 显示返回按钮
+	  var href = window.location.href;
+	  if(href.indexOf('appCde')>-1){
+	  	$("#btnRet").show();
+	  } 
 		$("#clearContent").click(function(){//清空查询信息
 		  $(".selectArea").each(function(){
 		    $(this).val("");
@@ -38,8 +43,6 @@
 		  return false;
 		})
 	});
-	
-	
 	
 </script>
 	<form action="${basepath}/manage/NvhlBase" method="post" theme="simple">
@@ -58,9 +61,14 @@
 					
 					onFocus="WdatePicker({minDate:'#F{$dp.$D(\'d4311\')}',maxDate:'2020-10-01'})"/>
 				</td>	
-				<td><button class="btn btn-danger" id="clearContent">
+				<td>
+				       <button class="btn btn-danger" id="clearContent">
 							<i class="icon-search icon-white"></i> 清空
-						</button></td>				
+						</button>
+						<button id="btnRet" style="display:none" onclick='javascript:history.back(-1);' class="btn btn-warning">
+	               			 <i class="icon-ok icon-white"></i>返回
+	           			 </button>	
+				</td>				
 		</tr>
 			<tr>
 				<td colspan="14" id="selectArea">
