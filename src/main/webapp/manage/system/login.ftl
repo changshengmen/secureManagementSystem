@@ -4,9 +4,9 @@
 	
 </script>
 <body>
-<div  class="main" style=" background-image:url('../../resource/images/mainForm3.png');background-repeat:no-repeat;background-size:cover;height:100%;width:100%" >
-    <div class="row" style="width:100%;height:637px;margin 0px auto;" >
-            <div class="login-panel panel" style="width:25.33%;margin-left:42%;margin-top:18%">
+<div  class="main" style=" background-image:url('../../resource/images/mainForm3.png');background-repeat:no-repeat;background-size:cover;" >
+    <div class="row" style="" >
+    		<div class="panel" style="width:24.33%;margin-left:42%;margin-top:15%">
                 <div class="panel-heading" style="color:#336b82;background-color:#ddd">
                     <h3 class="panel-title" style="font-weight:bold"><b>${systemSetting().name}</b></h3>
                 </div>
@@ -53,10 +53,12 @@
                     </form>
                 </div>
                    
-        </div> 
-     <div style="width:100%; position:fixed;  bottom:0;text-align:center">${systemSetting().version} &nbsp;${systemSetting().icp}</div>
-  
-    </div>
+            </div> 
+            <div class="" style="margin-top:13%">
+                   <div style="width:100%; position:fixed;  bottom:0;text-align:center">${systemSetting().version} &nbsp;${systemSetting().icp}</div>
+                </div> 
+            </div> 
+    			
    
 </body>
 </@html.htmlBase>
