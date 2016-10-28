@@ -5,7 +5,7 @@
 </script>
 <body>
 <div  class="main" style=" background-image:url('../../resource/images/mainForm3.png');background-repeat:no-repeat;background-size:cover;" >
-    <div class="row" style="" >
+    <div class="row" style="margin-right:0px;" >
     		<div class="panel" style="width:24.33%;margin-left:42%;margin-top:15%">
                 <div class="panel-heading" style="color:#336b82;background-color:#ddd">
                     <h3 class="panel-title" style="font-weight:bold"><b>${systemSetting().name}</b></h3>
@@ -54,10 +54,11 @@
                 </div>
                    
             </div> 
-            <div class="" style="margin-top:13%">
+              <div style="margin-top:13.7%;">
                    <div style="width:100%; position:fixed;  bottom:0;text-align:center">${systemSetting().version} &nbsp;${systemSetting().icp}</div>
                 </div> 
             </div> 
+          		
     			
    
 </body>
