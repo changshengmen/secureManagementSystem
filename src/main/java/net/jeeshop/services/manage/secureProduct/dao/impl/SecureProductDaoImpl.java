@@ -48,12 +48,12 @@ public class SecureProductDaoImpl implements SecureProductDao {
 			for (int i = 0; i < ids.length; i++) {
 				subProduct.setId(ids[i]);
 				subProduct.setUpdateAccount(e.getUpdateAccount());
-				return dao.delete("manage.secureProduct.deleteSubProduct", subProduct);
+				dao.delete("manage.secureProduct.deleteSubProduct", subProduct);
 			}
 		}else{
 			subProduct.setpId(e.getId());
 			subProduct.setUpdateAccount(e.getUpdateAccount());
-			return dao.delete("manage.secureProduct.deleteSubProduct", subProduct);
+			dao.delete("manage.secureProduct.deleteSubProduct", subProduct);
 		}	
 		return 0;
 	}

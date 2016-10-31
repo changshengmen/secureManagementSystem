@@ -68,7 +68,7 @@
                      </#if>
 
                     <#if checkDbPrivilege("secureProduct/deletes")>
-						<button method="deletes" class="btn btn-danger" onclick="return submitIDs(this,'确定删除选择的记录?');">
+						<button method="deletes?deleteFlag=1" class="btn btn-danger" onclick="return submitIDs(this,'确定删除选择的记录?');">
 							<i class="icon-remove-sign icon-white"></i> 删除
 						</button>
                     </#if>
@@ -89,6 +89,7 @@
 		</table>
 		<table id="t_secure" class="table table-bordered table-condensed table-hover" style="text-align: center;">
 			<tr style="background-color: #dff0d8">
+			
 			<th style="width:5%;text-align: center"><input type="checkbox" id="firstCheckbox" /></th>				
 				<th style="width:10%;text-align: center">产品代码</th>				
 				<th style="width:15%;text-align: center">产品名称</th>
@@ -137,7 +138,7 @@
 						<a href="toEditProduct?id=${item.id}">编辑</a>|
 						
 					</#if>
-					<a href="toOrder?id=${item.id}&CProdNo=${item.CProdNo}">查看</a>|
+					<a href="toOrder?id=${item.id}">查看</a>|
 					<a href="toPayPage?id=${item.id}&CProdNo=${item.CProdNo}">下单</a>
 					</td>
 				</tr>

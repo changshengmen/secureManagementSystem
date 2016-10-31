@@ -18,7 +18,7 @@
 			<table class="table table-bordered table-condensed table-hover">				
 				<tr style="background-color: #dff0d8">
 					<td style="display: none;">id</td>
-					<th nowrap="nowrap">产品代码（险种）</th>
+					<th nowrap="nowrap">产品代码</th>
 					<th>产品名称</th>
 					<th>保费币种</th>
 					<th>保费合计</th>

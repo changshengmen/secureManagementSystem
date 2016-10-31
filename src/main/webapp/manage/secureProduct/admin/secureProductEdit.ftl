@@ -27,7 +27,7 @@
 	              </div>
 			  	  <div class="form-group col-md-6">
 	                        <label class="col-md-4 control-label">产品名称</label>
-	                        <div class="col-md-8"><input type="text"  value="${e.CProdName!""}" name="CProdName"  data-rule="产品名称;required;CProdName;" size="25" maxlength="10"
+	                        <div class="col-md-8"><input type="text"  value="${e.CProdName!""}" name="CProdName"  data-rule="产品名称;required;CProdName;" size="25" maxlength="50"
 	                                                     id="CProdName" />
 	                        </div>
 	              </div>
@@ -91,7 +91,10 @@
 	            </#if>
             	</tr>                
      				<tr>
-     				<th style="display: none;">id</th>
+     				<#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
+     				<th><input type="checkbox" id="firstCheckbox" /></th>
+     				</#if>
+     				<td style="display: none;">id</td>
      				<td>标的名称</td>
      				<td>保费</td> 
      				<td>保额</td>
@@ -123,13 +126,14 @@
 							</tr>
 	                    </#list>
 					<#else>           
-            	    <#list [1,2] as item>					
+            	    <#list [1,2,3] as item>					
 						<tr>							
 							
 							<td><input type="text" name="secureProductDetailList[${item_index}].subName"  class="search-query input-small"data-rule="子产品名称;subName;"/></td>
-							<td><input type="text" name="secureProductDetailList[${item_index}].amount"  class="search-query input-small"data-rule="保险金额;double;amount;"/></td>
-							<td><input type="text" name="secureProductDetailList[${item_index}].rate"  class="search-query input-small"data-rule="费率;double;subName;"/></td>
+							<td><input type="text" name="secureProductDetailList[${item_index}].amount"  class="search-query input-small"data-rule="保险金额;integer;amount;"/></td>
 							<td><input type="text" name="secureProductDetailList[${item_index}].premium"  class="search-query input-small"data-rule="保费;double;subName;"/></td>
+							<td><input type="text" name="secureProductDetailList[${item_index}].rate"  class="search-query input-small"data-rule="费率;double;subName;"/></td>
+							
 							<td>
 	                            <#assign map = {'0':'市场价值'}>
 	                            <select id="sure_way" name="secureProductDetailList[${item_index}].sure_way" class="search-query input-medium">
@@ -194,9 +198,7 @@
 	                    <i class="icon-ok icon-white"></i> 修改
 	                </button>
                 </#if>
-                <button onclick="javascript:history.back(-1)" class="btn btn-warning"">
-	                <i class="icon-ok icon-white"></i>返回
-	        </button>	
+               	
 			<#else>
 			<span style="margin-left:0px;">
 				<#if checkDbPrivilege()>
@@ -205,10 +207,10 @@
 		            </button>
 		        </#if>				           
 			</span>	
-			<button onclick="javascript:history.back(-1)" class="btn btn-warning">
-	                <i class="icon-ok icon-white"></i>返回
-	        </button>
+			
 			</#if>
+		
+	        <a href="selectList"class="btn btn-warning" >返回</a>
 						
 			<!--------------------------操作按钮模块------------------------------------->	
 </form>
