@@ -6,8 +6,6 @@
 	}
 	
 	#btnTj{
-		background-color:#f0ad4e;
-		border-color:#eea236;
 		color: #fff;
 		    display: inline-block;
 	    padding: 6px 12px;
@@ -22,6 +20,7 @@
 	    background-image: none;
 	    border: 1px solid transparent;
 	    border-radius: 4px;
+	    background-color:#e8423d;border-color:#e8423d;
 	}
 </style>
 <!--产品代码-->
@@ -34,16 +33,19 @@
 		</ul>
 	<!--------------------------投保人模块------------------------------------->		
 
-			 <table class="table table-bordered table-condensed">
+			 <table class="table table-bordered table-condensed" style="margin-bottom:5px;" id="tableInfo">
 				
 				<tr>
 					<td style="text-align: right;">投保企业代码</td>
 	       			<td><input type="text" name="AppCde"  data-rule="投保企业代码;required;length[0~44];" value="1"
-	                                             id="Code" />&nbsp;<span style="color:red">*</span>
+	                                             id="Code" />&nbsp;<span style="color:red;">*</span>
+						 <button  type="button" class="btn btn-warning" onclick="searchHistory()" style="margin-left:70px;background-color:#949a97;border-color:#949a97">
+							<i class="icon-search icon-white"></i> 查询
+						</button>
 	          		</td>
 	           		<td style="text-align: right;">投保企业名称</td>
 	        		<td><input type="text" name="AppNme"  data-rule="投保企业名称;required;length[0~44];" value="1"
-	                                             id="Name" />&nbsp;<span style="color:red">*</span>
+	                                             id="Name" /><span style="color:red">*</span>
 	          		 </td>
 	           </tr>
 	            <tr>
@@ -81,7 +83,7 @@
 	                                             id="Email" />&nbsp;<span style="color:red">*</span>
 	                 </td>
 	                 <td style="text-align: right;">邮编</td>
-	        	     <td><input type="text" name="T_ZipCde"id="ZipCde" />
+	        	     <td><input type="text" name="T_ZipCde"id="ZipCde" />&nbsp;<span style="color:red">*</span>
 	                 </td>
 	           <tr>
 	            
@@ -115,13 +117,13 @@
 	           </tr> 
 	           <tr>	           		
 	                  <td style="text-align: right;">投保日期</td>
-	        		  <td> <input id="TAppTm" type="text" name="TAppTm" style="line-height:3px"
+	        		  <td> <input id="TAppTm" type="text" name="TAppTm" style="line-height:4px;height:30px;"
 							class="Wdate search-query input-small"
 							onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2100-03-10 20:59:30' })"/>
 							&nbsp;<span style="color:red">*</span>
 					  </td>
 					  <td style="text-align: right;">保险起期</td>
-	        		 <td> <input id="TInsrncBgnTm" type="text" name="TInsrncBgnTm" style="line-height:3px"
+	        		 <td> <input id="TInsrncBgnTm" type="text" name="TInsrncBgnTm" style="line-height:4px;height:30px;"
 							class="Wdate search-query input-small" 
 							onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2100-03-10 20:59:30' })"/>
 							&nbsp;<span style="color:red">*</span>
@@ -130,25 +132,23 @@
 	            <tr>	           		 
 	                  <td style="text-align: right;">保险止期</td>
 	        		  <td colspan="3">  	        		  
-						<input id="TInsrncEndTm" style="line-height:3px" class="Wdate search-query input-small" name="TInsrncEndTm" type="text"
+						<input id="TInsrncEndTm" style="line-height:3px;height:30px;" class="Wdate search-query input-small" name="TInsrncEndTm" type="text"
 						 onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2100-03-10 20:59:30' })" />
 						&nbsp;<span style="color:red">*</span>
 					  </td>
 				</tr>
 	                     
-	           </table>
 		<!-------------------------table ending---------------------------------->
 
 		<!--------------------------投保人模块 end------------------------------------->
 		
 		<!--------------------------被保人模块------------------------------------->		
 
-
-		        <input type="button" id="copyInfo" value="信息同步" style="font-size:11px;margin-bottom:5px;" class="btn btn-primary "/>  
-		      <br>
-		        <!--------------table---------------->
-		    	<table class="table table-bordered table-condensed" id="insureTable">
-		    	
+			<tr><td>
+		        <input type="button" id="copyInfo" value="信息同步" style="font-size:13px;margin-bottom:5px;background-color:rgba(171, 124, 58, 0.99);border-color:rgba(171, 124, 58, 0.99)" class="btn btn-primary "/>  
+		 		</td><td></td><td></td><td></td> 
+		 	</tr>      
+		 	<!--------------table---------------->
 				<tr>
 					<td style="text-align: right;" >被保企业代码</td>
 	       			<td><input type="text" name="InsuredCde"  data-rule="被保企业代码;required;length[0~44];"
@@ -192,7 +192,7 @@
 	             <tr>
 	           		
 	                 <td style="text-align: right;">邮编</td>
-	        	     <td><input type="text" name="B_ZipCde"id="ZipCdeA" />
+	        	     <td><input type="text" name="B_ZipCde"id="ZipCdeA" />&nbsp;<span style="color:red">*</span>
 	                 </td>
 	                  <td style="text-align: right;">邮箱</td>
 	        		 <td><input type="text" name="B_CEmail" data-rule="邮箱;required;length[0~44];email:true;"
@@ -237,19 +237,19 @@
 	</div><!--end tab-->
 			<!--------------------------操作按钮模块------------------------------------->
 			
-			<div style="margin-top:5px">
+			<div style="margin-top:5px;padding-bottom:16px">
 				
-	            <input value="提交" type="button"  class="btn btn-success" id="btnTj"   onclick="commitInfo()"/>
+	            <input value="提交" type="button"  id="btnTj"   onclick="commitInfo()" />
+	            <!--支付按钮 审核后显示-->
 	            <span id="pay" style="display:none">
-	           <img alt="新增" src="${basepath}/resource/images/11.png">
-				<button id="pay" method="toPay"+secure.id class="btn btn-success" >
+	           		<img alt="新增" src="${basepath}/resource/images/11.png">
+				<button id="pay" method="toPay"+secure.id class="btn btn-success"  style="background-color:#4cae4c;border-color:#4cae4c">
 	                <i class="icon-ok icon-white"></i>支付
 	            </button>
 	            </span>&nbsp;
 	            <span id="resultShow" style="font-weight:bold"></span>
-				<button style="float:right" onclick='javascript:history.back(-1);' class="btn btn-warning">
-	                <i class="icon-ok icon-white"></i>返回
-	            </button>	           
+				           
+	            <a href="selectList"class="btn btn-warning" style="float:right">返回</a>  
 			</span>	
 			</div>
 			<!--------------------------操作按钮模块------------------------------------->	
@@ -272,7 +272,12 @@ $(function() {
   	});	
   	
 });
+
+
 function commitInfo(){//提交
+	 //提交前验证非空项
+	
+ /*
   	var url = basepath+'/manage/secureProduct/toCommit';
   	  	$.ajax({
                  url: url,
@@ -283,17 +288,28 @@ function commitInfo(){//提交
                  success: function(res){ 
 	                  if(res&&res=='1'){//提交成功
 	                   $("#pay").show();
-	                   $("#resultShow").text("提交成功，请点击支付按钮！");
+	                   $("#resultShow").text("审核通过，请点击支付按钮！");
 	                  }else{ //提交不成功
-	                    $("#resultShow").text("提交失败，请审核信息重新填写！");
+	                    $("#resultShow").text("审核未通过，请重新填写！");
 	                  }
 	                   
                   }
                 
                }); 
-               
+               */
 }
 
+
+
+
+//查询历史
+function searchHistory(){
+   var code = $("#Code").val();
+   if(!code){
+     alert("请输入投保人代码！")
+     return;
+   }
+}
 </script>
 
 <script>
@@ -320,6 +336,8 @@ function commitInfo(){//提交
 		$(t).parent().parent().remove();
 		return false;
 	}
+	
+	
 </script>
 
 </@page.pageBase>
