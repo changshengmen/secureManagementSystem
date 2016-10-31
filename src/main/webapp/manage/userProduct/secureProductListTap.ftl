@@ -76,9 +76,23 @@ function bindProduct(){
 		   			
 				<td >&nbsp;${item.CProdNo!""}</td>									
 					<td>&nbsp;${item.CProdName!""}</td>
-					<td>&nbsp;${item.NAmtRmbExch!""}</td>	
+					<td>
+						<#assign map = {"01":'人民币',"02":'港币',"03":'美元',"04":'英镑',"12",'欧元'}>
+					 <#list map?keys as key>
+					  <#if item.NAmtRmbExch?? && item.NAmtRmbExch==key>
+					  ${map[key]}
+					  </#if>
+					 </#list>
+					</td>	
 					<td>&nbsp;${item.NAmt!""}</td>
-					<td>&nbsp;${item.NPrmRmbExch!""}</td>	
+					<td>
+					<#assign map = {"01":'人民币',"02":'港币',"03":'美元',"04":'英镑',"12",'欧元'}>
+					 <#list map?keys as key>
+					  <#if item.NPrmRmbExch?? && item.NPrmRmbExch==key>
+					  ${map[key]}
+					  </#if>
+					 </#list>
+					</td>	
 					<td>&nbsp;${item.NPrm!""}</td>	
 					<td>&nbsp;${item.introduce!""}</td>
 				</tr>

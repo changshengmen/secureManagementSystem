@@ -75,7 +75,7 @@
 								<td>${e.secureProductDetailList[item_index].amount!""}</td>
 								<td>${e.secureProductDetailList[item_index].rate!""}</td>
 								<td>
-	                                <#assign map = {'0':'确定方式1','1':'确定方式2','2':'确定方式3','3':'确定方式4'}>	                             
+	                                <#assign map = {'0':'市场价值'}>	                             
 	                                    <select id="sure_way" name="secureProductDetailList[${item_index}].sure_way" class="search-query input-medium">
 	                                    <#list map?keys as key>
 	                                        <option value="${key}" <#if item.sure_way?? && item.sure_way==key>selected="selected" </#if>>${map[key]}</option>

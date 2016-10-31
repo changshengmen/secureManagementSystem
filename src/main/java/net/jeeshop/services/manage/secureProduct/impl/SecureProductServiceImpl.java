@@ -163,9 +163,9 @@ SecureProductService {
 		return dao.selectStockByIDs(productIDs);
 	}
 	@Override
-	public List<SecureProductDetail> selectSecureProductDetail(String id) {
+	public List<SecureProductDetail> selectSecureProductDetail(SecureProductDetail p) {
 		// TODO Auto-generated method stub
-		return dao.selectSecureProductDetail(id);
+		return dao.selectSecureProductDetail(p);
 	}
 	@Override
 	public int selectOutOfStockProductCount() {
@@ -204,7 +204,10 @@ SecureProductService {
 		// TODO Auto-generated method stub
 		return dao.insertSecureProductDetail(p);
 	}
-
+	public int deleteSubProduct(String[] ids,SecureProduct e){
+		return dao.deleteSubProduct(ids, e);
+	}
+	
 	@Override
 	public int updateSecureProductDetail(SecureProductDetail p) {
 		// TODO Auto-generated method stub
@@ -216,7 +219,6 @@ SecureProductService {
 		return dao.selectProductPageList(e);
 	}
 	
-
 	@Override
 	public int bindUserProduct(String ids, String uid) {
 		if(ids== null || ids.length() <= 0){

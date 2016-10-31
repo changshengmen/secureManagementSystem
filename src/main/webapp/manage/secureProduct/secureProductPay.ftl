@@ -29,14 +29,13 @@
 <form action="${basepath}/manage/secureProduct" id="form" name="form" namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">		
 <div id="tabs">
 		<ul>
-			<li><a href="#tabs-1" >投保人基本信息</a></li>
-			<li><a href="#tabs-2">被保人基本信息</a></li>			
+			<li><a href="#tabs-1">投保人/被保人基本信息</a></li>
+					
 		</ul>
 	<!--------------------------投保人模块------------------------------------->		
-		<div id="tabs-1" >
-		
-		<div class="row form-horizontal"-role="form">
+
 			 <table class="table table-bordered table-condensed">
+				
 				<tr>
 					<td style="text-align: right;">投保企业代码</td>
 	       			<td><input type="text" name="AppCde"  data-rule="投保企业代码;required;length[0~44];" value="1"
@@ -113,22 +112,43 @@
 	                        			</#list>
 	                    			</select>
 		           	</td>          		
-	           </tr>           
+	           </tr> 
+	           <tr>	           		
+	                  <td style="text-align: right;">投保日期</td>
+	        		  <td> <input id="TAppTm" type="text" name="TAppTm" style="line-height:3px"
+							class="Wdate search-query input-small"
+							onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2100-03-10 20:59:30' })"/>
+							&nbsp;<span style="color:red">*</span>
+					  </td>
+					  <td style="text-align: right;">保险起期</td>
+	        		 <td> <input id="TInsrncBgnTm" type="text" name="TInsrncBgnTm" style="line-height:3px"
+							class="Wdate search-query input-small" 
+							onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2100-03-10 20:59:30' })"/>
+							&nbsp;<span style="color:red">*</span>
+					 </td>
+	           </tr>
+	            <tr>	           		 
+	                  <td style="text-align: right;">保险止期</td>
+	        		  <td colspan="3">  	        		  
+						<input id="TInsrncEndTm" style="line-height:3px" class="Wdate search-query input-small" name="TInsrncEndTm" type="text"
+						 onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2100-03-10 20:59:30' })" />
+						&nbsp;<span style="color:red">*</span>
+					  </td>
+				</tr>
+	                     
 	           </table>
 		<!-------------------------table ending---------------------------------->
-		    </div>
-		</div>
+
 		<!--------------------------投保人模块 end------------------------------------->
 		
 		<!--------------------------被保人模块------------------------------------->		
-		<div id="tabs-2">
-		
-		<div class="row form-horizontal"-role="form">
+
 
 		        <input type="button" id="copyInfo" value="信息同步" style="font-size:11px;margin-bottom:5px;" class="btn btn-primary "/>  
-		      
+		      <br>
 		        <!--------------table---------------->
 		    	<table class="table table-bordered table-condensed" id="insureTable">
+		    	
 				<tr>
 					<td style="text-align: right;" >被保企业代码</td>
 	       			<td><input type="text" name="InsuredCde"  data-rule="被保企业代码;required;length[0~44];"
@@ -212,15 +232,14 @@
           
 	           </table>
 		  	 <!------------------table ending---------------------------------->
-		    </div>
-		</div>
+
 																
 	</div><!--end tab-->
 			<!--------------------------操作按钮模块------------------------------------->
 			
 			<div style="margin-top:5px">
 				
-	            <input value="提交" type="button" id="btnTj"   onclick="commitInfo()"/>
+	            <input value="提交" type="button"  class="btn btn-success" id="btnTj"   onclick="commitInfo()"/>
 	            <span id="pay" style="display:none">
 	           <img alt="新增" src="${basepath}/resource/images/11.png">
 				<button id="pay" method="toPay"+secure.id class="btn btn-success" >

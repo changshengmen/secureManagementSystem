@@ -37,15 +37,25 @@ public class SecureProductDaoImpl implements SecureProductDao {
 	}
 
 	public int delete(SecureProduct e) {
-		SecureProductDetail subProduct = new SecureProductDetail();
-		subProduct.setpId(e.getId());
-		subProduct.setUpdateAccount(e.getUpdateAccount());
-		deleteSubProduct(subProduct);
+		String[] ids=null;
+		deleteSubProduct(ids,e);
 		return dao.delete("manage.secureProduct.delete", e);
 	}
 
-	public int deleteSubProduct(SecureProductDetail e) {
-		return dao.delete("manage.secureProduct.deleteSubProduct", e);
+	public int deleteSubProduct(String[] ids,SecureProduct e) {		
+		SecureProductDetail subProduct = new SecureProductDetail();
+		if(ids!=null){
+			for (int i = 0; i < ids.length; i++) {
+				subProduct.setId(ids[i]);
+				subProduct.setUpdateAccount(e.getUpdateAccount());
+				return dao.delete("manage.secureProduct.deleteSubProduct", subProduct);
+			}
+		}else{
+			subProduct.setpId(e.getId());
+			subProduct.setUpdateAccount(e.getUpdateAccount());
+			return dao.delete("manage.secureProduct.deleteSubProduct", subProduct);
+		}	
+		return 0;
 	}
 
 	// 更新保险产品
@@ -59,12 +69,14 @@ public class SecureProductDaoImpl implements SecureProductDao {
 		List<SecureProductDetail> f = e.getSecureProductDetailList();
 		for (int i = 0; i < f.size(); i++) {
 			SecureProductDetail subProduct = f.get(i);
-			if (subProduct.getId().length() > 0) {
+			if (subProduct.getId()!=null&& subProduct.getId().length() > 0) {
 				subProduct.setUpdateAccount(e.getUpdateAccount());
 				updateSecureProductDetail(subProduct);
 			} else {
 				if (subProduct.getSubName().length() > 0) {
 					subProduct.setpId(e.getId());
+					subProduct.setDeleteFlag(0);
+					subProduct.setStatus(1);
 					subProduct.setCreateAccount(e.getUpdateAccount());
 					insertSecureProductDetail(subProduct);
 				}
@@ -115,9 +127,9 @@ public class SecureProductDaoImpl implements SecureProductDao {
 
 	@Override
 	// 查询保险子产品
-	public List<SecureProductDetail> selectSecureProductDetail(String id) {
+	public List<SecureProductDetail> selectSecureProductDetail(SecureProductDetail p) {
 
-		return dao.selectList("manage.secureProduct.selectDetail", id);
+		return dao.selectList("manage.secureProduct.selectDetail", p);
 	}
 
 	@Override
@@ -197,4 +209,5 @@ public class SecureProductDaoImpl implements SecureProductDao {
 	public List<userProduct> selectIDListFromUserProduct(userProduct e ) {
 		return dao.selectList("manage.secureProduct.selectIDList",e);
 	}
+
 }
