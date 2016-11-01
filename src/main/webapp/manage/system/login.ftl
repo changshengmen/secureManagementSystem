@@ -49,7 +49,7 @@
                                     <span class="">用户名</span>
                                 </span>
                                 <input type="text" value="${e.username!""}" placeholder="账号" name="username"
-                                       class="len form-control" id="username" autofocus/>
+                                       class="len form-control" id="username" autofocus style="text-align:left"/>
                             </div>
                         </div>
                         <div class="form-group has-success">
@@ -58,7 +58,7 @@
                                     <span >密  码</span>
                                 </span>
                                 <input type="password" name="password" placeholder="密码" class="len form-control"
-                                       label="密码"/>
+                                       label="密码" style="text-align:left"/>
                             </div>
                         </div>
                             <!-- Change this to a button or input when using this as a form -->
