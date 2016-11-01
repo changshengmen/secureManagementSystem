@@ -27,8 +27,8 @@
 <div class="wrapper" style="width:100%;height:100%">
 <div  class="main"  >
     <div class="row" style="margin-right:0px;" >
-    		<div class="panel" style="width:22%;margin-left:39%;margin-top:15%">
-                <div class="panel-heading" style="color:#336b82;background-color:#00CC99;">
+    		<div class="panel" style="width:25%;margin-left:39%;margin-top:13%">
+                <div class="panel-heading" style="color:#336b82;background-color:#5dbba4;">
                    <label class="vintage" >金鼎涛</label>&nbsp;	<label class="press">保险业务系统</label>
                </div>
                 <div class="panel-body">
