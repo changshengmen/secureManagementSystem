@@ -28,9 +28,9 @@
 <div  class="main"  >
     <div class="row" style="margin-right:0px;" >
     		<div class="panel" style="width:22%;margin-left:39%;margin-top:15%">
-                <div class="panel-heading" style="color:#336b82;background-color:#00CC99">
+                <div class="panel-heading" style="color:#336b82;background-color:#00CC99;">
                    <label class="vintage" >金鼎涛</label>&nbsp;	<label class="press">保险业务系统</label>
-            </div>
+               </div>
                 <div class="panel-body">
                     <form role="form" id="formLogin" action="${basepath}/manage/user/login" method="post" style="padding:0px;0px;0px;0px">
                         <fieldset>
@@ -43,8 +43,8 @@
                                 </div>
                             </#if>
                         </div>
-                        <div class="form-group has-success">
-                            <div class="input-group" style="width:265px">
+                        <div class="form-group has-success" style="text-align:center">
+                            <div class="input-group" style="width:90%;margin:0 auto">
                                 <span class="input-group-addon">
                                     <span class="">用户名</span>
                                 </span>
@@ -53,7 +53,7 @@
                             </div>
                         </div>
                         <div class="form-group has-success">
-                            <div class="input-group" style="width:265px">
+                            <div class="input-group" style="width:90%;margin:0 auto">
                                 <span class="input-group-addon" style="width:65px">
                                     <span >密  码</span>
                                 </span>
@@ -62,7 +62,7 @@
                             </div>
                         </div>
                             <!-- Change this to a button or input when using this as a form -->
-                            <input type="submit" id="btnLogin" class="btn btn-lg btn-success btn-block" style="background-color:#2c8bb9;border-color:#5b8092;width:265px;align:left" value="登录">
+                            <input type="submit" id="btnLogin" class="btn btn-lg btn-success btn-block" style="background-color:#2c8bb9;border-color:#5b8092;width:90%;align:left" value="登录">
                         </fieldset>
                     </form>
                 </div>
