@@ -7,6 +7,10 @@
 <#assign formAction="insert">
     <#assign insertAction=true />
 </#if>
+<style type="text/css">
+.tabs-2 td{ width:100px}
+
+</style>
 <form action="${basepath}/manage/secureProduct" id="form" name="form" namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">		
 	<div id="tabs">
 		<ul>
@@ -81,8 +85,8 @@
             <!--------------------------主产品信息添加模块------------------------------------->
             
             <!--------------------------start子产品信息添加模块------------------------------------->
-            <div id="tabs-2"> 
-            	<table class="table"> 
+            <div id="tabs-2" style="width:100%"> 
+            	<table class="table" style="align:center"> 
             	<tr>
             	<#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
             		<button method="deletes?deleteFlag=0" class="btn btn-danger" onclick="return submitIDs(this,'确定删除选择的子产品?');">
@@ -100,14 +104,13 @@
      				<td>保额</td>
      				<td>费率</td>
      				<td>保险金额的确定方式</td>	
-     				<td>备注</td> 	           				
      				</tr>
         	        <#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
 	                    <#list e.secureProductDetailList as item>
 							<tr>
 							<td><input type="checkbox" name="ids" value="${e.secureProductDetailList[item_index].id!""}" /></td>
 								<td style="display: none;"><input type="hidden" value="${e.secureProductDetailList[item_index].id!""}" name="secureProductDetailList[${item_index}].id"/></td>
-								<td><input type="text"  value="${e.secureProductDetailList[item_index].subName!""}" name="secureProductDetailList[${item_index}].subName" 
+								<td style="width:100px"><input type="text" style="width:100px" value="${e.secureProductDetailList[item_index].subName!""}" name="secureProductDetailList[${item_index}].subName" 
 									 class="search-query input-small"/></td>
 								<td><input type="text"  value="${e.secureProductDetailList[item_index].premium!""}" name="secureProductDetailList[${item_index}].premium"  class="search-query input-small"/></td>
 								
@@ -142,53 +145,12 @@
 	                                </#list>
 	                            </select>
 	                        </td>
-	                        <td><input type="text" name="secureProductDetailList[${item_index}].remark"  class="search-query input-small"/></td>
-							
 						</tr>				
 						
            		  </#list>
            		  </#if>
            		  </table>          	 	
 			</div>	
-            <!--------------------------end子产品信息添加模块------------------------------------->
-		    <!--------------------------start-tabs-3------------------------------------->
-		    <!--
-			
-			<div id="tabs-3">
-				<textarea data-rule="保险条款;required;insuranceClause;" id="insuranceClause" name="insuranceClause" style="width:100%;height:500px;visibility:hidden;">${e.insuranceClause!""}</textarea>
-			</div>	
-			-->				
-			<!--------------------------end-tabs-3------------------------------------->
-					
-			<!--------------------------start-tabs-4------------------------------------->
-			<!--<div id="tabs-4">
-					<div>
-						<h4><div class="alert alert-info">图片列表</div></h4>
-						<table class="table table-bordered">
-						<tr id="firstTr" style="display:none">
-							<td>
-									<img name="img"  style="width:50px;height:50px;max-width: 50px;max-height: 50px;">								
-							</td>
-						</tr>
-						<tr>
-						<div id="fileQueue"></div> 
-							<td>
-	                            <input id="uploadify" name="uploadify" value="添加" class="btn btn-warning" type="button"/>
-	                        </td>
-						</tr>
-						<tr>
-							 <p>    
-		                		<a href="javascript:$('#uploadify').uploadify('upload')">开始上传</a>     
-		                		<a href="javascript:$('#uploadify').uploadify('cancel','*')">取消上传</a>    
-	           				</p>              									
-						</tr>
-						
-						</table>
-					</div>
-				</div>
-				-->
-			<!--------------------------end-tabs-4------------------------------------->	
-																
 		</div><!--end tab-->
 			<!--------------------------操作按钮模块------------------------------------->
 			<br>
