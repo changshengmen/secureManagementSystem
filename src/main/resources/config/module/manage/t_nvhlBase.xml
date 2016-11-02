@@ -69,7 +69,7 @@
 		City,Area,Stree,CusRiskLvl,CustRiskRank,createAccount,createtime		
 		)
          values(
-         #{AppCde},#{AppNme},#{ClntMrk},#{CertfCls},#{CertfCde},#{ClntAddr},
+         #{appCdePlay},#{appNmePlay},#{ClntMrk},#{CertfCls},#{CertfCde},#{ClntAddr},
          #{ZipCde},#{Email},#{Mobile},#{Country},#{Province},
         #{City},#{Area},#{Stree},#{CusRiskLvl},#{CustRiskRank},#{createAccount},now())
 	</insert>
@@ -83,7 +83,7 @@
 		Province,City,Area,Stree,CusRiskLvl,
 		CustRiskRank)
          values(
-         #{InsuredCde},#{InsuredNme},#{ClntMrk},#{CCertfCls},#{CCertfCde},
+         #{insuredCdePlay},#{insuredNmePlay},#{ClntMrk},#{CCertfCls},#{CCertfCde},
          #{ClntAddr},#{ZipCde},#{CEmail},#{Mobile},#{Country},
          #{Province},#{City},#{Area},#{Stree},#{CusRiskLvl},
          #{CustRiskRank})
