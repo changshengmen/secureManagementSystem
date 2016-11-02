@@ -64,7 +64,6 @@
      				<td style=" font-weight: bold;">保额</td>
      				<td style=" font-weight: bold;">费率</td>
      			<td style=" font-weight: bold;">保险金额的确定方式</td>	  
-     				<td style=" font-weight: bold;">备注</td> 	
      				</tr>
         	        <#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
 	                    <#list e.secureProductDetailList as item>
@@ -82,7 +81,6 @@
 	                                    </#list>
 	                                </select>	                                
 	                            </td>
-	                            <td>${e.secureProductDetailList[item_index].remark!""}</td>
 							</tr>
 	                    </#list>
 				     </#if>
