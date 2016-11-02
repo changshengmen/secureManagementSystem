@@ -6,7 +6,7 @@ import net.jeeshop.core.dao.QueryModel;
 
 public class NvhlInsuredVO  extends QueryModel implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private String InsuredCde;// 被保人编码
+	private String InsuredCde;// 被保人编码	
 	private String InsuredNme;// 被保人名称
 	private String ClntMrk;// 被保人性质
 	private String CCertfCls;// 证件类型
@@ -26,6 +26,16 @@ public class NvhlInsuredVO  extends QueryModel implements Serializable {
 	private String ProfessIn;// 职业中类
 	private String COccupCde;// 职业子类
 	private String CDuty;// 职业类别
+	//(用于显示)
+	private String insuredCdePlay;// 被保人编码	
+	private String insuredNmePlay;// 被保人编码
+	
+	public String getInsuredNmePlay() {
+		return insuredNmePlay;
+	}
+	public void setInsuredNmePlay(String insuredNmePlay) {
+		this.insuredNmePlay = insuredNmePlay;
+	}
 	public String getInsuredCde() {
 		return InsuredCde;
 	}
@@ -34,6 +44,12 @@ public class NvhlInsuredVO  extends QueryModel implements Serializable {
 	}
 	
 	
+	public String getInsuredCdePlay() {
+		return insuredCdePlay;
+	}
+	public void setInsuredCdePlay(String insuredCdePlay) {
+		this.insuredCdePlay = insuredCdePlay;
+	}
 	public String getInsuredNme() {
 		return InsuredNme;
 	}
