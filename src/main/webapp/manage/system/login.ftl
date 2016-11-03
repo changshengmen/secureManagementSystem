@@ -35,13 +35,16 @@
                     <form role="form" id="formLogin" action="${basepath}/manage/user/login" method="post" style="padding:0px;0px;0px;0px">
                         <fieldset>
                         <div class="form-group">
+                        
                             <#if errorMsg??>
-                                <div class="alert alert-danger alert-dismissable">
-                                    <button type="button" class="close" data-dismiss="alert"
-                                            aria-hidden="true">&times;</button>
-                                ${errorMsg}
+                                <div class="alert alert-danger alert-dismissable" style="color:#0c0c13;">
+                                    ${errorMsg}	 
+                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="width:10px;position:inherit">
+                                           &times;
+                                     </button>
                                 </div>
                             </#if>
+                            
                         </div>
                         <div class="form-group has-success" style="text-align:center">
                             <div class="input-group" style="width:90%;margin:0 auto">
