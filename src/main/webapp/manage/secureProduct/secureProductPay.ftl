@@ -332,7 +332,7 @@ function selectApplicantInfo(a){//提交
 	                 	$("#CertfCde").val(data[i].certfCdePlay);
 	                 	$("#Mobile").val(data[i].mobilePlay);
 	                 	$("#Country").val(data[i].countryPlay);
-	                 	$("#ZipCde").val(data[i].ZipCde);
+	                 	$("#ZipCde").val(data[i].zipCde);
 	                 	$("#Email").val(data[i].emailPlay);
 	                 	$("#CusRiskLvl").val(data[i].cusRiskLvl);
 	                 	$("#CustRiskRank").val(data[i].custRiskRank);
