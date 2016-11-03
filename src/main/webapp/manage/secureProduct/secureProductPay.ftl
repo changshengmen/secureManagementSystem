@@ -297,7 +297,8 @@ $(function() {
   		selectApplicantInfo($(this).val());
   		}
   		
-  	})	
+  	});
+  	window.onbeforeunload=function(event){return confirm("您确定离开此页面吗？");}	
   	
 });
 //把投保人信息复制到被保人

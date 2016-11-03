@@ -96,10 +96,10 @@
             	</tr>                
      				<tr>
      				<#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
-     				<th><input type="checkbox" id="firstCheckbox" /></th>
+     				<th style><input type="checkbox" id="firstCheckbox" /></th>
      				</#if>
      				<td style="display: none;">id</td>
-     				<td>标的名称</td>
+     				<td >标的名称</td>
      				<td>保费</td> 
      				<td>保额</td>
      				<td>费率</td>
@@ -110,7 +110,7 @@
 							<tr>
 							<td><input type="checkbox" name="ids" value="${e.secureProductDetailList[item_index].id!""}" /></td>
 								<td style="display: none;"><input type="hidden" value="${e.secureProductDetailList[item_index].id!""}" name="secureProductDetailList[${item_index}].id"/></td>
-								<td style="width:100px"><input type="text" style="width:100px" value="${e.secureProductDetailList[item_index].subName!""}" name="secureProductDetailList[${item_index}].subName" 
+								<td style="width:100px"><input type="text" value="${e.secureProductDetailList[item_index].subName!""}" name="secureProductDetailList[${item_index}].subName" 
 									 class="search-query input-small"/></td>
 								<td><input type="text"  value="${e.secureProductDetailList[item_index].premium!""}" name="secureProductDetailList[${item_index}].premium"  class="search-query input-small"/></td>
 								
@@ -125,7 +125,7 @@
 	                                    </#list>
 	                                </select>
 	                            </td>
-	                            	<td><input type="text"  value="${e.secureProductDetailList[item_index].remark!""}" name="secureProductDetailList[${item_index}].remark"  class="search-query input-small"/></td>
+	                            	<!--<td><input type="text"  value="${e.secureProductDetailList[item_index].remark!""}" name="secureProductDetailList[${item_index}].remark"  class="search-query input-small"/></td>-->
 							</tr>
 	                    </#list>
 					<#else>           

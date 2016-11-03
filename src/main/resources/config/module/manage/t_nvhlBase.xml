@@ -17,7 +17,7 @@
 		<if test="AppCde !=null and AppCde !=''">
 			and n.AppCde=#{AppCde}
 		</if>
-		<if test="TInsrncEndTmStartDate!=null and TInsrncEndTmStartDate!=''">
+		<if test="TInsrncEndTmStartDate!=nu11 and TInsrncEndTmStartDate!=''">
 			and TInsrncEndTm &gt;= #{TInsrncEndTmStartDate}
 		</if>
 		<if test="TInsrncEndTmEndDate!=null and TInsrncEndTmEndDate!=''">
@@ -27,7 +27,7 @@
 			and CProdName like CONCAT('%',#{CProdName,jdbcType=VARCHAR}
 			,'%' )
 		</if>
-		order by TInsrncEndTm 	
+		order by TAppTm,TInsrncEndTm 	
 			limit #{offset},#{pageSize}
 	</select>
 
