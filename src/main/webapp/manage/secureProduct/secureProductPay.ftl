@@ -336,10 +336,8 @@ function selectApplicantInfo(a){//提交
 	                 	$("#Email").val(data[i].emailPlay);
 	                 	$("#CusRiskLvl").val(data[i].cusRiskLvl);
 	                 	$("#CustRiskRank").val(data[i].custRiskRank);
-	                 })   
-	                            	           	                   
-                  }
-                
+	                 })   	                            	           	                   
+                  }                
                }); 
              
 }
