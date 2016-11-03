@@ -86,7 +86,7 @@
             
             <!--------------------------start子产品信息添加模块------------------------------------->
             <div id="tabs-2" style="width:100%"> 
-            	<table class="table" style="align:center"> 
+            	<table class="table table-bordered table-condensed table-hover" style="text-align:center;"> 
             	<tr>
             	<#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
             		<button method="deletes?deleteFlag=0" class="btn btn-danger" onclick="return submitIDs(this,'确定删除选择的子产品?');">
@@ -98,12 +98,12 @@
      				<#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
      				<th style><input type="checkbox" id="firstCheckbox" /></th>
      				</#if>
-     				<td style="display: none;">id</td>
-     				<td >标的名称</td>
-     				<td>保费</td> 
-     				<td>保额</td>
-     				<td>费率</td>
-     				<td>保险金额的确定方式</td>	
+     				<td style="display: none;">id</th>
+     				<th style="text-align: center;">标的名称</th>
+     				<th style="text-align: center;">保费</th> 
+     				<th style="text-align: center;">保额</th>
+     				<th style="text-align: center;">费率</th>
+     				<th style="text-align: center;">保险金额的确定方式</th>	
      				</tr>
         	        <#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
 	                    <#list e.secureProductDetailList as item>

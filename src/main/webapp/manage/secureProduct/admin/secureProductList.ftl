@@ -90,19 +90,19 @@
 		<table id="t_secure" class="table table-bordered table-condensed table-hover" style="text-align: center;">
 			<tr style="background-color: #dff0d8">
 			
-			<th style="width:5%;text-align: center"><input type="checkbox" id="firstCheckbox" /></th>				
+			<th class="checkboxTh"style="width:5%;text-align: center"><input type="checkbox" id="firstCheckbox" /></th>				
 				<th style="width:10%;text-align: center">产品代码</th>				
 				<th style="width:15%;text-align: center">产品名称</th>
 				<th style="width:10%;text-align: center">保额币种</th>
 				<th style="width:15%;text-align: center">保额合计</th>
 				<th style="width:10%;text-align: center">保费币种</th>	
 				<th style="width:15%;text-align: center">保费合计</th>									
-				<th style="width:5%">状态</th>				
+				<th style="width:5%;text-align: center">状态</th>				
 				<th style="width:20%;text-align: center">操作</th>
 			</tr>
             <#list pager.list as item>
 				<tr>		
-				<td><input type="checkbox" name="ids"
+				<td class="checkboxTh"><input type="checkbox" name="ids"
 						value="${item.id!""}" /></td>			
 					<td >&nbsp;${item.CProdNo!""}</td>									
 					<td>&nbsp;${item.CProdName!""}</td>
@@ -158,5 +158,16 @@
 		</div>
 
 	</form>
+<script>
+$(function(){
+	hideCheckbox();
+});
+//判断当前登陆者不是admin就隐藏。$("#currentUserID")此控件在pageBase.ftl中
+function hideCheckbox(){
+	if($("#currentUserID").val()!=1){
+		$(".checkboxTh").hide();
+	}
+}
 
+</script>
 </@page.pageBase>

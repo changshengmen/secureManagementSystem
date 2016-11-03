@@ -301,9 +301,8 @@ $(function() {
   	window.onbeforeunload=function(event){return confirm("您确定离开此页面吗？");}	
   	
 });
-//
+//点击提交或者支付的时候不用验证是否离开页面，此方法解除验证
 function unbind(){
-alert("werewtr");
 	window.onbeforeunload = null;
 }
 //把投保人信息复制到被保人
