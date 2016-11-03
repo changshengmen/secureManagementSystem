@@ -263,7 +263,7 @@
 			
 			<div style="margin-top:5px;padding-bottom:16px">
 			
-				<button id="commit" method="toCommit" class="btn btn-success">
+				<button id="commit" method="toCommit" class="btn btn-success" onclick="unbind()">
 	                <i class="icon-ok icon-white"></i>提交
 	            </button>
 	          <!-- <input value="支付" type="button"  id="btnTj" class="btn btn-success" style="background-color:#4cae4c;border-color:#4cae4c"  onclick="commitInfo()" />-->
@@ -301,6 +301,11 @@ $(function() {
   	window.onbeforeunload=function(event){return confirm("您确定离开此页面吗？");}	
   	
 });
+//
+function unbind(){
+alert("werewtr");
+	window.onbeforeunload = null;
+}
 //把投保人信息复制到被保人
 function copyInfo(){
 		var source=["NameA","ClntMrkA","CountryA","EmailA","CertfClsA","CertfCdeA","ClntAddrA","MobileA","ZipCdeA","CusRiskLvlA","CustRiskRankA"];	
@@ -365,6 +370,7 @@ function showCode(){
 }
 //用于支付时把数据传到后台
 function beforePay(){
+window.onbeforeunload = null;
 $("table input").each(function(){
 		  $(this).attr("disabled",false);
 		})
