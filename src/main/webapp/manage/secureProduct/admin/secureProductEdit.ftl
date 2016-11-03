@@ -1,5 +1,5 @@
 <#import "/manage/tpl/pageBase.ftl" as page>
-<@page.pageBase currentMenu="保险产品管理">
+<@page.pageBase currentMenu="编辑/新增产品信息">
 <#if e.id??>
     <#assign formAction="111">
 <#assign insertAction=false />
@@ -25,14 +25,16 @@
 			<div class="row form-horizontal"-role="form">
 				  <div class="form-group col-md-6">
 	                        <label class="col-md-4 control-label">产品代码</label>
-	                        <div class="col-md-8"><input type="text"  value="${e.CProdNo!""}" name="CProdNo"  data-rule="产品名称;required;CProdNo;" size="25" maxlength="10"
-	                                                     id="CProdNo" />
+	                        <div class="col-md-8">
+	                        	<input type="text"  value="${e.CProdNo!""}" name="CProdNo"
+	                          	data-rule="产品编号;required;CProdNo;" size="40" maxlength="40"id="CProdNo" />
 	                        </div>
 	              </div>
 			  	  <div class="form-group col-md-6">
 	                        <label class="col-md-4 control-label">产品名称</label>
-	                        <div class="col-md-8"><input type="text"  value="${e.CProdName!""}" name="CProdName"  data-rule="产品名称;required;CProdName;" size="25" maxlength="50"
-	                                                     id="CProdName" />
+	                        <div class="col-md-8">
+		                        <input type="text"  value="${e.CProdName!""}" name="CProdName"
+		                          data-rule="产品名称;required;CProdName;" size="40" maxlength="40"id="CProdName" />
 	                        </div>
 	              </div>
 	               <div class="form-group col-md-6">
@@ -43,13 +45,13 @@
                             		<option value="${key}" <#if e.NPrmRmbExch?? && e.NPrmRmbExch==key>selected="selected" </#if>>${map[key]}</option>
                         		</#list>
                      		</select>
-	                      <!--  <div class="col-md-8"><input type="text"  value="${e.NPrmRmbExch!""}" name="NPrmRmbExch"  data-rule="总保险费;required;NPrmRmbExch;" size="25" maxlength="10"
+	                      <!--  <div class="col-md-8"><input type="text"  value="${e.NPrmRmbExch!""}" name="NPrmRmbExch"  data-rule="总保险费;required;NPrmRmbExch;" size="10" maxlength="10"
 	                                                     id="NPrmRmbExch" />
 	                        </div>-->
 	              </div>
 	               <div class="form-group col-md-6">
 	                        <label class="col-md-4 control-label">保费合计</label>
-	                        <div class="col-md-8"><input type="text"  value="${e.NPrm!""}" name="NPrm"  data-rule="总保险费;required;integer;NPrm;" size="25" maxlength="10"
+	                        <div class="col-md-8"><input type="text"  value="${e.NPrm!""}" name="NPrm"  data-rule="总保险费;required;integer;NPrm;" size="25" maxlength="25"
 	                                                     id="NPrm" />
 	                        </div>
 	              </div>
@@ -61,13 +63,13 @@
                             		<option value="${key}" <#if e.NAmtRmbExch?? && e.NAmtRmbExch==key>selected="selected"</#if>>${map[key]}</option>
                         		</#list>
                      		</select>
-	                      <!--  <div class="col-md-8"><input type="text"  value="${e.NAmtRmbExch!""}" name="NAmtRmbExch"  data-rule="币种（默认值RMB）;required;NAmtRmbExch;" size="25" maxlength="10"
+	                      <!--  <div class="col-md-8"><input type="text"  value="${e.NAmtRmbExch!""}" name="NAmtRmbExch"  data-rule="币种（默认值RMB）;required;NAmtRmbExch;" size="10" maxlength="10"
 	                                                     id="NAmtRmbExch" />
 	                        </div>-->
 	              </div>
 	               <div class="form-group col-md-6">
 	                        <label class="col-md-4 control-label">保额合计</label>
-	                        <div class="col-md-8"><input type="text" value="${e.NAmt!""}" name="NAmt"  data-rule="总保险金额;required;integer;NAmt;" size="25" maxlength="10"
+	                        <div class="col-md-8"><input type="text" value="${e.NAmt!""}" name="NAmt"  data-rule="总保险金额;required;integer;NAmt;" size="25" maxlength="25"
 	                                                     id="NAmt" />
 	                        </div>
 	              </div>
@@ -85,7 +87,7 @@
             <!--------------------------主产品信息添加模块------------------------------------->
             
             <!--------------------------start子产品信息添加模块------------------------------------->
-            <div id="tabs-2" style="width:100%"> 
+            <div id="tabs-2"> 
             	<table class="table table-bordered table-condensed table-hover" style="text-align:center;"> 
             	<tr>
             	<#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
@@ -110,13 +112,22 @@
 							<tr>
 							<td><input type="checkbox" name="ids" value="${e.secureProductDetailList[item_index].id!""}" /></td>
 								<td style="display: none;"><input type="hidden" value="${e.secureProductDetailList[item_index].id!""}" name="secureProductDetailList[${item_index}].id"/></td>
-								<td style="width:100px"><input type="text" value="${e.secureProductDetailList[item_index].subName!""}" name="secureProductDetailList[${item_index}].subName" 
-									 class="search-query input-small"/></td>
-								<td><input type="text"  value="${e.secureProductDetailList[item_index].premium!""}" name="secureProductDetailList[${item_index}].premium"  class="search-query input-small"/></td>
+								<td>
+									<input type="text" value="${e.secureProductDetailList[item_index].subName!""}" name="secureProductDetailList[${item_index}].subName" 
+									 class="search-query input-small" data-rule="标的名称;required" size="40" maxlength="40"/>
+								</td>
+								<td>
+									<input type="text" value="${e.secureProductDetailList[item_index].premium!""}" name="secureProductDetailList[${item_index}].premium"
+									 class="search-query input-small" data-rule="保费;Double" size="25" maxlength="25"/>
+								</td>
 								
-								<td><input type="text"  value="${e.secureProductDetailList[item_index].amount!""}" name="secureProductDetailList[${item_index}].amount"  
-								class="search-query input-small"/></td>
-								<td><input type="text"  value="${e.secureProductDetailList[item_index].rate!""}" name="secureProductDetailList[${item_index}].rate"  class="search-query input-small"/></td>
+								<td>
+									<input type="text"  value="${e.secureProductDetailList[item_index].amount!""}" name="secureProductDetailList[${item_index}].amount"  
+									class="search-query input-small" data-rule="保额;Double" size="25" maxlength="25"/>
+								</td>
+								<td>
+									<input type="text"  value="${e.secureProductDetailList[item_index].rate!""}" name="secureProductDetailList[${item_index}].rate"
+									class="search-query input-small" data-rule="费率;Double" size="20" maxlength="20"/></td>
 								<td>
 	                                <#assign map = {'0':'市场价值'}>
 	                                <select id="sure_way" name="secureProductDetailList[${item_index}].sure_way" class="search-query input-medium">
@@ -132,10 +143,22 @@
             	    <#list [1,2,3] as item>					
 						<tr>							
 							
-							<td><input type="text" name="secureProductDetailList[${item_index}].subName"  class="search-query input-small"data-rule="子产品名称;subName;"/></td>
-							<td><input type="text" name="secureProductDetailList[${item_index}].amount"  class="search-query input-small"data-rule="保险金额;integer;amount;"/></td>
-							<td><input type="text" name="secureProductDetailList[${item_index}].premium"  class="search-query input-small"data-rule="保费;double;subName;"/></td>
-							<td><input type="text" name="secureProductDetailList[${item_index}].rate"  class="search-query input-small"data-rule="费率;double;subName;"/></td>
+							<td>
+								<input type="text" name="secureProductDetailList[${item_index}].subName"  class="search-query input-small"
+								data-rule="子产品名称;subName;"data-rule="标的名称;required"size="40" maxlength="40"/>
+							</td>
+							<td>
+								<input type="text" name="secureProductDetailList[${item_index}].amount"  class="search-query input-small"
+								data-rule="保险金额;integer;amount;"data-rule="保额;Double"size="40" maxlength="40"/>
+							</td>
+							<td>
+								<input type="text" name="secureProductDetailList[${item_index}].premium"  class="search-query input-small"
+								data-rule="保费;double;subName;"data-rule="保额;Double" size="40" maxlength="40"/>
+							</td>
+							<td>
+								<input type="text" name="secureProductDetailList[${item_index}].rate"  class="search-query input-small"
+								data-rule="费率;double;subName;"data-rule="费率;Double"size="40" maxlength="40"/>
+							</td>
 							
 							<td>
 	                            <#assign map = {'0':'市场价值'}>

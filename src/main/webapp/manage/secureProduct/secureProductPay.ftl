@@ -69,7 +69,7 @@
                    		</select>
 	          		 </td>
 	           		<td style="text-align: right;">投保企业名称</td>
-	        		<td colspan="2"><input type="text" name="appNmePlay"  data-rule="投保企业名称;required;length[0~44];" 
+	        		<td colspan="2"><input type="text" name="appNmePlay"  data-rule="投保企业名称;required;length[0~40];" 
 	                          id="Name" value="${applicantVO.appNmePlay!""}"/>&nbsp;<span style="color:red">*</span>
 	          		 </td>
 	          		 
@@ -78,14 +78,14 @@
 	            <tr>
 	           		<td style="text-align: right;">客户类型</td>
 	        		<td colspan="2"><#assign map = {"0":'非自然人',"1":'自然人'}>
-	                    <select id="ClntMrk" name="TClntMrk" class="input-medium" style="width:150px">
+	                    <select id="ClntMrk" name="TClntMrk" class="input-medium">
                         		<#list map?keys as key>
                             		<option value="${key}"<#if common.TClntMrk?? && common.TClntMrk==key>selected="selected" </#if>>${map[key]}</option>
                         		</#list>
                    		</select>
 	           		 </td>
 	          		 <td style="text-align: right;">通讯地址</td>
-	        		 <td colspan="2"> <input type="text" name="TClntAddr" data-rule="通讯地址;required;length[0~44];" value="${common.TClntAddr!""}"
+	        		 <td colspan="2"> <input type="text" name="TClntAddr" data-rule="通讯地址;required;length[0~40];" value="${common.TClntAddr!""}"
 	                                             id="ClntAddr" />&nbsp;<span style="color:red">*</span>
 	                 </td>
 	           		
@@ -93,26 +93,26 @@
 	           <tr>
 	           		<td style="text-align: right;">证件类型</td>
 	        		<td colspan="2"><#assign map = {"110001":'组织机构代码',"110002":'工商注册号码',"110009",'其他'}>
-	                    <select id="CertfCls" name="TCertfCls" class="input-medium" style="width:150px">
+	                    <select id="CertfCls" name="TCertfCls" class="input-medium">
                         		<#list map?keys as key>
                             		<option value="${key}" <#if common.TCertfCls?? && common.TCertfCls==key>selected="selected" </#if>>${map[key]}</option>
                         		</#list>
                    		</select>
 	           		 </td>
 	           		 <td style="text-align: right;">证件号码</td>
-	        		 <td colspan="2"><input type="text" name="TCertfCde"  data-rule="证件号码;required;length[0~44];" value="${common.TCertfCde!""}" 
+	        		 <td colspan="2"><input type="text" name="TCertfCde"  data-rule="证件号码;required;length[0~20];" value="${common.TCertfCde!""}" 
 	                                             id="CertfCde" />&nbsp;<span style="color:red">*</span>
 	           		 </td>            		
 	           </tr>
 	            
 	           <tr>
 	                 <td style="text-align: right;">联系电话</td>
-	        	     <td colspan="2"><input type="text" name="TMobile"  data-rule="联系电话;required;integer" maxlength="11"
+	        	     <td colspan="2"><input type="text" name="TMobile"  data-rule="联系电话;required;integer;length[0~11]"
 	                                             id="Mobile" value="${common.TMobile!""}" />&nbsp;<span style="color:red">*</span>
 	                 </td>
 	                  <td style="text-align: right;">国籍</td>
 	        	     <td colspan="2"><input type="text" name="TCountry"  value="${common.TCountry!""}"
-	                     id="Country" data-rule="联系电话;required;length[0~44];" maxlength="11" />&nbsp;<span style="color:red">*</span>
+	                     id="Country" data-rule="国籍;required;length[0~40];"/>&nbsp;<span style="color:red">*</span>
 	                 </td>
 	           <tr>
 	           <tr>
@@ -136,26 +136,25 @@
 	           		</tr>
 	           	<tr> 
 	           	 	<td style="text-align: right;">邮编</td>
-	        	     <td colspan="2"><input type="text" name="TZipCde" value="${common.TZipCde!""}" id="ZipCde" />&nbsp;<span style="color:red">*</span>
+	        	     <td colspan="2"><input type="text" name="TZipCde" value="${common.TZipCde!""}" id="ZipCde" data-rule="邮编;required;length[0~20];"/>&nbsp;<span style="color:red">*</span>
 	                 </td>       		
                   <td style="text-align: right;">邮箱</td>
-	        		 <td colspan="2"><input type="text" name="TEmail" data-rule="邮箱;required;length[0~44];email:true;" value="${common.TEmail!""}"
+	        		 <td colspan="2"><input type="text" name="TEmail" data-rule="邮箱;required;length[0~40];email:true;" value="${common.TEmail!""}"
 	                                             id="Email" />&nbsp;<span style="color:red">*</span>
 	                 </td>
 					 
 	           </tr>
-	           <tr>
-	           		
+	           <tr>	           		
 	                 <td style="text-align: right;">投保日期</td>
 	        		  <td colspan="2"> <input id="TAppTm" type="text" name="TAppTm" style="line-height:4px;height:30px;"
 							class="Wdate search-query input-small" value="${base.TAppTm!""}" data-rule="required;"
-							onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2100-03-10 20:59:30' })"/>
+							onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2200-03-10 20:59:30' })"/>
 							&nbsp;<span style="color:red">*</span>
 					  </td>
 					   <td style="text-align: right;">保险起期</td>
 	        		 <td colspan="2"> <input id="TInsrncBgnTm" type="text" name="TInsrncBgnTm" style="line-height:4px;height:30px;"
 							class="Wdate search-query input-small" value="${base.TInsrncBgnTm!""}" data-rule="required;"
-							onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2100-03-10 20:59:30' })"/>
+							onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2200-03-10 20:59:30' })"/>
 							&nbsp;<span style="color:red">*</span>
 					 </td>  
 	           </tr>
@@ -165,7 +164,7 @@
 	        		  <td colspan="5">  	        		  
 						<input id="TInsrncEndTm" style="line-height:3px;height:30px;" class="Wdate search-query input-small" 
 						name="TInsrncEndTm" type="text" value="${base.TInsrncEndTm!""}" data-rule="required;"
-						 onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2100-03-10 20:59:30' })" />
+						 onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2200-03-10 20:59:30' })" />
 						&nbsp;<span style="color:red">*</span>
 					  </td>
 				</tr>

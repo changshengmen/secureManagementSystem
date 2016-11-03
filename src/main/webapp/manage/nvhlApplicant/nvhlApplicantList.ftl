@@ -1,5 +1,5 @@
 <#import "/manage/tpl/pageBase.ftl" as page>
-<@page.pageBase currentMenu="保险产品管理">
+<@page.pageBase currentMenu="客户信息">
 
 
 	<form action="${basepath}/manage/nvhlApplicantVO" method="post" theme="simple">		

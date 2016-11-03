@@ -1,5 +1,5 @@
 <#import "/manage/tpl/pageBase.ftl" as page>
-<@page.pageBase currentMenu="查看订单">
+<@page.pageBase currentMenu="订单信息">
 <style type="text/css">
 .titleCss {
 	background-color: #e6e6e6;
