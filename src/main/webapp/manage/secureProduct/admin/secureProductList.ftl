@@ -1,14 +1,6 @@
 <#import "/manage/tpl/pageBase.ftl" as page>
-<@page.pageBase currentMenu="保险产品管理">
+<@page.pageBase currentMenu="产品信息">
 <style type="text/css">
-.product-name {
-	display: inline-block;
-	width: 250px;
-	overflow: hidden; /*注意不要写在最后了*/
-	white-space: nowrap;
-	-o-text-overflow: ellipsis;
-	text-overflow: ellipsis;
-}
 /* 设置td内容超出宽度时隐藏超出部分的内容 */
 #t_secure{
     table-layout:fixed;/* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */  
@@ -17,7 +9,7 @@
     word-break:keep-all;/*不换行 */  
     white-space:nowrap;/* 不换行 */  
     overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */  
-    text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:Rhidden;一起使用*/  
+    text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用*/  
 }  
 </style>
 
@@ -26,10 +18,10 @@
 			<tr>
 				<td style="text-align: right;">产品代码</td>
 				<td style="text-align: left;"><input type="text" name="CProdNo"  class="search-query input-small"
-						id="CProdNo" /></td>
+						id="CProdNo" data-rule="产品代码;CProdNo;" size="40" maxlength="40"/></td>
 				<td style="text-align: right;">产品名称</td>
 				<td style="text-align: left;" ><input type="text" name="CProdName"  class="input-small"
-						id="CProdName" /></td>					
+						id="CProdName" data-rule="产品名称;CProdName;" size="40" maxlength="40"/></td>					
 			</tr>
 	<!--------------------------------------------------------	<tr>
 				<td style="text-align: right;">录入时间</td>
@@ -59,26 +51,19 @@
 						<button method="selectList" class="btn btn-primary" onclick="selectList(this)">
 							<i class="icon-search icon-white"></i> 查询
 						</button>
-                    </#if>
-
-                     <#if checkDbPrivilege("secureProduct/toAdd")>
+                   
 						<a href="toAdd" class="btn btn-success">
 							<i class="icon-plus-sign icon-white"></i> 添加
 						</a>
-                     </#if>
-
-                    <#if checkDbPrivilege("secureProduct/deletes")>
+                
 						<button method="deletes?deleteFlag=1" class="btn btn-danger" onclick="return submitIDs(this,'确定删除选择的记录?');">
 							<i class="icon-remove-sign icon-white"></i> 删除
 						</button>
-                    </#if>
-
-                    <#if checkDbPrivilege("secureProduct/updateUp")>
+                  
 						<button method="updateUp" class="btn btn-warning" onclick="return submitIDs(this,'确定上架选择的记录?');">
 							<i class="icon-arrow-up icon-white"></i> 上架
 						</button>
-                    </#if>
-                    <#if checkDbPrivilege("secureProduct/updateDown")>
+                    
 						<button method="updateDown" class="btn btn-warning" onclick="return submitIDs(this,'确定下架选择的记录?');">
 							<i class="icon-arrow-down icon-white"></i> 下架
 						</button>
@@ -90,19 +75,19 @@
 		<table id="t_secure" class="table table-bordered table-condensed table-hover" style="text-align: center;">
 			<tr style="background-color: #dff0d8">
 			
-			<th style="width:5%;text-align: center"><input type="checkbox" id="firstCheckbox" /></th>				
+			<th class="checkboxTh"style="width:5%;text-align: center"><input type="checkbox" id="firstCheckbox" /></th>				
 				<th style="width:10%;text-align: center">产品代码</th>				
 				<th style="width:15%;text-align: center">产品名称</th>
 				<th style="width:10%;text-align: center">保额币种</th>
 				<th style="width:15%;text-align: center">保额合计</th>
 				<th style="width:10%;text-align: center">保费币种</th>	
 				<th style="width:15%;text-align: center">保费合计</th>									
-				<th style="width:5%">状态</th>				
+				<th style="width:5%;text-align: center">状态</th>				
 				<th style="width:20%;text-align: center">操作</th>
 			</tr>
             <#list pager.list as item>
 				<tr>		
-				<td><input type="checkbox" name="ids"
+				<td class="checkboxTh"><input type="checkbox" name="ids"
 						value="${item.id!""}" /></td>			
 					<td >&nbsp;${item.CProdNo!""}</td>									
 					<td>&nbsp;${item.CProdName!""}</td>
@@ -158,4 +143,16 @@
 		</div>
 
 	</form>
+<script>
+$(function(){
+	hideCheckbox();
+});
+//判断当前登陆者不是admin就隐藏。$("#currentUserID")此控件在pageBase.ftl中
+function hideCheckbox(){
+	if($("#currentUserID").val()!=1){
+		$(".checkboxTh").hide();
+	}
+}
+
+</script>
 </@page.pageBase>

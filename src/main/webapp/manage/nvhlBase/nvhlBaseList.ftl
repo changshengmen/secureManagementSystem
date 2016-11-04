@@ -1,5 +1,5 @@
 <#import "/manage/tpl/pageBase.ftl" as page>
-<@page.pageBase currentMenu="查看订单">
+<@page.pageBase currentMenu="订单信息">
 <style type="text/css">
 .titleCss {
 	background-color: #e6e6e6;
@@ -81,17 +81,17 @@
 			</tr>
 		</table>
 				
-		<table class="table table-bordered table-hover">
+		<table class="table table-bordered table-hover"style="text-align: center;">
 			<tr style="background-color: #dff0d8">
-				<th>险种名称</th>
-				<th>产品代码</th>
-				<th>投保企业</th>
-				<th>保额合计</th>
-				<th>保费合计</th>
-				<th>投保日期</th>
-				<th>保险起期</th>
-				<th>保险止期</th>
-				<th>业务员</th>
+				<th style="text-align: center;">险种名称</th>
+				<th style="text-align: center;">产品代码</th>
+				<th style="text-align: center;">投保企业</th>
+				<th style="text-align: center;">保额合计</th>
+				<th style="text-align: center;">保费合计</th>
+				<th style="text-align: center;">投保日期</th>
+				<th style="text-align: center;">保险起期</th>
+				<th style="text-align: center;">保险止期</th>
+				<th style="text-align: center;">业务员</th>
 			</tr>
 			<#list pager.list as item>
 				<tr>

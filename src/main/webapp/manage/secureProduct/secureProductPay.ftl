@@ -23,14 +23,16 @@
 	    background-color:#e8423d;border-color:#e8423d;
 	}
 </style>
-<!--产品代码-->
- <input type="text" style="display:none" name="CProdNo" id="CProdNo" value="${CProdNo}"/>
 <form action="${basepath}/manage/secureProduct" id="form" name="form" namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">		
 <div id="tabs">
 		<ul>
 			<li><a href="#tabs-1">投保人/被保人基本信息</a></li>
 					
 		</ul>
+		<!--------------------------用于后面支付的时候查询保险产品的隐藏域----产品代码--------------------------------->
+		
+		<input type="hidden" name="CProdNo" value="${base.CProdNo!""}"></input>	
+		<!--------------------------用于后面支付的时候查询保险产品的隐藏域------------------------------------->	
 	<!--------------------------投保人模块------------------------------------->		
 
 			 <table class="table table-bordered table-condensed" style="margin-bottom:5px;" id="tableInfo">
@@ -39,16 +41,19 @@
 					<td >
 						<input type="text" name="CAppNo" value="${base.CAppNo!""}"
 		                                             id="CAppNo" />
+		                                          
 					</td>
 					<td style="text-align: right;font-weight:bold">投保人代码</td>
 					<td>
-						<input type="text" name="AppCde" value="${applicantVO.appCdePlay!""}"
+						<input type="text" name="appCdePlay" value="${applicantVO.appCdePlay!""}"
 		                                             id="appCdePlay" />
+		             
 					</td>
 					<td style="text-align: right;font-weight:bold">被保人代码</td>
 					<td>
-						<input type="text" name="InsuredCde" value="${insuredVO.insuredCdePlay!""}"
+						<input type="text" name="insuredCdePlay" value="${insuredVO.insuredCdePlay!""}"
 		                                             id="insuredCdePlay" />
+		              
 					</td>
 				</tr>
 				<tr>
@@ -64,8 +69,8 @@
                    		</select>
 	          		 </td>
 	           		<td style="text-align: right;">投保企业名称</td>
-	        		<td colspan="2"><input type="text" name="appNmePlay"  data-rule="投保企业名称;required;length[0~44];" 
-	                          id="Name" value="${applicantVO.appNmePlay!""}"/><span style="color:red">*</span>
+	        		<td colspan="2"><input type="text" name="appNmePlay"  data-rule="投保企业名称;required;length[0~40];" 
+	                          id="Name" value="${applicantVO.appNmePlay!""}"/>&nbsp;<span style="color:red">*</span>
 	          		 </td>
 	          		 
 	          		  
@@ -73,14 +78,14 @@
 	            <tr>
 	           		<td style="text-align: right;">客户类型</td>
 	        		<td colspan="2"><#assign map = {"0":'非自然人',"1":'自然人'}>
-	                    <select id="ClntMrk" name="TClntMrk" class="input-medium" style="width:150px">
+	                    <select id="ClntMrk" name="TClntMrk" class="input-medium">
                         		<#list map?keys as key>
                             		<option value="${key}"<#if common.TClntMrk?? && common.TClntMrk==key>selected="selected" </#if>>${map[key]}</option>
                         		</#list>
                    		</select>
 	           		 </td>
 	          		 <td style="text-align: right;">通讯地址</td>
-	        		 <td colspan="2"> <input type="text" name="TClntAddr" data-rule="通讯地址;required;length[0~44];" value="${common.TClntAddr!""}"
+	        		 <td colspan="2"> <input type="text" name="TClntAddr" data-rule="通讯地址;required;length[0~40];" value="${common.TClntAddr!""}"
 	                                             id="ClntAddr" />&nbsp;<span style="color:red">*</span>
 	                 </td>
 	           		
@@ -88,26 +93,26 @@
 	           <tr>
 	           		<td style="text-align: right;">证件类型</td>
 	        		<td colspan="2"><#assign map = {"110001":'组织机构代码',"110002":'工商注册号码',"110009",'其他'}>
-	                    <select id="CertfCls" name="TCertfCls" class="input-medium" style="width:150px">
+	                    <select id="CertfCls" name="TCertfCls" class="input-medium">
                         		<#list map?keys as key>
                             		<option value="${key}" <#if common.TCertfCls?? && common.TCertfCls==key>selected="selected" </#if>>${map[key]}</option>
                         		</#list>
                    		</select>
 	           		 </td>
 	           		 <td style="text-align: right;">证件号码</td>
-	        		 <td colspan="2"><input type="text" name="TCertfCde"  data-rule="证件号码;required;length[0~44];" value="${common.TCertfCde!""}" 
+	        		 <td colspan="2"><input type="text" name="TCertfCde"  data-rule="证件号码;required;length[0~20];" value="${common.TCertfCde!""}" 
 	                                             id="CertfCde" />&nbsp;<span style="color:red">*</span>
 	           		 </td>            		
 	           </tr>
 	            
 	           <tr>
 	                 <td style="text-align: right;">联系电话</td>
-	        	     <td colspan="2"><input type="text" name="TMobile"  data-rule="联系电话;required;integer" maxlength="11"
+	        	     <td colspan="2"><input type="text" name="TMobile"  data-rule="联系电话;required;integer;length[0~11]"
 	                                             id="Mobile" value="${common.TMobile!""}" />&nbsp;<span style="color:red">*</span>
 	                 </td>
 	                  <td style="text-align: right;">国籍</td>
 	        	     <td colspan="2"><input type="text" name="TCountry"  value="${common.TCountry!""}"
-	                     id="Country" data-rule="联系电话;required;length[0~44];" maxlength="11" />&nbsp;<span style="color:red">*</span>
+	                     id="Country" data-rule="国籍;required;length[0~40];"/>&nbsp;<span style="color:red">*</span>
 	                 </td>
 	           <tr>
 	           <tr>
@@ -131,26 +136,25 @@
 	           		</tr>
 	           	<tr> 
 	           	 	<td style="text-align: right;">邮编</td>
-	        	     <td colspan="2"><input type="text" name="TZipCde" value="${common.TZipCde!""}" id="ZipCde" />&nbsp;<span style="color:red">*</span>
+	        	     <td colspan="2"><input type="text" name="TZipCde" value="${common.TZipCde!""}" id="ZipCde" data-rule="邮编;required;length[0~20];"/>&nbsp;<span style="color:red">*</span>
 	                 </td>       		
                   <td style="text-align: right;">邮箱</td>
-	        		 <td colspan="2"><input type="text" name="TEmail" data-rule="邮箱;required;length[0~44];email:true;" value="${common.TEmail!""}"
+	        		 <td colspan="2"><input type="text" name="TEmail" data-rule="邮箱;required;length[0~40];email:true;" value="${common.TEmail!""}"
 	                                             id="Email" />&nbsp;<span style="color:red">*</span>
 	                 </td>
 					 
 	           </tr>
-	           <tr>
-	           		
+	           <tr>	           		
 	                 <td style="text-align: right;">投保日期</td>
 	        		  <td colspan="2"> <input id="TAppTm" type="text" name="TAppTm" style="line-height:4px;height:30px;"
-							class="Wdate search-query input-small" value="${base.TAppTm!""}"
-							onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2100-03-10 20:59:30' })"/>
+							class="Wdate search-query input-small" value="${base.TAppTm!""}" data-rule="required;"
+							onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2200-03-10 20:59:30' })"/>
 							&nbsp;<span style="color:red">*</span>
 					  </td>
 					   <td style="text-align: right;">保险起期</td>
 	        		 <td colspan="2"> <input id="TInsrncBgnTm" type="text" name="TInsrncBgnTm" style="line-height:4px;height:30px;"
-							class="Wdate search-query input-small" value="${base.TInsrncBgnTm!""}"
-							onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2100-03-10 20:59:30' })"/>
+							class="Wdate search-query input-small" value="${base.TInsrncBgnTm!""}" data-rule="required;"
+							onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2200-03-10 20:59:30' })"/>
 							&nbsp;<span style="color:red">*</span>
 					 </td>  
 	           </tr>
@@ -159,8 +163,8 @@
 	                  <td style="text-align: right;">保险止期</td>
 	        		  <td colspan="5">  	        		  
 						<input id="TInsrncEndTm" style="line-height:3px;height:30px;" class="Wdate search-query input-small" 
-						name="TInsrncEndTm" type="text" value="${base.TInsrncEndTm!""}"
-						 onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2100-03-10 20:59:30' })" />
+						name="TInsrncEndTm" type="text" value="${base.TInsrncEndTm!""}" data-rule="required;"
+						 onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2200-03-10 20:59:30' })" />
 						&nbsp;<span style="color:red">*</span>
 					  </td>
 				</tr>
@@ -257,17 +261,17 @@
 			<!--------------------------操作按钮模块------------------------------------->
 			
 			<div style="margin-top:5px;padding-bottom:16px">
-				<button id="pay" method="toCommit" class="btn btn-success">
+			
+				<button id="commit" method="toCommit" class="btn btn-success" onclick="unbind()">
 	                <i class="icon-ok icon-white"></i>提交
 	            </button>
-	         <!--    <input value="提交" type="button"  id="btnTj"   onclick="commitInfo()" />
-	           支付按钮 审核后显示-->
-	            <span id="pay" style="display:none">
-	           		<img alt="新增" src="${basepath}/resource/images/11.png">
-				<button id="pay" method="toPay"+secure.id class="btn btn-success"  style="background-color:#4cae4c;border-color:#4cae4c">
+	          <!-- <input value="支付" type="button"  id="btnTj" class="btn btn-success" style="background-color:#4cae4c;border-color:#4cae4c"  onclick="commitInfo()" />-->
+	        
+	          
+				 <button id="toPay" method="toPay?id=1" class="btn btn-success" style="background-color:#4cae4c;border-color:#4cae4c;display:none" onclick="beforePay()" >
 	                <i class="icon-ok icon-white"></i>支付
 	            </button>
-	            </span>&nbsp;
+	        <!--  <a id="toPay" href="toPay" class="btn btn-warning" style="background-color:#4cae4c;border-color:#4cae4c;display:none">支付</a>--> 
 	            <span id="resultShow" style="font-weight:bold"></span>				           
 	            <a href="selectList"class="btn btn-warning" style="float:right">返回</a>  
 			</span>	
@@ -292,10 +296,15 @@ $(function() {
   		selectApplicantInfo($(this).val());
   		}
   		
-  	})	
+  	});
+  	window.onbeforeunload=function(event){return confirm("您确定离开此页面吗？");}	
   	
 });
-
+//点击提交或者支付的时候不用验证是否离开页面，此方法解除验证
+function unbind(){
+	window.onbeforeunload = null;
+}
+//把投保人信息复制到被保人
 function copyInfo(){
 		var source=["NameA","ClntMrkA","CountryA","EmailA","CertfClsA","CertfCdeA","ClntAddrA","MobileA","ZipCdeA","CusRiskLvlA","CustRiskRankA"];	
 		$.each(source,function(i,n){
@@ -322,33 +331,48 @@ function selectApplicantInfo(a){//提交
 	                 	$("#CertfCde").val(data[i].certfCdePlay);
 	                 	$("#Mobile").val(data[i].mobilePlay);
 	                 	$("#Country").val(data[i].countryPlay);
-	                 	$("#ZipCde").val(data[i].ZipCde);
+	                 	$("#ZipCde").val(data[i].zipCde);
 	                 	$("#Email").val(data[i].emailPlay);
 	                 	$("#CusRiskLvl").val(data[i].cusRiskLvl);
 	                 	$("#CustRiskRank").val(data[i].custRiskRank);
-	                 })   
-	                             	           	                   
-                  }
-                
+	                 })   	                            	           	                   
+                  }                
                }); 
              
 }
 
-//显示投保单号，投保人编码和被保人编码
+//显示投保单号，投保人编码和被保人编码 ;
+//showflag提交后页面是否返回正确的单号
 function showCode(){
-	var shouFlag=$("#CAppNo").val();
-	if(shouFlag==""||shouFlag==null){
+	var showFlag=$.trim($("#CAppNo").val());
+	if(showFlag==""||showFlag==null){
 		$("#codeTr").hide();
 	}else{
+		//显示投保单号，投保人编码和被保人编码 ;
 		$("#codeTr").show();
+		//信息同步按钮隐藏
 		$("#copyInfo").hide();	
 		$("table input").each(function(){
 		  $(this).attr("disabled",true);
 		})
 		$("table select").each(function(){
 		  $(this).attr("disabled",true);
-		})					
+		})
+					
+	$("#toPay").show();
+	$("#commit").hide();
+				
 	}
+}
+//用于支付时把数据传到后台
+function beforePay(){
+window.onbeforeunload = null;
+$("table input").each(function(){
+		  $(this).attr("disabled",false);
+		})
+		$("table select").each(function(){
+		  $(this).attr("disabled",false);
+		})	
 }
 
 </script>
