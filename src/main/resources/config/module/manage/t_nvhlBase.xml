@@ -81,12 +81,12 @@
 		InsuredCde,InsuredNme,ClntMrk,CCertfCls,CCertfCde,
 		ClntAddr,ZipCde,CEmail,Mobile,Country,
 		Province,City,Area,Stree,CusRiskLvl,
-		CustRiskRank)
+		CustRiskRank,createAccount,createtime)
          values(
          #{InsuredCde},#{InsuredNme},#{ClntMrk},#{CCertfCls},#{CCertfCde},
          #{ClntAddr},#{ZipCde},#{CEmail},#{Mobile},#{Country},
          #{Province},#{City},#{Area},#{Stree},#{CusRiskLvl},
-         #{CustRiskRank})
+         #{CustRiskRank},#{createAccount},now())
 	</insert>
 	
 </mapper>

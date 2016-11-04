@@ -29,7 +29,35 @@ public class NvhlInsuredVO  extends QueryModel implements Serializable {
 	//(用于显示)
 	private String insuredCdePlay;// 被保人编码	
 	private String insuredNmePlay;// 被保人编码
+	private String createAccount;//创建者
+	private String createtime;// 录入时间
+	private String updateAccount;//更新者
+	private String updatetime;//更新时间
 	
+	public String getCreateAccount() {
+		return createAccount;
+	}
+	public void setCreateAccount(String createAccount) {
+		this.createAccount = createAccount;
+	}
+	public String getCreatetime() {
+		return createtime;
+	}
+	public void setCreatetime(String createtime) {
+		this.createtime = createtime;
+	}
+	public String getUpdateAccount() {
+		return updateAccount;
+	}
+	public void setUpdateAccount(String updateAccount) {
+		this.updateAccount = updateAccount;
+	}
+	public String getUpdatetime() {
+		return updatetime;
+	}
+	public void setUpdatetime(String updatetime) {
+		this.updatetime = updatetime;
+	}
 	public String getInsuredNmePlay() {
 		return insuredNmePlay;
 	}
