@@ -36,8 +36,8 @@
                         <fieldset>
                         <div class="form-group">
                             <#if errorMsg??>
-                                <div class="alert alert-danger alert-dismissable">
-                                    <button type="button" class="close" data-dismiss="alert"
+                                <div class="alert alert-danger alert-dismissable" >
+                                    <button type="button" class="close" data-dismiss="alert" style="width:10px;position:inherit"
                                             aria-hidden="true">&times;</button>
                                 ${errorMsg}
                                 </div>
