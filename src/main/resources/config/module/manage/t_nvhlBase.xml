@@ -8,7 +8,7 @@
 		resultType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO">
 		select n.SerialNumber id,IFNULL(DATEDIFF(NOW(),n.TInsrncEndTm),'') expire_days, n.*,
 		(select a.AppNme from  nvhlapplicantvo a where A.AppCde=n.AppCde  and a.createAccount = n.createAccount )AppNme ,
-		(select i.InsuredNme from  nvhlinsuredvo i where i.InsuredCde=n.AppCde and i.createAccount = n.createAccount )InsuredNme ,u.username username 
+		(select i.InsuredNme from  nvhlinsuredvo i where i.InsuredCde=n.InsuredCde and i.createAccount = n.createAccount )InsuredNme ,u.username username 
 		from nvhlbasevo n ,nvhlapplicantvo a,nvhlinsuredvo i,t_user u   where 1=1 and deleteFlag='0'
 		and n.AppCde = a.AppCde and n.InsuredCde=i.InsuredCde and n.createAccount = u.id
 	<if test="createAccount!=null and createAccount!=''">

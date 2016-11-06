@@ -1,17 +1,6 @@
 <#import "/manage/tpl/pageBase.ftl" as page>
 <@page.pageBase currentMenu="编辑/新增产品信息">
-<#if e.id??>
-    <#assign formAction="111">
-<#assign insertAction=false />
-<#else >
-<#assign formAction="insert">
-    <#assign insertAction=true />
-</#if>
-<style type="text/css">
-.tabs-2 td{ width:100px}
-
-</style>
-<form action="${basepath}/manage/secureProduct" id="form" name="form" namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">		
+<form action="${basepath}/manage/secureProduct"  namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">		
 	<div id="tabs">
 		<ul>
 			<li><a href="#tabs-1">保险主产品基本信息</a></li>	
@@ -85,20 +74,17 @@
 	            </div>
             </div>
             <!--------------------------主产品信息添加模块------------------------------------->
-            
             <!--------------------------start子产品信息添加模块------------------------------------->
             <div id="tabs-2"> 
             	<table class="table table-bordered table-condensed table-hover" style="text-align:center;"> 
             	<tr>
-            	<#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
             		<button method="deletes?deleteFlag=0" class="btn btn-danger" onclick="return submitIDs(this,'确定删除选择的子产品?');">
-	                    <i class="icon-ok icon-white"></i> 删除子产品
+	                    <i class="icon-ok icon-white"></i>删除子产品
 	                </button>
-	            </#if>
             	</tr>                
      				<tr>
      				<#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
-     				<th style><input type="checkbox" id="firstCheckbox" /></th>
+     				<th style="text-align: center;"><input type="checkbox" id="firstCheckbox" /></th>
      				</#if>
      				<td style="display: none;">id</th>
      				<th style="text-align: center;">标的名称</th>
@@ -114,7 +100,11 @@
 								<td style="display: none;"><input type="hidden" value="${e.secureProductDetailList[item_index].id!""}" name="secureProductDetailList[${item_index}].id"/></td>
 								<td>
 									<input type="text" value="${e.secureProductDetailList[item_index].subName!""}" name="secureProductDetailList[${item_index}].subName" 
-									 class="search-query input-small" data-rule="标的名称;required"  maxlength="40"/>
+									 class="search-query input-small" 
+									 <#if item.subName??>
+									 data-rule="标的名称;required" 
+									 </#if>
+									 maxlength="40"/>
 								</td>
 								<td>
 									<input type="text" value="${e.secureProductDetailList[item_index].premium!""}" name="secureProductDetailList[${item_index}].premium"
@@ -179,7 +169,7 @@
 			<#if e.id??>
 				<#if checkDbPrivilege()>
 				 	<button method="update" class="btn btn-success">
-	                    <i class="icon-ok icon-white"></i> 修改
+	                    <i class="icon-ok icon-white"></i>修改
 	                </button>
                 </#if>
                	

@@ -59,7 +59,7 @@
 						<button method="deletes?deleteFlag=1" class="btn btn-danger" onclick="return submitIDs(this,'确定删除选择的记录?');">
 							<i class="icon-remove-sign icon-white"></i> 删除
 						</button>
-                  
+						
 						<button method="updateUp" class="btn btn-warning" onclick="return submitIDs(this,'确定上架选择的记录?');">
 							<i class="icon-arrow-up icon-white"></i> 上架
 						</button>
@@ -147,6 +147,7 @@
 $(function(){
 	hideCheckbox();
 });
+
 //判断当前登陆者不是admin就隐藏。$("#currentUserID")此控件在pageBase.ftl中
 function hideCheckbox(){
 	if($("#currentUserID").val()!=1){
