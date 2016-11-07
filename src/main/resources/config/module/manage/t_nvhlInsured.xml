@@ -5,6 +5,9 @@
 
 <delete id="manage.NvhlBase.deleteNvhlInsured" parameterType="net.jeeshop.services.manage.NvhlInsuredVO.bean.NvhlInsuredVO">
 		delete from  nvhlinsuredvo where  InsuredCde=#{InsuredCde}
+		<if test="createAccount !=null and createAccount !=''">
+			and createAccount =#{createAccount}
+		</if>
 	</delete>
 	
 </mapper>
