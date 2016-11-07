@@ -92,7 +92,7 @@
 	           </tr>
 	           <tr>
 	           		<td style="text-align: right;">证件类型</td>
-	        		<td colspan="2"><#assign map = {"110001":'组织机构代码',"110002":'工商注册号码',"110009",'其他'}>
+	        		<td colspan="2"><#assign map = {"110002":'工商注册号码',"110001":'组织机构代码',"110009",'其他'}>
 	                    <select id="CertfCls" name="TCertfCls" class="input-medium">
                         		<#list map?keys as key>
                             		<option value="${key}" <#if common.TCertfCls?? && common.TCertfCls==key>selected="selected" </#if>>${map[key]}</option>
@@ -107,7 +107,7 @@
 	            
 	           <tr>
 	                 <td style="text-align: right;">联系电话</td>
-	        	     <td colspan="2"><input type="text" name="TMobile"  data-rule="联系电话;required;integer;length[0~11]"
+	        	     <td colspan="2"><input type="text" name="TMobile"  data-rule="联系电话;required;integer;length[0~11]" maxlength="11"
 	                                             id="Mobile" value="${common.TMobile!""}" />&nbsp;<span style="color:red">*</span>
 	                 </td>
 	                  <td style="text-align: right;">国籍</td>
@@ -223,7 +223,7 @@
 	           </tr>	             	           
 	           <tr>
 	            <td style="text-align: right;">联系电话</td>
-	        	     <td colspan="2"><input type="text" name="BMobile"  data-rule="联系电话;required;integer;" maxlength="11"
+	        	     <td colspan="2"><input type="text" name="BMobile"  data-rule="联系电话;required;integer;length[0~11]" maxlength="11"
 	                                             id="MobileA" value="${common.BMobile!""}"/>&nbsp;<span style="color:red">*</span>
 	                 </td>
 	           		
