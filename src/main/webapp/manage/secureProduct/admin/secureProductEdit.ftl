@@ -1,5 +1,5 @@
 <#import "/manage/tpl/pageBase.ftl" as page>
-<@page.pageBase currentMenu="编辑/新增产品信息">
+<@page.pageBase currentMenu="产品信息">
 <form action="${basepath}/manage/secureProduct"  namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">		
 	<div id="tabs">
 		<ul>
@@ -78,9 +78,11 @@
             <div id="tabs-2"> 
             	<table class="table table-bordered table-condensed table-hover" style="text-align:center;"> 
             	<tr>
+            	<#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
             		<button method="deletes?deleteFlag=0" class="btn btn-danger" onclick="return submitIDs(this,'确定删除选择的子产品?');">
 	                    <i class="icon-ok icon-white"></i>删除子产品
 	                </button>
+	             </#if>
             	</tr>                
      				<tr>
      				<#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>

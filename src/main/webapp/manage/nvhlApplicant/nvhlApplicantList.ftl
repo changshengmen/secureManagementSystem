@@ -53,11 +53,10 @@
 				<th style="width:10%;text-align: center">企业代码</th>		
 				<th style="width:10%;text-align: center">企业名称</th>				
 				<th style="width:10%;text-align: center">证件类型</th>
-				<th style="width:10%;text-align: center">证件名称</th>
+				<th style="width:15%;text-align: center">证件号码</th>
 				<th style="width:20%;text-align: center">通讯地址</th>
-				<th style="width:10%;text-align: center">邮箱</th>
-				<th style="width:10%;text-align: center">手机</th>	
-				<th style="width:10%;text-align: center">国籍</th>
+				<th style="width:15%;text-align: center">邮箱</th>
+				<th style="width:10%;text-align: center">手机</th>					
 				<th style="width:10%;text-align: center">操作</th>													
 			</tr>
             <#list pager.list as item>
@@ -76,8 +75,7 @@
 					<td>&nbsp;${item.certfCdePlay!""}</td>						
 					<td>&nbsp;${item.clntAddrPlay!""}</td>			
 					<td >&nbsp;${item.emailPlay!""}</td>									
-					<td>&nbsp;${item.mobilePlay!""}</td>
-					<td >&nbsp;${item.countryPlay!""}</td>									
+					<td>&nbsp;${item.mobilePlay!""}</td>														
 					<td >
 						<#if checkDbPrivilege()>
 							<a href="toEdit?id=${item.id}">编辑</a>|						
