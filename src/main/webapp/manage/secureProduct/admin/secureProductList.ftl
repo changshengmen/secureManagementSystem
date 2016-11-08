@@ -46,12 +46,12 @@
 				</td>						
 			</tr>---------------------------------------------------------------->
 			<tr>
-				<td colspan="20">
-                    <#if checkPrivilege("secureProduct/selectList")>
+				<td colspan="20">                   
 						<button method="selectList" class="btn btn-primary" onclick="selectList(this)">
 							<i class="icon-search icon-white"></i> 查询
 						</button>
                    
+                   <#if checkDbPrivilege()>
 						<a href="toAdd" class="btn btn-success">
 							<i class="icon-plus-sign icon-white"></i> 添加
 						</a>
@@ -118,13 +118,10 @@
 							<img alt="已下架" src="${basepath}/resource/images/action_delete.gif">
 						</#if>
 					</td>
-					<td >
-					<#if checkDbPrivilege("secureProduct/updateDown")>
-						<a href="toEditProduct?id=${item.id}">编辑</a>|
-						
-					</#if>
-					<a href="toOrder?id=${item.id}">查看</a>|
-					<a href="toPayPage?id=${item.id}&CProdNo=${item.CProdNo}">下单</a>
+					<td >					
+						<a class="toEditProduct" href="toEditProduct?id=${item.id}">编辑|</a>	
+						<a href="toOrder?id=${item.id}">查看</a>|
+						<a href="toPayPage?id=${item.id}&CProdNo=${item.CProdNo}">下单</a>
 					</td>
 				</tr>
             </#list>
@@ -152,6 +149,7 @@ $(function(){
 function hideCheckbox(){
 	if($("#currentUserID").val()!=1){
 		$(".checkboxTh").hide();
+		$(".toEditProduct").hide();
 	}
 }
 

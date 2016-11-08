@@ -76,6 +76,11 @@
 	          		  
 	           </tr>
 	            <tr>
+	            	 
+	                <td style="text-align: right;">邮箱</td>
+	        		<td colspan="2"><input type="text" name="TEmail" data-rule="邮箱;required;length[0~40];email:true;" value="${common.TEmail!""}"
+	                                             id="Email" />&nbsp;<span style="color:red">*</span>
+	                </td> 
 	           		<td style="text-align: right;">客户类型</td>
 	        		<td colspan="2"><#assign map = {"0":'非自然人',"1":'自然人'}>
 	                    <select id="ClntMrk" name="TClntMrk" class="input-medium">
@@ -84,10 +89,7 @@
                         		</#list>
                    		</select>
 	           		 </td>
-	          		 <td style="text-align: right;">通讯地址</td>
-	        		 <td colspan="2"> <input type="text" name="TClntAddr" data-rule="通讯地址;required;length[0~40];" value="${common.TClntAddr!""}"
-	                                             id="ClntAddr" />&nbsp;<span style="color:red">*</span>
-	                 </td>
+	          		 
 	           		
 	           </tr>
 	           <tr>
@@ -106,16 +108,28 @@
 	           </tr>
 	            
 	           <tr>
+	           		<td style="text-align: right;">通讯地址</td>
+	        		 <td colspan="2"> <input type="text" name="TClntAddr" data-rule="通讯地址;required;length[0~40];" value="${common.TClntAddr!""}"
+	                                             id="ClntAddr" />&nbsp;<span style="color:red">*</span>
+	                 </td>
 	                 <td style="text-align: right;">联系电话</td>
 	        	     <td colspan="2"><input type="text" name="TMobile"  data-rule="联系电话;required;integer;length[0~11]" maxlength="11"
 	                                             id="Mobile" value="${common.TMobile!""}" />&nbsp;<span style="color:red">*</span>
 	                 </td>
-	                  <td style="text-align: right;">国籍</td>
-	        	     <td colspan="2"><input type="text" name="TCountry"  value="${common.TCountry!""}"
+	                
+	           <tr>
+	         
+	           	<tr> 
+	           	 	<td style="text-align: right;">国籍</td>
+	        	    <td colspan="2"><input type="text" name="TCountry"  value="${common.TCountry!""}"
 	                     id="Country" data-rule="国籍;required;length[0~40];"/>&nbsp;<span style="color:red">*</span>
-	                 </td>
-	           <tr>
-	           <tr>
+	                </td>     		
+                  	<td style="text-align: right;">邮编</td>
+	        	    <td colspan="2"><input type="text" name="TZipCde" value="${common.TZipCde!""}" id="ZipCde" data-rule="邮编;required;length[0~20];"/>&nbsp;<span style="color:red">*</span>
+	                </td>
+					 
+	           </tr>
+	             <tr>
 	                 <td style="text-align: right;">客户风险等级</td>
 	        		 <td colspan="2"> <#assign map = {"915102":'低风险客户',"915103":'高风险客户',"915106":'中等风险客户'}>
 	                         <select id="CusRiskLvl" name="TCusRiskLvl" class="input-medium">
@@ -133,17 +147,7 @@
                         			</#list>
                     			</select>
 	           		</td> 
-	           		</tr>
-	           	<tr> 
-	           	 	<td style="text-align: right;">邮编</td>
-	        	     <td colspan="2"><input type="text" name="TZipCde" value="${common.TZipCde!""}" id="ZipCde" data-rule="邮编;required;length[0~20];"/>&nbsp;<span style="color:red">*</span>
-	                 </td>       		
-                  <td style="text-align: right;">邮箱</td>
-	        		 <td colspan="2"><input type="text" name="TEmail" data-rule="邮箱;required;length[0~40];email:true;" value="${common.TEmail!""}"
-	                                             id="Email" />&nbsp;<span style="color:red">*</span>
-	                 </td>
-					 
-	           </tr>
+	           	</tr>
 	           <tr>	           		
 	                 <td style="text-align: right;">投保日期</td>
 	        		  <td colspan="2"> <input id="TAppTm" type="text" name="TAppTm" style="line-height:4px;height:30px;"
@@ -292,8 +296,13 @@ $(function() {
   	});
   	$("#quickChoose").change(function(){		
   		if($(this).val()!=0){
-  		debugger;
-  		selectApplicantInfo($(this).val());
+  			selectApplicantInfo($(this).val());
+  		}
+  		else{
+	  		$("table input").val("");
+	  		$("#copyInfo").val("信息同步");
+			// jquery1.6或以上版本
+			$("table select").prop('selectedIndex', 0);
   		}
   		
   	});

@@ -68,12 +68,9 @@
 			    <!--------------------------客户信息模块------------------------------------->	
 			      
 			       <!--------------------------操作按钮模块------------------------------------->  
-					
-						<#if checkDbPrivilege()>
-						 	<button method="update" class="btn btn-success">
-			                    <i class="icon-ok icon-white"></i> 修改
-			                </button>
-		                </#if>
+					 	<button id="update" method="update" class="btn btn-success">
+		                    <i class="icon-ok icon-white"></i> 修改
+		                </button>
 		                <button onclick="javascript:history.back(-1)" class="btn btn-warning"">
 			                <i class="icon-ok icon-white"></i>返回
 			       		</button>
@@ -85,6 +82,14 @@
 $(function() {
 	$( "#tabs" ).tabs({
 	});	
+	hideCheckbox();
 });
+//判断当前登陆者不是admin就隐藏。$("#currentUserID")此控件在pageBase.ftl中
+function hideCheckbox(){
+	if($("#currentUserID").val()!=1){
+		$(".checkboxTh").hide();
+		$("#toEditProduct").hide();
+	}
+}
 </script>	
 </@page.pageBase>

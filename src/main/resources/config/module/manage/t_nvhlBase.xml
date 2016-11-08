@@ -6,9 +6,10 @@
 	<select id="manage.NvhlBase.selectPageList"
 		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO"
 		resultType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO">
-		select n.SerialNumber id,IFNULL(DATEDIFF(NOW(),n.TInsrncEndTm),'') expire_days, n.*,
+		select n.SerialNumber id,IFNULL(DATEDIFF(NOW(),n.TInsrncEndTm),'') expire_days, 
+		n.CProdName,n.CProdNo,n.appCde appCdePlay,n.NAmt,n.NPrm,n.TAppTm,n.TInsrncBgnTm,n.TInsrncEndTm,n.createtime,
 		(select a.AppNme from  nvhlapplicantvo a where A.AppCde=n.AppCde  and a.createAccount = n.createAccount )AppNme ,
-		(select i.InsuredNme from  nvhlinsuredvo i where i.InsuredCde=n.InsuredCde and i.createAccount = n.createAccount )InsuredNme ,u.username username 
+		(select i.InsuredNme from  nvhlinsuredvo i where i.InsuredCde=n.InsuredCde and i.createAccount = n.createAccount )InsuredNme ,u.nickname username 
 		from nvhlbasevo n ,nvhlapplicantvo a,nvhlinsuredvo i,t_user u   where 1=1 and deleteFlag='0'
 		and n.AppCde = a.AppCde and n.InsuredCde=i.InsuredCde and n.createAccount = u.id
 	<if test="createAccount!=null and createAccount!=''">
@@ -28,7 +29,7 @@
 			,'%' )
 		</if>
 		group by n.SerialNumber
-		order by TAppTm,TInsrncEndTm 	
+		order by createtime desc,TAppTm,TInsrncEndTm 	
 			limit #{offset},#{pageSize}
 	</select>
 

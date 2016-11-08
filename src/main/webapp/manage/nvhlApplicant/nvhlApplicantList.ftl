@@ -6,11 +6,11 @@
 		<table class="table table-bordered table-condensed">
 			<tr>
 				
-				<td style="text-align: right;">产品名称</td>
+				<td style="text-align: right;">企业名称</td>
 				<td style="text-align: left;" ><input type="text" name="AppNme"  class="input-small"
 						id="AppNme" /></td>
 				<td style="text-align: right;">通讯地址</td>
-				<td style="text-align: left;"><input type="text" name="ClntAddr"  class="search-query input-small"
+				<td style="text-align: left;"><input type="text" name="clntAddrPlay"  class="search-query input-small"
 						id="ClntAddr" /></td>					
 			</tr>
 	<!--------------------------------------------------------	<tr>

@@ -86,6 +86,7 @@
 				<th style="text-align: center;">险种名称</th>
 				<th style="text-align: center;">产品代码</th>
 				<th style="text-align: center;">投保企业</th>
+				<th style="text-align: center;">企业代码</th>
 				<th style="text-align: center;">保额合计</th>
 				<th style="text-align: center;">保费合计</th>
 				<th style="text-align: center;">投保日期</th>
@@ -98,6 +99,7 @@
 					<td>${item.CProdName!""}</td>
 					<td>${item.CProdNo!""}</td>
 					<td>${item.appnme!""}</td>
+					<td>${item.appCdePlay!""}</td>
 					<td>${item.NAmt!""}</td>
 					<td>${item.NPrm!""}</td>
 					<td>${item.TAppTm!""}</td>

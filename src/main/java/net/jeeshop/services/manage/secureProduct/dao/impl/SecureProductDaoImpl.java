@@ -5,7 +5,6 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Repository;
-
 import net.jeeshop.core.dao.BaseDao;
 import net.jeeshop.core.dao.page.PagerModel;
 import net.jeeshop.core.util.MathUtil;
@@ -43,12 +42,14 @@ public class SecureProductDaoImpl implements SecureProductDao {
 	}
 
 	public int deleteSubProduct(String[] ids,SecureProduct e) {		
-		SecureProductDetail subProduct = new SecureProductDetail();
-		if(ids!=null){
+		SecureProductDetail subProduct = new SecureProductDetail();		
+		if(ids!=null){			
 			for (int i = 0; i < ids.length; i++) {
-				subProduct.setId(ids[i]);
-				subProduct.setUpdateAccount(e.getUpdateAccount());
-				dao.delete("manage.secureProduct.deleteSubProduct", subProduct);
+				if(ids[i].length()>0){
+					subProduct.setId(ids[i]);
+					subProduct.setUpdateAccount(e.getUpdateAccount());
+					dao.delete("manage.secureProduct.deleteSubProduct", subProduct);
+				}				
 			}
 		}else{
 			subProduct.setpId(e.getId());
