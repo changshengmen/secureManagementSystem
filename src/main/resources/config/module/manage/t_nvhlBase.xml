@@ -23,10 +23,9 @@
 		</if>
 		<if test="TInsrncEndTmEndDate!=null and TInsrncEndTmEndDate!=''">
 			and TInsrncEndTm &lt;= #{TInsrncEndTmEndDate}
-		</if>
-		<if test="CProdName!=null and CProdName!=''">
-			and CProdName like CONCAT('%',#{CProdName,jdbcType=VARCHAR}
-			,'%' )
+		</if>		
+		<if test="CProdName !=null and CProdName !=''">
+			and n.CProdName like CONCAT('%','${CProdName}','%' )
 		</if>
 		group by n.SerialNumber
 		order by createtime desc,TAppTm,TInsrncEndTm 	
@@ -47,10 +46,10 @@
 		<if test="TInsrncEndTmEndDate!=null and TInsrncEndTmEndDate!=''">
 			and TInsrncEndTm &lt;= #{TInsrncEndTmEndDate}
 		</if>
-		<if test="CProdName!=null and CProdName!=''">
-			and CProdName like CONCAT('%',#{CProdName,jdbcType=VARCHAR}
-			,'%' )
-		</if>		
+		<if test="CProdName !=null and CProdName !=''">
+			and CProdName like CONCAT('%','${CProdName}','%' )
+		</if>	
+			
 	</select>	
 	<!-- 插入 基本信息 NvhlBase-->
 	<insert id="manage.NvhlBase.insertNvhlBase"

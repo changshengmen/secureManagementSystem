@@ -7,8 +7,8 @@
 			<tr>
 				
 				<td style="text-align: right;">企业名称</td>
-				<td style="text-align: left;" ><input type="text" name="AppNme"  class="input-small"
-						id="AppNme" /></td>
+				<td style="text-align: left;" ><input type="text" name="appNmePlay"  class="input-small"
+						id="appNmePlay" /></td>
 				<td style="text-align: right;">通讯地址</td>
 				<td style="text-align: left;"><input type="text" name="clntAddrPlay"  class="search-query input-small"
 						id="ClntAddr" /></td>					
@@ -36,8 +36,8 @@
 				</td>						
 			</tr>---------------------------------------------------------------->
 			<tr>
-				<td colspan="20">                   
-					<button method="selectList" class="btn btn-primary">
+				<td colspan="20">                    
+					<button method="selectList" class="btn btn-primary" onclick="selectList(this)">
 						<i class="icon-search icon-white"></i> 查询
 					</button>
 				</td>

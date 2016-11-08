@@ -48,7 +48,7 @@
 	<form action="${basepath}/manage/NvhlBase" method="post" theme="simple">
 		<table class="table table-bordered">
 		<tr>
-		<td style="text-align: right;">险种名称</td>
+		<td style="text-align: right;">产品名称</td>
 		<td style="text-align: left" ><input class="selectArea" type="text" name="CProdName"  class="input-small"
 						id="CProdName" /></td>	
 				<td style="text-align: right;">保险止期</td>
@@ -83,8 +83,8 @@
 				
 		<table class="table table-bordered table-hover"style="text-align: center;">
 			<tr style="background-color: #dff0d8">
-				<th style="text-align: center;">险种名称</th>
 				<th style="text-align: center;">产品代码</th>
+				<th style="text-align: center;">产品名称</th>				
 				<th style="text-align: center;">投保企业</th>
 				<th style="text-align: center;">企业代码</th>
 				<th style="text-align: center;">保额合计</th>
@@ -96,8 +96,8 @@
 			</tr>
 			<#list pager.list as item>
 				<tr>
-					<td>${item.CProdName!""}</td>
 					<td>${item.CProdNo!""}</td>
+					<td>${item.CProdName!""}</td>					
 					<td>${item.appnme!""}</td>
 					<td>${item.appCdePlay!""}</td>
 					<td>${item.NAmt!""}</td>

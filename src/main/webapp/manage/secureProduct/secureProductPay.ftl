@@ -251,7 +251,7 @@
 	           </tr>
           		<tr>
           			 <td style="text-align: right;">反洗钱客户风险等级</td>
-	        		<td colspan="2"> <#assign map = {"925105":'普通',"925106":'关注级',"925107":'特别关注级',"925108":'高度关注级'}>
+	        		<td colspan="4"> <#assign map = {"925105":'普通',"925106":'关注级',"925107":'特别关注级',"925108":'高度关注级'}>
 		                         <select id="CustRiskRankA" name="BCustRiskRank" class="input-medium" >
                         			<#list map?keys as key>
                             			<option value="${key}" <#if common.BCustRiskRank?? && common.BCustRiskRank==key>selected="selected"</#if>>${map[key]}</option>
@@ -306,6 +306,7 @@ $(function() {
   		}
   		
   	});
+  	debugger;
   	window.onbeforeunload=function(event){return confirm("您确定离开此页面吗？");}	
   	
 });

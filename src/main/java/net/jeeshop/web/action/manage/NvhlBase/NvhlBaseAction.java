@@ -57,8 +57,7 @@ public class NvhlBaseAction  extends BaseController<NvhlBaseVO>{
 		String appCde = RequestHolder.getRequest().getParameter("appCde");//企业编码	
 		base.setAppCde(appCde);
 		 super.selectList(request, base);
-		 return page_toList;
-		 
+		 return page_toList;		 
 	}
 	
 }
