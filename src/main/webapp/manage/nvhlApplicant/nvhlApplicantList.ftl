@@ -36,15 +36,10 @@
 				</td>						
 			</tr>---------------------------------------------------------------->
 			<tr>
-				<td colspan="20">
-                    <#if checkPrivilege("secureProduct/selectList")>
-						<button method="selectList" class="btn btn-primary" onclick="selectList(this)">
-							<i class="icon-search icon-white"></i> 查询
-						</button>
-                    </#if>
-
-                  
-
+				<td colspan="20">                   
+					<button method="selectList" class="btn btn-primary">
+						<i class="icon-search icon-white"></i> 查询
+					</button>
 				</td>
 			</tr>
 		</table>

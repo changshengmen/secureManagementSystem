@@ -49,7 +49,7 @@
 		<table class="table table-bordered">
 		<tr>
 		<td style="text-align: right;">险种名称</td>
-		<td style="text-align: left;width:30px" ><input class="selectArea" type="text" name="CProdName"  class="input-small"
+		<td style="text-align: left" ><input class="selectArea" type="text" name="CProdName"  class="input-small"
 						id="CProdName" /></td>	
 				<td style="text-align: right;">保险止期</td>
 				<td style="text-align: left;">

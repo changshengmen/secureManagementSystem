@@ -18,10 +18,10 @@
 			<tr>
 				<td style="text-align: right;">产品代码</td>
 				<td style="text-align: left;"><input type="text" name="CProdNo"  class="search-query input-small"
-						id="CProdNo" data-rule="产品代码;CProdNo;" size="40" maxlength="40"/></td>
+						id="CProdNo" data-rule="产品代码;CProdNo;"/></td>
 				<td style="text-align: right;">产品名称</td>
 				<td style="text-align: left;" ><input type="text" name="CProdName"  class="input-small"
-						id="CProdName" data-rule="产品名称;CProdName;" size="40" maxlength="40"/></td>					
+						id="CProdName" data-rule="产品名称;CProdName;"/></td>					
 			</tr>
 	<!--------------------------------------------------------	<tr>
 				<td style="text-align: right;">录入时间</td>
@@ -47,7 +47,7 @@
 			</tr>---------------------------------------------------------------->
 			<tr>
 				<td colspan="20">                   
-						<button method="selectList" class="btn btn-primary" onclick="selectList(this)">
+						<button method="selectList" class="btn btn-primary">
 							<i class="icon-search icon-white"></i> 查询
 						</button>
                    
