@@ -29,9 +29,21 @@
 			<li><a href="#tabs-1">投保人/被保人基本信息</a></li>
 					
 		</ul>
-		<!--------------------------用于后面支付的时候查询保险产品的隐藏域----产品代码--------------------------------->
+		<!--------------------------订单的流水号------------------------------------->		
+		 <#if base.serialNumber??>
+			<input type="hidden"id="SerialNumber"  name="serialNumber" value="${base.serialNumber}"></input>	
+		 </#if>		
+		<!--------------------------订单的流水号------------------------------------->	
+		<!--------------------------用于判断支付是否成功的隐藏域------------------------------------->		
+		 <#if resultCode??>
+			<input type="hidden"id="resultCode"  name="resultCode" value="${resultCode}"></input>	
+		 </#if>		
+		<!--------------------------用于判断支付是否成功的隐藏域------------------------------------->	
+		<!--------------------------用于后面支付的时候查询保险产品的隐藏域------------------------------------->
 		
 		<input type="hidden" name="CProdNo" value="${base.CProdNo!""}"></input>	
+		<input type="hidden" name="NAmt" value="${base.NAmt!""}"></input>	
+		<input type="hidden" name="NPrm" value="${base.NPrm!""}"></input>	
 		<!--------------------------用于后面支付的时候查询保险产品的隐藏域------------------------------------->	
 	<!--------------------------投保人模块------------------------------------->		
 
@@ -40,7 +52,7 @@
 					<td style="text-align: right;font-weight:bold">投保单号</td>
 					<td >
 						<input type="text" name="CAppNo" value="${base.CAppNo!""}"
-		                                             id="CAppNo" />
+		                                             id="CAppNo" size="44";/>
 		                                          
 					</td>
 					<td style="text-align: right;font-weight:bold">投保人代码</td>
@@ -171,6 +183,18 @@
 						 onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2200-03-10 20:59:30' })" />
 						&nbsp;<span style="color:red">*</span>
 					  </td>
+					<!--  
+	           		<td style="text-align: right;">Quantity:</td> 
+	           		<td>   
+			        <div class="input-group spinner" data-trigger="spinner">
+			          <input type="text" class="form-control text-center" value="1" data-rule="quantity">
+			          <div class="input-group-addon">
+			            <a href="javascript:;" class="spin-up" data-spin="up"><i class="fa fa-caret-up"></i></a>
+			            <a href="javascript:;" class="spin-down" data-spin="down"><i class="fa fa-caret-down"></i></a>
+			          </div>       
+			      	</div>
+     				 </td>
+     				 -->
 				</tr>
 	                     
 		<!-------------------------table ending---------------------------------->
@@ -257,7 +281,7 @@
                             			<option value="${key}" <#if common.BCustRiskRank?? && common.BCustRiskRank==key>selected="selected"</#if>>${map[key]}</option>
                         			</#list>
                     			</select>
-	           		</td>
+	           		</td>	           		
           		</tr>
 	           </table>
 		  	 <!------------------table ending---------------------------------->																
@@ -282,11 +306,25 @@
 			</div>
 			<!--------------------------操作按钮模块------------------------------------->	
 </form>
+<!--
+<link rel="stylesheet" type="text/css" href="${basepath}/resource/bootstrap-spinner/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="${basepath}/resource/bootstrap-spinner/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="${basepath}/resource/bootstrap-spinner/bootstrap-spinner.css">
 
+<script src="${basepath}/resource/js/jquery.min.js"></script>
+<script src="${basepath}/resource/bootstrap3.3.4/js/bootstrap.min.js"></script>
+<script src="${basepath}/resource/bootstrap-spinner/jquery.spinner.js"></script>-->
 <script>
 $(function() {
 	$( "#tabs" ).tabs({
 	});
+	if($("#resultCode")[0]!==undefined){
+		window.onbeforeunload = null;	
+		window.location.href = "http://60.212.43.251:6003/onlinepay/recvMerchantAction.do?orderId="+$("#resultCode").val();
+	}
+	else{
+		window.onbeforeunload=function(event){return confirm("您确定离开此页面吗？");}	
+	}
 	showCode();
 	//信息同步（按钮） 时从投保人信息自动带出被保人
 	$("#copyInfo").click(function(){	
@@ -306,11 +344,10 @@ $(function() {
   		}
   		
   	});
-  	debugger;
-  	window.onbeforeunload=function(event){return confirm("您确定离开此页面吗？");}	
+  
   	
 });
-//点击提交或者支付的时候不用验证是否离开页面，此方法解除验证
+//不用验证是否离开页面，此方法解除验证
 function unbind(){
 	window.onbeforeunload = null;
 }

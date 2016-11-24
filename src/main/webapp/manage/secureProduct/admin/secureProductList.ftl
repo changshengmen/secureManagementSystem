@@ -121,7 +121,7 @@
 					<td >					
 						<a class="toEditProduct" href="toEditProduct?id=${item.id}">编辑|</a>	
 						<a href="toOrder?id=${item.id}">查看</a>|
-						<a href="toPayPage?id=${item.id}&CProdNo=${item.CProdNo}">下单</a>
+						<a href="toPayPage?CProdNo=${item.CProdNo}&NAmt=${item.NAmt}&NPrm=${item.NPrm}">下单</a>
 					</td>
 				</tr>
             </#list>

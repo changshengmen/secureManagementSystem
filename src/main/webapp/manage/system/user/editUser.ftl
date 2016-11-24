@@ -66,6 +66,12 @@
 								<input type="text" name="nickname" value="${e.nickname!""}" id="nickname"  data-rule="昵称:required;nickname;length[2~20];remote[unique, id]"/>
 									</td>
 							</tr>
+							<tr>
+								<th class="td_right">邮箱</th>
+								<td style="text-align: left;">
+								<input type="text" name="email" value="${e.email!""}" id="email"  data-rule="邮箱:required;email"/>
+									</td>
+							</tr>
 				
 				                <tr>
 				                    <th class="td_right">密码</th>
