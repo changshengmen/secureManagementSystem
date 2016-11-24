@@ -2,12 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- create by autoCode,v1.0.0 -->
 <mapper namespace="manage.nvhlInsured">
-
+<select id="manage.NvhlInsuredVO.selectOne"
+		parameterType="net.jeeshop.services.manage.NvhlInsuredVO.bean.NvhlInsuredVO"
+		resultType="net.jeeshop.services.manage.NvhlInsuredVO.bean.NvhlInsuredVO">
+		select * from nvhlinsuredvo where 1=1 
+		<if test="InsuredCde !=null and InsuredCde !=''">
+			and InsuredCde=#{InsuredCde}
+		</if>							
+</select>
 <delete id="manage.NvhlBase.deleteNvhlInsured" parameterType="net.jeeshop.services.manage.NvhlInsuredVO.bean.NvhlInsuredVO">
-		delete from  nvhlinsuredvo where  InsuredCde=#{InsuredCde}
-		<if test="createAccount !=null and createAccount !=''">
-			and createAccount =#{createAccount}
-		</if>
-	</delete>
+	delete from  nvhlinsuredvo where  InsuredCde=#{InsuredCde}
+	<if test="createAccount !=null and createAccount !=''">
+		and createAccount =#{createAccount}
+	</if>
+</delete>
 	
 </mapper>

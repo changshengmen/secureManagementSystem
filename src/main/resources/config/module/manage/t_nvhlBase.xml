@@ -34,7 +34,18 @@
 		order by createtime desc,TAppTm,TInsrncEndTm 	
 			limit #{offset},#{pageSize}
 	</select>
-
+	<select id="manage.NvhlBase.selectOne"
+		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO"
+		resultType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO">
+		select * from nvhlbasevo p where 1=1 
+		<if test="payNo !=null and payNo !=''">
+			and payNo=#{payNo}
+		</if>	
+		<if test="serialNumber !=null and serialNumber !=''">
+			and serialNumber=#{serialNumber}
+		</if>	
+			
+		</select>
 	<!-- 保险订单查询分页 -->
 	<select id="manage.NvhlBase.selectPageCount"
 		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO"
@@ -58,9 +69,9 @@
 	<insert id="manage.NvhlBase.insertNvhlBase"
 		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO"
 		useGeneratedKeys="true" keyProperty="id">
-		insert into nvhlbasevo(SerialNumber,CDptCde,SysRes,CBsnsTyp,CChaType,CChaSubtype,FinTyp,CProdNo,AppCde,InsuredCde,CCiMrk,NAmtRmbExch,NAmt,NPrmRmbExch,NPrm,
+		insert into nvhlbasevo(SerialNumber,CAppNo,CDptCde,SysRes,CBsnsTyp,CChaType,CChaSubtype,FinTyp,CProdNo,AppCde,InsuredCde,CCiMrk,NAmtRmbExch,NAmt,NPrmRmbExch,NPrm,
          TAppTm,TInsrncBgnTm,TInsrncEndTm,CGrpMrk,EfcManualFlag,CPlyTyp,CNeedfeeFlag,ICopyNum,createAccount,createTime,CProdName,status,deleteFlag,payNo)
-         values(#{serialNumber},#{CDptCde},#{SysRes},#{CBsnsTyp},#{CChaType},#{CChaSubtype},#{FinTyp},#{CProdNo},#{AppCde},#{InsuredCde},#{CCiMrk},#{NAmtRmbExch},#{NAmt},#{NPrmRmbExch},#{NPrm},#{TAppTm}
+         values(#{serialNumber},#{CAppNo},#{CDptCde},#{SysRes},#{CBsnsTyp},#{CChaType},#{CChaSubtype},#{FinTyp},#{CProdNo},#{AppCde},#{InsuredCde},#{CCiMrk},#{NAmtRmbExch},#{NAmt},#{NPrmRmbExch},#{NPrm},#{TAppTm}
   		,#{TInsrncBgnTm},#{TInsrncEndTm},#{CGrpMrk},#{EfcManualFlag},#{CPlyTyp},#{CNeedfeeFlag},#{ICopyNum},#{createAccount},now(),#{CProdName},#{status},#{deleteFlag},#{payNo})
 	</insert>
 	<!--插入 投保人NvhlApplicantVO  -->
@@ -92,8 +103,8 @@
          #{Province},#{City},#{Area},#{Stree},#{CusRiskLvl},
          #{CustRiskRank},#{createAccount},now())
 	</insert>
-	<!--更新订单信息 -->
-	<update id="manage.NvhlBase.update"
+	<!--更新支付申请号 -->
+	<update id="manage.NvhlBase.updatePayNo"
 		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO">
 		update nvhlbasevo
 		set
@@ -104,7 +115,20 @@
 		<if test="payNo !=null and payNo !=''">
 			,payNo=#{payNo}
 		</if>
-
+		where 1=1
+		<if test="serialNumber !=null and serialNumber !=''">
+			and serialNumber=#{serialNumber}
+		</if>
+	</update>
+	<!--支付完成后更新订单信息 -->
+	<update id="manage.NvhlBase.update"
+		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO">
+		update nvhlbasevo
+		set
+		updatetime=now(),updateAccount=#{updateAccount}
+		<if test="status !=null and status !=''">
+			,status=#{status}
+		</if>
 		<if test="cashNo !=null and cashNo !=''">
 			,cashNo=#{cashNo}
 		</if>
@@ -132,9 +156,6 @@
 			,remark=#{remark}
 		</if>
 		where 1=1
-		<if test="serialNumber !=null and serialNumber !=''">
-			and serialNumber=#{serialNumber}
-		</if>
 		<if test="payNo !=null and payNo !=''">
 			and payNo=#{payNo}
 		</if>

@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,12 +53,19 @@ public class NvhlBaseAction  extends BaseController<NvhlBaseVO>{
 	* @return String    返回类型 
 	* @throws
 	 */
-	
-	public String selectList(HttpServletRequest request,@ModelAttribute("base") NvhlBaseVO base) throws Exception {				
-		String appCde = RequestHolder.getRequest().getParameter("appCde");//企业编码	
-		base.setAppCde(appCde);
-		 super.selectList(request, base);
-		 return page_toList;		 
+	@RequestMapping(value = "selectOrderList")
+	public String selectOrderList(HttpServletRequest request,@ModelAttribute("base") NvhlBaseVO base,ModelMap model) throws Exception {				
+		if(StringUtils.isNotBlank(RequestHolder.getRequest().getParameter("payReturnFlag"))){						
+			super.selectList(request, base);
+			model.addAttribute("message", "支付成功1");
+			return page_toList;
+		}else{			
+			String appCde = RequestHolder.getRequest().getParameter("appCde");//企业编码	
+			base.setAppCde(appCde);
+			super.selectList(request, base);
+			return page_toList;
+		}
+				 
 	}
 	
 }

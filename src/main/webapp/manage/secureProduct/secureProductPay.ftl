@@ -45,7 +45,7 @@
 		<input type="hidden" name="NAmt" value="${base.NAmt!""}"></input>	
 		<input type="hidden" name="NPrm" value="${base.NPrm!""}"></input>	
 		<!--------------------------用于后面支付的时候查询保险产品的隐藏域------------------------------------->	
-	<!--------------------------投保人模块------------------------------------->		
+		<!--------------------------投保人模块------------------------------------->		
 
 			 <table class="table table-bordered table-condensed" style="margin-bottom:5px;" id="tableInfo">
 				<tr id="codeTr">
@@ -160,7 +160,7 @@
                     			</select>
 	           		</td> 
 	           	</tr>
-	           <tr>	           		
+	           <tr>   	                		
 	                 <td style="text-align: right;">投保日期</td>
 	        		  <td colspan="2"> <input id="TAppTm" type="text" name="TAppTm" style="line-height:4px;height:30px;"
 							class="Wdate search-query input-small" value="${base.TAppTm!""}" data-rule="required;"
@@ -169,32 +169,29 @@
 					  </td>
 					   <td style="text-align: right;">保险起期</td>
 	        		 <td colspan="2"> <input id="TInsrncBgnTm" type="text" name="TInsrncBgnTm" style="line-height:4px;height:30px;"
-							class="Wdate search-query input-small" value="${base.TInsrncBgnTm!""}" data-rule="required;"
-							onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2200-03-10 20:59:30' })"/>
+							class="Wdate search-query input-small" value="${base.TInsrncBgnTm!""}" data-rule="required;" 
+							onFocus="WdatePicker({el:'TInsrncBgnTm',onpicked:setTInsrncEndTm, skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2200-03-10 20:59:30' })"/>
 							&nbsp;<span style="color:red">*</span>
 					 </td>  
 	           </tr>
 	            <tr>	
-	             	         		 
+	             	 <td style="text-align: right;">保期/(年)</td> 
+	           		 <td colspan="2">   
+			        	<div class="input-group spinner" data-trigger="spinner">
+				          	<input type="text" id="secureCount" class="form-control text-center" value="1" data-rule="quantity">
+				          	<div class="input-group-addon">
+				            <a href="javascript:;" class="spin-up" data-spin="up" onclick="setSecureYearAdd()"><i class="fa fa-caret-up"></i></a>
+				            <a href="javascript:;" class="spin-down" data-spin="down" onclick="setSecureYearDec()"><i class="fa fa-caret-down"></i></a>
+				          	</div>       
+			      	  	</div>
+     				 </td>       		 
 	                  <td style="text-align: right;">保险止期</td>
-	        		  <td colspan="5">  	        		  
+	        		  <td colspan="2">  	        		  
 						<input id="TInsrncEndTm" style="line-height:3px;height:30px;" class="Wdate search-query input-small" 
 						name="TInsrncEndTm" type="text" value="${base.TInsrncEndTm!""}" data-rule="required;"
 						 onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2200-03-10 20:59:30' })" />
 						&nbsp;<span style="color:red">*</span>
 					  </td>
-					<!--  
-	           		<td style="text-align: right;">Quantity:</td> 
-	           		<td>   
-			        <div class="input-group spinner" data-trigger="spinner">
-			          <input type="text" class="form-control text-center" value="1" data-rule="quantity">
-			          <div class="input-group-addon">
-			            <a href="javascript:;" class="spin-up" data-spin="up"><i class="fa fa-caret-up"></i></a>
-			            <a href="javascript:;" class="spin-down" data-spin="down"><i class="fa fa-caret-down"></i></a>
-			          </div>       
-			      	</div>
-     				 </td>
-     				 -->
 				</tr>
 	                     
 		<!-------------------------table ending---------------------------------->
@@ -306,14 +303,12 @@
 			</div>
 			<!--------------------------操作按钮模块------------------------------------->	
 </form>
-<!--
-<link rel="stylesheet" type="text/css" href="${basepath}/resource/bootstrap-spinner/bootstrap.min.css">
+ <link rel="stylesheet" href="${basepath}/resource/uploadify/uploadify.css"  type="text/css">
+<link rel="stylesheet" type="text/css" href="${basepath}/resource/bootstrap3.3.4/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="${basepath}/resource/bootstrap-spinner/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="${basepath}/resource/bootstrap-spinner/bootstrap-spinner.css">
 
-<script src="${basepath}/resource/js/jquery.min.js"></script>
-<script src="${basepath}/resource/bootstrap3.3.4/js/bootstrap.min.js"></script>
-<script src="${basepath}/resource/bootstrap-spinner/jquery.spinner.js"></script>-->
+
 <script>
 $(function() {
 	$( "#tabs" ).tabs({
@@ -344,9 +339,39 @@ $(function() {
   		}
   		
   	});
-  
   	
 });
+//设置保期-
+function setSecureYearDec(){
+//投保起期不为空才做操作
+	var bgnTm = $("#TInsrncBgnTm").val();
+	if(bgnTm != ''){
+		if($("#secureCount").val()!="1"){
+			var bgnTm = $("#TInsrncBgnTm").val();
+			if(bgnTm != ''){
+				var year = parseInt(bgnTm.substring(0,4));
+				var secureCount = parseInt($("#secureCount").val())-1;
+				$("#TInsrncEndTm").val(year+secureCount+bgnTm.substring(4));
+			} 
+		}	
+	}	
+}
+//设置保期+
+function setSecureYearAdd(){
+//投保起期不为空才做操作
+	var bgnTm = $("#TInsrncBgnTm").val();
+	if(bgnTm != ''){
+		var year = parseInt(bgnTm.substring(0,4));
+		var secureCount = parseInt($("#secureCount").val())+1;
+		$("#TInsrncEndTm").val(year+secureCount+bgnTm.substring(4));
+	} 
+}
+//给保险止期赋值
+function setTInsrncEndTm(){
+	$dp.$('TInsrncEndTm').value = parseInt($dp.cal.getP('y'))+parseInt($("#secureCount").val())+'-'+$dp.cal.getP('M')+'-'+$dp.cal.getP('d')
+		+' '+$dp.cal.getP('H')+':'+$dp.cal.getP('m')+':'+$dp.cal.getP('s');
+return true;
+}
 //不用验证是否离开页面，此方法解除验证
 function unbind(){
 	window.onbeforeunload = null;
@@ -363,29 +388,28 @@ function copyInfo(){
 		})
 }
 function selectApplicantInfo(a){//提交
-  	var url = basepath+'/manage/nvhlApplicantVO/selectApplicantList?name='+a;
-  	  	$.ajax({
-                 url: url,
-                 type: "POST",                
-                 dataType: "json",
-                 async: false,
-                 success: function(data){ 
-	                 $.each(data,function(i){
-	                 	$("#Name").val(data[i].appNmePlay);
-	                 	$("#ClntMrk").val(data[i].ClntMrk);
-	                 	$("#ClntAddr").val(data[i].clntAddrPlay);        	
-	                 	$("#CertfCls").val(data[i].certfClsPlay);                 	
-	                 	$("#CertfCde").val(data[i].certfCdePlay);
-	                 	$("#Mobile").val(data[i].mobilePlay);
-	                 	$("#Country").val(data[i].countryPlay);
-	                 	$("#ZipCde").val(data[i].zipCde);
-	                 	$("#Email").val(data[i].emailPlay);
-	                 	$("#CusRiskLvl").val(data[i].cusRiskLvl);
-	                 	$("#CustRiskRank").val(data[i].custRiskRank);
-	                 })   	                            	           	                   
-                  }                
-               }); 
-             
+var url = basepath+'/manage/nvhlApplicantVO/selectApplicantList?name='+a;
+$.ajax({
+         url: url,
+         type: "POST",                
+         dataType: "json",
+         async: false,
+         success: function(data){ 
+             $.each(data,function(i){
+             	$("#Name").val(data[i].appNmePlay);
+             	$("#ClntMrk").val(data[i].ClntMrk);
+             	$("#ClntAddr").val(data[i].clntAddrPlay);        	
+             	$("#CertfCls").val(data[i].certfClsPlay);                 	
+             	$("#CertfCde").val(data[i].certfCdePlay);
+             	$("#Mobile").val(data[i].mobilePlay);
+             	$("#Country").val(data[i].countryPlay);
+             	$("#ZipCde").val(data[i].zipCde);
+             	$("#Email").val(data[i].emailPlay);
+             	$("#CusRiskLvl").val(data[i].cusRiskLvl);
+             	$("#CustRiskRank").val(data[i].custRiskRank);
+             })   	                            	           	                   
+          }                
+       });             
 }
 
 //显示投保单号，投保人编码和被保人编码 ;
