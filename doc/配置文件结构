@@ -1,0 +1,25 @@
+ 1. applicationContext-dao.xml
+ (1)配置c3p0数据源
+ (2)sessionFactory : mybatis-config.xml
+ (3) 定义事务管理器（声明式的事务）
+  
+ 2. applicationContext-base.xml
+ (1)注入 baseDao
+  （2)注入 freemakerHelper初始化类
+  
+  3.applicationContext-cache.xml 缓存配置文件
+  
+  4.applicationContext-manage.xml
+  (1)加载系统缓存
+  
+  5. applicationContext-front.xml
+  (1)加载前段配置缓存
+  
+  6.spring-mvc.xml
+      （1）配置自定义转换服务器
+      （2）启用注解驱动 
+      （3）配置国际化资源文件
+      （4）配置freeMarker模板路径
+      （5）配置jsp视图解析器
+      （6）配置freeMarker视图解析器
+      （7）配置上传文件所需的解析器 

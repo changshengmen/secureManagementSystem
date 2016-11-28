@@ -1,7 +1,9 @@
 package net.jeeshop.core.util;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DateTimeUtil {
@@ -124,5 +126,27 @@ public class DateTimeUtil {
 		Date dt = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat(expression);
 		return sdf.format(dt);
+	}
+	
+	
+	/**
+	* @param   string dateTime
+	* @Description: TODO(获取第二天的零点 时分秒) 
+	* @author lyx
+	* @date 2016年11月28日 下午3:20:49 
+	* @return String    返回类型 
+	* @throws
+	 */
+	public static String getNextDay(String dateTime){
+		DateFormat datef =  new SimpleDateFormat("yyyy-MM-dd");		
+        Calendar cal = Calendar.getInstance();
+        try {
+			cal.setTime(datef.parse(dateTime));
+			cal.add(Calendar.DAY_OF_MONTH,1);
+			return  datef.format(cal.getTime())+" 00:00:00";
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 }
