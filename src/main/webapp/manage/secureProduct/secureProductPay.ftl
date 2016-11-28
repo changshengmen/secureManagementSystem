@@ -26,19 +26,18 @@
 <form action="${basepath}/manage/secureProduct" id="form" name="form" namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">		
 <div id="tabs">
 		<ul>
-			<li><a href="#tabs-1">投保人/被保人基本信息</a></li>
-					
+			<li><a href="#tabs-1">投保人/被保人基本信息</a></li>					
 		</ul>
+		<!--------------------------支付页面的url------------------------------------->		
+		 <#if payUrl??>
+			<input type="hidden"id="payUrl"  name="payUrl" value="${payUrl}"></input>	
+		 </#if>		
+		<!--------------------------支付页面的url------------------------------------->	
 		<!--------------------------订单的流水号------------------------------------->		
 		 <#if base.serialNumber??>
 			<input type="hidden"id="SerialNumber"  name="serialNumber" value="${base.serialNumber}"></input>	
 		 </#if>		
 		<!--------------------------订单的流水号------------------------------------->	
-		<!--------------------------用于判断支付是否成功的隐藏域------------------------------------->		
-		 <#if resultCode??>
-			<input type="hidden"id="resultCode"  name="resultCode" value="${resultCode}"></input>	
-		 </#if>		
-		<!--------------------------用于判断支付是否成功的隐藏域------------------------------------->	
 		<!--------------------------用于后面支付的时候查询保险产品的隐藏域------------------------------------->
 		
 		<input type="hidden" name="CProdNo" value="${base.CProdNo!""}"></input>	
@@ -313,9 +312,9 @@
 $(function() {
 	$( "#tabs" ).tabs({
 	});
-	if($("#resultCode")[0]!==undefined){
-		window.onbeforeunload = null;	
-		window.location.href = "http://60.212.43.251:6003/onlinepay/recvMerchantAction.do?orderId="+$("#resultCode").val();
+	if($("#payUrl")[0]!==undefined){
+		window.onbeforeunload = null;			
+		window.location.href = $("#payUrl").val();
 	}
 	else{
 		window.onbeforeunload=function(event){return confirm("您确定离开此页面吗？");}	
@@ -333,6 +332,7 @@ $(function() {
   		}
   		else{
 	  		$("table input").val("");
+	  		$("#secureCount").val("1");
 	  		$("#copyInfo").val("信息同步");
 			// jquery1.6或以上版本
 			$("table select").prop('selectedIndex', 0);

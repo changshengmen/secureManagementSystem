@@ -83,6 +83,7 @@
 				
 		<table class="table table-bordered table-hover"style="text-align: center;">
 			<tr style="background-color: #dff0d8">
+				<th style="text-align: center;">投保单号</th>
 				<th style="text-align: center;">产品代码</th>
 				<th style="text-align: center;">产品名称</th>				
 				<th style="text-align: center;">投保企业</th>
@@ -93,9 +94,11 @@
 				<th style="text-align: center;">保险起期</th>
 				<th style="text-align: center;">保险止期</th>
 				<th style="text-align: center;">业务员</th>
+				<th style="text-align: center;">投保状态</th>
 			</tr>
 			<#list pager.list as item>
 				<tr>
+					<td>${item.CAppNo!""}</td>
 					<td>${item.CProdNo!""}</td>
 					<td>${item.CProdName!""}</td>					
 					<td>${item.appnme!""}</td>
@@ -117,6 +120,14 @@
 					<td></td>
 					</#if>
 					<td>${item.username!""}</td>
+					<td>
+						<#assign map = {"0":'支付成功，保单落地',"1":'支付中',"2":'信息审核中',"3":"支付成功"}>
+						<#list map?keys as key>
+						  <#if item.status?? && item.status==key>
+						  ${map[key]}
+						  </#if>
+						</#list>
+					</td>
 			</tr>
 			</#list>
 			<tr>
