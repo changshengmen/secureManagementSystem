@@ -5,6 +5,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TimeZone;
 
 public class DateTimeUtil {
 	public static void main(String[] args) throws Exception {
@@ -131,22 +134,60 @@ public class DateTimeUtil {
 	
 	/**
 	* @param   string dateTime
-	* @Description: TODO(获取第二天的零点 时分秒) 
+	* @Description: TODO(获取当天 23：59：59) 
 	* @author lyx
 	* @date 2016年11月28日 下午3:20:49 
 	* @return String    返回类型 
 	* @throws
 	 */
 	public static String getNextDay(String dateTime){
-		DateFormat datef =  new SimpleDateFormat("yyyy-MM-dd");		
-        Calendar cal = Calendar.getInstance();
-        try {
-			cal.setTime(datef.parse(dateTime));
-			cal.add(Calendar.DAY_OF_MONTH,1);
-			return  datef.format(cal.getTime())+" 00:00:00";
-		} catch (ParseException e) {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String dt = formatter.format(dateTime);
+		return  dt +" 23:59:59";
+	}
+	
+	/**
+	* @param
+	* @Description: TODO(把时间解析成json串 供传送) 
+	* @author lyx
+	* @date 2016年11月29日 上午11:02:40 
+	* @return Map    返回类型 
+	* @throws
+	 */
+	public static Map getDateFormat(String dateTime){
+		if(dateTime!="" &&dateTime.length()<11){
+			dateTime = dateTime + " 00:00:00";
+		}
+		Map m = new HashMap();
+		Calendar ca = Calendar.getInstance();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String hour;String minute;String second;Long times;int tz ; int year;int dat;int day;int month;
+		try {
+			Date dt = formatter.parse(dateTime);
+			times = dt.getTime();  //time 时间戳
+			day = dt.getDay()+1;
+			year = dt.getYear()+1;
+			tz = dt.getTimezoneOffset();
+			dat = dt.getDate();
+			month = dt.getMonth();
+			hour = dateTime.substring(11, 13);
+			minute = dateTime.substring(14, 16);
+			second = dateTime.substring(17, 19);
+			
+			m.put("date", dat);
+			m.put("day", day);
+			m.put("hour", hour);
+			m.put("minutes", minute);
+			m.put("month", month);
+			m.put("seconds", second);
+			m.put("time", times);
+			m.put("timezoneOffset", tz);
+			m.put("year", year);
+			
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "";
+		return m;
 	}
 }
