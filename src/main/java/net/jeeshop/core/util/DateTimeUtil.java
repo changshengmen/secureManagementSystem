@@ -151,7 +151,7 @@ public class DateTimeUtil {
 	}
 	
 	/**
-	* @param
+	* @param  yyyyMMddhhmmss 格式
 	* @Description: TODO(把时间解析成json串 供传送) 
 	* @author lyx
 	* @date 2016年11月29日 上午11:02:40 
@@ -191,7 +191,7 @@ public class DateTimeUtil {
 			m.put("time", times);
 			m.put("timezoneOffset", tz);
 			m.put("year", year);
-		} catch (Exception e) {
+		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		return m;
