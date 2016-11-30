@@ -8,6 +8,8 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
+
 public class DateTimeUtil {
 	public static void main(String[] args) throws Exception {
 		
@@ -132,26 +134,38 @@ public class DateTimeUtil {
 	
 	
 	/**
-	* @param   string dateTime
+	* @param   string dateTime yyyy-MM-dd hh:mm:ss  如果为空 获取当前时间
 	* @Description: TODO(获取第二天的零点 时分秒) 
 	* @author lyx
 	* @date 2016年11月28日 下午3:20:49 
 	* @return String    返回类型 
 	* @throws
 	 */
-	public static String getNextDay(){
-		 Date date=new Date();//取时间
+	public static String getNextDay(String dt){
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+		Date date = null ;
+		if(StringUtils.isBlank(dt)||dt==""){
+			date = new Date();
+		}
+		else{
+			String dtNow = dt.replace("-", "").substring(0, 8);
+			try {
+				date = formatter.parse(dtNow);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
 		 Calendar calendar = new GregorianCalendar();
 		 calendar.setTime(date);
 		 calendar.add(calendar.DATE,1);
-		 date=calendar.getTime(); //这个时间就是日期往后推一天的结果 
-		 SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+		 date = calendar.getTime(); //这个时间就是日期往后推一天的结果 
+		
 		 String dateString = formatter.format(date);
 		 return dateString + "000000";
 	}
 	
 	/**
-	* @param  yyyyMMddhhmmss 格式
+	* @param  yyyyMMddhhmmss 获取 yy-MM-dd hh:mm:ss 格式
 	* @Description: TODO(把时间解析成json串 供传送) 
 	* @author lyx
 	* @date 2016年11月29日 上午11:02:40 
@@ -159,9 +173,13 @@ public class DateTimeUtil {
 	* @throws
 	 */
 	public static Map getDateFormat(String dateTime){
+		if(dateTime.indexOf("-")>-1){
+			String ss = dateTime.replaceAll("(?:-|:|)", "");
+			dateTime = ss.replaceAll(" ", "");
+		}
+		
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMddhhmmss"); 
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		
 		
 		Map m = new HashMap();
 		Calendar ca = Calendar.getInstance();
