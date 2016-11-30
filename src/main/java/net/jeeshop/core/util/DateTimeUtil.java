@@ -159,24 +159,28 @@ public class DateTimeUtil {
 	* @throws
 	 */
 	public static Map getDateFormat(String dateTime){
-		if(dateTime!="" &&dateTime.length()<11){
-			dateTime = dateTime + " 00:00:00";
-		}
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMddhhmmss"); 
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		
 		Map m = new HashMap();
 		Calendar ca = Calendar.getInstance();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String hour;String minute;String second;Long times;int tz ; int year;int dat;int day;int month;
+		
+		String hour;String minute;String second;Long times;int tz ; int year;int dat;int day;int month;int length;
 		try {
-			Date dt = formatter.parse(dateTime);
-			times = dt.getTime();  //time 时间戳
-			day = dt.getDay()+1;
-			year = dt.getYear()+1;
-			tz = dt.getTimezoneOffset();
-			dat = dt.getDate();
-			month = dt.getMonth();
-			hour = dateTime.substring(11, 13);
-			minute = dateTime.substring(14, 16);
-			second = dateTime.substring(17, 19);
+			Date date = (Date) sdf1.parse(dateTime);  
+			String dt = formatter.format(date);
+			Date dtNow = formatter.parse(dt);
+			times = dtNow.getTime();  //time 时间戳
+			day = dtNow.getDay()+1;
+			year = dtNow.getYear()+1;
+			tz = dtNow.getTimezoneOffset();
+			dat = dtNow.getDate();
+			month = dtNow.getMonth();
+			length = dateTime.length();
+			hour = dateTime.substring(length-6, length-4);
+			minute = dateTime.substring(length-4,length-2);
+			second = dateTime.substring(length-2,length);
 			
 			m.put("date", dat);
 			m.put("day", day);
@@ -187,8 +191,6 @@ public class DateTimeUtil {
 			m.put("time", times);
 			m.put("timezoneOffset", tz);
 			m.put("year", year);
-			
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
