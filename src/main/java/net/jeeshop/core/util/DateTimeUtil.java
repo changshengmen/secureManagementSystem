@@ -1,13 +1,12 @@
 package net.jeeshop.core.util;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TimeZone;
 
 public class DateTimeUtil {
 	public static void main(String[] args) throws Exception {
@@ -134,16 +133,21 @@ public class DateTimeUtil {
 	
 	/**
 	* @param   string dateTime
-	* @Description: TODO(获取当天 23：59：59) 
+	* @Description: TODO(获取第二天的零点 时分秒) 
 	* @author lyx
 	* @date 2016年11月28日 下午3:20:49 
 	* @return String    返回类型 
 	* @throws
 	 */
-	public static String getNextDay(String dateTime){
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		String dt = formatter.format(dateTime);
-		return  dt +" 23:59:59";
+	public static String getNextDay(){
+		 Date date=new Date();//取时间
+		 Calendar calendar = new GregorianCalendar();
+		 calendar.setTime(date);
+		 calendar.add(calendar.DATE,1);
+		 date=calendar.getTime(); //这个时间就是日期往后推一天的结果 
+		 SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+		 String dateString = formatter.format(date);
+		 return dateString + "000000";
 	}
 	
 	/**
