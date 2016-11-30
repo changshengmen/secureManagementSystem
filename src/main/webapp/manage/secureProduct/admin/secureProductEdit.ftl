@@ -89,10 +89,11 @@
      				<th style="text-align: center;"><input type="checkbox" id="firstCheckbox" /></th>
      				</#if>
      				<td style="display: none;">id</th>
+     				<th style="text-align: center;">险别代码</th>
      				<th style="text-align: center;">标的名称</th>
-     				<th style="text-align: center;">保费</th> 
-     				<th style="text-align: center;">保额</th>
-     				<th style="text-align: center;">费率</th>
+     				<th style="text-align: center;">保费(元)</th> 
+     				<th style="text-align: center;">保额(元)</th>
+     				<th style="text-align: center;">费率(‰)</th>
      				<th style="text-align: center;">确定方式</th>	
      				</tr>
         	        <#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
@@ -100,6 +101,14 @@
 							<tr>
 							<td><input type="checkbox" name="ids" value="${e.secureProductDetailList[item_index].id!""}" /></td>
 								<td style="display: none;"><input type="hidden" value="${e.secureProductDetailList[item_index].id!""}" name="secureProductDetailList[${item_index}].id"/></td>
+								<td>
+									<input type="text" value="${e.secureProductDetailList[item_index].cvrgNo!""}" name="secureProductDetailList[${item_index}].cvrgNo" 
+									 class="search-query input-small" 
+									 <#if item.cvrgNo??>
+									 data-rule="险别代码;required" 
+									 </#if>
+									 maxlength="40"/>
+								</td>		
 								<td>
 									<input type="text" value="${e.secureProductDetailList[item_index].subName!""}" name="secureProductDetailList[${item_index}].subName" 
 									 class="search-query input-small" 
@@ -133,10 +142,14 @@
 	                    </#list>
 					<#else>           
             	    <#list [1,2,3] as item>					
-						<tr>							
+						<tr>
+							<td>
+								<input type="text" name="secureProductDetailList[${item_index}].cvrgNo"  class="search-query input-small"
+								data-rule="险别代码;cvrgNo" maxlength="40"/>
+							</td>							
 							<td>
 								<input type="text" name="secureProductDetailList[${item_index}].subName"  class="search-query input-small"
-								data-rule="子产品名称;subName;"data-rule="标的名称;required"  maxlength="40"/>
+								maxlength="40"/>
 							</td>
 							<td>
 								<input type="text" name="secureProductDetailList[${item_index}].premium"  class="search-query input-small"

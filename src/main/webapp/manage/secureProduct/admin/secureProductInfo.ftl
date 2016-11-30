@@ -21,9 +21,9 @@
 					<th nowrap="nowrap">产品代码</th>
 					<th style="width:20%;text-align: center">产品名称</th>
 					<th style="width:10%;text-align: center">保费币种</th>
-					<th style="width:20%;text-align: center">保费合计</th>
+					<th style="width:20%;text-align: center">保费合计(元)</th>
 					<th style="width:10%;text-align: center">保额币种</th>
-					<th style="width:20%;text-align: center">保额合计</th>
+					<th style="width:20%;text-align: center">保额合计(元)</th>
 					<th style="width:20%;text-align: center">简介</th>					
 				</tr>
 	   			<tr>
@@ -58,17 +58,19 @@
             <div id="tabs-2"> 
             	<table class="table table-bordered table-condensed table-hover" style="text-align: center;">                 
      				<tr style="background-color: #dff0d8">
-	     				<th style="display: none;">保险id</th>
-	     				<th style="width:20%;text-align: center">标的名称</th>
-	     				<th style="width:20%;text-align: center">保费</th> 
-	     				<th style="width:20%;text-align: center">保额</th>
-	     				<th style="width:20%;text-align: center">费率</th>
-	     				<th style="width:20%;text-align: center">保险金额的确定方式</th>	  
+	     				<th style="display: none;">id</th>
+	     				<th style="width:15%;text-align: center">险别代码</th>
+	     				<th style="width:15%;text-align: center">标的名称</th>
+	     				<th style="width:15%;text-align: center">保费(元)</th> 
+	     				<th style="width:15%;text-align: center">保额(元)</th>
+	     				<th style="width:15%;text-align: center">费率(‰)</th>
+	     				<th style="width:40%;text-align: center">保险金额的确定方式</th>	  
      				</tr>
         	        <#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
 	                    <#list e.secureProductDetailList as item>
 							<tr>
 								<td style="display: none;"><input type="hidden" value="${item.id!""}" name="secureProductDetailList[${item_index}].id"/></td>
+								<td>${e.secureProductDetailList[item_index].cvrgNo!""}</td>
 								<td>${e.secureProductDetailList[item_index].subName!""}</td>
 								<td>${e.secureProductDetailList[item_index].premium!""}</td>
 								<td>${e.secureProductDetailList[item_index].amount!""}</td>

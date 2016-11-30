@@ -192,7 +192,7 @@ public class UserAction extends BaseController<User>  {
 		Role role = new Role();
 		role.setId(u.getRid());
 		role = roleService.selectOne(role);
-		session.setAttribute(ManageContainer.manage_session_role_info, roleService.selectOne(role));
+		session.setAttribute(ManageContainer.manage_session_role_info, role);
 		
 		//解析用户的数据库权限，以后可以进行DB权限限制
 		if(StringUtils.isNotBlank(u.getRole_dbPrivilege())){

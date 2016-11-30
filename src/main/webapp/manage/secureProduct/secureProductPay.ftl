@@ -397,7 +397,7 @@ $.ajax({
          success: function(data){ 
              $.each(data,function(i){
              	$("#Name").val(data[i].appNmePlay);
-             	$("#ClntMrk").val(data[i].ClntMrk);
+             	$("#ClntMrk").val(data[i].clntMrk);
              	$("#ClntAddr").val(data[i].clntAddrPlay);        	
              	$("#CertfCls").val(data[i].certfClsPlay);                 	
              	$("#CertfCde").val(data[i].certfCdePlay);
