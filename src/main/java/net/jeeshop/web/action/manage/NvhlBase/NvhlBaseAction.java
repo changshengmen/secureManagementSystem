@@ -12,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import java_cup.runtime.virtual_parse_stack;
 import net.jeeshop.core.util.DateTimeUtil;
 import net.jeeshop.services.manage.NvhlApplicantVO.bean.NvhlApplicantVO;
 import net.jeeshop.services.manage.NvhlBaseVO.NvhlBaseService;
@@ -28,8 +30,8 @@ import net.jeeshop.web.util.RequestHolder;
 public class NvhlBaseAction  extends BaseController<NvhlBaseVO>{
 	private static final org.slf4j.Logger logger = LoggerFactory.getLogger(SecureOrderAction.class);
 	private static final long serialVersionUID = 1L;
-	private static final String page_toList = "/manage/NvhlBase/nvhlBaseList";
-	
+	private static final String page_toList = "/manage/NvhlBase/nvhlBaseList";//列表页面
+	private static final String page_toInfo = "/manage/NvhlBase/nvhlBaseInfo";//详细页面
 	private NvhlBaseAction() {
 		super.page_toList = page_toList;
 	}
@@ -66,6 +68,25 @@ public class NvhlBaseAction  extends BaseController<NvhlBaseVO>{
 			return page_toList;
 		}
 				 
+	}
+	/**
+	 * 
+	* @param
+	* @Description: 根据id查看订单详细 
+	* @author sunshuo
+	* @date 2016年11月30日 下午2:32:18 
+	* @return String    返回类型 
+	* @throws
+	 */
+	@RequestMapping(value = "selectOrderInfo")
+	public String selectOrderInfo(HttpServletRequest request,ModelMap model) throws Exception {				
+		if(StringUtils.isNotBlank(RequestHolder.getRequest().getParameter("id"))){						
+			NvhlBaseVO base = new NvhlBaseVO(); 
+			base.setId(RequestHolder.getRequest().getParameter("id").toString());
+			base = getService().selectOne(base);
+			model.addAttribute("base", base);			
+		}
+		return page_toInfo;
 	}
 	
 }

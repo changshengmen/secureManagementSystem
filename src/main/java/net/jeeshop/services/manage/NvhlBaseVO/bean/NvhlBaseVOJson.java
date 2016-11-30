@@ -1,6 +1,7 @@
 package net.jeeshop.services.manage.NvhlBaseVO.bean;
 
 import java.util.List;
+import java.util.Map;
 
 public class NvhlBaseVOJson
 { 
@@ -40,9 +41,9 @@ public class NvhlBaseVOJson
 	private String NPrmRmbExch;//保费币种   01 RMB
 	private String NPrm;//保费合计
 	
-	private String TAppTm;//投保日期
-	private String TInsrncBgnTm;//保险起期
-	private String TInsrncEndTm;//保险止期
+	private Map TAppTm;//投保日期
+	private Map TInsrncBgnTm;//保险起期
+	private Map TInsrncEndTm;//保险止期
 	
 	private String CGrpMrk;//团单标志 0 个单   1团单
 	private String EfcManualFlag;//是否转人工 Y转 N不转
@@ -468,18 +469,7 @@ public class NvhlBaseVOJson
 	{
 		return NPrm;
 	}
-	public String getTAppTm()
-	{
-		return TAppTm;
-	}
-	public String getTInsrncBgnTm()
-	{
-		return TInsrncBgnTm;
-	}
-	public String getTInsrncEndTm()
-	{
-		return TInsrncEndTm;
-	}
+
 	public String getCGrpMrk()
 	{
 		return CGrpMrk;
@@ -657,18 +647,7 @@ public class NvhlBaseVOJson
 	{
 		NPrm = nPrm;
 	}
-	public void setTAppTm(String tAppTm)
-	{
-		TAppTm = tAppTm;
-	}
-	public void setTInsrncBgnTm(String tInsrncBgnTm)
-	{
-		TInsrncBgnTm = tInsrncBgnTm;
-	}
-	public void setTInsrncEndTm(String tInsrncEndTm)
-	{
-		TInsrncEndTm = tInsrncEndTm;
-	}
+	
 	public void setCGrpMrk(String cGrpMrk)
 	{
 		CGrpMrk = cGrpMrk;
@@ -728,6 +707,30 @@ public class NvhlBaseVOJson
 	public void setTInsrncEndTmEndDate(String tInsrncEndTmEndDate)
 	{
 		TInsrncEndTmEndDate = tInsrncEndTmEndDate;
+	}
+	public Map getTAppTm()
+	{
+		return TAppTm;
+	}
+	public Map getTInsrncBgnTm()
+	{
+		return TInsrncBgnTm;
+	}
+	public Map getTInsrncEndTm()
+	{
+		return TInsrncEndTm;
+	}
+	public void setTAppTm(Map tAppTm)
+	{
+		TAppTm = tAppTm;
+	}
+	public void setTInsrncBgnTm(Map tInsrncBgnTm)
+	{
+		TInsrncBgnTm = tInsrncBgnTm;
+	}
+	public void setTInsrncEndTm(Map tInsrncEndTm)
+	{
+		TInsrncEndTm = tInsrncEndTm;
 	}
 	
 }

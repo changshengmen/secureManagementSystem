@@ -6,7 +6,7 @@
 	<select id="manage.NvhlBase.selectPageList"
 		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO"
 		resultType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO">
-		select n.SerialNumber id,IFNULL(DATEDIFF(NOW(),n.TInsrncEndTm),'') expire_days, 
+		select n.id,n.SerialNumber,IFNULL(DATEDIFF(NOW(),n.TInsrncEndTm),'') expire_days, 
 		n.CProdName,n.CAppNo,n.status,n.CProdNo,n.appCde appCdePlay,n.NAmt,n.NPrm,n.TAppTm,n.TInsrncBgnTm,n.TInsrncEndTm,n.createtime,
 		(select a.AppNme from  nvhlapplicantvo a where A.AppCde=n.AppCde  and a.createAccount = n.createAccount )AppNme ,
 		(select i.InsuredNme from  nvhlinsuredvo i where i.InsuredCde=n.InsuredCde and i.createAccount = n.createAccount )InsuredNme ,u.nickname username 
@@ -43,8 +43,10 @@
 		</if>	
 		<if test="serialNumber !=null and serialNumber !=''">
 			and serialNumber=#{serialNumber}
-		</if>	
-			
+		</if>
+		<if test="id !=null and id !=''">
+			and id=#{id}
+		</if>				
 		</select>
 	<!-- 保险订单查询分页 -->
 	<select id="manage.NvhlBase.selectPageCount"

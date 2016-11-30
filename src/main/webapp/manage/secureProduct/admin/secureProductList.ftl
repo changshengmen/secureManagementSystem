@@ -135,8 +135,8 @@
 		<div class="alert alert-info" style="text-align: left;font-size: 14px;margin: 2px 0px;">
 			图标含义：<BR>
 			
-			<img alt="已上架" src="${basepath}/resource/images/action_check.gif">：商品已上架
-			<img alt="已下架" src="${basepath}/resource/images/action_delete.gif">：商品已下架
+			<img alt="已上架" src="${basepath}/resource/images/action_check.gif">：产品已上架
+			<img alt="已下架" src="${basepath}/resource/images/action_delete.gif">：产品已下架
 		</div>
 
 	</form>

@@ -1,34 +1,6 @@
 <#import "/manage/tpl/pageBase.ftl" as page>
 <@page.pageBase currentMenu="订单信息">
-<style type="text/css">
-.titleCss {
-	background-color: #e6e6e6;
-	border: solid 1px #e6e6e6;
-	position: relative;
-	margin: -1px 0 0 0;
-	line-height: 32px;
-	text-align: left;
-}
 
-.aCss {
-	overflow: hidden;
-	word-break: keep-all;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	text-align: left;
-	font-size: 12px;
-}
-
-.liCss {
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	height: 30px;
-	text-align: left;
-	margin-left: 10px;
-	margin-right: 10px;
-}
-</style>
 <script type="text/javascript">
 	$(function() {
 	  //如果从客户页面跳转进来 显示返回按钮
@@ -47,16 +19,11 @@
 		$("#orderList").find("td[name='cappNo']").each(function(){
 			var cappNo = $(this).text();
 			var len = cappNo.length;
-			var showCappNo  = cappNo.substring(0,3) + "<a id="+cappNo+" href='javascript:void(0)' onclick='detail(this)'>XXX</a>" + cappNo.substring(len-3,len) ;
+			var showCappNo  = cappNo.substring(0,3) + "XXX" + cappNo.substring(len-3,len) ;
 		    $(this).html(showCappNo);
 		})
 	});
-	
-	//根据投保单号 查询详细信息
-	function detail(no){
-	 var  cappNo = no.id;  //投保单号
-	 alert(cappNo)
-	}
+
 </script>
 
 	<form action="${basepath}/manage/NvhlBase" method="post" theme="simple">
@@ -110,6 +77,7 @@
 				<th style="text-align: center;">保险止期</th>
 				<th style="text-align: center;">业务员</th>
 				<th style="text-align: center;">投保状态</th>
+				<th style="text-align: center;">操作</th>
 			</tr>
 			<#list pager.list as item>
 				<tr>
@@ -143,11 +111,15 @@
 						  </#if>
 						</#list>
 					</td>
+					<td>					
+						<a class="toEditProduct" href="selectOrderInfo?id=${item.id!""}">查看详情</a>	
+					<!--	<a href="secureProduct/pay_Result?id=${item.id}">保单落地</a>		-->				
+					</td>
 			</tr>
 			</#list>
 			<tr>
 				<td colspan="55" style="text-align: center;">
-					<#include "/manage/system/pager.ftl"/></td>
+				<#include "/manage/system/pager.ftl"/></td>
 			</tr>
 		</table>
 			</div>
