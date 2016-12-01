@@ -152,6 +152,37 @@ public class DateTimeUtil {
 	}
 	
 	/**
+	* @param   string dateTime yyyy-MM-dd hh:mm:ss  如果为空 获取当前时间
+	* @Description: TODO(获取前一天晚上的23：59：59) 
+	* @author lyx
+	* @date 2016年11月28日 下午3:20:49 
+	* @return String    返回类型 
+	* @throws
+	 */
+	public static String getLastDay(String dt){
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+		Date date = null ;
+		if(StringUtils.isBlank(dt)||dt==""){
+			date = new Date();
+		}
+		else{
+			String dtNow = dt.replace("-", "").substring(0, 8);
+			try {
+				date = formatter.parse(dtNow);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		 Calendar calendar = new GregorianCalendar();
+		 calendar.setTime(date);
+		 calendar.add(calendar.DATE,-1);
+		 date = calendar.getTime(); //这个时间就是日期往前推一天的结果 
+		
+		 String dateString = formatter.format(date);
+		 return dateString + "235959";
+	}
+	
+	/**
 	* @param  yyyyMMddhhmmss 获取 yy-MM-dd hh:mm:ss 格式
 	* @Description: TODO(把时间解析成json串 供传送) 
 	* @author lyx
