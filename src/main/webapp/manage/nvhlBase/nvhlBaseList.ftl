@@ -3,6 +3,9 @@
 
 <script type="text/javascript">
 	$(function() {
+	$('.tipso').tipso({
+		useTitle: false
+	});
 	  //如果从客户页面跳转进来 显示返回按钮
 	  var href = window.location.href;
 	  if(href.indexOf('appCde')>-1){
@@ -81,7 +84,7 @@
 			</tr>
 			<#list pager.list as item>
 				<tr>
-					<td name="cappNo">${item.CAppNo!""}</td>
+					<td class="tipso" name="cappNo" data-tipso="${item.CAppNo!""}">${item.CAppNo!""}</td>
 					<!--<td>${item.CProdNo!""}</td>-->
 					<td>${item.CProdName!""}</td>					
 					<td>${item.appnme!""}</td>

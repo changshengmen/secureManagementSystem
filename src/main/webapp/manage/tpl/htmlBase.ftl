@@ -82,6 +82,9 @@
     <#--<script charset="utf-8" src="${staticpath}/datatables-responsive/js/dataTables.responsive.js"></script>-->
     <script type="text/javascript" src="${basepath}/manage/manage.js"></script>
     <script type="text/javascript" src="${basepath}/resource/bootstrap-spinner/jquery.spinner.js"></script>
+   
+   	<link href="${basepath}/resource/tipso/css/tipso.css" rel="stylesheet">
+    <script type="text/javascript" src="${basepath}/resource/tipso/js/tipso.js"></script>
     <#list staticJsFiles as jsFile>
         <script src="${staticpath}/${jsFile}"></script>
     </#list>
