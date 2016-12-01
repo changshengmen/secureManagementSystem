@@ -128,8 +128,7 @@
 	                                             id="Mobile" value="${common.TMobile!""}" />&nbsp;<span style="color:red">*</span>
 	                 </td>
 	                
-	           <tr>
-	         
+	           <tr>	         
 	           	<tr> 
 	           	 	<td style="text-align: right;">国籍</td>
 	        	    <td><input type="text" name="TCountry"  value="${common.TCountry!""}"
