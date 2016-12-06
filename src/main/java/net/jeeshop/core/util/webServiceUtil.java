@@ -23,13 +23,14 @@ public class webServiceUtil
 			call.addParameter("TotalParValue", XMLType.XSD_STRING, ParameterMode.IN);
 			call.setReturnType(XMLType.XSD_STRING);
 			// 调用并且获取返回的报文结果
+			System.out.println("入参=" + json);
 			result = (String) call.invoke(new Object[] { json });
-			System.out.println("=================>" + result);
+			
 		} catch (Exception e)
 		{
 			System.out.println("GeneratorData_error_supply:" + e);
 		}
-		System.out.println("result=" + result);
+		System.out.println("出参=" + result);
 		return result;
 
 	}

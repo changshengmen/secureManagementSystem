@@ -72,7 +72,7 @@
 				<tr>
 					<td style="text-align: right;">选择客户</td>
 	        		<td>
-	        			<select id="quickChoose" class="input-medium" style="width:150px">
+	        			<select id="quickChoose" class="input-medium" style="width:150px" size="8">
 	        				<option value="0" selected="selected">请选择客户</option>
 	        				<#if applcantList??>
 	        					<#list applcantList as item>
