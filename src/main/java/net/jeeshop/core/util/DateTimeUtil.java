@@ -154,6 +154,42 @@ public class DateTimeUtil {
 		
 		return dateString;
 	}
+	
+	/**
+	 * @param string dateTime yyyy-MM-dd hh:mm:ss （入参） 如果为空 获取当前时间 
+	 * @param1 con :next 下一天 ？？？ last前一天
+	 * @Description: TODO(获取第二天的零点 时分秒) 
+	 * @author lyx @date
+	 * 2016年11月28日 下午3:20:49 @return String 返回类型 yyyy-MM-dd hh:mm:ss （出参）
+	 * @throws
+	 */
+	public static String getNextOrLastDayCombine(String dt, String con) {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+		Date date = null;String dateString = "";
+		if (StringUtils.isBlank(dt) || dt == "") {
+			date = new Date();
+		} else {
+			String dtNow = dt.replace("-", "").substring(0, 8);
+			try {
+				date = formatter.parse(dtNow);
+				Calendar calendar = new GregorianCalendar();
+				calendar.setTime(date);
+				if (con == "last") {
+					calendar.add(calendar.DATE, -1);
+					date = calendar.getTime(); // 这个时间就是日期往后推一天的结果
+					dateString = formatter.format(date) + "235959";
+				} else {
+					calendar.add(calendar.DATE, 1);
+					date = calendar.getTime(); // 这个时间就是日期往后推一天的结果
+					dateString = formatter.format(date) + "000000";
+				}
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return dateString;
+	}
 
 	/**
 	 * @param yyyyMMddhhmmss
