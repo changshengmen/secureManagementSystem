@@ -160,7 +160,7 @@ public class DateTimeUtil {
 	 * @param1 con :next 下一天 ？？？ last前一天
 	 * @Description: TODO(获取第二天的零点 时分秒) 
 	 * @author lyx @date
-	 * 2016年11月28日 下午3:20:49 @return String 返回类型 yyyy-MM-dd hh:mm:ss （出参）
+	 * 2016年11月28日 下午3:20:49 @return String 返回类型 yyyyMMdd hhmmss （出参）
 	 * @throws
 	 */
 	public static String getNextOrLastDayCombine(String dt, String con) {
