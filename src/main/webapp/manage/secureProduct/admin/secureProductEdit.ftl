@@ -112,11 +112,7 @@
 								</td>		
 								<td>
 									<input type="text" value="${e.secureProductDetailList[item_index].subName!""}" name="secureProductDetailList[${item_index}].subName" 
-									 class="search-query input-small" 
-									 <#if item.subName??>
-									 data-rule="标的名称;required" 
-									 </#if>
-									 maxlength="40"/>
+									 class="search-query input-small" maxlength="40"/>
 								</td>
 								<td>
 									<input type="text" value="${e.secureProductDetailList[item_index].premium!""}" name="secureProductDetailList[${item_index}].premium"
@@ -169,7 +165,10 @@
 								<input type="text" name="secureProductDetailList[${item_index}].rate"  class="search-query input-small"
 								data-rule=""  maxlength="9"/>
 							</td>
-							
+							<td>
+								<input type="text" name="secureProductDetailList[${item_index}].NIndemLmt"  class="search-query input-small"
+								data-rule=""  maxlength="9"/>
+							</td>
 							<td>
 	                            <#assign map = {'0':'市场价值'}>
 	                            <select id="sure_way" name="secureProductDetailList[${item_index}].sure_way" class="search-query input-medium">

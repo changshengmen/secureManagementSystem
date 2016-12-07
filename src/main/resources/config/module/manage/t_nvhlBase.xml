@@ -105,6 +105,23 @@
          #{Province},#{City},#{Area},#{Stree},#{CusRiskLvl},
          #{CustRiskRank},#{createAccount},now())
 	</insert>
+	<!--删除投保人 -->
+	<delete id="manage.NvhlBase.deleteNvhlApplication" parameterType="net.jeeshop.services.manage.NvhlApplicantVO.bean.NvhlApplicantVO">
+		delete from  NvhlApplicantVO where  AppCde=#{AppCde}
+		<if test="AppNme !=null and AppNme !=''">
+				and AppNme=#{AppNme}
+		</if>
+		<if test="createAccount !=null and createAccount !=''">
+			and createAccount =#{createAccount}
+		</if>
+	</delete>
+	<!--删除被保人 -->
+	<delete id="manage.NvhlBase.deleteNvhlInsured" parameterType="net.jeeshop.services.manage.NvhlInsuredVO.bean.NvhlInsuredVO">
+		delete from  nvhlinsuredvo where  InsuredCde=#{InsuredCde}
+		<if test="createAccount !=null and createAccount !=''">
+			and createAccount =#{createAccount}
+		</if>
+</delete>
 	<!--更新支付申请号 -->
 	<update id="manage.NvhlBase.updatePayNo"
 		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO">
