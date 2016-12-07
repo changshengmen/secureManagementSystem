@@ -45,8 +45,7 @@
 		<input type="hidden" name="NPrm" value="${base.NPrm!""}"></input>	
 		<!--------------------------用于后面支付的时候查询保险产品的隐藏域------------------------------------->	
 		<!--------------------------投保人模块------------------------------------->		
-
-
+        
 			 <table class="table table-bordered table-condensed" style="margin-bottom:5px;" id="tableInfo">
 				<tr class="codeTr">
 					
@@ -74,11 +73,11 @@
 					<td style="text-align: right;">选择客户</td>
 	        		<td>
 	        		
-	        		<select id="quickChoose"  class="dropdown scrollable" data-settings='{"cutOff":4}' style="width:250px" >
+	        		<select id="quickChoose"  class="dropdown scrollable" data-settings='{"cutOff":4}' style="width:250px;overflow:auto;" >
 	        				<option value="0" selected="selected">请选择客户</option>
 		        				<#if applcantList??>
 		        					<#list applcantList as item>
-	                            		<option value="${item.appNmePlay!""}">${item.appNmePlay!""}</option>
+	                            		<option  value="${item.appNmePlay!""}">${item.appNmePlay!""}</option>
 	                        		</#list>
 		        				</#if>                       		
                    		</select>
@@ -178,13 +177,13 @@
 	            <tr>	
 	             	 <td style="text-align: right;">保期/(年)</td> 
 	           		 <td>   
-			        	<div class="input-group spinner" data-trigger="spinner" style="width:40%">
-				          	<input type="text" id="secureCount" class="form-control text-center" value="1" data-rule="quantity"/>
-				          	<div class="input-group-addon">
-				            <a href="javascript:;" class="spin-up" data-spin="up" onclick="setSecureYearAdd()"><i class="fa fa-caret-up"></i></a>
-				            <a href="javascript:;" class="spin-down" data-spin="down" onclick="setSecureYearDec()"><i class="fa fa-caret-down"></i></a>
-				          	</div>       
-			      	  	</div>
+			        	<div class="input-group spinner" style="width:40%" data-trigger="spinner">
+					          <input type="text" id="secureCount" class="form-control text-center" value="1" data-rule="quantity">
+					          <div class="input-group-addon">
+					            <a href="javascript:;" class="spin-up" data-spin="up" onclick="setSecureYearAdd()"><i class="fa fa-caret-up"></i></a>
+					            <a href="javascript:;" class="spin-down" data-spin="down" onclick="setSecureYearDec()"><i class="fa fa-caret-down"></i></a>
+					          </div>
+					        </div>
      				 </td>       		 
 	                  <td style="text-align: right;">保险止期</td>
 	        		  <td>  	        		  
@@ -306,14 +305,14 @@
 </form>
  <link rel="stylesheet" href="${basepath}/resource/uploadify/uploadify.css"  type="text/css">
 <link rel="stylesheet" type="text/css" href="${basepath}/resource/bootstrap3.3.4/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="${basepath}/resource/bootstrap-spinner/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="${basepath}/resource/bootstrap-spinner/bootstrap-spinner.css">
 <link rel="stylesheet" type="text/css" href="${basepath}/resource/css/select/easydropdown.css">
+<link rel="stylesheet" type="text/css" href="${basepath}/resource/jquery-spinner/bootstrap-spinner.css">
 
 <script>
 $(function() {
 	var a = $(".navbar-top-links li").attr("class","dropdown1"); //角色切换 和 下拉框重名 改
-
+   
 	$( "#tabs" ).tabs({
 	});
 	if($("#payUrl")[0]!==undefined){
@@ -329,7 +328,6 @@ $(function() {
 		copyInfo();		
   	});
   	
-  	$().val(new Date)
   	$("#quickChoose").change(function(){		
   		if($(this).val()!=0){
   			selectApplicantInfo($(this).val());
@@ -345,6 +343,7 @@ $(function() {
   	});
   	
 });
+
 
 //设置保期-
 function setSecureYearDec(){
