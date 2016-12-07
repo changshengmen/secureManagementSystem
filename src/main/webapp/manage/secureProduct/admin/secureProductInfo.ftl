@@ -64,6 +64,7 @@
 	     				<th style="width:15%;text-align: center">保费(元)</th> 
 	     				<th style="width:15%;text-align: center">保额(元)</th>
 	     				<th style="width:15%;text-align: center">费率(‰)</th>
+	     				<th style="width:15%;text-align: center">累计赔偿限额</th>
 	     				<th style="width:40%;text-align: center">保险金额的确定方式</th>	  
      				</tr>
         	        <#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
@@ -75,6 +76,7 @@
 								<td>${e.secureProductDetailList[item_index].premium!""}</td>
 								<td>${e.secureProductDetailList[item_index].amount!""}</td>
 								<td>${e.secureProductDetailList[item_index].rate!""}</td>
+								<td>${e.secureProductDetailList[item_index].NIndemLmt!""}</td>
 								<td>
 	                                <#assign map = {'0':'市场价值'}>	                             
 	                                    <select id="sure_way" name="secureProductDetailList[${item_index}].sure_way" class="search-query input-medium">
