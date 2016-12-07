@@ -46,6 +46,7 @@
 		<!--------------------------用于后面支付的时候查询保险产品的隐藏域------------------------------------->	
 		<!--------------------------投保人模块------------------------------------->		
 
+
 			 <table class="table table-bordered table-condensed" style="margin-bottom:5px;" id="tableInfo">
 				<tr class="codeTr">
 					
@@ -72,14 +73,16 @@
 				<tr>
 					<td style="text-align: right;">选择客户</td>
 	        		<td>
-	        			<select id="quickChoose" class="input-medium" style="width:150px" size="8">
+	        		
+	        		<select id="quickChoose"  class="dropdown scrollable" data-settings='{"cutOff":4}' style="width:250px" >
 	        				<option value="0" selected="selected">请选择客户</option>
-	        				<#if applcantList??>
-	        					<#list applcantList as item>
-                            		<option value="${item.appNmePlay!""}">${item.appNmePlay!""}</option>
-                        		</#list>
-	        				</#if>                       		
+		        				<#if applcantList??>
+		        					<#list applcantList as item>
+	                            		<option value="${item.appNmePlay!""}">${item.appNmePlay!""}</option>
+	                        		</#list>
+		        				</#if>                       		
                    		</select>
+                   		
 	          		 </td>
 	           		<td style="text-align: right;">投保企业名称</td>
 	        		<td><input type="text" name="appNmePlay"  data-rule="投保企业名称;required;length[0~40];" 
@@ -305,10 +308,12 @@
 <link rel="stylesheet" type="text/css" href="${basepath}/resource/bootstrap3.3.4/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="${basepath}/resource/bootstrap-spinner/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="${basepath}/resource/bootstrap-spinner/bootstrap-spinner.css">
-
+<link rel="stylesheet" type="text/css" href="${basepath}/resource/css/select/easydropdown.css">
 
 <script>
 $(function() {
+	var a = $(".navbar-top-links li").attr("class","dropdown1"); //角色切换 和 下拉框重名 改
+
 	$( "#tabs" ).tabs({
 	});
 	if($("#payUrl")[0]!==undefined){

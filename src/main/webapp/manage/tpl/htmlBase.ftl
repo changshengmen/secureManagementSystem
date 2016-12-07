@@ -42,11 +42,10 @@
     <link rel="stylesheet" href="${staticpath}/bootstrap3.3.4/css/bootstrap.min.css"  type="text/css">
     <#--<link rel="stylesheet" href="${staticpath}/bootstrap3.3.4/css/bootstrap-theme.min.css"  type="text/css">-->
     <link rel="stylesheet" href="${staticpath}/jquery-ui-1.11.2/jquery-ui.css">
-    <#--<link rel="stylesheet" href="${staticpath}/jquery-ui-1.11.2/jquery-ui.theme.css">-->
     <link rel="stylesheet" href="${staticpath}/validator-0.7.0/jquery.validator.css" />
 
-<#--<script type="text/javascript" src="${staticpath}/js/jquery-1.4.2.min.js"></script>-->
     <script type="text/javascript" src="${staticpath}/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="${staticpath}/js/jquery.easydropdown.min.js"></script>
     <script type="text/javascript" src="${staticpath}/zTree3.5/js/jquery.ztree.all-3.5.min.js"></script>
 
     <script type="text/javascript" src="${staticpath}/js/jquery.blockUI.js"></script>
