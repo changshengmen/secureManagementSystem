@@ -110,7 +110,7 @@ public class NvhlBaseVOJson
 	private String OccProp;//占用性质
 	private String CSummaryNo;//批量处理号
 	private String CTotalNo;//协议号
-	private List entryObjList;
+	private Object entryObjList;
 	////////////////////
 		
 	public String getSerialNumber()
@@ -351,10 +351,13 @@ public class NvhlBaseVOJson
 	public void setCTotalNo(String cTotalNo) {
 		CTotalNo = cTotalNo;
 	}
-	public List getEntryObjList() {
+	
+	public Object getEntryObjList()
+	{
 		return entryObjList;
 	}
-	public void setEntryObjList(List entryObjList) {
+	public void setEntryObjList(Object entryObjList)
+	{
 		this.entryObjList = entryObjList;
 	}
 	public String getCAppNo()
