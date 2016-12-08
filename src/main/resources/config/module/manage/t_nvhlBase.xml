@@ -108,8 +108,8 @@
 	<!--删除投保人 -->
 	<delete id="manage.NvhlBase.deleteNvhlApplication" parameterType="net.jeeshop.services.manage.NvhlApplicantVO.bean.NvhlApplicantVO">
 		delete from  NvhlApplicantVO where  AppCde=#{AppCde}
-		<if test="AppNme !=null and AppNme !=''">
-				and AppNme=#{AppNme}
+		<if test="appNme !=null and appNme !=''">
+				and AppNme=#{appNme}
 		</if>
 		<if test="createAccount !=null and createAccount !=''">
 			and createAccount =#{createAccount}
@@ -117,11 +117,14 @@
 	</delete>
 	<!--删除被保人 -->
 	<delete id="manage.NvhlBase.deleteNvhlInsured" parameterType="net.jeeshop.services.manage.NvhlInsuredVO.bean.NvhlInsuredVO">
-		delete from  nvhlinsuredvo where  InsuredCde=#{InsuredCde}
+		delete from  nvhlinsuredvo where  InsuredCde=#{insuredCde}
+		<if test="insuredNme !=null and insuredNme !=''">
+			and InsuredNme =#{insuredNme}
+		</if>
 		<if test="createAccount !=null and createAccount !=''">
 			and createAccount =#{createAccount}
 		</if>
-</delete>
+	</delete>
 	<!--更新支付申请号 -->
 	<update id="manage.NvhlBase.updatePayNo"
 		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO">

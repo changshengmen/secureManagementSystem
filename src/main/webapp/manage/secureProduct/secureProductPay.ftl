@@ -66,7 +66,7 @@
 					<td style="text-align: right;font-weight:bold">投保单号</td>
 					<td colspan="3">
 						<input type="text" name="CAppNo" value="${base.CAppNo!""}"
-		                                             id="CAppNo" size="35";/>		                                          
+		                                             id="CAppNo" size="32";/>		                                          
 					</td>
 				</tr>
 				<tr>
@@ -423,7 +423,7 @@ function showCode(){
 	}else{
 		//显示投保单号，投保人编码和被保人编码 ;
 		$(".codeTr").show();
-		$(".dropdown").hide();		
+		$("#dropdown").hide();
 		//信息同步按钮隐藏
 		$("#copyInfo").hide();	
 		$("table input").each(function(){
