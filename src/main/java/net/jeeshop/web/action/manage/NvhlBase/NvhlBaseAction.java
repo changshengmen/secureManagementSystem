@@ -56,12 +56,15 @@ public class NvhlBaseAction  extends BaseController<NvhlBaseVO>{
 	* @throws
 	 */
 	@RequestMapping(value = "selectOrderList")
-	public String selectOrderList(HttpServletRequest request,@ModelAttribute("base") NvhlBaseVO base,ModelMap model) throws Exception {				
-		if(StringUtils.isNotBlank(RequestHolder.getRequest().getParameter("payReturnFlag"))){						
+	public String selectOrderList(HttpServletRequest request,@ModelAttribute("base") NvhlBaseVO base,ModelMap model) throws Exception {	
+		//调用接口后 返回定单页面时
+		if(StringUtils.isNotBlank(RequestHolder.getRequest().getParameter("payReturnFlag"))){
+			base.setCreateAccount("19");
 			super.selectList(request, base);
 			model.addAttribute("message", "支付成功");
 			return page_toList;
-		}else{			
+		}else{	
+			//正常进入查询时
 			String appCde = RequestHolder.getRequest().getParameter("appCde");//企业编码	
 			base.setAppCde(appCde);
 			super.selectList(request, base);
