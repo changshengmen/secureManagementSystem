@@ -423,7 +423,7 @@ function showCode(){
 	}else{
 		//显示投保单号，投保人编码和被保人编码 ;
 		$(".codeTr").show();
-		$("#quickChoose").attr("disabled",true);
+		$(".dropdown").hide();		
 		//信息同步按钮隐藏
 		$("#copyInfo").hide();	
 		$("table input").each(function(){
