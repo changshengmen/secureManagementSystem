@@ -1,6 +1,6 @@
 <#import "/manage/tpl/pageBase.ftl" as page>
 <@page.pageBase currentMenu="产品详细信息">
-<form action="${basepath}/manage/secureProduct" id="form" name="form" namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">		
+<form action="${basepath}/manage/secureProduct" id="form" name="form" namespace="/manage" theme="simple" method="post">		
 	<div id="tabs">
 		<ul>
 			<li><a href="#tabs-1">保险主产品基本信息</a></li>	
@@ -78,12 +78,12 @@
 								<td>${e.secureProductDetailList[item_index].rate!""}</td>
 								<td>${e.secureProductDetailList[item_index].NIndemLmt!""}</td>
 								<td>
-	                                <#assign map = {'0':'市场价值'}>	                             
-	                                    <select id="sure_way" name="secureProductDetailList[${item_index}].sure_way" class="search-query input-medium">
-	                                    <#list map?keys as key>
-	                                        <option value="${key}"  <#if item.sure_way?? && item.sure_way==key>selected="selected" </#if>>${map[key]}</option>
-	                                    </#list>
-	                                </select>	                                
+	                                <#assign map = {'0':'市场价值'}>	                             	                                    
+	                                <#list map?keys as key>
+	                                     <#if item.sure_way?? && item.sure_way==key>
+	                                     	${map[key]}
+	                                     </#if>	                                       
+	                                </#list>                                
 	                            </td>
 							</tr>
 	                    </#list>
@@ -146,18 +146,7 @@
 $(function() {
 	$( "#tabs" ).tabs({
 	});	
-	
-	selectDefaultCatalog();
 });
-
-function selectDefaultCatalog(){
-	var _catalogID = $("#catalogID").val();
-	if(_catalogID!='' && _catalogID>0){
-		//$("#catalogSelect").attr("value",_catalogID);
-		$("#catalogSelect").val(_catalogID);
-	}
-}
-
 </script>
 
 </@page.pageBase>

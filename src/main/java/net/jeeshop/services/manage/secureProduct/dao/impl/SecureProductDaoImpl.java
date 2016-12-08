@@ -70,7 +70,7 @@ public class SecureProductDaoImpl implements SecureProductDao {
 		List<SecureProductDetail> f = e.getSecureProductDetailList();
 		for (int i = 0; i < f.size(); i++) {
 			SecureProductDetail subProduct = f.get(i);
-			if (subProduct.getId()!=null&& subProduct.getId().length() > 0) {
+			if (subProduct.getId() != null && subProduct.getId().length() > 0) {
 				subProduct.setUpdateAccount(e.getUpdateAccount());
 				updateSecureProductDetail(subProduct);
 			} else {

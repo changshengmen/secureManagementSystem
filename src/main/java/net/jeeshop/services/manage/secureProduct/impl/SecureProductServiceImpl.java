@@ -47,7 +47,7 @@ SecureProductService {
 	@Override
 	public int insert(SecureProduct e) {
 		int productID = super.insert(e);
-		insertOrUpdateSpec(e);
+		//insertOrUpdateSpec(e);
 		return productID;
 	}
 	
@@ -56,41 +56,11 @@ SecureProductService {
 	 */
 	@Override
 	public int update(SecureProduct e) {
-		super.update(e);
-		
+		super.update(e);		
 		return 1;
 	}
 	
-	private void insertOrUpdateSpec(SecureProduct e){
-		if(e.getSpecList()!=null && e.getSpecList().size()>0){
-			for(int i=0;i<e.getSpecList().size();i++){
-				logger.error("=======insertOrUpdateSpec.e.getSpecArray() = " + e.getSpecList().get(i));
-				Spec spec = e.getSpecList().get(i);
-				
-				if(StringUtils.isBlank(spec.getSpecColor())){
-					continue;
-				}
-				
-				spec.setProductID(e.getId());
-				if(StringUtils.isBlank(spec.getId())){
-					specService.insert(spec);
-				}else{
-					specService.update(spec);
-				}
-			}
-		}else{
-			logger.error("=======insertOrUpdateSpec.e.getSpecArray() is null");
-		}
-		
-//		if(e.getSpecArray()!=null && e.getSpecArray().length>0){
-//			for(int i=0;i<e.getSpecArray().length;i++){
-//				logger.error("=======insertOrUpdateSpec.e.getSpecArray() = " + e.getSpecArray());
-//			}
-//		}else{
-//			logger.error("=======insertOrUpdateSpec.e.getSpecArray() is null");
-//		}
-//		specService.insertOrUpdateSpec(e);
-	}
+	
 
 	/**
 	 * 批量删除商品

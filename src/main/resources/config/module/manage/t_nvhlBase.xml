@@ -7,16 +7,14 @@
 		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO"
 		resultType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO">
 		select n.id,n.SerialNumber,IFNULL(DATEDIFF(NOW(),n.TInsrncEndTm),'') expire_days, 
-		n.CProdName,n.CAppNo,n.status,n.CProdNo,n.appCde appCdePlay,n.NAmt,n.NPrm,n.TAppTm,n.TInsrncBgnTm,n.TInsrncEndTm,n.createtime,
-		(select a.AppNme from  nvhlapplicantvo a where A.AppCde=n.AppCde  and a.createAccount = n.createAccount )AppNme ,
-		(select i.InsuredNme from  nvhlinsuredvo i where i.InsuredCde=n.InsuredCde and i.createAccount = n.createAccount )InsuredNme ,u.nickname username 
-		from nvhlbasevo n ,nvhlapplicantvo a,nvhlinsuredvo i,t_user u   where 1=1 and deleteFlag='0'
-		and n.AppCde = a.AppCde and n.InsuredCde=i.InsuredCde and n.createAccount = u.id
+		n.CProdName,n.CAppNo,n.status,n.CProdNo,n.appCde,n.NAmt,n.NPrm,n.TAppTm,
+		n.TInsrncBgnTm,n.TInsrncEndTm,n.createtime,n.CSlsNme 
+		from nvhlbasevo n where 1=1 and deleteFlag='0'
 		<if test="createAccount!=null and createAccount!=''">
 			and n.createAccount=#{createAccount}
 		</if>
-		<if test="AppCde !=null and AppCde !=''">
-			and n.AppCde=#{AppCde}
+		<if test="appCde !=null and appCde !=''">
+			and n.appCde=#{appCde}
 		</if>
 		<if test="TInsrncEndTmStartDate!=null and TInsrncEndTmStartDate!=''">
 			and TInsrncEndTm &gt;= #{TInsrncEndTmStartDate}
@@ -71,10 +69,14 @@
 	<insert id="manage.NvhlBase.insertNvhlBase"
 		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO"
 		useGeneratedKeys="true" keyProperty="id">
-		insert into nvhlbasevo(SerialNumber,CAppNo,CDptCde,SysRes,CBsnsTyp,CChaType,CChaSubtype,FinTyp,CProdNo,AppCde,InsuredCde,CCiMrk,NAmtRmbExch,NAmt,NPrmRmbExch,NPrm,
-         TAppTm,TInsrncBgnTm,TInsrncEndTm,CGrpMrk,EfcManualFlag,CPlyTyp,CNeedfeeFlag,ICopyNum,createAccount,createTime,CProdName,status,deleteFlag,payNo)
-         values(#{serialNumber},#{CAppNo},#{CDptCde},#{SysRes},#{CBsnsTyp},#{CChaType},#{CChaSubtype},#{FinTyp},#{CProdNo},#{AppCde},#{InsuredCde},#{CCiMrk},#{NAmtRmbExch},#{NAmt},#{NPrmRmbExch},#{NPrm},#{TAppTm}
-  		,#{TInsrncBgnTm},#{TInsrncEndTm},#{CGrpMrk},#{EfcManualFlag},#{CPlyTyp},#{CNeedfeeFlag},#{ICopyNum},#{createAccount},now(),#{CProdName},#{status},#{deleteFlag},#{payNo})
+		insert into nvhlbasevo(		
+		SerialNumber,CAppNo,AppNme,InsuredNme,AppCde,InsuredCde,	
+		CProdNo,CProdName,NAmtRmbExch,NAmt,NPrmRmbExch,NPrm,TAppTm,TInsrncBgnTm,
+		TInsrncEndTm,createAccount,createTime,status,deleteFlag,CSlsNme)
+         values(
+         #{serialNumber},#{CAppNo},#{appNme},#{insuredNme},#{appCde},#{insuredCde},
+         #{CProdNo},#{CProdName},#{NAmtRmbExch},#{NAmt},#{NPrmRmbExch},#{NPrm},#{TAppTm}
+  		,#{TInsrncBgnTm},#{TInsrncEndTm},#{createAccount},now(),#{status},#{deleteFlag},#{CSlsNme})
 	</insert>
 	<!--插入 投保人NvhlApplicantVO  -->
 	<insert id="manage.NvhlBase.insertNvhlApplication"

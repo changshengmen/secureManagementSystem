@@ -13,6 +13,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java_cup.runtime.virtual_parse_stack;
 import net.jeeshop.core.util.DateTimeUtil;
@@ -45,32 +46,24 @@ public class NvhlBaseAction  extends BaseController<NvhlBaseVO>{
 		this.nvhlBaseService = nvhlBaseService;
 	}
 	/**
-	 * @return 
-	 * @return 
-	 * 
-	* @param
-	* @Description: 供applicantAction调用，查看客户购买的产品
+	* @param payReturnFlag：支付返回标志
+	* @Description: 该方法既是支付后返回调用的方法，也是供applicantAction调用，查看客户购买的产品的方法
 	* @author sunshuo
 	* @date 2016年10月21日 上午10:41:13 
 	* @return String    返回类型 
 	* @throws
 	 */
 	@RequestMapping(value = "selectOrderList")
-	public String selectOrderList(HttpServletRequest request,@ModelAttribute("base") NvhlBaseVO base,ModelMap model) throws Exception {	
-		//调用接口后 返回定单页面时
-		if(StringUtils.isNotBlank(RequestHolder.getRequest().getParameter("payReturnFlag"))){
-			base.setCreateAccount("19");
-			super.selectList(request, base);
-			model.addAttribute("message", "支付成功");
-			return page_toList;
-		}else{	
-			//正常进入查询时
+	public void selectOrderList(HttpServletRequest request,@ModelAttribute("base") NvhlBaseVO base,ModelMap model,RedirectAttributes flushAttrs) throws Exception {				
+		if(StringUtils.isNotBlank(RequestHolder.getRequest().getParameter("payReturnFlag"))){						
+			//model.addAttribute("message", "支付成功");
+			flushAttrs.addFlashAttribute("message", "更新成功！");
+			super.selectList(request, base);			
+		}else{			
 			String appCde = RequestHolder.getRequest().getParameter("appCde");//企业编码	
 			base.setAppCde(appCde);
-			super.selectList(request, base);
-			return page_toList;
-		}
-				 
+			super.selectList(request, base);			
+		}				 
 	}
 	/**
 	 * 

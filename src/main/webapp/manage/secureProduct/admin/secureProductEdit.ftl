@@ -116,20 +116,20 @@
 								</td>
 								<td>
 									<input type="text" value="${e.secureProductDetailList[item_index].premium!""}" name="secureProductDetailList[${item_index}].premium"
-									 class="search-query input-small"   maxlength="9"/>
+									 class="search-query input-small" maxlength="9"/>
 								</td>
 								
 								<td>
 									<input type="text"  value="${e.secureProductDetailList[item_index].amount!""}" name="secureProductDetailList[${item_index}].amount"  
-									class="search-query input-small"  maxlength="9"/>
+									class="search-query input-small" maxlength="9"/>
 								</td>
 								<td>
 									<input type="text"  value="${e.secureProductDetailList[item_index].rate!""}" name="secureProductDetailList[${item_index}].rate"
-									class="search-query input-small"   maxlength="9"/>
+									class="search-query input-small" maxlength="9"/>
 								</td>
 								<td>
 									<input type="text"  value="${e.secureProductDetailList[item_index].NIndemLmt!""}" name="secureProductDetailList[${item_index}].NIndemLmt"
-									class="search-query input-small"   maxlength="9"/>
+									class="search-query input-small" maxlength="9"/>
 								</td>
 								<td>
 	                                <#assign map = {'0':'市场价值'}>
@@ -139,7 +139,7 @@
 	                                    </#list>
 	                                </select>
 	                            </td>
-	                            	<!--<td><input type="text"  value="${e.secureProductDetailList[item_index].remark!""}" name="secureProductDetailList[${item_index}].remark"  class="search-query input-small"/></td>-->
+	                            	<!--<td><input type="text" value="${e.secureProductDetailList[item_index].remark!""}" name="secureProductDetailList[${item_index}].remark"  class="search-query input-small"/></td>-->
 							</tr>
 	                    </#list>
 					<#else>           
@@ -213,17 +213,8 @@
 $(function() {
 	$( "#tabs" ).tabs({
 	});	
-	
-	selectDefaultCatalog();
 });
 
-function selectDefaultCatalog(){
-	var _catalogID = $("#catalogID").val();
-	if(_catalogID!='' && _catalogID>0){
-		//$("#catalogSelect").attr("value",_catalogID);
-		$("#catalogSelect").val(_catalogID);
-	}
-}
 </script>
 
 </@page.pageBase>
