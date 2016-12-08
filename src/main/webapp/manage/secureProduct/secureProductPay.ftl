@@ -221,7 +221,7 @@
 	           <tr>
 	           		<td style="text-align: right;">客户类型</td>
 	        		<td><#assign map = {"0":'非自然人',"1":'自然人'}>
-	                    <select id="ClntMrkA" name="BClntMrk" class="input-medium" style="width:150px">
+	                    <select id="ClntMrkA" name="BClntMrk" class="input-medium" >
                         		<#list map?keys as key>
                             		<option value="${key}"<#if common.BClntMrk?? && common.BClntMrk==key> selected="selected"</#if> >${map[key]}</option>
                         		</#list>
@@ -235,7 +235,7 @@
 	           <tr>
 	           		<td style="text-align: right;">证件类型</td>
 	        		<td><#assign map = {"110001":'组织机构代码',"110002":'工商注册号码',"110009",'其他'}>
-	                    <select id="CertfClsA" name="BCCertfCls" class="input-medium" style="width:150px">
+	                    <select id="CertfClsA" name="BCCertfCls" class="input-medium" >
                         		<#list map?keys as key>
                             		<option value="${key}"<#if common.BCCertfCls?? && common.BCCertfCls ==key> selected="selected"</#if>>${map[key]}</option>
                         		</#list>
