@@ -6,8 +6,8 @@
 			parameterType="net.jeeshop.services.manage.NvhlInsuredVO.bean.NvhlInsuredVO"
 			resultType="net.jeeshop.services.manage.NvhlInsuredVO.bean.NvhlInsuredVO">
 			select * from nvhlinsuredvo where 1=1 
-			<if test="InsuredCde !=null and InsuredCde !=''">
-				and InsuredCde=#{InsuredCde}
+			<if test="insuredCde !=null and insuredCde !=''">
+				and InsuredCde=#{insuredCde}
 			</if>							
 	</select>	
 </mapper>

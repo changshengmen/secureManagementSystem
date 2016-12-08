@@ -51,14 +51,14 @@
 					
 					<td style="text-align: right;font-weight:bold">投保人代码</td>
 					<td>
-						<input type="text" name="appCdePlay" value="${applicantVO.appCdePlay!""}"
-		                                             id="appCdePlay" />
+						<input type="text" name="appCde" value="${applicantVO.appCde!""}"
+		                                             id="appCde" />
 		             
 					</td>
 					<td style="text-align: right;font-weight:bold">被保人代码</td>
 					<td>
-						<input type="text" name="insuredCdePlay" value="${insuredVO.insuredCdePlay!""}"
-		                                             id="insuredCdePlay" />
+						<input type="text" name="insuredCde" value="${insuredVO.insuredCde!""}"
+		                                             id="insuredCde" />
 		              
 					</td>
 				</tr>
@@ -76,15 +76,15 @@
 	        				<option value="0" selected="selected">请选择客户</option>
 		        				<#if applcantList??>
 		        					<#list applcantList as item>
-	                            		<option  value="${item.appNmePlay!""}">${item.appNmePlay!""}</option>
+	                            		<option  value="${item.appNme!""}">${item.appNme!""}</option>
 	                        		</#list>
 		        				</#if>                       		
                    		</select>
                    		
 	          		 </td>
 	           		<td style="text-align: right;">投保企业名称</td>
-	        		<td><input type="text" name="appNmePlay"  data-rule="投保企业名称;required;length[0~40];" 
-	                          id="Name" value="${applicantVO.appNmePlay!""}"/>&nbsp;<span style="color:red">*</span>
+	        		<td><input type="text" name="appNme"  data-rule="投保企业名称;required;length[0~40];" 
+	                          id="Name" value="${applicantVO.appNme!""}"/>&nbsp;<span style="color:red">*</span>
 	          		 </td>	          		  
 	           </tr>
 	            <tr>
@@ -207,7 +207,7 @@
 		 	<!--------------table---------------->
 				<tr>
 	           		<td style="text-align: right;">被保企业名称</td>
-	        		<td><input type="text" name="insuredNmePlay" value="${insuredVO.insuredNmePlay!""}" 
+	        		<td><input type="text" name="insuredNme" value="${insuredVO.insuredNme!""}" 
 	                                             id="NameA" />&nbsp;<span style="color:red">*</span>
 	          		 </td>
 	          		 
@@ -423,7 +423,7 @@ function showCode(){
 	}else{
 		//显示投保单号，投保人编码和被保人编码 ;
 		$(".codeTr").show();
-		$("#dropdown").hide();
+		$(".dropdown").hide();
 		//信息同步按钮隐藏
 		$("#copyInfo").hide();	
 		$("table input").each(function(){

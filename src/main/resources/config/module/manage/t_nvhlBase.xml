@@ -90,7 +90,7 @@
          values(
          #{appCde},#{appNme},#{clntMrk},#{certfCls},#{certfCde},#{clntAddr},
          #{zipCde},#{email},#{mobile},#{country},
-        #{CusRiskLvl},#{CustRiskRank},#{createAccount},now())
+        #{cusRiskLvl},#{custRiskRank},#{createAccount},now())
 	</insert>
 	<!-- 插入 被保人NvhlInsuredVO -->
 	<insert id="manage.NvhlBase.insertNvhlInsured"
@@ -103,7 +103,7 @@
          values(
          #{insuredCde},#{insuredNme},#{clntMrk},#{ccertfCls},#{ccertfCde},
          #{clntAddr},#{zipCde},#{cemail},#{mobile},#{country},
-		#{CusRiskLvl},#{CustRiskRank},#{createAccount},now())
+		#{cusRiskLvl},#{custRiskRank},#{createAccount},now())
 	</insert>
 	<!--删除投保人 -->
 	<delete id="manage.NvhlBase.deleteNvhlApplication" parameterType="net.jeeshop.services.manage.NvhlApplicantVO.bean.NvhlApplicantVO">
