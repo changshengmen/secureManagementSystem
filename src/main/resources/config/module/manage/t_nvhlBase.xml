@@ -109,7 +109,7 @@
 	</insert>
 	<!--删除投保人 -->
 	<delete id="manage.NvhlBase.deleteNvhlApplication" parameterType="net.jeeshop.services.manage.NvhlApplicantVO.bean.NvhlApplicantVO">
-		delete from  NvhlApplicantVO where  AppCde=#{AppCde}
+		delete from  NvhlApplicantVO where  AppCde=#{appCde}
 		<if test="appNme !=null and appNme !=''">
 				and AppNme=#{appNme}
 		</if>
