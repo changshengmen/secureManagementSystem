@@ -84,13 +84,13 @@
 		useGeneratedKeys="true" keyProperty="id">
 		insert into nvhlapplicantvo(
 		AppCde,AppNme,ClntMrk,CertfCls,CertfCde,ClntAddr,		
-		ZipCde,Email,Mobile,Country,Province,
-		City,Area,Stree,CusRiskLvl,CustRiskRank,createAccount,createtime		
+		ZipCde,Email,Mobile,Country,
+		CusRiskLvl,CustRiskRank,createAccount,createtime		
 		)
          values(
-         #{appCdePlay},#{appNmePlay},#{ClntMrk},#{CertfCls},#{CertfCde},#{ClntAddr},
-         #{ZipCde},#{Email},#{Mobile},#{Country},#{Province},
-        #{City},#{Area},#{Stree},#{CusRiskLvl},#{CustRiskRank},#{createAccount},now())
+         #{appCde},#{appNme},#{clntMrk},#{certfCls},#{certfCde},#{clntAddr},
+         #{cipCde},#{email},#{cobile},#{country},
+        #{CusRiskLvl},#{CustRiskRank},#{createAccount},now())
 	</insert>
 	<!-- 插入 被保人NvhlInsuredVO -->
 	<insert id="manage.NvhlBase.insertNvhlInsured"
@@ -98,14 +98,12 @@
 		useGeneratedKeys="true" keyProperty="id">
 		insert into nvhlinsuredvo(
 		InsuredCde,InsuredNme,ClntMrk,CCertfCls,CCertfCde,
-		ClntAddr,ZipCde,CEmail,Mobile,Country,
-		Province,City,Area,Stree,CusRiskLvl,
+		ClntAddr,ZipCde,CEmail,Mobile,Country,CusRiskLvl,
 		CustRiskRank,createAccount,createtime)
          values(
-         #{insuredCdePlay},#{insuredNmePlay},#{ClntMrk},#{CCertfCls},#{CCertfCde},
-         #{ClntAddr},#{ZipCde},#{CEmail},#{Mobile},#{Country},
-         #{Province},#{City},#{Area},#{Stree},#{CusRiskLvl},
-         #{CustRiskRank},#{createAccount},now())
+         #{insuredCde},#{insuredNme},#{clntMrk},#{ccertfCls},#{ccertfCde},
+         #{clntAddr},#{zipCde},#{cemail},#{mobile},#{country},
+		#{CusRiskLvl},#{CustRiskRank},#{createAccount},now())
 	</insert>
 	<!--删除投保人 -->
 	<delete id="manage.NvhlBase.deleteNvhlApplication" parameterType="net.jeeshop.services.manage.NvhlApplicantVO.bean.NvhlApplicantVO">
