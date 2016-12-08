@@ -59,7 +59,7 @@ public class NvhlBaseAction  extends BaseController<NvhlBaseVO>{
 	public String selectOrderList(HttpServletRequest request,@ModelAttribute("base") NvhlBaseVO base,ModelMap model) throws Exception {				
 		if(StringUtils.isNotBlank(RequestHolder.getRequest().getParameter("payReturnFlag"))){						
 			super.selectList(request, base);
-			model.addAttribute("message", "支付成功1");
+			model.addAttribute("message", "支付成功");
 			return page_toList;
 		}else{			
 			String appCde = RequestHolder.getRequest().getParameter("appCde");//企业编码	
