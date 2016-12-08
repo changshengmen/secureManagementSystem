@@ -89,7 +89,7 @@
 		)
          values(
          #{appCde},#{appNme},#{clntMrk},#{certfCls},#{certfCde},#{clntAddr},
-         #{cipCde},#{email},#{cobile},#{country},
+         #{zipCde},#{email},#{cobile},#{country},
         #{CusRiskLvl},#{CustRiskRank},#{createAccount},now())
 	</insert>
 	<!-- 插入 被保人NvhlInsuredVO -->
