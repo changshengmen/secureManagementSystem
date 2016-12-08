@@ -66,7 +66,7 @@
 					<td style="text-align: right;font-weight:bold">投保单号</td>
 					<td colspan="3">
 						<input type="text" name="CAppNo" value="${base.CAppNo!""}"
-		                                             id="CAppNo" size="44";/>		                                          
+		                                             id="CAppNo" size="38";/>		                                          
 					</td>
 				</tr>
 				<tr>
@@ -305,7 +305,6 @@
 </form>
  <link rel="stylesheet" href="${basepath}/resource/uploadify/uploadify.css"  type="text/css">
 <link rel="stylesheet" type="text/css" href="${basepath}/resource/bootstrap3.3.4/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="${basepath}/resource/bootstrap-spinner/bootstrap-spinner.css">
 <link rel="stylesheet" type="text/css" href="${basepath}/resource/css/select/easydropdown.css">
 <link rel="stylesheet" type="text/css" href="${basepath}/resource/jquery-spinner/bootstrap-spinner.css">
 
@@ -441,13 +440,13 @@ function showCode(){
 }
 //用于支付时把数据传到后台
 function beforePay(){
-window.onbeforeunload = null;
-$("table input").each(function(){
+	window.onbeforeunload = null;
+	$("table input").each(function(){
 		  $(this).attr("disabled",false);
-		})
-		$("table select").each(function(){
+	})
+	$("table select").each(function(){
 		  $(this).attr("disabled",false);
-		})	
+	})	
 }
 
 </script>
