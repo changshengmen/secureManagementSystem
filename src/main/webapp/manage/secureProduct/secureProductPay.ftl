@@ -66,12 +66,12 @@
 					<td style="text-align: right;font-weight:bold">投保单号</td>
 					<td colspan="3">
 						<input type="text" name="CAppNo" value="${base.CAppNo!""}"
-		                                             id="CAppNo" size="38";/>		                                          
+		                                             id="CAppNo" size="35";/>		                                          
 					</td>
 				</tr>
 				<tr>
 					<td style="text-align: right;">选择客户</td>
-	        		<td>
+	        		<td id="chooseCus">
 	        		
 	        		<select id="quickChoose"  class="dropdown scrollable" data-settings='{"cutOff":4}' style="width:250px;overflow:auto;" >
 	        				<option value="0" selected="selected">请选择客户</option>
@@ -424,6 +424,7 @@ function showCode(){
 	}else{
 		//显示投保单号，投保人编码和被保人编码 ;
 		$(".codeTr").show();
+		$("#chooseCus").hide();
 		//信息同步按钮隐藏
 		$("#copyInfo").hide();	
 		$("table input").each(function(){
