@@ -21,6 +21,7 @@ import net.jeeshop.services.manage.NvhlApplicantVO.bean.NvhlApplicantVO;
 import net.jeeshop.services.manage.NvhlBaseVO.NvhlBaseService;
 import net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO;
 import net.jeeshop.services.manage.secureProduct.bean.SecureProduct;
+import net.jeeshop.services.manage.system.impl.UserService;
 import net.jeeshop.web.action.BaseController;
 import net.jeeshop.web.action.manage.SecureOrder.SecureOrderAction;
 import net.jeeshop.web.util.LoginUserHolder;
@@ -38,6 +39,9 @@ public class NvhlBaseAction  extends BaseController<NvhlBaseVO>{
 	}
 	@Autowired
 	private NvhlBaseService nvhlBaseService;
+	@Autowired
+	private UserService userService;
+	
 	@Override
 	public NvhlBaseService getService() {
 		return nvhlBaseService;
@@ -54,10 +58,13 @@ public class NvhlBaseAction  extends BaseController<NvhlBaseVO>{
 	* @throws
 	 */
 	@RequestMapping(value = "selectOrderList")
-	public void selectOrderList(HttpServletRequest request,@ModelAttribute("base") NvhlBaseVO base,ModelMap model,RedirectAttributes flushAttrs) throws Exception {				
-		if(StringUtils.isNotBlank(RequestHolder.getRequest().getParameter("payReturnFlag"))){						
+	public void selectOrderList(HttpServletRequest request,ModelMap model,RedirectAttributes flushAttrs) throws Exception {				
+		NvhlBaseVO base = new NvhlBaseVO();
+		if(StringUtils.isNotBlank(RequestHolder.getRequest().getParameter("cid"))){						
 			//model.addAttribute("message", "支付成功");
-			flushAttrs.addFlashAttribute("message", "更新成功！");
+			flushAttrs.addFlashAttribute("message", "支付成功！");
+			String cid = RequestHolder.getRequest().getParameter("cid");			
+			base.setCreateAccount(cid);
 			super.selectList(request, base);			
 		}else{			
 			String appCde = RequestHolder.getRequest().getParameter("appCde");//企业编码	
