@@ -7,7 +7,7 @@
 		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO"
 		resultType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO">
 		select n.id,n.SerialNumber,IFNULL(DATEDIFF(NOW(),n.TInsrncEndTm),'') expire_days, 
-		n.CProdName,n.CAppNo,n.status,n.CProdNo,n.appCde,n.NAmt,n.NPrm,n.TAppTm,
+		n.CProdName,n.CAppNo,n.status,n.CProdNo,n.appCde,n.AppNme,n.NAmt,n.NPrm,n.TAppTm,
 		n.TInsrncBgnTm,n.TInsrncEndTm,n.createtime,n.CSlsNme 
 		from nvhlbasevo n where 1=1 and deleteFlag='0'
 		<if test="createAccount!=null and createAccount!=''">

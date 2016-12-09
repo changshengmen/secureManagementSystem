@@ -80,7 +80,7 @@ $(function() {
 				<td class="tipso" name="cappNo" data-tipso="${item.CAppNo!""}">${item.CAppNo!""}</td>
 				<!--<td>${item.CProdNo!""}</td>-->
 				<td>${item.CProdName!""}</td>					
-				<td>${item.appnme!""}</td>
+				<td>${item.appNme!""}</td>
 				<!--<td>${item.appCdePlay!""}</td>
 				<td>${item.NAmt!""}</td>
 				<td>${item.NPrm!""}</td>

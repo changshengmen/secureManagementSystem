@@ -70,7 +70,7 @@
 				<td >&nbsp;${item.email!""}</td>									
 				<td>&nbsp;${item.mobile!""}</td>-->															
 				<td >
-					<a class="application" href="toEdit?id=${item.id}">编辑</a> |						
+					<a class="application" href="toEdit?id=${item.id}">编辑   |</a>						
 					<a href="selectApplicationInfo?id=${item.id!""}"> 查看客户 |</a>	
 					<a href="selectSecureProduct?appCde=${item.appCde}"> 查看订单</a>
 				</td>			
