@@ -8,6 +8,9 @@
 			select * from nvhlinsuredvo where 1=1 
 			<if test="insuredCde !=null and insuredCde !=''">
 				and InsuredCde=#{insuredCde}
+			</if>	
+			<if test="createAccount !=null and createAccount !=''">
+				and createAccount=#{createAccount}
 			</if>							
 	</select>	
 </mapper>

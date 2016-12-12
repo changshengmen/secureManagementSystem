@@ -107,9 +107,12 @@
 	</insert>
 	<!--删除投保人 -->
 	<delete id="manage.NvhlBase.deleteNvhlApplication" parameterType="net.jeeshop.services.manage.NvhlApplicantVO.bean.NvhlApplicantVO">
-		delete from  NvhlApplicantVO where  AppCde=#{appCde}
-		<if test="appNme !=null and appNme !=''">
-				and AppNme=#{appNme}
+		delete from  NvhlApplicantVO where  1=1
+		<if test="certfCls != null and certfCls != ''">
+			and CertfCls=#{certfCls}
+		</if>
+		<if test="certfCde != null and certfCde != ''">
+			and CertfCde=#{certfCde}
 		</if>
 		<if test="createAccount !=null and createAccount !=''">
 			and createAccount =#{createAccount}
@@ -117,9 +120,12 @@
 	</delete>
 	<!--删除被保人 -->
 	<delete id="manage.NvhlBase.deleteNvhlInsured" parameterType="net.jeeshop.services.manage.NvhlInsuredVO.bean.NvhlInsuredVO">
-		delete from  nvhlinsuredvo where  InsuredCde=#{insuredCde}
-		<if test="insuredNme !=null and insuredNme !=''">
-			and InsuredNme =#{insuredNme}
+		delete from  nvhlinsuredvo where  1=1
+		<if test="ccertfCls != null and ccertfCls != ''">
+			and CcertfCls=#{ccertfCls}
+		</if>
+		<if test="ccertfCde != null and ccertfCde != ''">
+			and CCertfCde=#{ccertfCde}
 		</if>
 		<if test="createAccount !=null and createAccount !=''">
 			and createAccount =#{createAccount}

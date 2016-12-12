@@ -8,18 +8,18 @@
 		</ul>
 		<table class="table table-bordered table-condensed" style="margin-bottom:5px;" id="tableInfo">
 			<tr>
-           		 <td style="text-align: right;">支付申请号</td>
-           		 <td>${base.payNo!""}
-           		 </td>	        
+			 	 <td style="text-align: right;">投保单号</td>
+           		 <td>${base.CAppNo!""}
+           		 </td>
+           			        
            		 <td style="text-align: right;">流水号</td>
            		 <td>${base.serialNumber!""}
            		 </td>            		
 	        </tr>
 	        <tr>
-	        
-	         <td style="text-align: right;">投保单号</td>
-           		 <td>${base.CAppNo!""}
-           		 </td>
+	         	 <td style="text-align: right;">支付申请号</td>
+           		 <td>${base.payNo!""}
+           		 </td>	        
            		 <td style="text-align: right;">险种名称</td>
            		 <td>${base.CProdName!""}
            		 </td>
@@ -36,11 +36,11 @@
            		          		
 	        </tr>
 	        <tr>
-	         	  <td style="text-align: right;">保额</td>
+	         	  <td style="text-align: right;">保额(元)</td>
            		 <td>${base.NAmt!""}
            		 </td>
 	        
-           		 <td style="text-align: right;">保费</td>
+           		 <td style="text-align: right;">保费(元)</td>
            		 <td>${base.NPrm!""}
            		 </td>  
 					        
@@ -57,7 +57,7 @@
 					</#list>
 				 </td>   
 				 <td style="text-align: right;">支付时间</td>
-           		 <td>
+           		 <td id="payTime">
            		 	${base.bankAcctDate!""}
            		 </td>        		
 	        </tr>
@@ -88,18 +88,15 @@
 $(function() {
 	$( "#tabs" ).tabs({
 	});	
-	
-	selectDefaultCatalog();
+	//格式化支付时间
+	formatPayTime();
 });
-
-function selectDefaultCatalog(){
-	var _catalogID = $("#catalogID").val();
-	if(_catalogID!='' && _catalogID>0){
-		//$("#catalogSelect").attr("value",_catalogID);
-		$("#catalogSelect").val(_catalogID);
-	}
+function formatPayTime(){
+	var paytime = $("#payTime").html().trim();	
+ 	var newPayTime = paytime.substring(0,4)+'-'+paytime.substring(4,6)+'-'+paytime.substring(6,8)
+ 					+' '+paytime.substring(8,10)+':'+paytime.substring(10,12)+':'+paytime.substring(12,14);
+ 	$("#payTime").html(newPayTime);				
 }
-
 </script>
 
 </@page.pageBase>

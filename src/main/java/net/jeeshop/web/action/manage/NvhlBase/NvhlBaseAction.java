@@ -58,19 +58,32 @@ public class NvhlBaseAction  extends BaseController<NvhlBaseVO>{
 	* @throws
 	 */
 	@RequestMapping(value = "selectOrderList")
-	public void selectOrderList(HttpServletRequest request,ModelMap model,RedirectAttributes flushAttrs) throws Exception {				
+	public String selectOrderList(HttpServletRequest request,ModelMap model,RedirectAttributes flushAttrs) throws Exception {		
 		NvhlBaseVO base = new NvhlBaseVO();
 		if(StringUtils.isNotBlank(RequestHolder.getRequest().getParameter("cid"))){						
 			//model.addAttribute("message", "支付成功");
 			flushAttrs.addFlashAttribute("message", "支付成功！");
-			String cid = RequestHolder.getRequest().getParameter("cid");			
-			base.setCreateAccount(cid);
-			super.selectList(request, base);			
+			//String cid = RequestHolder.getRequest().getParameter("cid");			
+//			base.setCreateAccount(cid);
+			return "redirect:selectOrder";						
 		}else{			
 			String appCde = RequestHolder.getRequest().getParameter("appCde");//企业编码	
 			base.setAppCde(appCde);
-			super.selectList(request, base);			
-		}				 
+			super.selectList(request, base);	
+			return page_toList;
+		}	
+		
+	}
+	/**
+	 * 此方法用于显示flushAttrs.addFlashAttribute("message", "支付成功！")
+	 * @param request
+	 * @param base
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "selectOrder")
+	public String selectOrder(HttpServletRequest request,NvhlBaseVO base) throws Exception{
+		super.selectList(request, base);
+		return page_toList;
 	}
 	/**
 	 * 
