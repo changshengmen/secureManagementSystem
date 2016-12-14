@@ -1,5 +1,61 @@
 <#import "/manage/tpl/pageBase.ftl" as page>
 <@page.pageBase currentMenu="产品信息">
+<script>
+$(function() {
+
+	$( "#tabs" ).tabs({
+	});
+	$("#addRow").click(function(){
+		addRow();
+	});
+	$("#delRow").click(function(){
+		delRow();
+	});
+	hideCheckbox();	
+});
+//判断当前登陆者不是admin就隐藏。$("#currentUserID")此控件在pageBase.ftl中
+function hideCheckbox(){
+	if($("#currentUserID").val()!=1){
+		$(".checkboxTh").hide();
+		$(".toEditProduct").hide();
+	}
+}
+//减行 && $("#subProductList tr").size() !=${e.secureProductDetailList?size}
+function delRow(){
+	if(${e.secureProductDetailList?size}>0){
+		if($("#subProductList tr").size()>(${e.secureProductDetailList?size}+2)){
+			$("#subProductList tr").eq(-1).remove();
+		}
+	}else{
+		if($("#subProductList tr").size()>3){		
+			$("#subProductList tr").eq(-1).remove();
+		}
+	}
+	
+} 
+//加行
+function addRow(){
+	var count = $("#subProductList tr").size()-2;
+	var tr="<tr>"
+	var cvrgNoTd = "<td><input type='text' name='secureProductDetailList["+count+"].cvrgNo'class='search-query form-control input-small'data-rule='险别代码;required;cvrgNo'maxlength='40'/></td>"						
+	var subNameTd="<td><input type='text' name='secureProductDetailList["+count+"].subName'class='search-query form-control input-small'maxlength='40'/></td>"	
+	var	premiumTd="<td><input type='text' name='secureProductDetailList["+count+"].premium'class='search-query form-control input-small'data-rule='保费;required;integer;premium;'maxlength='9'/></td>"
+	var amountTd="<td><input type='text' name='secureProductDetailList["+count+"].amount'class='search-query form-control input-small'data-rule='保额;required;integer;premium;length[1~10];'maxlength='9'/></td>"
+	var rateTd="<td><input type='text' name='secureProductDetailList["+count+"].rate'class='search-query form-control input-small'data-rule='费率;required;double;rate;'maxlength='9'/></td>"
+	var NIndemLmt="<td><input type='text' name='secureProductDetailList["+count+"].NIndemLmt'class='search-query form-control input-small'maxlength='9'/></td>"
+	var	wayTd="<td><select id='sure_way' name='secureProductDetailList["+count+"].sure_way'class='search-query form-control input-medium'><option value='0'>市场价值</option></select></td></tr>"	
+	var checkBoxTd="<td><input type='checkbox' name='ids'/></td>";
+	if(${e.secureProductDetailList?size}>0){
+		var trHtml=tr+checkBoxTd+cvrgNoTd+subNameTd+premiumTd+amountTd+rateTd+NIndemLmt+wayTd;	
+	
+	}else{
+		var trHtml=tr+cvrgNoTd+subNameTd+premiumTd+amountTd+rateTd+NIndemLmt+wayTd;	
+	
+	}
+	$("#subProductList").append(trHtml);	
+}
+</script>
+
 <form action="${basepath}/manage/secureProduct"  namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">		
 	<div id="tabs">
 		<ul>
@@ -76,13 +132,11 @@
             <!--------------------------主产品信息添加模块------------------------------------->
             <!--------------------------start子产品信息添加模块------------------------------------->
             <div id="tabs-2"> 
-            	<table class="table table-bordered table-condensed table-hover" style="text-align:center;"> 
-            	<tr>
-            	<#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
-            		<button method="deletes?deleteFlag=0" class="btn btn-danger" onclick="return submitIDs(this,'确定删除选择的子产品?');">
-	                    <i class="icon-ok icon-white"></i>删除子产品
-	                </button>
-	             </#if>
+            	<table id="subProductList" class="table table-bordered table-condensed table-hover" style="text-align:center;"> 
+            	<tr>          	
+            	<img src="${systemSetting().www}/resource/images/maximize.png" onclick="addRow()"/>
+            	<img src="${systemSetting().www}/resource/images/minimize.png" onclick="delRow()"/>
+	             </br>
             	</tr>                
      				<tr>
      				<#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
@@ -124,7 +178,7 @@
 									class="search-query input-small" maxlength="9"/>
 								</td>
 								<td>
-									<input type="text"  value="${e.secureProductDetailList[item_index].rate!""}" name="secureProductDetailList[${item_index}].rate"
+									<input type="text"  id="rate" value="${e.secureProductDetailList[item_index].rate!""}" name="secureProductDetailList[${item_index}].rate"
 									class="search-query input-small" maxlength="9"/>
 								</td>
 								<td>
@@ -142,79 +196,71 @@
 	                            	<!--<td><input type="text" value="${e.secureProductDetailList[item_index].remark!""}" name="secureProductDetailList[${item_index}].remark"  class="search-query input-small"/></td>-->
 							</tr>
 	                    </#list>
-					<#else>           
-            	    <#list [1,2,3] as item>					
+					<#else>                       	   					
 						<tr>
-							<td>
-								<input type="text" name="secureProductDetailList[${item_index}].cvrgNo"  class="search-query input-small"
-								data-rule="险别代码;cvrgNo" maxlength="40"/>
+							<td>							
+								<input type="text" name="secureProductDetailList[0].cvrgNo"  class="search-query input-small"
+								data-rule="险别代码;required;cvrgNo" maxlength="40"/>
 							</td>							
 							<td>
-								<input type="text" name="secureProductDetailList[${item_index}].subName"  class="search-query input-small"
+							
+								<input type="text" name="secureProductDetailList[0].subName"  class="search-query input-small"
 								maxlength="40"/>
 							</td>
 							<td>
-								<input type="text" name="secureProductDetailList[${item_index}].premium"  class="search-query input-small"
-								data-rule="保费;integer;subName;"  maxlength="9"/>
+							
+							
+								<input type="text" name="secureProductDetailList[0].premium"  class="search-query input-small"
+								data-rule="保费;required;integer;premium;"  maxlength="9"/>
 							</td>
 							<td>
-								<input type="text" name="secureProductDetailList[${item_index}].amount"  class="search-query input-small"
-								data-rule="保额:integer;premium;length[1~10];"  maxlength="9"/>
+							
+								<input type="text" name="secureProductDetailList[0].amount"  class="search-query input-small"
+								data-rule="保额;required;integer;premium;length[1~10];"  maxlength="9"/>
 							</td>
 							<td>
-								<input type="text" name="secureProductDetailList[${item_index}].rate"  class="search-query input-small"
-								data-rule=""  maxlength="9"/>
+							
+								<input type="text" id="rate" name="secureProductDetailList[0].rate"  class="search-query input-small"
+								data-rule="required;"  maxlength="9"/>
 							</td>
 							<td>
-								<input type="text" name="secureProductDetailList[${item_index}].NIndemLmt"  class="search-query input-small"
-								data-rule=""  maxlength="9"/>
+							
+								<input type="text" name="secureProductDetailList[0].NIndemLmt"  class="search-query input-small"
+								data-rule="integer"  maxlength="9"/>
 							</td>
 							<td>
+							
 	                            <#assign map = {'0':'市场价值'}>
-	                            <select id="sure_way" name="secureProductDetailList[${item_index}].sure_way" class="search-query input-medium">
+	                            <select id="sure_way" name="secureProductDetailList[0].sure_way" class="search-query input-medium">
 	                                <#list map?keys as key>
 	                                    <option value="${key}">${map[key]}</option>
 	                                </#list>
 	                            </select>
 	                        </td>
 						</tr>				
-						
-           		  </#list>
            		  </#if>
            		  </table>          	 	
 			</div>	
 		</div><!--end tab-->
 			<!--------------------------操作按钮模块------------------------------------->
-			<br>
+			</br>
 			<#if e.id??>
-				<#if checkDbPrivilege()>
-				 	<button method="update" class="btn btn-success">
-	                    <i class="icon-ok icon-white"></i>修改
-	                </button>
-                </#if>
-               	
+			 	<button id="updateProduct" method="update" class="btn btn-success">
+                    <i class="icon-ok icon-white"></i>修改
+                </button>
+        		<button id="deleteProduct" method="deletes?deleteFlag=0" class="btn btn-danger" onclick="return submitIDs(this,'确定删除选择的子产品?');">
+                    <i class="icon-ok icon-white"></i>删除
+                </button>	
 			<#else>
-			<span style="margin-left:0px;">
-				<#if checkDbPrivilege()>
-					<button method="insertSecureProduct" class="btn btn-success">
+				<span style="margin-left:0px;">				
+					<button id="insertProduct"method="insertSecureProduct" class="btn btn-success">
 		                <i class="icon-ok icon-white"></i>新增	
-		            </button>
-		        </#if>				           
-			</span>	
-			
+		            </button>		           
+				</span>				
 			</#if>
 		
 	        <a href="selectList"class="btn btn-warning" >返回</a>
 						
 			<!--------------------------操作按钮模块------------------------------------->	
 </form>
-
-<script>
-$(function() {
-	$( "#tabs" ).tabs({
-	});	
-});
-
-</script>
-
 </@page.pageBase>
