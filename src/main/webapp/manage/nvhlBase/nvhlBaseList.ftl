@@ -100,7 +100,7 @@ $(function() {
 				</#if>
 				<td>${item.CSlsNme!""}</td>
 				<td>
-					<#assign map = {"0":'保单落地',"1":'支付中',"2":'信息审核中',"3":"支付成功"}>
+					<#assign map = {"0":'支付成功',"1":'支付中',"2":'信息审核中',"3":"保单落地失败","4":"保单落地"}>
 					<#list map?keys as key>
 					  <#if item.status?? && item.status==key>
 					  ${map[key]}
@@ -109,7 +109,7 @@ $(function() {
 				</td>
 				<td>					
 					<a href="selectOrderInfo?id=${item.id!""}&appnme=${item.appnme!""}">查看</a>	
-				<!--	<a href="secureProduct/pay_Result?id=${item.id}">保单落地</a>		-->				
+					<a href="toInsurancePolicy?payNo=${item.payNo!""}">保单落地</a>			
 				</td>
 		</tr>
 		</#list>

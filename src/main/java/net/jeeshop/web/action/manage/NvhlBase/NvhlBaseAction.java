@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.LoggerFactory;
@@ -72,6 +73,16 @@ public class NvhlBaseAction  extends BaseController<NvhlBaseVO>{
 			super.selectList(request, base);	
 			return page_toList;
 		}	
+		
+	}
+	/**
+	 * 跳转到调用1003 接口
+	 * @throws Exception 
+	 */
+	@RequestMapping(value="toInsurancePolicy")
+	public void toInsurancePolicy(HttpServletRequest request,HttpServletResponse response,RedirectAttributes model) throws Exception{
+		String payNo = RequestHolder.getRequest().getParameter("payNo");//支付申请号
+		response.sendRedirect("/JDT/manage/secureProduct/insurancePolicy?payNo="+payNo);
 		
 	}
 	/**

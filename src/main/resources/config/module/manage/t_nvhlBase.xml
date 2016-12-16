@@ -7,8 +7,9 @@
 		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO"
 		resultType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO">
 		select n.id,n.SerialNumber,IFNULL(DATEDIFF(NOW(),n.TInsrncEndTm),'') expire_days, 
-		n.CProdName,n.CAppNo,n.status,n.CProdNo,n.appCde,n.AppNme,n.NAmt,n.NPrm,n.TAppTm,
-		n.TInsrncBgnTm,n.TInsrncEndTm,n.createtime,n.CSlsNme 
+		n.CProdName,n.CAppNo,n.status,n.CProdNo,n.appCde,n.AppNme,n.NAmt,n.NPrm,n.TAppTm,n.payNo,
+		n.TInsrncBgnTm,n.TInsrncEndTm,n.createtime,
+		(select nickname from t_user u where u.id=n.createaccount) CSlsNme 
 		from nvhlbasevo n where 1=1 and deleteFlag='0'
 		<if test="createAccount!=null and createAccount!=''">
 			and n.createAccount=#{createAccount}
@@ -65,6 +66,24 @@
 		</if>	
 			
 	</select>	
+	<!-- 业务员销售报表订单查询 -->
+	<select id="manage.NvhlBase.selectOrderReportByPer"
+		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO"
+		resultType="net.jeeshop.web.action.manage.report.ReportInfo">
+		select* from (
+		select u.id,u.nickname name, sum(t.NPrm) sumAmount from t_user u 
+			left join nvhlbasevo t
+		on t.createaccount = u.id
+		<if test="startDate != null and startDate !='' and endDate != null and endDate !=''">	
+		and t.createtime &gt;= #{startDate}  and  t.createtime &lt;= #{endDate} 
+		</if>
+		<if test="createAccount != null and createAccount != ''">
+		and t.createAccount = #{createAccount}
+		</if>
+		group by name) sale
+		where id != 1 
+	</select>
+
 	<!-- 插入 基本信息 NvhlBase-->
 	<insert id="manage.NvhlBase.insertNvhlBase"
 		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO"
@@ -72,11 +91,11 @@
 		insert into nvhlbasevo(		
 		SerialNumber,CAppNo,AppNme,InsuredNme,AppCde,InsuredCde,	
 		CProdNo,CProdName,NAmtRmbExch,NAmt,NPrmRmbExch,NPrm,TAppTm,TInsrncBgnTm,
-		TInsrncEndTm,createAccount,createTime,status,deleteFlag,CSlsNme)
+		TInsrncEndTm,createAccount,createTime,status,deleteFlag)
          values(
          #{serialNumber},#{CAppNo},#{appNme},#{insuredNme},#{appCde},#{insuredCde},
          #{CProdNo},#{CProdName},#{NAmtRmbExch},#{NAmt},#{NPrmRmbExch},#{NPrm},#{TAppTm}
-  		,#{TInsrncBgnTm},#{TInsrncEndTm},#{createAccount},now(),#{status},#{deleteFlag},#{CSlsNme})
+  		,#{TInsrncBgnTm},#{TInsrncEndTm},#{createAccount},now(),#{status},#{deleteFlag})
 	</insert>
 	<!--插入 投保人NvhlApplicantVO  -->
 	<insert id="manage.NvhlBase.insertNvhlApplication"

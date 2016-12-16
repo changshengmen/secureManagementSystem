@@ -1,5 +1,5 @@
 <#import "/manage/tpl/pageBase.ftl" as page>
-<@page.pageBase currentMenu="商品销售统计">
+<@page.pageBase currentMenu="销售统计">
 	<table class="table table-bordered">
 		<tr>
 			<td style="text-align: right;" nowrap="nowrap">日期范围</td>
@@ -11,6 +11,10 @@
 				<input id="endDate" class="Wdate search-query input-small" type="text" name="endDate" 
 				value="${(e.endDate)!""}"
 				onFocus="WdatePicker({dateFmt:'yyyy-MM',minDate:'#F{$dp.$D(\'startDate\')}',maxDate:'2020-10-01'})"/>
+			</td>
+			<td>业务员</td>
+			<td>
+				<input id="name" class="Wdate search-query input-small" type="text" name="name" value="${(e.name)!""}"/> 
 			</td>
 		</tr>
 		<tr>
@@ -60,7 +64,10 @@
         }});
     	console.log("正在查询，请稍候...");
     	
-    	var _url = "selectProductSales?startDate="+$("#startDate").val()+"&endDate="+$("#endDate").val();
+    	var _url = "selectProductSales?startDate="+$("#startDate").val()+"&endDate="+$("#endDate").val()+"&$name=";
+    	if($().val()!=''){
+    		_url=_url+"&name="+$("#name").val();
+    	}
     	//var _url = "report!selectProductSales.action?e.startDate=2012-01&e.endDate=2015-03";
     	console.log("_url="+_url);
 		$.ajax({
@@ -69,12 +76,13 @@
 		  data: {},
 		  dataType:"json",
 		  //async:false,
-		  success: function(data){
+		  success: function(data){		  
 			  if(data=="0"){
 				  jQuery.unblockUI();
 				  alert("查询不到任何数据！");
 				  return null;
 			  }
+			
 			  console.log("data.productSellCountArr="+data.productSellCountArr);
 			  console.log("data.productNameArr="+data.productNameArr);
 			  
@@ -121,8 +129,8 @@
     	var myChart = echarts.init(document.getElementById('main'));
         myChart.setOption({
             title : {
-                text: '商品销售统计',
-                subtext: '商品销售统计排行榜'
+                text: '业务员销售统计报表',
+                subtext: ''
             },
             tooltip : {
                 trigger: 'axis'

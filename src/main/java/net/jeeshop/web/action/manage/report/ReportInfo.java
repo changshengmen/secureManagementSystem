@@ -13,17 +13,18 @@ import net.jeeshop.core.dao.page.PagerModel;
  * 
  */
 public class ReportInfo extends QueryModel implements Serializable {
-	private String productID;
+	private String id;
 	private String productName;//商品名称
 	private int productSellCount;// 报表.商品销售总数
 	private String createdate;// 订单创建日期
 	private double sumAmount;// 订单支付汇总金额
+	private String name;//业务员名称
 	
 	private String amountArr;
 	private String orderdateArr;
 
 	public void clear() {
-		productID = null;
+		id = null;
 		productName = null;
 		productSellCount = 0;
 		createdate = null;
@@ -31,14 +32,26 @@ public class ReportInfo extends QueryModel implements Serializable {
 		
 		amountArr = null;
 		orderdateArr = null;
+		name=null;
 	}
 
-	public String getProductID() {
-		return productID;
+	public String getName()
+	{
+		return name;
 	}
 
-	public void setProductID(String productID) {
-		this.productID = productID;
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+	public String getId()
+	{
+		return id;
+	}
+
+	public void setId(String id)
+	{
+		this.id = id;
 	}
 
 	public int getProductSellCount() {
