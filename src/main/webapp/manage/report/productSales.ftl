@@ -66,8 +66,8 @@
     	
     	var _url = "selectProductSales?startDate="+$("#startDate").val()+"&endDate="+$("#endDate").val()+"&$name=";
     	if($().val()!=''){
-    		_url=_url+"&name="+$("#name").val();
-    	}
+    	_url=_url+encodeURI(encodeURI("&name="+$("#name").val()));
+    	}   	
     	//var _url = "report!selectProductSales.action?e.startDate=2012-01&e.endDate=2015-03";
     	console.log("_url="+_url);
 		$.ajax({

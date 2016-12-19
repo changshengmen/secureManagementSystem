@@ -2,6 +2,8 @@
 <@page.pageBase currentMenu="订单信息">
 <script type="text/javascript">
 $(function() {
+//如果是支付返回就刷新页面
+	flushPage();
 	$('.tipso').tipso({
 		useTitle: false
 	});
@@ -25,6 +27,12 @@ $(function() {
 	    $(this).html(showCappNo);
 	})
 });
+function flushPage(){
+	//如果刚刚的交易还是支付中就刷新页面，后台可能更新订单状态有可能慢啦	
+	if((typeof($("td[name='orderStatus']")) != "undefined") && $('td[name="orderStatus"]:eq(0)').html().trim().indexOf("中")!=-1){
+		window.location.reload();
+	}
+}
 </script>
 <form action="${basepath}/manage/NvhlBase" method="post" theme="simple">
 	<table class="table table-bordered">
@@ -99,7 +107,7 @@ $(function() {
 				<td></td>
 				</#if>
 				<td>${item.CSlsNme!""}</td>
-				<td>
+				<td name="orderStatus">
 					<#assign map = {"0":'支付成功',"1":'支付中',"2":'信息审核中',"3":"保单落地失败","4":"保单落地"}>
 					<#list map?keys as key>
 					  <#if item.status?? && item.status==key>
@@ -108,7 +116,7 @@ $(function() {
 					</#list>
 				</td>
 				<td>					
-					<a href="selectOrderInfo?id=${item.id!""}&appnme=${item.appnme!""}">查看</a>	
+					<a href="selectOrderInfo?id=${item.id!""}&appnme=${item.appnme!""}">查看 |</a>	
 					<a href="toInsurancePolicy?payNo=${item.payNo!""}">保单落地</a>			
 				</td>
 		</tr>

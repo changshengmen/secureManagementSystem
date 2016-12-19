@@ -20,14 +20,14 @@ function hideCheckbox(){
 		$(".toEditProduct").hide();
 	}
 }
-//减行 && $("#subProductList tr").size() !=${e.secureProductDetailList?size}
+//减行 
 function delRow(){
 	if(${e.secureProductDetailList?size}>0){
 		if($("#subProductList tr").size()>(${e.secureProductDetailList?size}+2)){
 			$("#subProductList tr").eq(-1).remove();
 		}
 	}else{
-		if($("#subProductList tr").size()>3){		
+		if($("#subProductList tr").size()>2){		
 			$("#subProductList tr").eq(-1).remove();
 		}
 	}
@@ -196,48 +196,7 @@ function addRow(){
 	                            	<!--<td><input type="text" value="${e.secureProductDetailList[item_index].remark!""}" name="secureProductDetailList[${item_index}].remark"  class="search-query input-small"/></td>-->
 							</tr>
 	                    </#list>
-					<#else>                       	   					
-						<tr>
-							<td>							
-								<input type="text" name="secureProductDetailList[0].cvrgNo"  class="search-query input-small"
-								data-rule="险别代码;required;cvrgNo" maxlength="40"/>
-							</td>							
-							<td>
-							
-								<input type="text" name="secureProductDetailList[0].subName"  class="search-query input-small"
-								maxlength="40"/>
-							</td>
-							<td>
-							
-							
-								<input type="text" name="secureProductDetailList[0].premium"  class="search-query input-small"
-								data-rule="保费;required;integer;premium;"  maxlength="9"/>
-							</td>
-							<td>
-							
-								<input type="text" name="secureProductDetailList[0].amount"  class="search-query input-small"
-								data-rule="保额;required;integer;premium;length[1~10];"  maxlength="9"/>
-							</td>
-							<td>
-							
-								<input type="text" id="rate" name="secureProductDetailList[0].rate"  class="search-query input-small"
-								data-rule="required;"  maxlength="9"/>
-							</td>
-							<td>
-							
-								<input type="text" name="secureProductDetailList[0].NIndemLmt"  class="search-query input-small"
-								data-rule="integer"  maxlength="9"/>
-							</td>
-							<td>
-							
-	                            <#assign map = {'0':'市场价值'}>
-	                            <select id="sure_way" name="secureProductDetailList[0].sure_way" class="search-query input-medium">
-	                                <#list map?keys as key>
-	                                    <option value="${key}">${map[key]}</option>
-	                                </#list>
-	                            </select>
-	                        </td>
-						</tr>				
+								
            		  </#if>
            		  </table>          	 	
 			</div>	

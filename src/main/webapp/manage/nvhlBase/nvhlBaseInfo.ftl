@@ -49,7 +49,7 @@
 	        <tr>	        
            		 <td style="text-align: right;">订单状态</td>
            		 <td>
-					<#assign map = {"0":'保单落地',"1":'支付中',"2":'信息审核中',"3":"支付成功"}>
+					<#assign map = {"0":'支付成功',"1":'支付中',"2":'信息审核中',"3":"保单落地失败","4":"保单落地"}>
 					<#list map?keys as key>
 					  <#if base.status?? && base.status==key>
 					  ${map[key]}

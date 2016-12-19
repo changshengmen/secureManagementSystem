@@ -77,11 +77,11 @@
 		<if test="startDate != null and startDate !='' and endDate != null and endDate !=''">	
 		and t.createtime &gt;= #{startDate}  and  t.createtime &lt;= #{endDate} 
 		</if>
-		<if test="createAccount != null and createAccount != ''">
-		and t.createAccount = #{createAccount}
-		</if>
 		group by name) sale
 		where id != 1 
+		<if test="createAccount != null and createAccount != ''">
+		and id= #{createAccount}
+		</if>
 	</select>
 
 	<!-- 插入 基本信息 NvhlBase-->

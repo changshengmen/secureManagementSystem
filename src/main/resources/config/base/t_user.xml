@@ -20,6 +20,9 @@
 		<if test="status!=null and status!=''">
 			and t.status= #{status}
 		</if>
+		<if test="nickname != null and nickname !=''">
+			and t.nickname=#{nickname}
+		</if>
 		<if test="rid!=null and rid!=''">
 			and t.rid=#{rid}
 		</if> 
@@ -60,6 +63,9 @@
 				</if>
 				<if test="username!=null and username!=''">
 					and t.username=#{username} 
+				</if>
+				<if test="nickname != null and nickname !=''">
+					and t.nickname=#{nickname}
 				</if>
 				<if test="password!=null and password!=''">
 					and t.password=#{password} 
