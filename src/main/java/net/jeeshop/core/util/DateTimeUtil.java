@@ -139,7 +139,7 @@ public class DateTimeUtil {
 				Calendar calendar = new GregorianCalendar();
 				calendar.setTime(date);
 				if (con == "last") {
-					calendar.add(calendar.DATE, -1);
+					//calendar.add(calendar.DATE, -1);
 					date = calendar.getTime(); // 这个时间就是日期往后推一天的结果
 					dateString = formatter.format(date) + " 23:59:59";
 				} else {

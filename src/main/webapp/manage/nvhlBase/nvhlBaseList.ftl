@@ -116,7 +116,7 @@ function flushPage(){
 					</#list>
 				</td>
 				<td>					
-					<a href="selectOrderInfo?id=${item.id!""}&appnme=${item.appnme!""}">查看 |</a>	
+					<a href="selectOrderInfo?id=${item.id!""}">查看 |</a>	
 					<a href="toInsurancePolicy?payNo=${item.payNo!""}">保单落地</a>			
 				</td>
 		</tr>

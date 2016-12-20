@@ -1,31 +1,19 @@
 package net.jeeshop.web.action.manage.NvhlBase;
-
-import java.util.Date;
-import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java_cup.runtime.virtual_parse_stack;
-import net.jeeshop.core.util.DateTimeUtil;
-import net.jeeshop.services.manage.NvhlApplicantVO.bean.NvhlApplicantVO;
+import net.jeeshop.core.system.bean.User;
 import net.jeeshop.services.manage.NvhlBaseVO.NvhlBaseService;
 import net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO;
-import net.jeeshop.services.manage.secureProduct.bean.SecureProduct;
 import net.jeeshop.services.manage.system.impl.UserService;
 import net.jeeshop.web.action.BaseController;
 import net.jeeshop.web.action.manage.SecureOrder.SecureOrderAction;
-import net.jeeshop.web.util.LoginUserHolder;
 import net.jeeshop.web.util.RequestHolder;
 
 @Controller
@@ -46,6 +34,12 @@ public class NvhlBaseAction  extends BaseController<NvhlBaseVO>{
 	@Override
 	public NvhlBaseService getService() {
 		return nvhlBaseService;
+	}
+	public UserService getUserService() {
+		return userService;
+	}
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 	public void setNvhlBaseService(NvhlBaseService nvhlBaseService) {
 		this.nvhlBaseService = nvhlBaseService;
@@ -111,6 +105,10 @@ public class NvhlBaseAction  extends BaseController<NvhlBaseVO>{
 			NvhlBaseVO base = new NvhlBaseVO(); 
 			base.setId(RequestHolder.getRequest().getParameter("id").toString());
 			base = getService().selectOne(base);
+			User user = new User();
+			user.setId(base.getCreateAccount());
+			user = getUserService().selectOne(user);
+			base.setCSlsNme(user.getNickname());
 			model.addAttribute("base", base);			
 		}
 		return page_toInfo;

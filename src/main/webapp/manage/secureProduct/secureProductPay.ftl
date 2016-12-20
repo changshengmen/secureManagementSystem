@@ -169,7 +169,7 @@
 					   <td style="text-align: right;">保险起期</td>
 	        		 <td> <input id="TInsrncBgnTm" type="text" name="TInsrncBgnTm" style="line-height:4px;height:30px;"
 							class="Wdate search-query input-small" value="${base.TInsrncBgnTm!""}" data-rule="required;" 
-							onFocus="WdatePicker({el:'TInsrncBgnTm',onpicked:setTInsrncEndTm, skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2200-03-10 20:59:30' })"/>
+							onFocus="WdatePicker({el:'TInsrncBgnTm',onpicked:setTInsrncEndTm, skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '#F{$dp.$D(\'TAppTm\')||\'2008-03-08\'}', maxDate: '2200-03-10 20:59:30' })"/>
 							&nbsp;<span style="color:red">*</span>
 					 </td>  
 	           </tr>
@@ -188,7 +188,7 @@
 	        		  <td>  	        		  
 						<input id="TInsrncEndTm" style="line-height:3px;height:30px;" class="Wdate search-query input-small" 
 						name="TInsrncEndTm" type="text" value="${base.TInsrncEndTm!""}" data-rule="required;"
-						 onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2200-03-10 20:59:30' })" />
+						 onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '#F{$dp.$D(\'TInsrncBgnTm\')||\'2008-03-08 11:30:00\'}', maxDate: '2200-03-10 20:59:30' })" />
 						&nbsp;<span style="color:red">*</span>
 					  </td>
 				</tr>
