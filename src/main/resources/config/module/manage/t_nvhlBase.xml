@@ -8,6 +8,7 @@
 		resultType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO">
 		select n.id,n.SerialNumber,IFNULL(DATEDIFF(NOW(),n.TInsrncEndTm),'') expire_days, 
 		n.CProdName,n.CAppNo,n.status,n.CProdNo,n.appCde,n.AppNme,n.NAmt,n.NPrm,n.TAppTm,n.payNo,
+		n.PolicyNo,n.EdrAppNo,n.CUdrMrk,n.PolicyIdef,n.CResvTxt,n.undwrMsg,n.CUdrCde,n.TUdrTm,
 		n.TInsrncBgnTm,n.TInsrncEndTm,n.createtime,
 		(select nickname from t_user u where u.id=n.createaccount) CSlsNme 
 		from nvhlbasevo n where 1=1 and deleteFlag='0'
@@ -205,9 +206,36 @@
 		<if test="remark !=null and remark !=''">
 			,remark=#{remark}
 		</if>
+		<if test="policyNo !=null and policyNo !=''">
+			,policyNo=#{policyNo}
+		</if>
+		<if test="edrAppNo !=null and edrAppNo !=''">
+			,edrAppNo=#{edrAppNo}
+		</if>
+		<if test="cudrMrk !=null and cudrMrk !=''">
+			,cudrMrk=#{cudrMrk}
+		</if>
+		<if test="policyIdef !=null and policyIdef !=''">
+			,policyIdef=#{policyIdef}
+		</if>
+		<if test="cresvTxt !=null and cresvTxt !=''">
+			,cresvTxt=#{cresvTxt}
+		</if>
+		<if test="undwrMsg !=null and undwrMsg !=''">
+			,undwrMsg=#{undwrMsg}
+		</if>
+		<if test="cudrCde !=null and cudrCde !=''">
+			,cudrCde=#{cudrCde}
+		</if>
+		<if test="tudrTm !=null and tudrTm !=''">
+			,tudrTm=#{tudrTm}
+		</if>
 		where 1=1
 		<if test="payNo !=null and payNo !=''">
 			and payNo=#{payNo}
+		</if>
+		<if test="CAppNo !=null and CAppNo !=''">
+			and CAppNo=#{CAppNo}
 		</if>
 	</update>
 </mapper>
