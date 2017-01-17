@@ -84,7 +84,6 @@
 		and id= #{createAccount}
 		</if>
 	</select>
-
 	<!-- 插入 基本信息 NvhlBase-->
 	<insert id="manage.NvhlBase.insertNvhlBase"
 		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO"
