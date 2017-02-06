@@ -15,4 +15,6 @@
   （1）备注为查询条件  父键值 为0 及为定义 字典名称 键值为子字典项的 父ID
   （2）left join t_keyvalue k on   k.key1=t.target（字典字段）
 
+ 4. 接口 1005 地址  （我们在JDT开发数据库里的存档）
+ 	http://123.207.254.113:8080/jshop/manage/secureProduct/pay_Result
 		
