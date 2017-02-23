@@ -23,7 +23,7 @@ $(function() {
 	$("#orderList").find("td[name='cappNo']").each(function(){
 		var cappNo = $(this).text();
 		var len = cappNo.length;
-		var showCappNo  = cappNo.substring(0,3) + "XXX" + cappNo.substring(len-3,len) ;
+		var showCappNo  = cappNo.substring(0,10) + " ...";
 	    $(this).html(showCappNo);
 	})
 });

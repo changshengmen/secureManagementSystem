@@ -8,7 +8,7 @@
 		resultType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO">
 		select n.id,n.SerialNumber,IFNULL(DATEDIFF(NOW(),n.TInsrncEndTm),'') expire_days, 
 		n.CProdName,n.CAppNo,n.status,n.CProdNo,n.appCde,n.AppNme,n.NAmt,n.NPrm,n.TAppTm,n.payNo,
-		n.PolicyNo,n.EdrAppNo,n.CUdrMrk,n.PolicyIdef,n.CResvTxt,n.undwrMsg,n.CUdrCde,n.TUdrTm,
+		n.PolicyNo,n.EdrAppNo,n.CUdrMrk,n.PolicyIdef,n.CResvTxt,n.undwrMsg,n.occProp,n.CUdrCde,n.TUdrTm,
 		n.TInsrncBgnTm,n.TInsrncEndTm,n.createtime,
 		(select nickname from t_user u where u.id=n.createaccount) CSlsNme 
 		from nvhlbasevo n where 1=1 and deleteFlag='0'
@@ -91,11 +91,18 @@
 		insert into nvhlbasevo(		
 		SerialNumber,CAppNo,AppNme,InsuredNme,AppCde,InsuredCde,	
 		CProdNo,CProdName,NAmtRmbExch,NAmt,NPrmRmbExch,NPrm,TAppTm,TInsrncBgnTm,
-		TInsrncEndTm,createAccount,createTime,status,deleteFlag)
+		TInsrncEndTm,createAccount,createTime,status,deleteFlag
+		<if test="occProp != null and occProp != ''">
+		,occProp
+		</if>)
          values(
          #{serialNumber},#{CAppNo},#{appNme},#{insuredNme},#{appCde},#{insuredCde},
          #{CProdNo},#{CProdName},#{NAmtRmbExch},#{NAmt},#{NPrmRmbExch},#{NPrm},#{TAppTm}
-  		,#{TInsrncBgnTm},#{TInsrncEndTm},#{createAccount},now(),#{status},#{deleteFlag})
+  		,#{TInsrncBgnTm},#{TInsrncEndTm},#{createAccount},now(),#{status},#{deleteFlag}
+  		<if test="occProp != null and occProp != ''">
+		,#{occProp}
+		</if>
+  		)
 	</insert>
 	<!--插入 投保人NvhlApplicantVO  -->
 	<insert id="manage.NvhlBase.insertNvhlApplication"

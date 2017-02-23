@@ -15,7 +15,7 @@
 		 	<input type="hidden"  value="${e.currency!""}" name="currency"  data-rule="币种;currency;" size="10" maxlength="10"
 	                                                     id="currency" />
 		 	<!----------------------------------------------商品列表-------------------------------------------->
-			<table class="table table-bordered table-condensed table-hover"style="text-align: center;">				
+			<table id="secureProductTable" class="table table-bordered table-condensed table-hover"style="text-align: center;">				
 				<tr style="background-color: #dff0d8">
 					<td style="display: none;">id</td>
 					<th nowrap="nowrap">产品代码</th>
@@ -48,8 +48,7 @@
 						 </#list>	
 					 </td>
 					<td>${e.NAmt!""}</td>
-				
-					<td>${e.introduce!""}</td>
+					<td id="introduce"class="tipso" name="introduce" data-tipso="${e.introduce!""}">${e.introduce!""}</td>
 				</tr>
 			</table>
            </div>
@@ -131,9 +130,7 @@
 			<!--------------------------操作按钮模块------------------------------------->
 			<br>
 			<#if e.id??>
-			 	<a href="toPayPage?CProdNo=${e.CProdNo}&NAmt=${e.NAmt}&NPrm=${e.NPrm}" class="btn btn-success">下单</a> 
-               
-           
+			 	<a href="toPayPage?CProdNo=${e.CProdNo}&NAmt=${e.NAmt}&NPrm=${e.NPrm}&occPropFlag=${e.occPropFlag}" class="btn btn-success">下单</a>            
                 <button method="selectList?init=y" class="btn btn-warning">
 	                <i class="icon-ok icon-white"></i>返回
 	        	</button>	
@@ -146,7 +143,19 @@
 $(function() {
 	$( "#tabs" ).tabs({
 	});	
+	$('.tipso').tipso({
+		useTitle: false
+	});
+	//投保单号 缩短 显示
+	cutIntroduce();
 });
+//投保单号 缩短 显示
+function cutIntroduce(){	
+	var introduce = $("#introduce").text();
+	var len = introduce.length;
+	var showContent = introduce.substring(0,20) + " ...";
+	$("#introduce").html(showContent);
+}
 </script>
 
 </@page.pageBase>

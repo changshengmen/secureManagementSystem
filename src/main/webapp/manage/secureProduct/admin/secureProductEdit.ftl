@@ -118,7 +118,18 @@ function addRow(){
 	                                                     id="NAmt" />
 	                        </div>
 	              </div>
-	
+	  				<div class="form-group col-md-12">
+	                        <label class="col-md-2 control-label">是否显示占用性质</label>
+	                        <div class="col-md-10">
+	                        	 <#assign map = {"1":'不显示',"0":'显示'}>
+								 <select id="occPropFlag" name ="occPropFlag" >
+									<#list map?keys as key>
+	                            		<option value="${key}" <#if e.occPropFlag?? && e.occPropFlag==key>selected="selected"</#if>>${map[key]}</option>
+	                        		</#list>                  		
+                   				 </select>
+                   				 （财产险默认显示）	
+	                        </div>
+	               </div>
 	                <div class="form-group col-md-12">
 	                        <label class="col-md-2 control-label">产品简介</label>
 	                        <div class="col-md-10">

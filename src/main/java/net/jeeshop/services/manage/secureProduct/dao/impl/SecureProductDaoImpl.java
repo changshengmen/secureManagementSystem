@@ -61,7 +61,9 @@ public class SecureProductDaoImpl implements SecureProductDao {
 
 	// 更新保险产品
 	public int update(SecureProduct e) {
-		updateSubProduct(e);
+		if(e.getSecureProductDetailList() != null){
+			updateSubProduct(e);
+		}		
 		return dao.update("manage.secureProduct.update", e);
 	}
 

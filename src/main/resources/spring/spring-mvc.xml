@@ -10,14 +10,8 @@
 		http://cxf.apache.org/schemas/jaxws.xsd
 	">
 
-	<import resource="classpath:META-INF/cxf/cxf.xml" />
-	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
-	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
-
-	<jaxws:endpoint id="helloworld"
-		implementor="net.jeeshop.services.test.impl.HelloWorldService" address="/helloworld" />
-	
 	<context:component-scan base-package="net.jeeshop.web.action" />
+
 	<!--<import resource="classpath*:strutsSpring/front/spring_struts.xml"/> -->
 	<!-- 配置自定义转换服务器 -->
 	<bean id="conversionService"
