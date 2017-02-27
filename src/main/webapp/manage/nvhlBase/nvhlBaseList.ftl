@@ -2,11 +2,20 @@
 <@page.pageBase currentMenu="订单信息">
 <script type="text/javascript">
 $(function() {
-//如果是支付返回就刷新页面
-	flushPage();
 	$('.tipso').tipso({
 		useTitle: false
 	});
+	//投保止期格式化
+	$("#orderList").find("td[name='tinsrncEndTm']").each(function(){
+	var tinsrncEndTm = $(this).text();	
+	var year = tinsrncEndTm.substr(0,4);
+	var moon = tinsrncEndTm.substr(4,2);
+	var day = tinsrncEndTm.substr(6,2);
+	var hour = tinsrncEndTm.substr(8,2);
+	var min = tinsrncEndTm.substr(10,2);
+	var sec = tinsrncEndTm.substr(12,2);
+	$(this).text(tinsrncEndTm= year+"-"+moon+"-"+day+" "+hour+":"+min+":"+sec);
+	})
 	//如果从客户页面跳转进来 显示返回按钮
 	var href = window.location.href;
 	if(href.indexOf('appCde')>-1){
@@ -28,10 +37,7 @@ $(function() {
 	})
 });
 function flushPage(){
-	//如果刚刚的交易还是支付中就刷新页面，后台可能更新订单状态有可能慢啦	
-	if((typeof($("td[name='orderStatus']")) != "undefined") && $('td[name="orderStatus"]:eq(0)').html().trim().indexOf("中")!=-1){
-		window.location.reload();
-	}
+	window.location.reload();
 }
 </script>
 <form action="${basepath}/manage/NvhlBase" method="post" theme="simple">
@@ -76,8 +82,8 @@ function flushPage(){
 			<!--<th style="text-align: center;">企业代码</th>-->
 			<!--<th style="text-align: center;">保额合计</th>
 			<th style="text-align: center;">保费合计</th>
+			<th style="text-align: center;">投保起期</th>-->
 			<th style="text-align: center;">投保日期</th>
-			<th style="text-align: center;">保险起期</th>-->
 			<th style="text-align: center;">保险止期</th>
 			<th style="text-align: center;">业务员</th>
 			<th style="text-align: center;">投保状态</th>
@@ -94,14 +100,15 @@ function flushPage(){
 				<td>${item.NPrm!""}</td>
 				<td>${item.TAppTm!""}</td>
 				<td>${item.TInsrncBgnTm!""}</td>-->
+				<td>${item.TAppTm!""}</td>
 				<#if item.TInsrncEndTm??>
 				<!--如果超期天数为负数 则高亮显示-->
 				<#if item.expire_days gt 0> <!--大于等于0 表示已过期-->
-				<td id="expireDate" bgcolor="#FF8888">${item.TInsrncEndTm!""}</td>
+				<td id="expireDate" name="tinsrncEndTm" bgcolor="#FF8888">${item.TInsrncEndTm!""}</td>
 				<#elseif  item.expire_days lte -30> <!--小于等于30 表示 距离截止日期一个月以上-->
-				<td id="expireDate">${item.TInsrncEndTm!""}</td>
+				<td id="expireDate" name="tinsrncEndTm">${item.TInsrncEndTm!""}</td>
 				<#else>   <!--一个月之内到期-->
-				<td id="expireDate"  bgcolor="#FFBB66" >${item.TInsrncEndTm!""}</td>
+				<td id="expireDate" name="tinsrncEndTm" bgcolor="#FFBB66" >${item.TInsrncEndTm!""}</td>
 				</#if> 
 				<#else>
 				<td></td>
@@ -116,8 +123,12 @@ function flushPage(){
 					</#list>
 				</td>
 				<td>					
-					<a href="selectOrderInfo?id=${item.id!""}">查看 |</a>	
-					<a href="toInsurancePolicy?payNo=${item.payNo!""}">保单落地</a>			
+					<a href="selectOrderInfo?id=${item.id!""}">查看 |</a>
+					<#if item.status == "1" ||item.status == "2" >				
+						<a href="#" onclick="flushPage()">刷新</a>
+					<#else>	
+						<a href="toInsurancePolicy?payNo=${item.payNo!""}">保单落地</a>	
+					</#if>
 				</td>
 		</tr>
 		</#list>
