@@ -82,10 +82,10 @@ function flushPage(){
 			<!--<th style="text-align: center;">企业代码</th>-->
 			<!--<th style="text-align: center;">保额合计</th>
 			<th style="text-align: center;">保费合计</th>
-			<th style="text-align: center;">投保起期</th>-->
-			<th style="text-align: center;">投保日期</th>
+			<th style="text-align: center;">投保起期</th>-->		
 			<th style="text-align: center;">保险止期</th>
 			<th style="text-align: center;">业务员</th>
+			<th style="text-align: center;">创建日期</th>
 			<th style="text-align: center;">投保状态</th>
 			<th style="text-align: center;">操作</th>
 		</tr>
@@ -99,8 +99,7 @@ function flushPage(){
 				<td>${item.NAmt!""}</td>
 				<td>${item.NPrm!""}</td>
 				<td>${item.TAppTm!""}</td>
-				<td>${item.TInsrncBgnTm!""}</td>-->
-				<td>${item.TAppTm!""}</td>
+				<td>${item.TInsrncBgnTm!""}</td>-->				
 				<#if item.TInsrncEndTm??>
 				<!--如果超期天数为负数 则高亮显示-->
 				<#if item.expire_days gt 0> <!--大于等于0 表示已过期-->
@@ -114,6 +113,7 @@ function flushPage(){
 				<td></td>
 				</#if>
 				<td>${item.CSlsNme!""}</td>
+				<td>${item.TAppTm!""}</td>
 				<td name="orderStatus">
 					<#assign map = {"0":'支付成功',"1":'支付中',"2":'信息审核中',"3":"保单落地失败","4":"保单落地"}>
 					<#list map?keys as key>
