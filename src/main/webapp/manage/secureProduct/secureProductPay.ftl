@@ -136,8 +136,7 @@
 	                </td>     		
                   	<td style="text-align: right;">邮编</td>
 	        	    <td><input type="text" name="TZipCde" value="${common.TZipCde!""}" id="ZipCde" data-rule="邮编;required;length[0~20];"/>&nbsp;<span style="color:red">*</span>
-	                </td>
-					 
+	                </td>					 
 	           </tr>
 	             <tr>
 	                 <td style="text-align: right;">客户风险等级</td>
