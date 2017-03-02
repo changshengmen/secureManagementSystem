@@ -127,8 +127,7 @@
 	                 <td style="text-align: right;">联系电话</td>
 	        	     <td><input type="text" name="TMobile"  data-rule="联系电话;required;integer;length[0~11]" maxlength="11"
 	                                             id="Mobile" value="${common.TMobile!""}" />&nbsp;<span style="color:red">*</span>
-	                 </td>
-	                
+	                 </td>                
 	           <tr>	         
 	           	<tr> 
 	           	 	<td style="text-align: right;">国籍</td>
@@ -397,6 +396,7 @@ function unbind(){
 //把投保人信息复制到被保人
 function copyInfo(){
 		var source=["NameA","ClntMrkA","CountryA","EmailA","CertfClsA","CertfCdeA","ClntAddrA","MobileA","ZipCdeA","CusRiskLvlA","CustRiskRankA"];	
+		debugger;
 		$.each(source,function(i,n){
 			if($("#"+n.substring(0,n.length-1))){
 				  var formerVal = $("#"+n.substring(0,n.length-1)).val();
