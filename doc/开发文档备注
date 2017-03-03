@@ -17,4 +17,38 @@
 
  4. 接口 1005 地址  （我们在JDT开发数据库里的存档）
  	http://123.207.254.113:8080/jshop/manage/secureProduct/pay_Result
-		
+ 5. 客户管理功能相关文件
+ 	实体类：(投保人和被保人使用同一个)NvhlApplicantVO.java
+ 	controller层：NvhlApplicantVOAction.java
+ 	service层：NvhlApplicantService.java
+	service实现层：NvhlApplicantImpl.java
+	dao层：NvhlApplicantDao.java
+	dao实现层：NvhlApplicantDaoImpl.java
+	前台页面：nvhlApplicantList.ftl \ nvhlApplicantEdit.ftl \nvhlApplicantInfo.ftl
+6. 订单功能相关文件
+ 	实体类：NvhlBaseVO.java
+ 	controller层：NvhlBaseAction.java
+ 	service层：NvhlBaseService.java
+	service实现层：NvhlBaseImpl.java
+	dao层：NvhlBaseDao.java
+	dao实现层：NvhlBaseDaoImpl.java
+	前台页面：nvhlBaseList.ftl \nvhlBaseInfo.ftl
+7. 保险产品管理相关文件
+	实体类：SecureProduct.java
+ 	controller层：SecureProductAction.java
+ 	service层：SecureProductService.java
+	service实现层：SecureProductServiceImpl.java
+	dao层：SecureProductDao.java
+	dao实现层：SecureProductDaoImpl.java
+	前台页面：secureProductList.ftl \secureProductInfo.ftl \secureProductEdit.ftl
+8. 用户分配产品
+	controller层：SecureProductAction.java
+	userProductList此方法就是给用户分配产品的方法
+9. 报表查看
+	controller层 :ReportAction.java
+	实体类：reportInfo.java
+	前台页面：productSales.ftl
+10.财产险与责任险的子产品的字段（因为两个产品的子产品字段不一样，所以特此说明）
+责任险的子产品：险别代码、保费、保额、费率、累计赔偿限额、每次事故赔偿限额
+责任险的子产品：险别代码、标的名称、保费、保额、费率
+
