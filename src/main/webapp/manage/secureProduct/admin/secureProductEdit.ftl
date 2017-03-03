@@ -56,7 +56,6 @@ function addRow(){
 	$("#subProductList").append(trHtml);	
 }
 </script>
-
 <form action="${basepath}/manage/secureProduct"  namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">		
 	<div id="tabs">
 		<ul>
