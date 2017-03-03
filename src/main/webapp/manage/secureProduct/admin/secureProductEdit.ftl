@@ -43,13 +43,14 @@ function addRow(){
 	var amountTd="<td><input type='text' name='secureProductDetailList["+count+"].amount'class='search-query form-control input-small'data-rule='保额;required;integer;premium;length[1~10];'maxlength='9'/></td>"
 	var rateTd="<td><input type='text' name='secureProductDetailList["+count+"].rate'class='search-query form-control input-small'data-rule='费率;required;double;rate;'maxlength='9'/></td>"
 	var NIndemLmt="<td><input type='text' name='secureProductDetailList["+count+"].NIndemLmt'class='search-query form-control input-small'maxlength='9'/></td>"
+	var nonceIndemLmt="<td><input type='text' name='secureProductDetailList["+count+"].nonceIndemLmt'class='search-query form-control input-small'maxlength='9'/></td>"
 	var	wayTd="<td><select id='sure_way' name='secureProductDetailList["+count+"].sure_way'class='search-query form-control input-medium'><option value='0'>市场价值</option></select></td></tr>"	
 	var checkBoxTd="<td><input type='checkbox' name='ids'/></td>";
 	if(${e.secureProductDetailList?size}>0){
-		var trHtml=tr+checkBoxTd+cvrgNoTd+subNameTd+premiumTd+amountTd+rateTd+NIndemLmt+wayTd;	
+		var trHtml=tr+checkBoxTd+cvrgNoTd+subNameTd+premiumTd+amountTd+rateTd+NIndemLmt+nonceIndemLmt+wayTd;	
 	
 	}else{
-		var trHtml=tr+cvrgNoTd+subNameTd+premiumTd+amountTd+rateTd+NIndemLmt+wayTd;	
+		var trHtml=tr+cvrgNoTd+subNameTd+premiumTd+amountTd+rateTd+NIndemLmt+nonceIndemLmt+wayTd;	
 	
 	}
 	$("#subProductList").append(trHtml);	
@@ -159,7 +160,8 @@ function addRow(){
      				<th style="text-align: center;">保费(元)</th> 
      				<th style="text-align: center;">保额(元)</th>
      				<th style="text-align: center;">费率(‰)</th>
-     				<th style="text-align: center;">累计赔偿限额</th>	
+     				<th style="text-align: center;">累计赔偿限额</th>
+     				<th style="text-align: center;">每次事故赔偿限额</th>	
      				<th style="text-align: center;">确定方式</th>	
      				</tr>
         	        <#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
@@ -194,6 +196,10 @@ function addRow(){
 								</td>
 								<td>
 									<input type="text"  value="${e.secureProductDetailList[item_index].NIndemLmt!""}" name="secureProductDetailList[${item_index}].NIndemLmt"
+									class="search-query input-small" maxlength="9"/>
+								</td>
+								<td>
+									<input type="text"  value="${e.secureProductDetailList[item_index].nonceIndemLmt!""}" name="secureProductDetailList[${item_index}].nonceIndemLmt"
 									class="search-query input-small" maxlength="9"/>
 								</td>
 								<td>

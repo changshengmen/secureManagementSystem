@@ -58,12 +58,13 @@
             	<table class="table table-bordered table-condensed table-hover" style="text-align: center;">                 
      				<tr style="background-color: #dff0d8">
 	     				<th style="display: none;">id</th>
-	     				<th style="width:15%;text-align: center">险别代码</th>
-	     				<th style="width:15%;text-align: center">标的名称</th>
-	     				<th style="width:15%;text-align: center">保费(元)</th> 
-	     				<th style="width:15%;text-align: center">保额(元)</th>
-	     				<th style="width:15%;text-align: center">费率(‰)</th>
-	     				<th style="width:15%;text-align: center">累计赔偿限额</th>
+	     				<th style="width:10%;text-align: center">险别代码</th>
+	     				<th style="width:10%;text-align: center">标的名称</th>
+	     				<th style="width:10%;text-align: center">保费(元)</th> 
+	     				<th style="width:10%;text-align: center">保额(元)</th>
+	     				<th style="width:10%;text-align: center">费率(‰)</th>
+	     				<th style="width:13%;text-align: center">累计赔偿限额</th>
+	     				<th style="width:15%;text-align: center">每次事故赔偿限额</th>
 	     				<th style="width:40%;text-align: center">保险金额的确定方式</th>	  
      				</tr>
         	        <#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
@@ -76,6 +77,7 @@
 								<td>${e.secureProductDetailList[item_index].amount!""}</td>
 								<td>${e.secureProductDetailList[item_index].rate!""}</td>
 								<td>${e.secureProductDetailList[item_index].NIndemLmt!""}</td>
+								<td>${e.secureProductDetailList[item_index].nonceIndemLmt!""}</td>
 								<td>
 	                                <#assign map = {'0':'市场价值'}>	                             	                                    
 	                                <#list map?keys as key>
