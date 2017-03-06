@@ -159,8 +159,8 @@ function addRow(){
      				<th style="text-align: center;">保费(元)</th> 
      				<th style="text-align: center;">保额(元)</th>
      				<th style="text-align: center;">费率(‰)</th>
-     				<th style="text-align: center;">累计赔偿限额</th>
-     				<th style="text-align: center;">每次事故赔偿限额</th>	
+     				<th style="text-align: center;">累计赔偿限额</th>	
+     				<th style="text-align: center;">每次事故赔偿限额</th>
      				<th style="text-align: center;">确定方式</th>	
      				</tr>
         	        <#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
@@ -197,10 +197,12 @@ function addRow(){
 									<input type="text"  value="${e.secureProductDetailList[item_index].NIndemLmt!""}" name="secureProductDetailList[${item_index}].NIndemLmt"
 									class="search-query input-small" maxlength="9"/>
 								</td>
+								
 								<td>
 									<input type="text"  value="${e.secureProductDetailList[item_index].nonceIndemLmt!""}" name="secureProductDetailList[${item_index}].nonceIndemLmt"
 									class="search-query input-small" maxlength="9"/>
 								</td>
+								
 								<td>
 	                                <#assign map = {'0':'市场价值'}>
 	                                <select id="sure_way" name="secureProductDetailList[${item_index}].sure_way" class="search-query input-medium">
