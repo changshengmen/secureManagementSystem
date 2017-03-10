@@ -21,7 +21,9 @@
 	    border: 1px solid transparent;
 	    border-radius: 4px;
 	    background-color:#e8423d;border-color:#e8423d;
+		
 	}
+	
 </style>
 <form action="${basepath}/manage/secureProduct" id="form" name="form" namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">		
 <div id="tabs">
@@ -205,7 +207,7 @@
 	           		
 	           		<td style="text-align: right;">行业类型清单</td> 
 						<td> 
-		                        <select id="hylxList" name="value" class="input-medium">
+		                        <select id="hylxList" name="value">
                         			<#list hylxList as key>
                             			<option value="${key.key1}">${key.value}</option>
                         			</#list>
@@ -367,11 +369,11 @@
 			 async:false,
          	 success:function(data){
          	 	//遍历拼接下拉框
-         		var html='<select id="hylxList" name="value" class="input-medium">';
+         		var html='';
          		$.each(data,function(index,obj){
-         		html+='<option value="'+obj.key1+'">'+obj.value+'</option>';  			
+         			html+='<option value="'+obj.key1+'">'+obj.value+'</option>';  			
          		});
-         		html+='</select>';
+         		
          		$('#hylxList').html(html);	
          	 },   
          	 
@@ -379,6 +381,12 @@
        });
        
 $(function() {
+//------页面初始化将动态生成的下拉框的样式remove掉---------
+	$('#hylxList').removeClass("form-control");
+	//为动态添加的下拉框赋新的样式和宽度
+	$('#hylxList').css({"overflow-x":"hidden", "width":"200px"});
+//---------------end-----------------------	
+
 	var a = $(".navbar-top-links li").attr("class","dropdown1"); //角色切换 和 下拉框重名 改
    
 	$( "#tabs" ).tabs({
@@ -421,12 +429,12 @@ $(function() {
 			 dataType: "json",
 			 async:false,
          	 success:function(data){
-         	 	//遍历拼接下拉框
-         		var html='<select id="hylxList" name="value" class="input-medium" style="width:120px">';
+         	 	//遍历拼接option
+         		var html='';
          		$.each(data,function(index,obj){
          		html+='<option value="'+obj.key1+'">'+obj.value+'</option>';  			
          		});
-         		html+='</select>';
+         		//加入到select中
          		$('#hylxList').html(html);	
          	 },   
          	 
