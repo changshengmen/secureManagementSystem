@@ -42,7 +42,7 @@
 		<!--------------------------订单的流水号------------------------------------->	
 		<!--------------------------用于后面支付的时候查询保险产品的隐藏域------------------------------------->
 		<input type="hidden" name="occPropFlag" value="${secure.occPropFlag!""}"></input>
-		<input type="hidden" name="CProdNo" value="${base.CProdNo!""}"></input>	
+		<input type="hidden" id="CProdNo" name="CProdNo" value="${base.CProdNo!""}"></input>	
 		<input type="hidden" name="NAmt" value="${base.NAmt!""}"></input>	
 		<input type="hidden" name="NPrm" value="${base.NPrm!""}"></input>	
 		<!--------------------------用于后面支付的时候查询保险产品的隐藏域------------------------------------->	
@@ -193,8 +193,9 @@
 					  </td>
 				</tr>
 				
-				<tr>
 				
+				<tr id="trends">
+					
 					<td style="text-align: right;">营业性质</td> 
 						<td> 
 		                         <select id="yyxz" name="key1" class="input-medium" >
@@ -212,11 +213,10 @@
                             			<option value="${key.key1}">${key.value}</option>
                         			</#list>
                     			</select>
-	           		</td>  
-	           		
-	           		
-	
+	           		</td> 
 				</tr>
+				
+				
 				<#if secure?? && secure.occPropFlag == "0">
 					<tr>
 						<td colspan="1" style="text-align: right;">占地性质</td>
@@ -439,7 +439,15 @@ $(function() {
          	 },   
          	 
       	})
-  	
+      	
+      	//----判断是哪份保险如果是010001财产险则删除页面中营业性质等字段 ----------------------------------------------
+      	var cProdNo=$('#CProdNo').val();
+      	alert(cProdNo=="010001");
+      	if(cProdNo=="010001"){
+      		$('#trends').empty();  
+      	}
+      		
+  		//---------判断保险end--------------------------------------------------------------
 });
 
 
