@@ -190,6 +190,31 @@
 						&nbsp;<span style="color:red">*</span>
 					  </td>
 				</tr>
+				
+				<tr>
+				
+					<td style="text-align: right;">营业性质</td> 
+						<td> 
+		                         <select id="yyxz" name="key1" class="input-medium" >
+                        			<#list dicList as key>
+                            			<option value="${key.key1}">${key.value}</option>
+                        			</#list>
+                    			</select>
+                    			
+	           		</td>  
+	           		
+	           		<td style="text-align: right;">行业类型清单</td> 
+						<td> 
+		                        <select id="hylxList" name="value" class="input-medium">
+                        			<#list hylxList as key>
+                            			<option value="${key.key1}">${key.value}</option>
+                        			</#list>
+                    			</select>
+	           		</td>  
+	           		
+	           		
+	
+				</tr>
 				<#if secure?? && secure.occPropFlag == "0">
 					<tr>
 						<td colspan="1" style="text-align: right;">占地性质</td>
@@ -322,7 +347,37 @@
 <link rel="stylesheet" type="text/css" href="${basepath}/resource/css/select/easydropdown.css">
 <link rel="stylesheet" type="text/css" href="${basepath}/resource/jquery-spinner/bootstrap-spinner.css">
 
+
+
+
+
 <script>
+//动态下拉框功能实现
+ $('#yyxz').change(function(){
+       	//获取当前选中的pcode
+       	var pcode = $(this).val()
+       	console.log(pcode)
+       	//访问action的url
+       	var url = basepath+'/manage/secureProduct/toChangeSelect?pcode='+pcode;
+		//异步实现级联下拉框
+      	$.ajax({
+			 url:url,
+			 type:"get",
+			 dataType: "json",
+			 async:false,
+         	 success:function(data){
+         	 	//遍历拼接下拉框
+         		var html='<select id="hylxList" name="value" class="input-medium">';
+         		$.each(data,function(index,obj){
+         		html+='<option value="'+obj.key1+'">'+obj.value+'</option>';  			
+         		});
+         		html+='</select>';
+         		$('#hylxList').html(html);	
+         	 },   
+         	 
+      	})
+       });
+       
 $(function() {
 	var a = $(".navbar-top-links li").attr("class","dropdown1"); //角色切换 和 下拉框重名 改
    
@@ -354,6 +409,28 @@ $(function() {
   		}
   		
   	});
+  	
+  	//页面装在完成后选中营业性质实现级联功能
+  	var seldValue=$('#yyxz option:selected').val()
+  	//alert(value);
+  		var url = basepath+'/manage/secureProduct/toChangeSelect?pcode='+seldValue;
+		//异步实现级联下拉框
+      	$.ajax({
+			 url:url,
+			 type:"get",
+			 dataType: "json",
+			 async:false,
+         	 success:function(data){
+         	 	//遍历拼接下拉框
+         		var html='<select id="hylxList" name="value" class="input-medium" style="width:120px">';
+         		$.each(data,function(index,obj){
+         		html+='<option value="'+obj.key1+'">'+obj.value+'</option>';  			
+         		});
+         		html+='</select>';
+         		$('#hylxList').html(html);	
+         	 },   
+         	 
+      	})
   	
 });
 
