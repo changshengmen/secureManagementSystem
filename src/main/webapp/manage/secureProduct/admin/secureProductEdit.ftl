@@ -12,6 +12,12 @@ $(function() {
 		delRow();
 	});
 	hideCheckbox();	
+	
+	//--------页面加载完成后为动态添加行的input添加css样式-----------------------------------
+	var xbdm=$('#xbdm').val();
+	$("input[type='text']").css({"width":"100px"});
+	
+	//----------添加样式end-----------------------------------------------------------
 });
 //判断当前登陆者不是admin就隐藏。$("#currentUserID")此控件在pageBase.ftl中
 function hideCheckbox(){
@@ -37,11 +43,11 @@ function delRow(){
 function addRow(){
 	var count = $("#subProductList tr").size()-2;
 	var tr="<tr>"
-	var cvrgNoTd = "<td><input type='text' name='secureProductDetailList["+count+"].cvrgNo'class='search-query form-control input-small'data-rule='险别代码;required;cvrgNo'maxlength='40'/></td>"						
+	var cvrgNoTd = "<td><input id='xbdm' type='text' name='secureProductDetailList["+count+"].cvrgNo'class='search-query form-control input-small'data-rule='险别代码;required;cvrgNo'maxlength='40'/></td>"						
 	var subNameTd="<td><input type='text' name='secureProductDetailList["+count+"].subName'class='search-query form-control input-small'maxlength='40'/></td>"	
-	var	premiumTd="<td><input type='text' name='secureProductDetailList["+count+"].premium'class='search-query form-control input-small'data-rule='保费;required;integer;premium;'maxlength='9'/></td>"
-	var amountTd="<td><input type='text' name='secureProductDetailList["+count+"].amount'class='search-query form-control input-small'data-rule='保额;required;integer;premium;length[1~10];'maxlength='9'/></td>"
-	var rateTd="<td><input type='text' name='secureProductDetailList["+count+"].rate'class='search-query form-control input-small'data-rule='费率;required;double;rate;'maxlength='9'/></td>"
+	var	premiumTd="<td><input id='bf' type='text' name='secureProductDetailList["+count+"].premium'class='search-query form-control input-small'data-rule='保费;required;integer;premium;'maxlength='9'/></td>"
+	var amountTd="<td><input id='be' type='text' name='secureProductDetailList["+count+"].amount'class='search-query form-control input-small'data-rule='保额;required;integer;premium;length[1~10];'maxlength='9'/></td>"
+	var rateTd="<td><input id='fl' type='text' name='secureProductDetailList["+count+"].rate'class='search-query form-control input-small'data-rule='费率;required;double;rate;'maxlength='9'/></td>"
 	var NIndemLmt="<td><input type='text' name='secureProductDetailList["+count+"].NIndemLmt'class='search-query form-control input-small'maxlength='9'/></td>"
 	var nonceIndemLmt="<td><input type='text' name='secureProductDetailList["+count+"].nonceIndemLmt'class='search-query form-control input-small'maxlength='9'/></td>"
 	var	wayTd="<td><select id='sure_way' name='secureProductDetailList["+count+"].sure_way'class='search-query form-control input-medium'><option value='0'>市场价值</option></select></td></tr>"	
@@ -53,7 +59,8 @@ function addRow(){
 		var trHtml=tr+cvrgNoTd+subNameTd+premiumTd+amountTd+rateTd+NIndemLmt+nonceIndemLmt+wayTd;	
 	
 	}
-	$("#subProductList").append(trHtml);	
+	$("#subProductList").append(trHtml);
+	$("input[type='text']").css({"width":"100px"});	
 }
 </script>
 <form action="${basepath}/manage/secureProduct"  namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">		
@@ -162,14 +169,16 @@ function addRow(){
      				<th style="text-align: center;">累计赔偿限额</th>	
      				<th style="text-align: center;">每次事故赔偿限额</th>
      				<th style="text-align: center;">确定方式</th>	
+     				</div>
      				</tr>
         	        <#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
 	                    <#list e.secureProductDetailList as item>
+							
 							<tr>
 							<td><input type="checkbox" name="ids" value="${e.secureProductDetailList[item_index].id!""}" /></td>
 								<td style="display: none;"><input type="hidden" value="${e.secureProductDetailList[item_index].id!""}" name="secureProductDetailList[${item_index}].id"/></td>
 								<td>
-									<input type="text" value="${e.secureProductDetailList[item_index].cvrgNo!""}" name="secureProductDetailList[${item_index}].cvrgNo" 
+									<input id="xbdm" type="text" value="${e.secureProductDetailList[item_index].cvrgNo!""}" name="secureProductDetailList[${item_index}].cvrgNo" 
 									 class="search-query input-small" 
 									 <#if item.cvrgNo??>
 									 data-rule="险别代码;required" 
@@ -181,16 +190,16 @@ function addRow(){
 									 class="search-query input-small" maxlength="40"/>
 								</td>
 								<td>
-									<input type="text" value="${e.secureProductDetailList[item_index].premium!""}" name="secureProductDetailList[${item_index}].premium"
+									<input id="bf" type="text" value="${e.secureProductDetailList[item_index].premium!""}" name="secureProductDetailList[${item_index}].premium"
 									 class="search-query input-small" maxlength="9"/>
 								</td>
 								
 								<td>
-									<input type="text"  value="${e.secureProductDetailList[item_index].amount!""}" name="secureProductDetailList[${item_index}].amount"  
+									<input id="be" type="text"  value="${e.secureProductDetailList[item_index].amount!""}" name="secureProductDetailList[${item_index}].amount"  
 									class="search-query input-small" maxlength="9"/>
 								</td>
 								<td>
-									<input type="text"  id="rate" value="${e.secureProductDetailList[item_index].rate!""}" name="secureProductDetailList[${item_index}].rate"
+									<input id="fl" type="text"  id="rate" value="${e.secureProductDetailList[item_index].rate!""}" name="secureProductDetailList[${item_index}].rate"
 									class="search-query input-small" maxlength="9"/>
 								</td>
 								<td>
@@ -213,6 +222,7 @@ function addRow(){
 	                            </td>
 	                            	<!--<td><input type="text" value="${e.secureProductDetailList[item_index].remark!""}" name="secureProductDetailList[${item_index}].remark"  class="search-query input-small"/></td>-->
 							</tr>
+							
 	                    </#list>
 								
            		  </#if>
