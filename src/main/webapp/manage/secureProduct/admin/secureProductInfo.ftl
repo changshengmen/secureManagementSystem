@@ -59,7 +59,7 @@
      				<tr style="background-color: #dff0d8">
 	     				<th style="display: none;">id</th>
 	     				<th style="width:10%;text-align: center">险别代码</th>
-	     				<th style="width:10%;text-align: center">标的名称</th>
+	     				<th style="width:15%;text-align: center">标的名称</th>
 	     				<th style="width:8%;text-align: center">保费(元)</th> 
 	     				<th style="width:8%;text-align: center">保额(元)</th>
 	     				<th style="width:8%;text-align: center">费率(‰)</th>
