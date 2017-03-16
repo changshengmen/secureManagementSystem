@@ -196,7 +196,6 @@
 				</tr>
 				
 					
-				
 				<tr id="trends">
 				
 					<td style="text-align: right;">营业性质</td> 
