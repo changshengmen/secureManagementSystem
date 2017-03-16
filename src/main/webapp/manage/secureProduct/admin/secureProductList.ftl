@@ -88,7 +88,8 @@
             <#list pager.list as item>
 				<tr>		
 				<td class="checkboxTh"><input type="checkbox" name="ids"
-						value="${item.id!""}" /></td>			
+						value="${item.id!""}" />
+						</td>			
 					<td >&nbsp;${item.CProdNo!""}</td>									
 					<td>&nbsp;${item.CProdName!""}</td>
 					<td>
@@ -121,7 +122,7 @@
 					<td >					
 						<a class="toEditProduct" href="toEditProduct?id=${item.id}">编辑|</a>	
 						<a href="toOrder?id=${item.id}">查看</a>|
-						<a href="toPayPage?CProdNo=${item.CProdNo}&NAmt=${item.NAmt}&NPrm=${item.NPrm}&occPropFlag=${item.occPropFlag}">下单</a>
+						<a href="toPayPage?id=${item.id}&CProdNo=${item.CProdNo}&NAmt=${item.NAmt}&NPrm=${item.NPrm}&occPropFlag=${item.occPropFlag}">下单</a>
 					</td>
 				</tr>
             </#list>
