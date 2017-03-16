@@ -65,7 +65,7 @@
 	     				<th style="width:8%;text-align: center">费率(‰)</th>
 	     				<th style="width:13%;text-align: center">累计赔偿限额</th>
 	     				<th style="width:15%;text-align: center">每次事故赔偿限额</th>
-	     				<th style="width:40%;text-align: center">保险金额的确定方式</th>	  
+	     				<th style="width:20%;text-align: center">保险金额的确定方式</th>	  
      				</tr>
         	        <#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
 	                    <#list e.secureProductDetailList as item>
