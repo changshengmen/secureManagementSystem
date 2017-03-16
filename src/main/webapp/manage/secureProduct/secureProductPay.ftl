@@ -42,6 +42,8 @@
 		<!--------------------------订单的流水号------------------------------------->	
 		<!--------------------------用于后面支付的时候查询保险产品的隐藏域------------------------------------->
 		<input type="hidden" name="occPropFlag" value="${secure.occPropFlag!""}"></input>
+		<!--当前产品的主键id-->
+		<input type="hidden" name="id" value="${secure.id!""}"></input>
 		<input type="hidden" id="CProdNo" name="CProdNo" value="${base.CProdNo!""}"></input>	
 		<input type="hidden" name="NAmt" value="${base.NAmt!""}"></input>	
 		<input type="hidden" name="NPrm" value="${base.NPrm!""}"></input>	
@@ -193,14 +195,15 @@
 					  </td>
 				</tr>
 				
+					
 				
 				<tr id="trends">
-					
+				
 					<td style="text-align: right;">营业性质</td> 
 						<td> 
-		                         <select id="yyxz" name="key1" class="input-medium" >
+		                         <select id="yyxz" name="key1" class="input-medium">
                         			<#list dicList as key>
-                            			<option value="${key.key1}">${key.value}</option>
+                            			<option value="${key.key1}"<#if common.key1?? && common.key1==key.key1>selected="selected" </#if>>${key.value}</option>
                         			</#list>
                     			</select>
                     			
@@ -208,15 +211,13 @@
 	           		
 	           		<td style="text-align: right;">行业类型清单</td> 
 						<td> 
-		                        <select id="hylxList" name="value">
+		                        <select id="hylxList" name="p_code" class="input-medium">
                         			<#list hylxList as key>
-                            			<option value="${key.key1}">${key.value}</option>
+                            			<option value="${key.key1}"<#if pcode?? && pcode==key.key1>selected="selected" </#if>>${key.value}</option>
                         			</#list>
                     			</select>
 	           		</td> 
 				</tr>
-				
-				
 				<#if secure?? && secure.occPropFlag == "0">
 					<tr>
 						<td colspan="1" style="text-align: right;">占地性质</td>
@@ -321,9 +322,37 @@
                     			</select>
 	           		</td>	           		
           		</tr>
+          		
+				
+			<tr id="trends3">
+				<td colspan="4">
+				<span style="font-size:16px;" class="badge badge-warning">房屋信息</span>
+		         
+		 		</td>
+		 	</tr>  
+				
+				<tr id="trends1">
+					<td style="text-align: right;">承保区域</td> 
+						<td><input type="text" name="Tcbqy" value="${cbqy!""}" id="cbqy" data-rule="承保区域;required;length[0~20];"/>&nbsp;<span style="color:red">*</span>
+	           		 	</td>  
+	           		
+	           		 <td style="text-align: right;">营业场所地址</td> 
+						<td><input type="text" name="Tyycs" value="${yycs!""}" id="yycs" data-rule="营业场所地址;required;length[0~20];"/>&nbsp;<span style="color:red">*</span>
+	           		 	</td>
+	           		 		  
+				</tr>
+				
+				<tr id="trends2">
+					 <td style="text-align: right;">邮政编码</td> 
+						<td><input type="text" name="Tzip" value="${zip!""}" id="zip" data-rule="邮编;required;length[0~7];"/>&nbsp;<span style="color:red">*</span>
+	           		 </td>	 
+				</tr>
+         	
 	           </table>
 		  	 <!------------------table ending---------------------------------->																
-	</div><!--end tab-->
+	</div>
+	
+	<!--end tab-->
 			<!--------------------------操作按钮模块------------------------------------->
 			
 			<div style="margin-top:5px;padding-bottom:16px">
@@ -371,7 +400,7 @@
          	 	//遍历拼接下拉框
          		var html='';
          		$.each(data,function(index,obj){
-         			html+='<option value="'+obj.key1+'">'+obj.value+'</option>';  			
+         			html+='<option value="'+obj.p_code+'">'+obj.value+'</option>';  			
          		});
          		
          		$('#hylxList').html(html);	
@@ -380,9 +409,9 @@
       	})
        });
        
-$(function() {
+$(function(){
 //------页面初始化将动态生成的下拉框的样式remove掉---------
-	$('#hylxList').removeClass("form-control");
+	//$('#hylxList').removeClass("form-control");
 	//为动态添加的下拉框赋新的样式和宽度
 	$('#hylxList').css({"overflow-x":"hidden", "width":"200px"});
 //---------------end-----------------------	
@@ -417,36 +446,21 @@ $(function() {
   		}
   		
   	});
-  	
-  	//页面装在完成后选中营业性质实现级联功能
-  	var seldValue=$('#yyxz option:selected').val()
-  	//alert(value);
-  		var url = basepath+'/manage/secureProduct/toChangeSelect?pcode='+seldValue;
-		//异步实现级联下拉框
-      	$.ajax({
-			 url:url,
-			 type:"get",
-			 dataType: "json",
-			 async:false,
-         	 success:function(data){
-         	 	//遍历拼接option
-         		var html='';
-         		$.each(data,function(index,obj){
-         		html+='<option value="'+obj.key1+'">'+obj.value+'</option>';  			
-         		});
-         		//加入到select中
-         		$('#hylxList').html(html);	
-         	 },   
-         	 
-      	})
+  		
       	
-      	//----判断是哪份保险如果是010001财产险则删除页面中营业性质等字段 ----------------------------------------------
+      	
+      	
+      	//----判断是哪份保险如果是010001财产险则删除页面中营业性质承保区域等字段 ----------------------------------------------
       	var cProdNo=$('#CProdNo').val();
-      	alert(cProdNo=="010001");
-      	if(cProdNo=="010001"){
-      		$('#trends').empty();  
-      	}
-      		
+      	//alert(cProdNo=="010001");
+      	if(cProdNo=="010001")
+      	{
+      		$('#trends').empty(); 
+      		$('#trends1').remove();	 
+      		$('#trends2').remove();	 
+      		$('#trends3').remove();	 
+      		//alert($('#zip').val());
+		}
   		//---------判断保险end--------------------------------------------------------------
 });
 
@@ -489,7 +503,7 @@ function unbind(){
 //把投保人信息复制到被保人
 function copyInfo(){
 		var source=["NameA","ClntMrkA","CountryA","EmailA","CertfClsA","CertfCdeA","ClntAddrA","MobileA","ZipCdeA","CusRiskLvlA","CustRiskRankA"];	
-		debugger;
+		//debugger;
 		$.each(source,function(i,n){
 			if($("#"+n.substring(0,n.length-1))){
 				  var formerVal = $("#"+n.substring(0,n.length-1)).val();
