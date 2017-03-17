@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- create by autoCode,v1.0.0 -->
+<mapper namespace="manage.NvhlCollectComm">
+	
+	<!-- 新增表单信息 -->
+	<insert id="manage.NvhlCollectComm.insertNvhlCollectComm"
+		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhCollectCommonVO"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into nvhcollectcomment(		
+		cappno,yyxzkey,hylxkey,cbqy,yycs
+		)
+         values(
+         #{cAppNo},#{yyxzKey},#{hylxKey},#{cbqy},#{yycs}
+  		
+  		)
+	</insert>
+	
+	<!-- 根据保单编号查记录 -->
+	<select id="manage.NvhlCollectComm.selectByCappNo" parameterType="object"
+	resultType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhCollectCommonVO">
+		select * from nvhcollectcomment where cappno=#{cAppNo}
+	</select>
+	
+	
+	
+	
+	
+	
+</mapper>
