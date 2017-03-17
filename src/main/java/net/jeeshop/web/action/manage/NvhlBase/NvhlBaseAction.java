@@ -79,6 +79,7 @@ public class NvhlBaseAction  extends BaseController<NvhlBaseVO>{
 		String cAppNo=RequestHolder.getRequest().getParameter("cappNo");//投保单号
 		response.sendRedirect("/JDT/manage/secureProduct/insurancePolicy?payNo="+payNo+"&cappNo="+cAppNo);
 		
+		
 	}
 	/**
 	 * 此方法用于显示flushAttrs.addFlashAttribute("message", "支付成功！")
