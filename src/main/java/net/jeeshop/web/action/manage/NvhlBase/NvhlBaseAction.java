@@ -76,7 +76,8 @@ public class NvhlBaseAction  extends BaseController<NvhlBaseVO>{
 	@RequestMapping(value="toInsurancePolicy")
 	public void toInsurancePolicy(HttpServletRequest request,HttpServletResponse response,RedirectAttributes model) throws Exception{
 		String payNo = RequestHolder.getRequest().getParameter("payNo");//支付申请号
-		response.sendRedirect("/JDT/manage/secureProduct/insurancePolicy?payNo="+payNo);
+		String cAppNo=RequestHolder.getRequest().getParameter("cappNo");//投保单号
+		response.sendRedirect("/JDT/manage/secureProduct/insurancePolicy?payNo="+payNo+"&cappNo="+cAppNo);
 		
 	}
 	/**
