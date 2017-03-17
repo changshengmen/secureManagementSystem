@@ -212,7 +212,7 @@
 						<td> 
 		                        <select id="hylxList" name="p_code" class="input-medium">
                         			<#list hylxList as key>
-                            			<option value="${key.key1}"<#if pcode?? && pcode==key.key1>selected="selected" </#if>>${key.value}</option>
+                            			<option value="${key.p_code}"<#if pcode?? && pcode==key.p_code>selected="selected" </#if>>${key.value}</option>
                         			</#list>
                     			</select>
 	           		</td> 
