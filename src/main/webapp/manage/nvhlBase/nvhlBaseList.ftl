@@ -127,7 +127,7 @@ function flushPage(){
 					<#if item.status == "1" ||item.status == "2" >				
 						<a href="#" onclick="flushPage()">刷新</a>
 					<#else>	
-						<a href="toInsurancePolicy?payNo=${item.payNo!""}">保单落地</a>	
+						<a href="toInsurancePolicy?payNo=${item.payNo!""}&cappNo=${item.CAppNo!""}">保单落地</a>	
 					</#if>
 				</td>
 		</tr>
