@@ -12,7 +12,7 @@
 	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
 	
 	<jaxws:server  id="manualUnderwriting"
-		serviceClass="net.jeeshop.services.manage.webservice.ManualUnderwritingResultService" address="/testService" >
+		serviceClass="net.jeeshop.services.manage.webservice.ManualUnderwritingResultService" address="/manualUnderwritingResult" >
  			<jaxws:serviceBean>  
        			 <bean class="net.jeeshop.services.manage.webservice.impl.ManualUnderwritingResultServiceImpl" />  
     		</jaxws:serviceBean>  
