@@ -31,14 +31,13 @@ public class ManualUnderwritingResultServiceImpl extends ServersManager<NvhlBase
 	private static final Logger logger = LoggerFactory.getLogger(SecureProductAction.class);
 	
 	public void setDao(NvhlBaseDao dao) {
-        this.dao =dao;
+        this.dao = dao;
 	}
-	@Override
+	
 	public String getPolicyStatus(String policyStatusResult) {
 		try {
 			getPolicyPram(policyStatusResult);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "success";
