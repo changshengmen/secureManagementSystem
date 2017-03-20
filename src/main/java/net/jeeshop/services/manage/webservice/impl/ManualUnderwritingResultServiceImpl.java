@@ -63,8 +63,16 @@ public class ManualUnderwritingResultServiceImpl extends ServersManager<NvhlBase
 		}
 		JSONObject policyStatusJson = JSONObject.fromObject(policyStatusResult).getJSONArray("packageList").getJSONObject(0);
 		JSONObject telOperVO = JSONObject.fromObject(policyStatusResult).getJSONObject("telOperVO");
-		String coperId = telOperVO.getString("COperId");
-		String cpassWd = telOperVO.getString("CPassWd");
+		String coperId = "";
+		String cpassWd = "";
+		coperId = telOperVO.getString("COperId");
+		cpassWd = telOperVO.getString("CPassWd");
+		if(telOperVO != null)
+		{
+			coperId = telOperVO.getString("COperId");
+			cpassWd = telOperVO.getString("CPassWd");
+		}
+		
 		//验证用户名密码
 		if(!(coperId.equals("JDT") && cpassWd.equals("JDT"))){
 			logger.error("用户名或密码不对");
