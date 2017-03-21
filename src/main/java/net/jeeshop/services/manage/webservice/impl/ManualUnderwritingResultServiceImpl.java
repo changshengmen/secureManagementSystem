@@ -1,5 +1,6 @@
 package net.jeeshop.services.manage.webservice.impl;
 
+import javax.annotation.Resource;
 import javax.jws.WebService;
 
 import org.apache.commons.lang.StringUtils;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import net.jeeshop.core.ServersManager;
+import net.jeeshop.core.dao.BaseDao;
 import net.jeeshop.core.util.DateTimeUtil;
 import net.jeeshop.services.common.telOperVO;
 import net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO;
@@ -29,18 +31,21 @@ import net.sf.json.JSONObject;
 
 public class ManualUnderwritingResultServiceImpl extends ServersManager<NvhlBaseVO, NvhlBaseDao> implements ManualUnderwritingResultService{
 	private static final Logger logger = LoggerFactory.getLogger(SecureProductAction.class);
-	
-	public void setDao(NvhlBaseDao dao) {
-        this.dao = dao;
+	@Resource
+	private BaseDao dao;
+
+	public void setDao(BaseDao dao) {
+		this.dao = dao;
 	}
-	
+
 	public String getPolicyStatus(String policyStatusResult) {
+		String res = "";
 		try {
-			getPolicyPram(policyStatusResult);
+			 res = getPolicyPram(policyStatusResult);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "success";
+		return res;
 	}
 	/**
 	 * 
@@ -65,38 +70,45 @@ public class ManualUnderwritingResultServiceImpl extends ServersManager<NvhlBase
 		JSONObject telOperVO = JSONObject.fromObject(policyStatusResult).getJSONObject("telOperVO");
 		String coperId = "";
 		String cpassWd = "";
-		coperId = telOperVO.getString("COperId");
-		cpassWd = telOperVO.getString("CPassWd");
+		
 		if(telOperVO != null)
 		{
 			coperId = telOperVO.getString("COperId");
 			cpassWd = telOperVO.getString("CPassWd");
-		}
-		
-		//验证用户名密码
-		if(!(coperId.equals("JDT") && cpassWd.equals("JDT"))){
-			logger.error("用户名或密码不对");
-			return "0";
+			//验证用户名密码
+			if(!(coperId.equals("JDT") && cpassWd.equals("JDT"))){
+				logger.error("用户名或密码不对");
+				return "0";
+			}
 		}
 		NvhlBaseVO base	= new NvhlBaseVO();	
 		//  String policyStatusResult = request.getParameter("TelBaseVOList");		
 		System.out.println(policyStatusJson);
+		String cUdrMrk = policyStatusJson.getString("CUdrMrk");
+		String telBaseOutVOList = "";
+		if(cUdrMrk.equals("4"))//如果核保失败不会回调
+		{
+			//更新订单
+			base.setCAppNo(policyStatusJson.getString("CAppNo"));
+			base.setPolicyNo(policyStatusJson.getString("policyNo"));
+			base.setEdrAppNo(policyStatusJson.getString("edrAppNo"));
+			base.setCudrMrk(policyStatusJson.getString("CUdrMrk"));
+			base.setPolicyIdef(policyStatusJson.getString("policyIdef"));
+			base.setCresvTxt(policyStatusJson.getString("CResvTxt"));
+			base.setUndwrMsg(policyStatusJson.getString("undwrMsg"));
+			base.setCudrCde(policyStatusJson.getString("CUdrCde"));
+			base.setTudrTm(policyStatusJson.getString("TUdrTm"));
+			base.setStatus("5");
+			//更新订单 end
+			
+			dao.update("manage.manualUnderwritingResult.update", base);
+			telBaseOutVOList = getReturnTelBaseOutVOList(policyStatusJson.getString("CAppNo"),"1","成功");
+			System.out.println(telBaseOutVOList);
+		}
+		
 	
-		base.setCAppNo(policyStatusJson.getString("CAppNo"));
-		base.setPolicyNo(policyStatusJson.getString("PolicyNo"));
-		base.setEdrAppNo(policyStatusJson.getString("EdrAppNo"));
-		base.setCudrMrk(policyStatusJson.getString("CUdrMrk"));
-		base.setPolicyIdef(policyStatusJson.getString("PolicyIdef"));
-		base.setCresvTxt(policyStatusJson.getString("CResvTxt"));
-		base.setUndwrMsg(policyStatusJson.getString("undwrMsg"));
-		base.setCudrCde(policyStatusJson.getString("CUdrCde"));
-		base.setTudrTm(policyStatusJson.getString("TUdrTm"));
-		//更新订单
-		int orderSucc = dao.update(base);		
 		//拼接返回字符串
 		
-		String telBaseOutVOList = getReturnTelBaseOutVOList(policyStatusJson.getString("CAppNo"),"1","成功");
-		System.out.println(telBaseOutVOList);
 		return telBaseOutVOList;
 	}
 	/**
@@ -106,42 +118,55 @@ public class ManualUnderwritingResultServiceImpl extends ServersManager<NvhlBase
 	public String getReturnTelBaseOutVOList(String cappNo, String cEctRst, String cRstTxt){
 		JSONObject TelBaseOutVOList = new JSONObject();
 		telOperVO telOperVOObject = new telOperVO();
+		
 		telOperVOObject.setId("");
-		telOperVOObject.setCPassWd("JDT");
-		telOperVOObject.setCOperId("JDT");
+		telOperVOObject.setCPassWd("ecargoceshi");
+		telOperVOObject.setCOperId("ecargo");
 		telOperVOObject.setAccequ("");				
 		telOperVOObject.setIp("");
 		telOperVOObject.setMacAddress("");
-		telOperVOObject.setOperTm(DateTimeUtil.getDateNowByExpression("yyyy-MM-dd HH:mm:ss"));
-		JSONObject telTradeRtnVO = new JSONObject();
+		//String value=null;
+		telOperVOObject.setOperTm("");
+		//----------------------------------------------
 		
+//		TelBaseOutVOList.put("telTradeRequestVO", null);
+		JSONObject telTradeRtnVO = new JSONObject();
+//		
 		JSONObject dataTranArea = new JSONObject();
 		
 		JSONArray returnList = new JSONArray();
+		JSONArray packageList = new JSONArray();
 		JSONObject returnListJson = new JSONObject();
 		returnListJson.put("CAppNo", cappNo);
 		returnListJson.put("CEctRst", cEctRst);
 		returnListJson.put("CRstTxt", cRstTxt);
 		returnList.add(0, returnListJson);
 		
-		dataTranArea.put("packageList",null);
+		dataTranArea.put("packageList",packageList);
 		dataTranArea.put("returnList",returnList);
 		
 		telTradeRtnVO.put("dataTranArea", dataTranArea);
-		telTradeRtnVO.put("pageRecord", dataTranArea);
-		telTradeRtnVO.put("respNo", dataTranArea);
-		telTradeRtnVO.put("resultVO", dataTranArea);
-		telTradeRtnVO.put("subtransNo", dataTranArea);
-		telTradeRtnVO.put("telTradeRtnVO", dataTranArea);
-		telTradeRtnVO.put("transDate", dataTranArea);
-		telTradeRtnVO.put("transTime", dataTranArea);
-		telTradeRtnVO.put("transType", dataTranArea);
+		telTradeRtnVO.put("pageRecord", "");
+		telTradeRtnVO.put("respNo", "");
+		telTradeRtnVO.put("resultVO", "");
+		telTradeRtnVO.put("subtransNo", "");
+		telTradeRtnVO.put("telTradeRtnVO", "");
+		telTradeRtnVO.put("transDate", "");
+		telTradeRtnVO.put("transTime", "");
+		telTradeRtnVO.put("transType", "");
 		
 		TelBaseOutVOList.put("telOperVO", telOperVOObject);
-		TelBaseOutVOList.put("telTradeRequestVO", null);
+		TelBaseOutVOList.put("telTradeRequestVO", "");
 		TelBaseOutVOList.put("telTradeRtnVO", telTradeRtnVO);
 		return TelBaseOutVOList.toString();
 	}
+
+	@Override
+	public void setDao(NvhlBaseDao dao) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 
 	
 	

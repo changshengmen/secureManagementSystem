@@ -115,7 +115,7 @@ function flushPage(){
 				<td>${item.CSlsNme!""}</td>
 				<td>${item.TAppTm!""}</td>
 				<td name="orderStatus">
-					<#assign map = {"0":'支付成功',"1":'支付中',"2":'信息审核中',"3":"保单落地失败","4":"保单落地"}>
+					<#assign map = {"0":'支付成功',"1":'支付中',"2":'信息审核中',"3":"保单落地失败","4":"保单落地","5":"核保通过"}>
 					<#list map?keys as key>
 					  <#if item.status?? && item.status==key>
 					  ${map[key]}

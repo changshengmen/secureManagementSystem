@@ -13,5 +13,5 @@ import net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO;
 @WebService
 public interface ManualUnderwritingResultService extends Services<NvhlBaseVO>{
 	//人工核保
-	String getPolicyStatus(String policyStatusResult);
+	public String getPolicyStatus(String policyStatusResult);
 }

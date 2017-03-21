@@ -244,4 +244,41 @@
 			and CAppNo=#{CAppNo}
 		</if>
 	</update>
+	
+	<!--支付完成后更新订单信息 -->
+	<update id="manage.manualUnderwritingResult.update"
+		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO">
+		update nvhlbasevo set
+
+			policyNo=#{policyNo}
+	
+		<if test="edrAppNo !=null and edrAppNo !=''">
+			,edrAppNo=#{edrAppNo}
+		</if>
+		<if test="cudrMrk !=null and cudrMrk !=''">
+			,cudrMrk=#{cudrMrk}
+		</if>
+		<if test="policyIdef !=null and policyIdef !=''">
+			,policyIdef=#{policyIdef}
+		</if>
+		<if test="cresvTxt !=null and cresvTxt !=''">
+			,cresvTxt=#{cresvTxt}
+		</if>
+		<if test="undwrMsg !=null and undwrMsg !=''">
+			,undwrMsg=#{undwrMsg}
+		</if>
+		<if test="cudrCde !=null and cudrCde !=''">
+			,cudrCde=#{cudrCde}
+		</if>
+		<if test="tudrTm !=null and tudrTm !=''">
+			,tudrTm=#{tudrTm}
+		</if>
+		<if test="status !=null and status !=''">
+			,status=#{status}
+		</if>
+		where 1=1
+		<if test="CAppNo !=null and CAppNo !=''">
+			and CAppNo=#{CAppNo}
+		</if>
+	</update>
 </mapper>
