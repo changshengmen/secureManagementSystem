@@ -86,6 +86,7 @@ public class ManualUnderwritingResultServiceImpl extends ServersManager<NvhlBase
 		System.out.println(policyStatusJson);
 		String cUdrMrk = policyStatusJson.getString("CUdrMrk");
 		String telBaseOutVOList = "";
+		//判断支付结果是否为4
 		if(cUdrMrk.equals("4"))//如果核保失败不会回调
 		{
 			//更新订单
@@ -99,9 +100,8 @@ public class ManualUnderwritingResultServiceImpl extends ServersManager<NvhlBase
 			base.setCudrCde(policyStatusJson.getString("CUdrCde"));
 			base.setTudrTm(policyStatusJson.getString("TUdrTm"));
 			base.setStatus("5");
-			//更新订单 end
-			
 			dao.update("manage.manualUnderwritingResult.update", base);
+			//更新订单 end
 			telBaseOutVOList = getReturnTelBaseOutVOList(policyStatusJson.getString("CAppNo"),"1","成功");
 			System.out.println(telBaseOutVOList);
 		}
@@ -116,6 +116,7 @@ public class ManualUnderwritingResultServiceImpl extends ServersManager<NvhlBase
 	 * @return 结果信息字符串
 	 */
 	public String getReturnTelBaseOutVOList(String cappNo, String cEctRst, String cRstTxt){
+		//拼接返回时的参数
 		JSONObject TelBaseOutVOList = new JSONObject();
 		telOperVO telOperVOObject = new telOperVO();
 		
@@ -125,18 +126,14 @@ public class ManualUnderwritingResultServiceImpl extends ServersManager<NvhlBase
 		telOperVOObject.setAccequ("");				
 		telOperVOObject.setIp("");
 		telOperVOObject.setMacAddress("");
-		//String value=null;
 		telOperVOObject.setOperTm("");
-		//----------------------------------------------
 		
-//		TelBaseOutVOList.put("telTradeRequestVO", null);
 		JSONObject telTradeRtnVO = new JSONObject();
-//		
 		JSONObject dataTranArea = new JSONObject();
-		
 		JSONArray returnList = new JSONArray();
 		JSONArray packageList = new JSONArray();
 		JSONObject returnListJson = new JSONObject();
+		
 		returnListJson.put("CAppNo", cappNo);
 		returnListJson.put("CEctRst", cEctRst);
 		returnListJson.put("CRstTxt", cRstTxt);
