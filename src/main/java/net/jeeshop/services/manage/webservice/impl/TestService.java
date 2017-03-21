@@ -7,13 +7,14 @@ import org.apache.axis.encoding.XMLType;
 public class TestService {
 	public static void main(String[] args) {
 //		ManualUnderwritingResultServiceImpl factory = new ManualUnderwritingResultServiceImpl();
-//		String result = factory.getPolicyStatus("world");
+//		String result = factory.getPolicyStatus('world');
 //		//HelloService hs = factory.getHelloServicePort();
-//		System.out.println("success" + result);
+//		System.out.println('success' + result);
 		
 		String endpoint = "http://123.207.254.113:8080/JDT/manualUnderwriting?wsdl";
 		 try {  
-	            String str = "rcfeng" ;  
+			 
+	            String str = "{'telOperVP':{'COperId':'JDT','cpASSwD':'JDT'},'packageList':[{'CAppNo':'0100115000104000120170000010','CResvTxt':'提交成功!','CUdrCde':'100000001052','CUdrMrk':'4','TUdrTm':'2017-03-02 00:00:00','edrAppNo':'','policyIdef':'A','policyNo':'','undwrMsg':'fff'}],'returnList':[{'CAppNo':'','CEctRst':'','CRstTxt':''}]}" ;  
 	            Service service = new Service() ;  
 	            Call call = (Call) service.createCall() ;  
 	            call.setTargetEndpointAddress(endpoint) ;  

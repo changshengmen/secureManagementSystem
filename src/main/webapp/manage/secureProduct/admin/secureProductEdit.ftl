@@ -231,6 +231,7 @@ function addRow(){
 		</div><!--end tab-->
 			<!--------------------------操作按钮模块------------------------------------->
 			</br>
+			
 			<#if e.id??>
 			 	<button id="updateProduct" method="update" class="btn btn-success">
                     <i class="icon-ok icon-white"></i>修改
@@ -240,13 +241,13 @@ function addRow(){
                 </button>	
 			<#else>
 				<span style="margin-left:0px;">				
-					<button id="insertProduct"method="insertSecureProduct" class="btn btn-success">
+					<button id="insertProduct" method="insertSecureProduct" class="btn btn-success">
 		                <i class="icon-ok icon-white"></i>新增	
 		            </button>		           
 				</span>				
 			</#if>
 		
-	        <a href="selectList"class="btn btn-warning" >返回</a>
+	        <a href="selectList" class="btn btn-warning" >返回</a>
 						
 			<!--------------------------操作按钮模块------------------------------------->	
 </form>
