@@ -54,7 +54,7 @@
                         </div>
                         <div class="form-group has-success">
                             <div class="input-group" style="width:90%;margin:0 auto">
-                                <span class="input-group-addon" style="width:65px">
+                                <span class="input-group-addon" style="width:67px">
                                     <span >密  码</span>
                                 </span>
                                 <input type="password" name="password" placeholder="密码" class="len form-control"
