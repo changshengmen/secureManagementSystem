@@ -394,7 +394,6 @@
 			 url:url,
 			 type:"get",
 			 dataType: "json",
-			 async:false,
          	 success:function(data){
          	 	//遍历拼接下拉框
          		var html='';
