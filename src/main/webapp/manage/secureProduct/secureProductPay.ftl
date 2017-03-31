@@ -7,7 +7,7 @@
 	
 	#btnTj{
 		color: #fff;
-		    display: inline-block;
+		display: inline-block;
 	    padding: 6px 12px;
 	    margin-bottom: 0;
 	    font-size: 14px;
@@ -23,6 +23,42 @@
 	    background-color:#e8423d;border-color:#e8423d;
 		
 	}
+	form{
+	 	width : 80%;
+	}
+	table td{font-family:Microsoft YaHei;}
+	
+	/*table 第一列单元格*/
+	td:nth-child(1){
+		text-align:right;
+	}
+	/*table 第三列单元格*/
+	td:nth-child(3){
+		text-align:right;
+	}
+	td:nth-child(2){
+		width:250px;
+	}
+	td:nth-child(4){
+		width:250px;
+	}
+	table select{
+	 width:200px
+	}
+	
+	.sep td{
+		text-align:left;
+	}
+	.table-bordered{
+		border-right-width : 1;
+	}
+	.codeTr td{  /* 隐藏三列加粗*/
+	   font-weight:bold;
+	}
+	#trends3 td:nth-child(1){
+		text-align:left;
+	}
+	
 	
 </style>
 <form action="${basepath}/manage/secureProduct" id="form" name="form" namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">		
@@ -50,16 +86,16 @@
 		<!--------------------------用于后面支付的时候查询保险产品的隐藏域------------------------------------->	
 		<!--------------------------投保人模块------------------------------------->		
         
-			 <table class="table table-bordered table-condensed" style="margin-bottom:5px;" id="tableInfo">
+			 <table class="table-bordered table-condensed" style="margin-bottom:5px;" id="tableInfo">
 				<tr class="codeTr">
 					
-					<td style="text-align: right;font-weight:bold">投保人代码</td>
+					<td style="text-align: right;">投保人代码</td>
 					<td>
 						<input type="text" name="appCde" value="${applicantVO.appCde!""}"
 		                                             id="appCde" />
 		             
 					</td>
-					<td style="text-align: right;font-weight:bold">被保人代码</td>
+					<td >被保人代码</td>
 					<td>
 						<input type="text" name="insuredCde" value="${insuredVO.insuredCde!""}"
 		                                             id="insuredCde" />
@@ -67,16 +103,19 @@
 					</td>
 				</tr>
 				<tr class="codeTr">
-					<td style="text-align: right;font-weight:bold">投保单号</td>
-					<td colspan="3">
+					<td >投保单号</td>
+					<td>
 						<input type="text" name="CAppNo" value="${base.CAppNo!""}"
-		                                             id="CAppNo" size="32";/>		                                          
+		                                             id="CAppNo" />		                                          
+					</td>
+					<td colspan="2">
+						                                          
 					</td>
 				</tr>
 				<tr>
-					<td style="text-align: right;">选择客户</td>
-	        		<td>
-	        		  <select id="quickChoose"  class="dropdown scrollable" data-settings='{"cutOff":4}' style="width:250px;overflow:auto;" >
+					<td id="xzkh" >选择客户</td>
+	        		<td id="xzkh1">
+	        		  <select id="quickChoose"  class="input-medium" data-settings='{"cutOff":4}'>
 	        				<option value="0" selected="selected">请选择客户</option>
 		        				<#if applcantList??>
 		        					<#list applcantList as item>
@@ -86,18 +125,19 @@
                    		</select>
                    		
 	          		 </td>
-	           		<td style="text-align: right;">投保企业名称</td>
-	        		<td><input type="text" name="appNme"  data-rule="投保企业名称;required;length[0~40];" 
+	           		<td >投保企业名称</td>
+	        		<td colspan="3"><input type="text" name="appNme"  data-rule="投保企业名称;required;length[0~40];" 
 	                          id="Name" value="${applicantVO.appNme!""}"/>&nbsp;<span style="color:red">*</span>
-	          		 </td>	          		  
+	          		 </td>	
+	          		        		  
 	           </tr>
 	            <tr>
 	            	 
-	                <td style="text-align: right;">邮箱</td>
-	        		<td><input type="text" name="TEmail" data-rule="邮箱;required;length[0~40];email:true;" value="${common.TEmail!""}"
+	                <td style="">邮箱</td>
+	        		<td ><input type="text" name="TEmail" data-rule="邮箱;required;length[0~40];email:true;" value="${common.TEmail!""}"
 	                                             id="Email" />&nbsp;<span style="color:red">*</span>
 	                </td> 
-	           		<td style="text-align: right;">客户类型</td>
+	           		<td >客户类型</td>
 	        		<td colspan="2"><#assign map = {"0":'非自然人',"1":'自然人'}>
 	                    <select id="ClntMrk" name="TClntMrk" class="input-medium">
                         		<#list map?keys as key>
@@ -109,7 +149,7 @@
 	           		
 	           </tr>
 	           <tr>
-	           		<td style="text-align: right;">证件类型</td>
+	           		<td >证件类型</td>
 	        		<td><#assign map = {"110002":'工商注册号码',"110001":'组织机构代码',"110009",'其他'}>
 	                    <select id="CertfCls" name="TCertfCls" class="input-medium">
                         		<#list map?keys as key>
@@ -117,33 +157,33 @@
                         		</#list>
                    		</select>
 	           		 </td>
-	           		 <td style="text-align: right;">证件号码</td>
-	        		 <td><input type="text" name="TCertfCde"  data-rule="证件号码;required;length[0~20];" value="${common.TCertfCde!""}" 
+	           		 <td >证件号码</td>
+	        		 <td colspan="2"><input type="text" name="TCertfCde"  data-rule="证件号码;required;length[0~20];" value="${common.TCertfCde!""}" 
 	                                             id="CertfCde" />&nbsp;<span style="color:red">*</span>
 	           		 </td>            		
 	           </tr>
 	            
 	           <tr>
-	           		<td style="text-align: right;">通讯地址</td>
+	           		<td >通讯地址</td>
 	        		 <td> <input type="text" name="TClntAddr" data-rule="通讯地址;required;length[0~40];" value="${common.TClntAddr!""}"
 	                                             id="ClntAddr" />&nbsp;<span style="color:red">*</span>
 	                 </td>
-	                 <td style="text-align: right;">联系电话</td>
-	        	     <td><input type="text" name="TMobile"  data-rule="联系电话;required;integer;length[0~11]" maxlength="11"
+	                 <td >联系电话</td>
+	        	     <td colspan="2"><input type="text" name="TMobile"  data-rule="联系电话;required;integer;length[0~11]" maxlength="11"
 	                                             id="Mobile" value="${common.TMobile!""}" />&nbsp;<span style="color:red">*</span>
 	                 </td>                
 	           <tr>	         
 	           	<tr> 
-	           	 	<td style="text-align: right;">国籍</td>
+	           	 	<td >国籍</td>
 	        	    <td><input type="text" name="TCountry"  value="${common.TCountry!""}"
 	                     id="Country" data-rule="国籍;required;length[0~40];"/>&nbsp;<span style="color:red">*</span>
 	                </td>     		
-                  	<td style="text-align: right;">邮编</td>
-	        	    <td><input type="text" name="TZipCde" value="${common.TZipCde!""}" id="ZipCde" data-rule="邮编;required;length[0~20];"/>&nbsp;<span style="color:red">*</span>
+                  	<td >邮编</td>
+	        	    <td colspan="2"> <input type="text" name="TZipCde" value="${common.TZipCde!""}" id="ZipCde" data-rule="邮编;required;length[0~20];"/>&nbsp;<span style="color:red">*</span>
 	                </td>					 
 	           </tr>
 	             <tr>
-	                 <td style="text-align: right;">客户风险等级</td>
+	                 <td >客户风险等级</td>
 	        		 <td> <#assign map = {"915102":'低风险客户',"915103":'高风险客户',"915106":'中等风险客户'}>
 	                         <select id="CusRiskLvl" name="TCusRiskLvl" class="input-medium">
                         		<#list map?keys as key>
@@ -152,8 +192,8 @@
                         	 </select>
                     </td>   
            		
-           			<td style="text-align: right;">反洗钱客户风险等级</td>
-	        		<td> <#assign map = {"925105":'普通',"925106":'关注级',"925107":'特别关注级',"925108":'高度关注级'}>
+           			<td >反洗钱客户风险等级</td>
+	        		<td colspan="2"> <#assign map = {"925105":'普通',"925106":'关注级',"925107":'特别关注级',"925108":'高度关注级'}>
 		                         <select id="CustRiskRank" name="TCustRiskRank" class="input-medium" >
                         			<#list map?keys as key>
                             			<option value="${key}" <#if common.TCustRiskRank?? && common.TCustRiskRank==key>selected="selected" </#if>>${map[key]}</option>
@@ -162,21 +202,21 @@
 	           		</td> 
 	           	</tr>
 	           <tr>   	                		
-	                 <td style="text-align: right;">投保日期</td>
+	                 <td >投保日期</td>
 	        		  <td> <input id="TAppTm" type="text" name="TAppTm" style="line-height:4px;height:30px;"
 							class="Wdate search-query input-small" value="${base.TAppTm!""}" data-rule="required;"
 							onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2200-03-10 20:59:30' })"/>
 							&nbsp;<span style="color:red">*</span>
 					  </td>
-					   <td style="text-align: right;">保险起期</td>
-	        		 <td> <input id="TInsrncBgnTm" type="text" name="TInsrncBgnTm" style="line-height:4px;height:30px;"
+					   <td >保险起期</td>
+	        		 <td colspan="2"> <input id="TInsrncBgnTm" type="text" name="TInsrncBgnTm" style="line-height:4px;height:30px;"
 							class="Wdate search-query input-small" value="${base.TInsrncBgnTm!""}" data-rule="required;" 
 							onFocus="WdatePicker({el:'TInsrncBgnTm',onpicked:setTInsrncEndTm, skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '#F{$dp.$D(\'TAppTm\')||\'2008-03-08\'}', maxDate: '2200-03-10 20:59:30' })"/>
 							&nbsp;<span style="color:red">*</span>
 					 </td>  
 	           </tr>
 	            <tr>	
-	             	 <td style="text-align: right;">保期/(年)</td> 
+	             	 <td >保期/(年)</td> 
 	           		 <td>   
 			        	<div class="input-group spinner" style="width:40%" data-trigger="spinner">
 					          <input type="text" id="secureCount" class="form-control text-center" value="1" data-rule="quantity">
@@ -186,8 +226,8 @@
 					          </div>
 					        </div>
      				 </td>       		 
-	                  <td style="text-align: right;">保险止期</td>
-	        		  <td>  	        		  
+	                  <td >保险止期</td>
+	        		  <td colspan="2">   	        		  
 						<input id="TInsrncEndTm" style="line-height:3px;height:30px;" class="Wdate search-query input-small" 
 						name="TInsrncEndTm" type="text" value="${base.TInsrncEndTm!""}" data-rule="required;"
 						 onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '#F{$dp.$D(\'TInsrncBgnTm\')||\'2008-03-08 11:30:00\'}', maxDate: '2200-03-10 20:59:30' })" />
@@ -198,7 +238,7 @@
 					
 				<tr id="trends">
 				
-					<td style="text-align: right;">营业性质</td> 
+					<td >营业性质</td> 
 						<td> 
 		                         <select id="yyxz" name="key1" class="input-medium">
                         			<#list dicList as key>
@@ -208,7 +248,7 @@
                     			
 	           		</td>  
 	           		
-	           		<td style="text-align: right;">行业类型清单</td> 
+	           		<td >行业类型清单</td> 
 						<td> 
 		                        <select id="hylxList" name="p_code" class="input-medium">
                         			<#list hylxList as key>
@@ -219,8 +259,8 @@
 				</tr>
 				<#if secure?? && secure.occPropFlag == "0">
 					<tr>
-						<td colspan="1" style="text-align: right;">占地性质</td>
-						<td colspan="3">
+						<td >占地性质</td>
+						<td colspan="1">
 						<#assign map = {"598001":'第一级工业',"598002":'第二级工业',"598003":'第三级工业',"598004":'第四级工业',"598005":'第五级工业',"598006":'第六级工业',"598007":'一般物资',
 						"598008":'危险品',"598009":'特别危险品',"598010":'金属专储',"598011":'粮食专储',"598012":'石油专储',"598013":'社会团体、机关、事业单位/办公楼、住宅、公寓',"598014":'综合商业、商贸、写字楼、交通运输业等等',"598015":'其他',
 						"598016":'半导体制造业',"598017":'电厂',"598018":'电网',"598019":'港口',"598020":'商业楼宇',"598021":'石化',"598022":'道路',"598023":'铁路',
@@ -231,6 +271,8 @@
 	                        		</#list>
 	                   		</select>
 		           		 </td>
+		           		 <td colspan="2"></td>
+		           		 
 					</tr>
 				</#if>
 	                 
@@ -241,26 +283,26 @@
 		
 		<!--------------------------被保人模块------------------------------------->		
 
-			<tr>
-				<td colspan="4">
+			<tr class = "sep">
+				<td colspan="5" >
 		        <input type="button" id="copyInfo" value="信息同步" style="font-size:13px;margin-bottom:5px;background-color:rgba(171, 124, 58, 0.99);border-color:rgba(171, 124, 58, 0.99)" class="btn btn-primary "/>  
 		 		</td>
 		 	</tr>      
 		 	<!--------------table---------------->
 				<tr>
-	           		<td style="text-align: right;">被保企业名称</td>
+	           		<td >被保企业名称</td>
 	        		<td><input type="text" name="insuredNme" value="${insuredVO.insuredNme!""}" 
 	                                             id="NameA" />&nbsp;<span style="color:red">*</span>
 	          		 </td>
 	          		 
-	                 <td style="text-align: right;">邮箱</td>
-	        		 <td><input type="text" name="BCEmail" data-rule="邮箱;required;length[0~44];email:true;"
+	                 <td >邮箱</td>
+	        		 <td colspan="2"><input type="text" name="BCEmail" data-rule="邮箱;required;length[0~44];email:true;"
 	                                             id="EmailA" value="${common.BCEmail!""}"/>&nbsp;<span style="color:red">*</span>
 	                 </td>
 	           </tr>
 	            
 	           <tr>
-	           		<td style="text-align: right;">客户类型</td>
+	           		<td >客户类型</td>
 	        		<td><#assign map = {"0":'非自然人',"1":'自然人'}>
 	                    <select id="ClntMrkA" name="BClntMrk" class="input-medium" >
                         		<#list map?keys as key>
@@ -268,13 +310,13 @@
                         		</#list>
                    		</select>
 	           		 </td>
-	          		 <td style="text-align: right;">通讯地址</td>
-	        		 <td> <input type="text" name="BClntAddr" data-rule="通讯地址;required;length[0~100];"
+	          		 <td >通讯地址</td>
+	        		 <td colspan="2"> <input type="text" name="BClntAddr" data-rule="通讯地址;required;length[0~100];"
 	                                             id="ClntAddrA" value="${common.BClntAddr!""}"/>&nbsp;<span style="color:red">*</span>
 	                 </td>	           		
 	           </tr>
 	           <tr>
-	           		<td style="text-align: right;">证件类型</td>
+	           		<td >证件类型</td>
 	        		<td><#assign map = {"110001":'组织机构代码',"110002":'工商注册号码',"110009",'其他'}>
 	                    <select id="CertfClsA" name="BCCertfCls" class="input-medium" >
                         		<#list map?keys as key>
@@ -282,27 +324,27 @@
                         		</#list>
                    		</select>
 	           		 </td>
-	          		 <td style="text-align: right;">证件号码</td>
-	        		 <td><input type="text" name="BCCertfCde"  data-rule="证件号码;required;length[0~44];" 
+	          		 <td >证件号码</td>
+	        		 <td colspan="2"><input type="text" name="BCCertfCde"  data-rule="证件号码;required;length[0~44];" 
 	                                             id="CertfCdeA" value="${common.BCCertfCde!""}"/>&nbsp;<span style="color:red">*</span>
 	           		 </td>	           		
 	           </tr>	             	           
 	           <tr>
-	            <td style="text-align: right;">联系电话</td>
+	            <td >联系电话</td>
 	        	     <td><input type="text" name="BMobile"  data-rule="联系电话;required;integer;length[0~11]" maxlength="11"
 	                                             id="MobileA" value="${common.BMobile!""}"/>&nbsp;<span style="color:red">*</span>
 	                 </td>
 	           		
-	           		<td style="text-align: right;">国籍</td>
-	        		 <td> <input type="text" name="BCountry" data-rule="通讯地址;required;length[0~100];"
+	           		<td >国籍</td>
+	        		 <td colspan="2"> <input type="text" name="BCountry" data-rule="通讯地址;required;length[0~100];"
 	                                             id="CountryA" value="${common.BCountry!""}"/>&nbsp;<span style="color:red">*</span>
 	                 </td>	      	                 
 	           <tr>
 	           <tr>
-	           	<td style="text-align: right;">邮编</td>
+	           	<td >邮编</td>
 	        	     <td><input type="text" name="BZipCde"id="ZipCdeA" value="${common.BZipCde!""}"/>&nbsp;<span style="color:red">*</span>
 	                 </td>
-	            <td style="text-align: right;">客户风险等级</td>
+	            <td  >客户风险等级</td>
 	        		 <td> <#assign map = {"915102":'低风险客户',"915103":'高风险客户',"915106":'中等风险客户'}>
 	                         <select id="CusRiskLvlA" name="BCusRiskLvl" class="input-medium">
                         		<#list map?keys as key>
@@ -313,7 +355,7 @@
 	           </tr>
           		<tr>
           			 <td style="text-align: right;">反洗钱客户风险等级</td>
-	        		<td> <#assign map = {"925105":'普通',"925106":'关注级',"925107":'特别关注级',"925108":'高度关注级'}>
+	        		 <td><#assign map = {"925105":'普通',"925106":'关注级',"925107":'特别关注级',"925108":'高度关注级'}>
 		                         <select id="CustRiskRankA" name="BCustRiskRank" class="input-medium" >
                         			<#list map?keys as key>
                             			<option value="${key}" <#if common.BCustRiskRank?? && common.BCustRiskRank==key>selected="selected"</#if>>${map[key]}</option>
@@ -366,7 +408,7 @@
 	                <i class="icon-ok icon-white"></i>支付
 	            </button>
 	        <!--  <a id="toPay" href="toPay" class="btn btn-warning" style="background-color:#4cae4c;border-color:#4cae4c;display:none">支付</a>--> 
-	            <span id="resultShow" style="font-weight:bold"></span>				           
+	            <span id="resultShow" style=""></span>				           
 	            <a href="selectList"class="btn btn-warning" style="float:right">返回</a>  
 			</span>	
 			</div>
@@ -408,11 +450,21 @@
        
 $(function(){
 //------页面初始化将动态生成的下拉框的样式remove掉---------
-	//$('#hylxList').removeClass("form-control");
+	$("select").addClass("setSelect");
 	//为动态添加的下拉框赋新的样式和宽度
 	$('#hylxList').css({"overflow-x":"hidden", "width":"200px"});
+	$('#occProp').css({"width":"200px"});
+	$('#quickChoose').css({"width":"200px","overflow-x":"hidden"});
+	
+	
 //---------------end-----------------------	
 
+//获取投保人代码 判断是否为空动态显示选择客户文本框
+var appCdeStr=$('#appCde').val();
+	if(appCdeStr != null && appCdeStr != ""){
+		$('#xzkh').remove();
+		$('#xzkh1').remove();
+	}
 	var a = $(".navbar-top-links li").attr("class","dropdown1"); //角色切换 和 下拉框重名 改
    
 	$( "#tabs" ).tabs({
@@ -444,8 +496,6 @@ $(function(){
   		
   	});
   		
-      	
-      	
       	
       	//----判断是哪份保险如果是010001财产险则删除页面中营业性质承保区域等字段 ----------------------------------------------
       	var cProdNo=$('#CProdNo').val();
