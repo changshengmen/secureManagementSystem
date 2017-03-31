@@ -386,7 +386,6 @@
  $('#yyxz').change(function(){
        	//获取当前选中的pcode
        	var pcode = $(this).val()
-       	console.log(pcode)
        	//访问action的url
        	var url = basepath+'/manage/secureProduct/toChangeSelect?pcode='+pcode;
 		//异步实现级联下拉框
