@@ -55,6 +55,7 @@
 	.codeTr td{  /* 隐藏三列加粗*/
 	   font-weight:bold;
 	}
+	/*左侧显示房屋信息*/
 	#trends3 td:nth-child(1){
 		text-align:left;
 	}
