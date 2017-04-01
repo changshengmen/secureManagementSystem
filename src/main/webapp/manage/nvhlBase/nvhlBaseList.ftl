@@ -1,7 +1,23 @@
 <#import "/manage/tpl/pageBase.ftl" as page>
 <@page.pageBase currentMenu="订单信息">
+<style type="text/css">
+</style>
+
+
 <script type="text/javascript">
 $(function() {
+/*获取保单状态返回信息 页面显示 start-----------------*/
+	debugger;
+	var href = window.location.href;
+	var msg = '';
+	var indexNum = href.indexOf('msg');
+	if(indexNum > 0){	
+		msg = href.split('?')[1].split('=')[1];//拆分url得到”=”后面的参数 
+		var htmlStr='<div class="alert alert-success alert-dismissable fade in" id="alert-success"><label id="msgBtn"></label></div>';
+		$('#showErrM').html(htmlStr);
+		$("#msgBtn").html(decodeURI(msg)); 
+	}
+	/*获取保单状态返回信息 页面显示 end---------------*/
 	$('.tipso').tipso({
 		useTitle: false
 	});
@@ -14,7 +30,7 @@ $(function() {
 	var hour = tinsrncEndTm.substr(8,2);
 	var min = tinsrncEndTm.substr(10,2);
 	var sec = tinsrncEndTm.substr(12,2);
-	$(this).text(tinsrncEndTm= year+"-"+moon+"-"+day+" "+hour+":"+min+":"+sec);
+	$(this).text(tinsrncEndTm = year+"-"+moon+"-"+day+" "+hour+":"+min+":"+sec);
 	})
 	//如果从客户页面跳转进来 显示返回按钮
 	var href = window.location.href;
@@ -40,6 +56,7 @@ function flushPage(){
 	window.location.reload();
 }
 </script>
+<div id = "msgShow"></div>
 <form action="${basepath}/manage/NvhlBase" method="post" theme="simple">
 	<table class="table table-bordered">
 	<tr>
@@ -69,6 +86,9 @@ function flushPage(){
 				<i class="icon-search icon-white"></i> 查询
 			</button>				
 		</td>
+		
+				<span id="showErrM"></span>   			
+		
 	</tr>
 	</table>
 	
@@ -124,7 +144,7 @@ function flushPage(){
 				</td>
 				<td>					
 					<a href="selectOrderInfo?id=${item.id!""}">查看 |</a>
-					<#if item.status == "1" ||item.status == "2" >				
+					<#if item.status == "1" ||item.status == "2" || item.status == "4" || item.status == "5" >				
 						<a href="#" onclick="flushPage()">刷新</a>
 					<#else>	
 						<a href="toInsurancePolicy?payNo=${item.payNo!""}&cappNo=${item.CAppNo!""}">保单落地</a>	

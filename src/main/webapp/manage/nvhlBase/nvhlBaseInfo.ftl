@@ -2,6 +2,7 @@
 <@page.pageBase currentMenu="产品详细信息">
 <form action="${basepath}/manage/NvhlBase" id="form" name="form" namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">		
 	<div id="tabs">
+		<span id="showErrM"></span> 
 		<ul>
 			<li><a href="#tabs-1">订单详细信息</a></li>	
 				
@@ -86,6 +87,18 @@
 </form>
 <script>
 $(function() {
+	/*获取保单状态返回信息 页面显示 start-----------------*/
+	debugger;
+	var href = window.location.href;
+	var msg = '';
+	var indexNum = href.indexOf('msg');
+	if(indexNum > 0){	
+		msg = href.split('&')[1].split('=')[1];//拆分url得到”=”后面的参数 
+		var htmlStr='<div class="alert alert-success alert-dismissable fade in" id="alert-success"><label id="msgBtn"></label></div>';
+		$('#showErrM').html(htmlStr);
+		$("#msgBtn").html(decodeURI(msg)); 
+	}
+	/*获取保单状态返回信息 页面显示 end---------------*/
 	$( "#tabs" ).tabs({
 	});	
 	//格式化支付时间
