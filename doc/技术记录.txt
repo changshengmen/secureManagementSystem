@@ -80,7 +80,7 @@ div.dataTables_wrapper.dt-bootstrap input.btn {
 div.dataTables_wrapper.dt-bootstrap th {
     background: none !important
 }
-（2） 国际化配置
+（2） 国际化配置 
 "language": {
                 "lengthMenu": "每页 _MENU_ 条记录",
                 "zeroRecords": "没有找到记录",
