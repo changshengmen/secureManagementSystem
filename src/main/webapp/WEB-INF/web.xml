@@ -68,7 +68,16 @@
         <servlet-name>ValidateImage</servlet-name>
         <url-pattern>/ValidateImage.do</url-pattern>
     </servlet-mapping>
-
+	
+	<servlet>
+		<servlet-name>SecureProductServlet</servlet-name>
+		<servlet-class>net.jeeshop.web.action.manage.NvhlBase.SecureProductServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SecureProductServlet</servlet-name>
+		<url-pattern>/SecureProductServlet.do</url-pattern>
+	</servlet-mapping>
+	
     <filter>
         <filter-name>Set Character Encoding</filter-name>
         <filter-class>
@@ -159,10 +168,21 @@
 		<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
 		<load-on-startup>2</load-on-startup>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>SecureProductServlet</display-name>
+		<servlet-name>SecureProductServlet</servlet-name>
+		<servlet-class>net.jeeshop.web.action.manage.NvhlBase.SecureProductServlet</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>CXFServlet</servlet-name>
 		<url-pattern>/services/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SecureProductServlet</servlet-name>
+		<url-pattern>/SecureProductServlet</url-pattern>
 	</servlet-mapping>
 	
 </web-app>

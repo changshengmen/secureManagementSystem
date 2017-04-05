@@ -5,19 +5,8 @@
 
 
 <script type="text/javascript">
+	
 $(function() {
-/*获取保单状态返回信息 页面显示 start-----------------*/
-	debugger;
-	var href = window.location.href;
-	var msg = '';
-	var indexNum = href.indexOf('msg');
-	if(indexNum > 0){	
-		msg = href.split('?')[1].split('=')[1];//拆分url得到”=”后面的参数 
-		var htmlStr='<div class="alert alert-success alert-dismissable fade in" id="alert-success"><label id="msgBtn"></label></div>';
-		$('#showErrM').html(htmlStr);
-		$("#msgBtn").html(decodeURI(msg)); 
-	}
-	/*获取保单状态返回信息 页面显示 end---------------*/
 	$('.tipso').tipso({
 		useTitle: false
 	});
@@ -51,10 +40,33 @@ $(function() {
 		var showCappNo  = cappNo.substring(0,10) + " ...";
 	    $(this).html(showCappNo);
 	})
+	
+	//点击废弃按钮触发的函数
+	$('#toDiscard').click(function(){
+		//判断是否选中 复选框
+		var idsLength=$('input[name="ids"]:checked').length;
+				if(1>idsLength){
+					alert("提示：请先选择订单在进行操作！");
+				}
+				
+				if($('input[name=ids]:checked').length>0){
+				flag=confirm('操作过后不可更改请再次确认');
+				//判断用户是否确定废弃订单
+				if(flag==true){
+				$('form:eq(0)').prop("action","${basepath}/manage/NvhlBase/todiscardStatus").submit();	
+				}
+			}
+		});
+		
+	$('#selDiscard').click(function(){
+		$('form:eq(0)').prop("action","${basepath}/manage/NvhlBase/selectDiscardList").submit();
+	});	
 });
 function flushPage(){
 	window.location.reload();
 }
+
+	
 </script>
 <div id = "msgShow"></div>
 <form action="${basepath}/manage/NvhlBase" method="post" theme="simple">
@@ -81,13 +93,19 @@ function flushPage(){
 		</td>				
 	</tr>
 	<tr>
-		<td colspan="14" id="selectArea">
+		<td colspan="13" id="selectArea">
 			<button method="selectList" class="btn btn-primary" onclick="selectList(this)">
 				<i class="icon-search icon-white"></i> 查询
-			</button>				
+			</button>
+			
+			<input id="toDiscard" type="button" class="btn btn-danger" value="废弃"/>
+			
+			<input id="selDiscard" type="button" class="btn btn-warning" value="查询废弃订单"/>	
+				
 		</td>
 		
-				<span id="showErrM"></span>   			
+		
+				   			
 		
 	</tr>
 	</table>
@@ -95,6 +113,7 @@ function flushPage(){
 	<div style="" id="tableList">		
 	<table id="orderList" class="table table-bordered table-hover"style="text-align: center;">
 		<tr style="background-color: #dff0d8">
+			<th class="checkboxTh"style="width:5%;text-align: center"><input type="checkbox" id="firstCheckbox" /></th>
 			<th style="text-align: center;">投保单号</th>
 			<!--<th style="text-align: center;">产品代码</th>-->
 			<th style="text-align: center;">产品名称</th>				
@@ -111,6 +130,9 @@ function flushPage(){
 		</tr>
 		<#list pager.list as item>
 			<tr>
+				<td class="checkboxTh"><input type="checkbox" name="ids"
+						value="${item.CAppNo!""}" />
+						</td>			
 				<td class="tipso" name="cappNo" data-tipso="${item.CAppNo!""}">${item.CAppNo!""}</td>
 				<!--<td>${item.CProdNo!""}</td>-->
 				<td>${item.CProdName!""}</td>					
