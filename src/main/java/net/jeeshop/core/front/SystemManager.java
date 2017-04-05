@@ -4,22 +4,15 @@ import com.google.common.collect.Lists;
 import net.jeeshop.core.cache.CacheProvider;
 import net.jeeshop.core.cache.SimpleCacheProvider;
 import net.jeeshop.core.listener.SystemListener;
-import net.jeeshop.services.front.advert.bean.Advert;
-import net.jeeshop.services.front.area.bean.Area;
-import net.jeeshop.services.front.attribute.bean.Attribute;
 import net.jeeshop.services.front.catalog.bean.Catalog;
-import net.jeeshop.services.front.express.bean.Express;
 import net.jeeshop.services.front.indexImg.bean.IndexImg;
 import net.jeeshop.services.front.navigation.bean.Navigation;
-import net.jeeshop.services.front.news.bean.News;
 import net.jeeshop.services.front.notifyTemplate.bean.NotifyTemplate;
 import net.jeeshop.services.front.product.bean.Product;
 import net.jeeshop.services.front.product.bean.ProductStockInfo;
 import net.jeeshop.services.manage.accountRank.bean.AccountRank;
-import net.jeeshop.services.manage.activity.bean.Activity;
 import net.jeeshop.services.manage.hotquery.bean.Hotquery;
 import net.jeeshop.services.manage.order.bean.OrdersReport;
-import net.jeeshop.services.manage.oss.bean.AliyunOSS;
 import net.jeeshop.services.manage.systemSetting.bean.SystemSetting;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.LoggerFactory;
@@ -46,82 +39,8 @@ public class SystemManager {
     public void afterPropertiesSet(){
         instance = this;
     }
-	/**
-	 * 商品目录，树形结构
-	 */
-//	private List<Catalog> catalogs = new LinkedList<Catalog>();//产品目录列表
-//    private List<Catalog> catalogsArticle = new LinkedList<Catalog>();//文章目录列表
-//    private List<Attribute> attrs;//属性集合
-//    private Map<String,Attribute> attrsMap = new HashMap<String, Attribute>();//属性集合map
-    private SystemSetting systemSetting;//系统设置
-//    private OrdersReport ordersReport = new OrdersReport();//后台首页,统计数据
-//    private Map<String,AccountRank> accountRankMap = new TreeMap<String, AccountRank>();//会员等级表
-//    private Map<String,NotifyTemplate> notifyTemplateMap;//邮件模板
-//    private List<Product> hotSearchProductList;//热门搜索的商品列表
-//    private String alipayConfig;//支付宝卖家账号
-//    private String commentTypeCode;//启用的评论插件的代号
-//    private List<Hotquery> hotqueryList;//热门查询列表
-//	public static Map<Integer, Integer> catalogMap = new HashMap<Integer, Integer>();//目录表，key:目录ID，value:目录顶级PID
-	
-//	/**
-//	 * 目录的MAP形式，具有层级关系。key：主类别ID，value：主类别对象，可以通过该对象的getChildren()方法获取该主类别的所有的子类别集合
-//	 */
-//	private Map<String,Catalog> catalogsMap = new HashMap<String,Catalog>();
-//
-//	/**
-//	 * 目录的MAP形式，具有层级关系。key：主类别code，value：主类别对象，可以通过该对象的getChildren()方法获取该主类别的所有的子类别集合
-//	 */
-//	private Map<String,Catalog> catalogsCodeMap = new HashMap<String,Catalog>();
-//
-//	//商品库存应该使用JAVA类库中的读写锁，key:商品ID，value：商品对象
-//	private ConcurrentMap<String, ProductStockInfo> productStockMap;// = new ConcurrentHashMap<String, ProductStockInfo>();//商品库存表
-//	private  Object product_stock_lock = new Object();//商品库存锁，操作商品库存的时候需要进行加锁
-//	/**
-//	 * 促销的商品 top=10
-//	 */
-//	private List<List<Product>> goodsTopList;
-////	public static List<IndexMenu> indexMenuList;
-//	private List<Navigation> navigations;
-//	private List<Product> hotProducts;//热门商品
-//	private List<Product> historyProducts;//浏览过的商品历史列表，仅限于当前session中存储
-//	private List<Product> newProducts;//新品商品
-//	private List<Product> saleProducts;//特价商品
-//	@Deprecated
-//	private List<Product> suijiProducts;//随机推荐的商品
-//	private List<IndexImg> indexImages;//门户滚动图片
-//	@Deprecated
-//	private List<News> news;//文章列表
-//	@Deprecated
-	private Map<String,News> newsMap = new HashMap<String, News>();//文章map；key:code
-//
-//	private List<Catalog> newsCatalogs;//文章目录。文章目前只有一级目录
-//	private List<News> noticeList;//系统通知
-//	private Map<String, Area> areaMap = new HashMap<String, Area>();//省市区集合
-//	private Map<String,Express> expressMap;//前台订单支付页面--物流列表
-//	private Map<String,Advert> advertMap;//广告列表
-//
+	  private SystemSetting systemSetting;//系统设置
 	private static Map<String,String> manageExpressMap = new HashMap<String, String>();//后台发货页面物流公司列表
-//	private AliyunOSS aliyunOSS;//阿里云存储的配置信息
-////	public static Task task;//系统定时任务
-//	private List<Product> indexLeftProduct;//加载首页左侧的商品列表，此位置的商品从全局加载
-//	private Map<String,Activity> activityMap = new HashMap<String, Activity>();//所有活动列表
-//
-//	/**
-//	 * 促销活动的商品列表activity_discountType_c=c
-//	 * key:【r:减免；d:折扣；s:双倍积分】
-//	 * value:【商品列表ArrayList】
-//	 */
-//	private Map<String,List<Product>> activityProductMap = new HashMap<String, List<Product>>();
-//	private List<Product> activityScoreProductList;//积分商城商品列表
-//	private List<Product> activityTuanProductList;//团购活动商品列表
-//
-//
-//	/////////////////后台缓存///////////////////
-//	/**
-//	 * 后台类目查询的JSON字符串缓存
-//	 */
-//	private String productCatalogJsonStr;//商品类目JSON字符串缓存
-//	private String articleCatalogJsonStr;//缓存类目JSON字符串缓存
 
     public static SystemManager getInstance(){
         return instance;
@@ -134,10 +53,7 @@ public class SystemManager {
 		try {
 			p.load(SystemListener.class
 					.getResourceAsStream("/system.properties"));
-//			code.load(new BufferedReader(new InputStreamReader(SystemListener.class
-//					.getResourceAsStream("/code.properties"), "utf-8")));
 			logger.info(p.toString());
-//			log.info(code.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -176,19 +92,6 @@ public class SystemManager {
 		return systemSetting.getImageRootPath()+systemSetting.getImagesList().get(n);
 	}
 
-	/**
-	 * 获取网站上下文路径/house
-	 * 正式环境和测试环境获取上下文不一样
-	 * @param request
-	 * @return
-	 */
-//	public static String getContextPath(HttpServletRequest request){
-//		if(Boolean.valueOf(getInstance().get("is_www"))){
-//			return SystemManager.getInstance().get("contextPath");
-//		}
-//		return request.getContextPath();
-//	}
-	
 	
 	/**
 	 * 根据类别ID获取该类别下的所有ID集合
@@ -289,41 +192,7 @@ public class SystemManager {
         putCacheObject("catalogsArticle", (Serializable)catalogsArticle);
     }
 
-    /**
-     * 属性集合
-     * @return
-     */
-    public List<Attribute> getAttrs() {
-        return getCacheObject("attrs");
-    }
 
-    public void setAttrs(List<Attribute> attrs) {
-        putCacheObject("attrs", (Serializable)attrs);
-    }
-
-    /**
-     * 文章列表
-     * @return
-     */
-    public Map<String, News> getNewsMap() {
-        return getCacheObject("newsMap");
-    }
-
-    public void setNewsMap(Map<String, News> newsMap) {
-        putCacheObject("newsMap", (Serializable)newsMap);
-    }
-
-    /**
-     * 属性集合map
-     * @return
-     */
-    public Map<String, Attribute> getAttrsMap() {
-        return getCacheObject("attrsMap");
-    }
-
-    public void setAttrsMap(Map<String, Attribute> attrsMap) {
-        putCacheObject("attrsMap", (Serializable)attrsMap);
-    }
 
     //系统设置
     public SystemSetting getSystemSetting() {
@@ -550,56 +419,6 @@ public class SystemManager {
         putCacheObject("newsCatalogs", (Serializable)(newsCatalogs));
     }
 
-    /**
-     * 系统通知
-     * @return
-     */
-    public List<News> getNoticeList() {
-        return getCacheObject("noticeList");
-    }
-
-    public void setNoticeList(List<News> noticeList) {
-        putCacheObject("noticeList", (Serializable)(noticeList));
-    }
-
-    /**
-     * 省市区集合
-     * @return
-     */
-    public Map<String, Area> getAreaMap() {
-        return getCacheObject("areaMap");
-    }
-
-    public void setAreaMap(Map<String, Area> areaMap) {
-        putCacheObject("areaMap", (Serializable)areaMap);
-    }
-
-    /**
-     * 前台订单支付页面--物流列表
-     * @return
-     */
-    public Map<String, Express> getExpressMap() {
-        return getCacheObject("expressMap");
-    }
-
-    public void setExpressMap(Map<String, Express> expressMap) {
-//        this.expressMap = expressMap;
-        putCacheObject("expressMap", (Serializable)(expressMap));
-    }
-
-    /**
-     * 广告列表
-     * @return
-     */
-    public Map<String, Advert> getAdvertMap() {
-//        return advertMap;
-        return getCacheObject("advertMap");
-    }
-
-    public void setAdvertMap(Map<String, Advert> advertMap) {
-//        this.advertMap = advertMap;
-        putCacheObject("advertMap", (Serializable)advertMap);
-    }
 
     /**
      * 后台发货页面物流公司列表
@@ -618,19 +437,6 @@ public class SystemManager {
         putCacheObject("manageExpressMap", Lists.newArrayList(manageExpressMap));
     }
 
-    /**
-     * 阿里云存储的配置信息
-     * @return
-     */
-    public AliyunOSS getAliyunOSS() {
-//        return aliyunOSS;
-        return getCacheObject("aliyunOSS");
-    }
-
-    public void setAliyunOSS(AliyunOSS aliyunOSS) {
-//        this.aliyunOSS = aliyunOSS;
-        putCacheObject("aliyunOSS", aliyunOSS);
-    }
 
     /**
      * 加载首页左侧的商品列表，此位置的商品从全局加载
@@ -646,19 +452,6 @@ public class SystemManager {
         putCacheObject("indexLeftProduct", Lists.newArrayList(indexLeftProduct));
     }
 
-    /**
-     * 所有活动列表
-     * @return
-     */
-    public Map<String, Activity> getActivityMap() {
-//        return activityMap;
-        return getCacheObject("activityMap");
-    }
-
-    public void setActivityMap(Map<String, Activity> activityMap) {
-//        this.activityMap = activityMap;
-        putCacheObject("activityMap", (Serializable)(activityMap));
-    }
 
 
     /**

@@ -3,8 +3,6 @@ package net.jeeshop.core.freemarker.front;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import net.jeeshop.services.front.news.NewsService;
-import net.jeeshop.services.front.news.bean.News;
 import net.jeeshop.services.front.product.ProductService;
 import net.jeeshop.services.front.product.bean.Product;
 import net.jeeshop.web.util.RequestHolder;
@@ -32,8 +30,6 @@ public class FreemarkerHelper {
 	private static final Logger logger = LoggerFactory.getLogger(FreemarkerHelper.class);
 	@Autowired
 	private ProductService productService;
-	@Autowired
-	private NewsService newsService;
 	
 	/**
 	 * 模板
@@ -43,10 +39,6 @@ public class FreemarkerHelper {
 
 	public void setProductService(ProductService productService) {
 		this.productService = productService;
-	}
-
-	public void setNewsService(NewsService newsService) {
-		this.newsService = newsService;
 	}
 
 	/**
@@ -134,63 +126,7 @@ public class FreemarkerHelper {
 		return false;
 	}
 	
-	/**
-	 * 对系统帮助的文章静态化
-	 * @throws Exception 
-	 */
-	public void helps() throws Exception {
-		News param = new News();
-		param.setType("help");
-		List<News> notices = newsService.selectList(param);
-		if(notices==null || notices.size()==0){
-			logger.error("notices size = 0");
-			return;
-		}
-		logger.error("notices size = " + notices.size());
-		
-		HashMap<String, Object> data = new HashMap<String, Object>();
-		for(int i=0;i<notices.size();i++){
-			News news = notices.get(i);
-			if(StringUtils.isBlank(news.getContent())){
-				continue;
-			}
-			
-			data.clear();
-			data.put("e", news);
-			String templateHtml = RequestHolder.getSession().getServletContext().getRealPath("/")+"/jsp/helps/"+news.getId()+".jsp";
-			crateHTML(RequestHolder.getSession().getServletContext(), data, template_newsInfo,templateHtml);
-			logger.error("生成html页面成功！id="+news.getId());
-		}
-	}
 	
-	/**
-	 * 对新闻公告的文章静态化
-	 * @throws Exception 
-	 */
-	public void notices() throws Exception {
-		News param = new News();
-		param.setType("notice");
-		List<News> notices = newsService.selectList(param);
-		if(notices==null || notices.size()==0){
-			logger.error("notices size = 0");
-			return;
-		}
-		logger.error("notices size = " + notices.size());
-		
-		HashMap<String, Object> data = new HashMap<String, Object>();
-		for(int i=0;i<notices.size();i++){
-			News news = notices.get(i);
-			if(StringUtils.isBlank(news.getContent())){
-				continue;
-			}
-			
-			data.clear();
-			data.put("e", news);
-			String templateHtml = RequestHolder.getSession().getServletContext().getRealPath("/")+"/jsp/notices/"+news.getId()+".jsp";
-			crateHTML(RequestHolder.getSession().getServletContext(), data, template_newsInfo,templateHtml);
-			logger.error("生成html页面成功！id="+news.getId());
-		}
-	}
 
 	/**
 	 * 对商品介绍静态化
@@ -256,36 +192,4 @@ public class FreemarkerHelper {
 		return "success";
 	}
 	
-	/**
-	 * 静态化指定的文章
-	 * @param id
-	 * @return
-	 * @throws Exception 
-	 */
-	public String staticNewsByID(String id) throws Exception {
-		if(StringUtils.isBlank(id)){
-			throw new NullPointerException("id参数不能为空！");
-		}
-		
-		News news = newsService.selectById(id);
-		if(news==null || StringUtils.isBlank(news.getContent())){
-			logger.error("ERROR,not found news by id = " + id);
-			throw new NullPointerException("ERROR,not found news by id = " + id);
-		}
-		
-		HashMap<String, Object> data = new HashMap<String, Object>();
-		data.clear();
-		data.put("e", news);
-		String templateHtml = null;
-		
-		if(news.getType().equals(News.news_type_help)){
-			templateHtml = RequestHolder.getSession().getServletContext().getRealPath("/")+"/jsp/helps/"+news.getId()+".jsp";
-		}else if(news.getType().equals(News.news_type_notice)){
-			templateHtml = RequestHolder.getSession().getServletContext().getRealPath("/")+"/jsp/notices/"+news.getId()+".jsp";
-		}
-		crateHTML(RequestHolder.getSession().getServletContext(), data, template_newsInfo,templateHtml);
-		logger.error("生成html页面成功！id="+news.getId());
-		
-		return "success";
-	}
 }

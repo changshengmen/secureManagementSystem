@@ -2,8 +2,6 @@ package net.jeeshop.core.listener;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-
-import net.jeeshop.core.TaskManager;
 import net.jeeshop.core.front.SystemManager;
 import net.jeeshop.core.oscache.FrontCache;
 import net.jeeshop.core.oscache.ManageCache;

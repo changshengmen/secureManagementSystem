@@ -67,10 +67,6 @@ public class FreemarkerAction {
 		logger.error("create method = " + method);
 		if(StringUtils.isBlank(method)){
 			
-		}else if(method.equals("helps")){
-			freemarkerHelper.helps();//所有帮助文件静态化
-		}else if(method.equals("notices")){
-			freemarkerHelper.notices();//所有公告通知静态化
 		}else if(method.equals("products")){
 			String error = freemarkerHelper.products();//所有商品描述静态化
 			if(error==null){
@@ -83,13 +79,7 @@ public class FreemarkerAction {
 			
 			String response = freemarkerHelper.staticProductByID(id);//所有商品描述静态化
 			return (response);
-		}else if(method.equals("staticNewsByID")){
-			String id = RequestHolder.getRequest().getParameter("id");
-			
-			String response = freemarkerHelper.staticNewsByID(id);//所有商品描述静态化
-			return (response);
 		}
-		
 		return ("success");
 //		return SUCCESS;
 	}

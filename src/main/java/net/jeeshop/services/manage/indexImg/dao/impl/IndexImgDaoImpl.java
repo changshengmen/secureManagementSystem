@@ -8,7 +8,6 @@ import java.util.List;
 
 import net.jeeshop.core.dao.BaseDao;
 import net.jeeshop.core.dao.page.PagerModel;
-import net.jeeshop.services.manage.comment.bean.Comment;
 import net.jeeshop.services.manage.indexImg.bean.IndexImg;
 import net.jeeshop.services.manage.indexImg.dao.IndexImgDao;
 import org.springframework.stereotype.Repository;

@@ -236,9 +236,6 @@ function addRow(){
 			 	<button id="updateProduct" method="update" class="btn btn-success">
                     <i class="icon-ok icon-white"></i>修改
                 </button>
-        		<button id="deleteProduct" method="deletes?deleteFlag=0" class="btn btn-danger" onclick="return submitIDs(this,'确定删除选择的子产品?');">
-                    <i class="icon-ok icon-white"></i>删除
-                </button>	
 			<#else>
 				<span style="margin-left:0px;">				
 					<button id="insertProduct" method="insertSecureProduct" class="btn btn-success">

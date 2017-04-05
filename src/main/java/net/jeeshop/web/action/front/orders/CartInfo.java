@@ -6,7 +6,6 @@ import java.util.List;
 
 import net.jeeshop.core.dao.page.ClearBean;
 import net.jeeshop.core.dao.page.PagerModel;
-import net.jeeshop.services.front.address.bean.Address;
 import net.jeeshop.services.front.product.bean.Product;
 
 
@@ -24,9 +23,6 @@ public class CartInfo extends PagerModel implements Serializable {
 	private String amount;// 合计总金额，也就是用户最终需要支付的金额
 	private int totalExchangeScore;//总计所需积分
 	
-	private List<Address> addressList;//用户配送地址信息
-	@Deprecated
-	private Address address;//客户配送信息
 	private String defaultAddessID;//用户的默认地址ID
 
 	public List<Product> getProductList() {
@@ -48,16 +44,6 @@ public class CartInfo extends PagerModel implements Serializable {
 		this.amount = amount;
 	}
 	
-	public Address getAddress() {
-		if(address==null){
-			address = new Address();
-		}
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
 
 	/**
 	 * 购物车汇总计算总金额
@@ -97,9 +83,6 @@ public class CartInfo extends PagerModel implements Serializable {
 			productList = null;
 		}
 		amount = null;
-		if(address!=null){
-			address.clear();
-		}
 	}
 
 	public String getDefaultAddessID() {
@@ -110,13 +93,6 @@ public class CartInfo extends PagerModel implements Serializable {
 		this.defaultAddessID = defaultAddessID;
 	}
 
-	public List<Address> getAddressList() {
-		return addressList;
-	}
-
-	public void setAddressList(List<Address> addressList) {
-		this.addressList = addressList;
-	}
 
 	public int getTotalExchangeScore() {
 		return totalExchangeScore;
@@ -126,17 +102,4 @@ public class CartInfo extends PagerModel implements Serializable {
 		this.totalExchangeScore = totalExchangeScore;
 	}
 
-	@Override
-	public String toString() {
-		return "CartInfo [productList=" + productList + ", amount=" + amount
-				+ ", addressList=" + addressList + ", address=" + address
-				+ ", defaultAddessID=" + defaultAddessID + "]";
-	}
-	
-//	@Override
-//	public String toString() {
-//		StringBuilder buff = new StringBuilder();
-//		buff.append("amount="+amount+",defaultAddessID="+defaultAddessID);
-//		return buff.toString();
-//	}
 }
