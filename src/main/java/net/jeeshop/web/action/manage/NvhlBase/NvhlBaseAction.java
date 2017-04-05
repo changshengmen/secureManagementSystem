@@ -64,11 +64,24 @@ public class NvhlBaseAction  extends BaseController<NvhlBaseVO>{
 		}else{			
 			String appCde = RequestHolder.getRequest().getParameter("appCde");//企业编码	
 			base.setAppCde(appCde);
+			base.setDiscardStatus(0);
 			super.selectList(request, base);	
 			return page_toList;
 		}	
 		
 	}
+	
+	
+	
+	@RequestMapping(value="selectDiscardList")
+	public String selectDiscardList(HttpServletRequest request,ModelMap model,RedirectAttributes flushAttrs)throws Exception{
+		NvhlBaseVO base = new NvhlBaseVO();
+		base.setDiscardStatus(1);
+		super.selectList(request, base);	
+		return page_toList;
+	}
+	
+	
 	/**
 	 * 跳转到调用1003 接口
 	 * @throws Exception 
@@ -115,5 +128,18 @@ public class NvhlBaseAction  extends BaseController<NvhlBaseVO>{
 		}
 		return page_toInfo;
 	}
+	
+	@RequestMapping(value="todiscardStatus")
+	public String toChageRemark(HttpServletRequest request ,NvhlBaseVO baseVO){
+		String []ids=request.getParameterValues("ids");
+		for(int i=0; i<ids.length;i++){
+			baseVO.setCAppNo(ids[i]);
+			baseVO.setDiscardStatus(1);
+			nvhlBaseService.updateDiscardStatus(baseVO);
+		}
+		return "redirect:selectList";
+	}
+	
+	
 	
 }
