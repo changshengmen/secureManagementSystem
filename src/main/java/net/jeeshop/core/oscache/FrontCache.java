@@ -13,7 +13,6 @@ import net.jeeshop.core.FrontContainer;
 import net.jeeshop.core.KeyValueHelper;
 import net.jeeshop.core.ManageContainer;
 import net.jeeshop.core.front.SystemManager;
-import net.jeeshop.core.pay.alipay.alipayescow.config.AlipayConfig;
 import net.jeeshop.core.util.DateTimeUtil;
 import net.jeeshop.services.front.catalog.CatalogService;
 import net.jeeshop.services.front.catalog.bean.Catalog;
@@ -174,15 +173,6 @@ public class FrontCache {
 		pay.setCode(Pay.pay_code_alipayescow);
 		pay = payService.selectOne(pay);
 		systemManager.setAlipayConfig(pay.getSeller());
-
-		AlipayConfig.partner = pay.getPartner();
-		AlipayConfig.key = pay.getKey1();
-
-//		logger.error("SystemManager.alipayConfig="+SystemManager.alipayConfig);
-
-		/**
-		 * 加载评论配置
-		 */
 	}
 
 

@@ -18,20 +18,9 @@ try{
 		frontCache.loadAllCache();
 		out.println("加载数据成功！");
 
-	}else if(method.equals("activity")){
-		
-		frontCache.loadActivityMap();
-		frontCache.loadActivityProductList();
-		frontCache.loadActivityScoreProductList();
-		frontCache.loadActivityTuanProductList();
-		out.println("加载数据成功！");
 	}else if(method.equals("loadIndexImgs")){
 		
 		frontCache.loadIndexImgs();
-		out.println("加载数据成功！");
-	}else if(method.equals("loadAdvertList")){
-		
-		frontCache.loadAdvertList();
 		out.println("加载数据成功！");
 	}else if(method.equals("loadNotifyTemplate")){
 		
