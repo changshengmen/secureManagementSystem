@@ -26,7 +26,9 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 /**
- * Servlet implementation class SecureProductServlet
+ * 用于解析payresult的servlet
+ * @author Yang
+ *
  */
 public class SecureProductServlet extends HttpServlet {
 	//Servlet中注入service
@@ -34,6 +36,9 @@ public class SecureProductServlet extends HttpServlet {
 	private NvhlBaseService baseService;
 	private static final long serialVersionUID = 1L;
     
+	/**
+	 * 重写init方法 完成使用spring在Servlet中注入Service
+	 */
 	@Override
 	public void init(ServletConfig config)throws ServletException
 	{
