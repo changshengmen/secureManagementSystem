@@ -26,7 +26,9 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 /**
- * 用于解析payresult的servlet
+ * @Description: 1：解析华海1005接口返回数据，给订单base类支付申请号赋值，查询该条订单
+ * 				 2：进而查询出投保人和被保人具体信息
+ * 				 3：调用华海1003接口
  * @author Yang
  *
  */
@@ -138,8 +140,6 @@ public class SecureProductServlet extends HttpServlet {
 		}else{
 			return ;
 		}
-	
-		
 	}
 	
 	
