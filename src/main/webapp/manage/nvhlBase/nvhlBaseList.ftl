@@ -7,6 +7,17 @@
 <script type="text/javascript">
 	
 $(function() {
+	//判断订单废弃状态动态显示按钮组
+	var discard=$('input[name="discard"]').val();
+	if(discard!=0 && discard==1){
+		$('#toDiscard').remove();
+		$('#selDiscard').remove();
+	}
+	if(discard!=1 && discard==0 || discard==undefined){
+		$('#toRecover').remove();
+	}
+		
+	
 	$('.tipso').tipso({
 		useTitle: false
 	});
@@ -50,10 +61,10 @@ $(function() {
 				}
 				
 				if($('input[name=ids]:checked').length>0){
-				flag=confirm('操作过后不可更改请再次确认');
+				flag=confirm('请再次确认废弃订单！');
 				//判断用户是否确定废弃订单
 				if(flag==true){
-				$('form:eq(0)').prop("action","${basepath}/manage/NvhlBase/todiscardStatus").submit();	
+					changeDiscardStatus();
 				}
 			}
 		});
@@ -61,7 +72,29 @@ $(function() {
 	$('#selDiscard').click(function(){
 		$('form:eq(0)').prop("action","${basepath}/manage/NvhlBase/selectDiscardList").submit();
 	});	
+	
+	//点击恢复按钮触发的函数
+	$('#toRecover').click(function(){
+		//判断是否选中 复选框
+		var idsLength=$('input[name="ids"]:checked').length;
+				if(1>idsLength){
+					alert("提示：请先选择订单在进行操作！");
+				}
+				
+				if($('input[name=ids]:checked').length>0){
+				flag=confirm('请确认恢复订单！');
+				//判断用户是否确定废弃订单
+				if(flag==true){
+				changeDiscardStatus();
+				}
+			}
+		});
 });
+
+//更改废弃废弃状态的请求
+function changeDiscardStatus(){
+	$('form:eq(0)').prop("action","${basepath}/manage/NvhlBase/todiscardStatus").submit();
+}
 function flushPage(){
 	window.location.reload();
 }
@@ -99,6 +132,7 @@ function flushPage(){
 			</button>
 			
 			<input id="toDiscard" type="button" class="btn btn-danger" value="废弃"/>
+			<input id="toRecover" type="button" class="btn btn-success" value="恢复订单"/>
 			
 			<input id="selDiscard" type="button" class="btn btn-warning" value="查询废弃订单"/>	
 				
@@ -129,6 +163,7 @@ function flushPage(){
 			<th style="text-align: center;">操作</th>
 		</tr>
 		<#list pager.list as item>
+			<input type="hidden" name="discard" value="${item.discardStatus}">
 			<tr>
 				<td class="checkboxTh"><input type="checkbox" name="ids"
 						value="${item.CAppNo!""}" />

@@ -129,17 +129,36 @@ public class NvhlBaseAction  extends BaseController<NvhlBaseVO>{
 		return page_toInfo;
 	}
 	
+	/**
+	 * 
+	* @param
+	* @Description: TODO(更改订单废弃状态的方法) 
+	* @author yc
+	* @date 2017年4月6日 上午11:45:39 
+	* @return void    返回类型 
+	* @throws
+	 */
 	@RequestMapping(value="todiscardStatus")
-	public String toChageRemark(HttpServletRequest request ,NvhlBaseVO baseVO){
+	public String toChageDiscard(HttpServletRequest request ,NvhlBaseVO baseVO){
 		String []ids=request.getParameterValues("ids");
-		for(int i=0; i<ids.length;i++){
-			baseVO.setCAppNo(ids[i]);
-			baseVO.setDiscardStatus(1);
-			nvhlBaseService.updateDiscardStatus(baseVO);
+		String discard=request.getParameter("discard");
+		if(discard.equals("0"))
+		{
+			for(int i=0; i<ids.length;i++){
+				baseVO.setCAppNo(ids[i]);
+				baseVO.setDiscardStatus(1);
+				nvhlBaseService.updateDiscardStatus(baseVO);
+			}
+		}else{
+			for(int i=0; i<ids.length;i++){
+				baseVO.setCAppNo(ids[i]);
+				baseVO.setDiscardStatus(0);
+				nvhlBaseService.updateDiscardStatus(baseVO);
+			}
 		}
+		
 		return "redirect:selectList";
 	}
-	
 	
 	
 }
