@@ -72,7 +72,15 @@ public class NvhlBaseAction  extends BaseController<NvhlBaseVO>{
 	}
 	
 	
-	
+	/**
+	 * 
+	* @param
+	* @Description: TODO(分页查询废弃订单列表，支持模糊查询) 
+	* @author yc
+	* @date 2017年4月10日 上午11:53:52 
+	* @return String    返回类型 
+	* @throws
+	 */
 	@RequestMapping(value="selectDiscardList")
 	public String selectDiscardList(HttpServletRequest request,ModelMap model,RedirectAttributes flushAttrs ,NvhlBaseVO base)throws Exception{
 		//NvhlBaseVO base = new NvhlBaseVO();
