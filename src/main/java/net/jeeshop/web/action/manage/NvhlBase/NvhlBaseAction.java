@@ -74,8 +74,8 @@ public class NvhlBaseAction  extends BaseController<NvhlBaseVO>{
 	
 	
 	@RequestMapping(value="selectDiscardList")
-	public String selectDiscardList(HttpServletRequest request,ModelMap model,RedirectAttributes flushAttrs)throws Exception{
-		NvhlBaseVO base = new NvhlBaseVO();
+	public String selectDiscardList(HttpServletRequest request,ModelMap model,RedirectAttributes flushAttrs ,NvhlBaseVO base)throws Exception{
+		//NvhlBaseVO base = new NvhlBaseVO();
 		base.setDiscardStatus(1);
 		super.selectList(request, base);	
 		return page_toList;

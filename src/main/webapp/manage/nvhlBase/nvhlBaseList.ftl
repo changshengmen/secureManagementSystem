@@ -12,9 +12,12 @@ $(function() {
 	if(discard!=0 && discard==1){
 		$('#toDiscard').remove();
 		$('#selDiscard').remove();
+		$('#selectLi').remove();
 	}
 	if(discard!=1 && discard==0 || discard==undefined){
 		$('#toRecover').remove();
+		$('#selectDisLi').remove();
+		$('#backBtn').remove();
 	}
 		
 	
@@ -69,9 +72,9 @@ $(function() {
 			}
 		});
 		
-	$('#selDiscard').click(function(){
-		$('form:eq(0)').prop("action","${basepath}/manage/NvhlBase/selectDiscardList").submit();
-	});	
+	//$('#selDiscard').click(function(){
+		//$('form:eq(0)').prop("action","${basepath}/manage/NvhlBase/selectDiscardList").submit();
+	//});	
 	
 	//点击恢复按钮触发的函数
 	$('#toRecover').click(function(){
@@ -91,6 +94,9 @@ $(function() {
 		});
 });
 
+function selDisListfun(){
+	$('form:eq(0)').prop("action","${basepath}/manage/NvhlBase/selectDiscardList").submit();
+}
 //更改废弃废弃状态的请求
 function changeDiscardStatus(){
 	$('form:eq(0)').prop("action","${basepath}/manage/NvhlBase/todiscardStatus").submit();
@@ -127,15 +133,14 @@ function flushPage(){
 	</tr>
 	<tr>
 		<td colspan="13" id="selectArea">
-			<button method="selectList" class="btn btn-primary" onclick="selectList(this)">
+			<button method="selectList" id="selectLi" class="btn btn-primary" onclick="selectList(this)">
 				<i class="icon-search icon-white"></i> 查询
 			</button>
-			
+			<input id="selectDisLi" onclick="selDisListfun();" type="button" class="btn btn-primary" value="查询订单"/>
 			<input id="toDiscard" type="button" class="btn btn-danger" value="废弃"/>
 			<input id="toRecover" type="button" class="btn btn-success" value="恢复订单"/>
-			
-			<input id="selDiscard" type="button" class="btn btn-warning" value="查询废弃订单"/>	
-				
+			<input id="selDiscard" type="button" class="btn btn-warning" onclick="selDisListfun();" value="查询废弃订单"/>	
+			<button onclick="javascript:history.back(-1)" class="btn btn-warning" id="backBtn">返回</button>	
 		</td>
 		
 		
