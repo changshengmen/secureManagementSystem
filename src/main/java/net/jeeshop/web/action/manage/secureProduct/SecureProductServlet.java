@@ -1,4 +1,4 @@
-package net.jeeshop.web.action.manage.NvhlBase;
+package net.jeeshop.web.action.manage.secureProduct;
 
 import java.io.IOException;
 import java.io.PrintWriter;
