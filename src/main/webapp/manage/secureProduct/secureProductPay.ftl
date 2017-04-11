@@ -116,7 +116,7 @@
 				<tr>
 					<td id="xzkh" >选择客户</td>
 	        		<td id="xzkh1">
-	        		  <select id="quickChoose"  class="input-medium" data-settings='{"cutOff":4}'>
+	        		  <select id="quickChoose" class="input-medium" data-settings='{"cutOff":4}'>
 	        				<option value="0" selected="selected">请选择客户</option>
 		        				<#if applcantList??>
 		        					<#list applcantList as item>
@@ -427,8 +427,14 @@
 <script>
 //动态下拉框功能实现
  $('#yyxz').change(function(){
-       	//获取当前选中的pcode
-       	var pcode = $(this).val()
+      //调用方法实现下拉框级联	
+       yycxChange();
+       });
+       
+ function yycxChange(){
+ 	//获取当前选中的pcode
+       	var pcode = $('#yyxz').val()
+       	//alert(pcode)
        	//访问action的url
        	var url = basepath+'/manage/secureProduct/toChangeSelect?pcode='+pcode;
 		//异步实现级联下拉框
@@ -445,9 +451,8 @@
          		
          		$('#hylxList').html(html);	
          	 },   
-         	 
-      	})
-       });
+      	});
+ }     
        
 $(function(){
 //------页面初始化将动态生成的下拉框的样式remove掉---------
@@ -493,6 +498,10 @@ var appCdeStr=$('#appCde').val();
 	  		$("#copyInfo").val("信息同步");
 			// jquery1.6或以上版本
 			$("table select").prop('selectedIndex', 0);
+			//调用方法级联下拉框
+			yycxChange();
+       	
+      
   		}
   		
   	});
