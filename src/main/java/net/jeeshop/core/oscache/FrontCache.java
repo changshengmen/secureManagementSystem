@@ -21,8 +21,6 @@ import net.jeeshop.services.front.indexImg.bean.IndexImg;
 import net.jeeshop.services.front.keyvalue.KeyvalueService;
 import net.jeeshop.services.front.keyvalue.bean.Keyvalue;
 import net.jeeshop.services.front.order.OrderService;
-import net.jeeshop.services.front.pay.PayService;
-import net.jeeshop.services.front.pay.bean.Pay;
 import net.jeeshop.services.front.product.ProductService;
 import net.jeeshop.services.front.product.bean.Product;
 import net.jeeshop.services.front.product.bean.ProductStockInfo;
@@ -60,8 +58,6 @@ public class FrontCache {
 	private CatalogService catalogService;
     @Autowired
 	private IndexImgService indexImgService;
-    @Autowired
-	private PayService payService;
     @Autowired
 //	private OssService ossService;
 	private OrderService orderService;
@@ -102,9 +98,7 @@ public class FrontCache {
 
 
 
-	public void setPayService(PayService payService) {
-		this.payService = payService;
-	}
+
 
 
 
@@ -139,21 +133,6 @@ public class FrontCache {
 		logger.info("load...");
 		KeyValueHelper.load(keyvalueService.selectList(new Keyvalue()));
 	}
-
-	/**
-	 * 加载插件配置
-	 */
-	public void loadPlugConfig() {
-
-		/**
-		 * 加载支付宝配置
-		 */
-		Pay pay = new Pay();
-		pay.setCode(Pay.pay_code_alipayescow);
-		pay = payService.selectOne(pay);
-		systemManager.setAlipayConfig(pay.getSeller());
-	}
-
 
 	/**
 	 * 如果类别ID是是主类别，则返回该主类别的下面所有子类别
@@ -553,7 +532,6 @@ public class FrontCache {
 		loadCatalogs(true);
 		loadIndexLeftProduct();
 		loadKeyValue();
-		loadPlugConfig();
 		loadProductStock();
 		loadAccountRank();
 		//加载所有的活动列表
