@@ -116,7 +116,7 @@
 				<tr>
 					<td id="xzkh" >选择客户</td>
 	        		<td id="xzkh1">
-	        		  <select id="quickChoose" name="selIndex" class="input-medium" data-settings='{"cutOff":4}'>
+	        		  <select id="quickChoose" class="input-medium" data-settings='{"cutOff":4}'>
 	        				<option value="0" selected="selected">请选择客户</option>
 		        				<#if applcantList??>
 		        					<#list applcantList as item>
