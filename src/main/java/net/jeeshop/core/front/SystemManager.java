@@ -18,7 +18,6 @@ import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
-
 /**
  * 系统管理类.
  * 1、负责管理system.properties的东东
