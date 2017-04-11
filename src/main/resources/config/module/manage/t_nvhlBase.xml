@@ -68,6 +68,9 @@
 		<if test="discardStatus!=null and discardStatus==1">
 			and discardStatus=#{discardStatus}
 		</if>
+		<if test="appCde !=null and appCde !=''">
+			and d.appCde=#{appCde}
+		</if>
 		<if test="TInsrncEndTmStartDate!=null and TInsrncEndTmStartDate!=''">
 			and TInsrncEndTm &gt;= #{TInsrncEndTmStartDate}
 		</if>
