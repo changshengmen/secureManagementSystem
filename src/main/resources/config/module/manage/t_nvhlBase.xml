@@ -68,6 +68,9 @@
 		<if test="discardStatus!=null and discardStatus==1">
 			and discardStatus=#{discardStatus}
 		</if>
+		<if test="appCde !=null and appCde !=''">
+			and d.appCde=#{appCde}
+		</if>
 		<if test="TInsrncEndTmStartDate!=null and TInsrncEndTmStartDate!=''">
 			and TInsrncEndTm &gt;= #{TInsrncEndTmStartDate}
 		</if>
@@ -77,6 +80,7 @@
 		<if test="CProdName !=null and CProdName !=''">
 			and CProdName like CONCAT('%','${CProdName}','%' )
 		</if>	
+			
 			
 	</select>	
 	<!-- 业务员销售报表订单查询 -->

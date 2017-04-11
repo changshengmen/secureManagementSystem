@@ -20,10 +20,6 @@ import net.jeeshop.services.front.indexImg.IndexImgService;
 import net.jeeshop.services.front.indexImg.bean.IndexImg;
 import net.jeeshop.services.front.keyvalue.KeyvalueService;
 import net.jeeshop.services.front.keyvalue.bean.Keyvalue;
-import net.jeeshop.services.front.navigation.NavigationService;
-import net.jeeshop.services.front.navigation.bean.Navigation;
-import net.jeeshop.services.front.notifyTemplate.NotifyTemplateService;
-import net.jeeshop.services.front.notifyTemplate.bean.NotifyTemplate;
 import net.jeeshop.services.front.order.OrderService;
 import net.jeeshop.services.front.pay.PayService;
 import net.jeeshop.services.front.pay.bean.Pay;
@@ -34,8 +30,6 @@ import net.jeeshop.services.manage.systemSetting.SystemSettingService;
 import net.jeeshop.services.manage.systemSetting.bean.SystemSetting;
 import net.jeeshop.services.manage.accountRank.AccountRankService;
 import net.jeeshop.services.manage.accountRank.bean.AccountRank;
-import net.jeeshop.services.manage.hotquery.HotqueryService;
-import net.jeeshop.services.manage.hotquery.bean.Hotquery;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.annotations.Param;
@@ -67,18 +61,13 @@ public class FrontCache {
     @Autowired
 	private IndexImgService indexImgService;
     @Autowired
-	private NavigationService navigationService;
-    @Autowired
 	private PayService payService;
-    @Autowired
-	private NotifyTemplateService notifyTemplateService;
     @Autowired
 //	private OssService ossService;
 	private OrderService orderService;
     @Autowired
 	private AccountRankService accountRankService;
-    @Autowired
-	private HotqueryService hotqueryService;
+  
 
 	/**
 	 * front前台
@@ -93,13 +82,7 @@ public class FrontCache {
         FrontCache.systemManager = systemManager;
     }
 
-    public HotqueryService getHotqueryService() {
-		return hotqueryService;
-	}
-
-	public void setHotqueryService(HotqueryService hotqueryService) {
-		this.hotqueryService = hotqueryService;
-	}
+   
 
 
 	public AccountRankService getAccountRankService() {
@@ -115,9 +98,7 @@ public class FrontCache {
 		this.orderService = orderService;
 	}
 
-	public void setNotifyTemplateService(NotifyTemplateService notifyTemplateService) {
-		this.notifyTemplateService = notifyTemplateService;
-	}
+	
 
 
 
@@ -145,9 +126,7 @@ public class FrontCache {
 		this.productService = productService;
 	}
 
-	public void setNavigationService(NavigationService navigationService) {
-		this.navigationService = navigationService;
-	}
+	
 
 	public void setKeyvalueService(KeyvalueService keyvalueService) {
 		this.keyvalueService = keyvalueService;
@@ -430,15 +409,7 @@ public class FrontCache {
         return catalogs;
 	}
 
-	/**
-	 * 加载门户滚动图片列表
-	 */
-	public void loadIndexImgs() {
-		logger.info("loadIndexImgs...");
-		IndexImg c = new IndexImg();
-		List<IndexImg> indexImages = indexImgService.selectList(c);
-        systemManager.setIndexImages(indexImages);
-	}
+	
 
 	/**
 	 * 加载促销的商品
@@ -484,39 +455,11 @@ public class FrontCache {
 		System.out.println("list====" + list);
 	}
 
-	/**
-	 * 加载门户导航菜单
-	 */
-	public void loadNavigations() {
-		logger.info("load...");
-		Navigation nav = new Navigation();
-		nav.setPosition("bottom");
-		List<Navigation> navigations = navigationService.selectList(nav);
-//		SystemManager.navigations = navigations;
-        systemManager.setNavigations(navigations);
-	}
+	
 
-	/**
-	 * 加载特价商品、热门商品、新品商品  显示到首页的中下方位置
-	 */
-	public void loadProductsShowInIndex() {
-//		SystemManager.newProducts = loadProducts(1);
-//        SystemManager.saleProducts = loadProducts(2);
-//        SystemManager.hotProducts = loadProducts(3);
-        systemManager.setNewProducts(loadProducts(1));
-        systemManager.setSaleProducts(loadProducts(2));
-        systemManager.setHotProducts(loadProducts(3));
-	}
+	
 
-	/**
-	 * 加载随机推荐的商品
-	 */
-//	public void loadSuijiProducts() {
-////		SystemManager.suijiProducts = loadProducts(2);
-//		Product p = new Product();
-//		p.setTop(10);
-//		SystemManager.suijiProducts = productService.selectList(p);
-//	}
+	
 
 	// 加载商品
 	private List<Product> loadProducts(int type) {
@@ -567,20 +510,7 @@ public class FrontCache {
 	}
 
 
-	/**
-	 * 加载邮件模板列表
-	 */
-	public void loadNotifyTemplate(){
-		List<NotifyTemplate> list = notifyTemplateService.selectList(null);
-        Map<String, NotifyTemplate> notifyTemplateMap = Maps.newHashMap();
-		if(list!=null && list.size()>0){
-			for(int i=0;i<list.size();i++){
-				NotifyTemplate item = list.get(i);
-				notifyTemplateMap.put(item.getCode(), item);
-			}
-		}
-        systemManager.setNotifyTemplateMap(notifyTemplateMap);
-	}
+	
 
 	/**
 	 * 加载会员等级列表
@@ -613,13 +543,6 @@ public class FrontCache {
 
 
 
-	/**
-	 * 加载热门查询列表
-	 */
-	public void loadHotquery(){
-		List<Hotquery> hotqueryList = hotqueryService.selectList(new Hotquery());
-        systemManager.setHotqueryList(hotqueryList);
-	}
 
 	/**
 	 * 加载全部的缓存数据
@@ -627,17 +550,12 @@ public class FrontCache {
 	 */
 	public void loadAllCache() throws Exception {
 		logger.info("loadAllCache...");
-		loadHotquery();
 		loadCatalogs(true);
 		loadIndexLeftProduct();
-		loadIndexImgs();
 		loadKeyValue();
-		loadNavigations();
 		loadPlugConfig();
-		loadProductsShowInIndex();
 		loadProductStock();
 		loadAccountRank();
-		loadNotifyTemplate();
 		//加载所有的活动列表
 
 		logger.info("前台缓存加载完毕!");

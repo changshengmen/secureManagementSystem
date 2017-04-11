@@ -1,6 +1,5 @@
 package net.jeeshop.core;
 
-import net.jeeshop.services.manage.indexImg.IndexImgService;
 /**
  * 全局变量
  * @author huangf
@@ -29,7 +28,6 @@ public class ManageContainer {
 	public static final String lable = "lable";//标签KEY
 	public static final String sessionID = "sessionID";//sessionIDKEY
 	public static final String imgList = "imgList";
-	public static IndexImgService indexImgService;//门户滚动图片
 	public static final String resource_menus = "resource_menus";//用户资源菜单
 	public static final String user_resource_menus_button = "user_resource_menus_button";//用户资源功能菜单
 	public static final String SystemSetting = "SystemSetting";//资源菜单
