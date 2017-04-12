@@ -5,7 +5,6 @@ import net.jeeshop.core.cache.CacheProvider;
 import net.jeeshop.core.cache.SimpleCacheProvider;
 import net.jeeshop.core.listener.SystemListener;
 import net.jeeshop.services.front.catalog.bean.Catalog;
-import net.jeeshop.services.front.indexImg.bean.IndexImg;
 import net.jeeshop.services.front.product.bean.Product;
 import net.jeeshop.services.front.product.bean.ProductStockInfo;
 import net.jeeshop.services.manage.accountRank.bean.AccountRank;

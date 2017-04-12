@@ -11,6 +11,7 @@
         <property name="cacheProvider" ref="ehcacheCacheProvider"/>
     </bean>
 
+
     <!-- cache provider -->
     <bean id="simpleCacheProvider" class="net.jeeshop.core.cache.SimpleCacheProvider"/>
 
