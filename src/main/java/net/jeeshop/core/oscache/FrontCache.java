@@ -23,8 +23,6 @@ import net.jeeshop.services.front.product.bean.Product;
 import net.jeeshop.services.front.product.bean.ProductStockInfo;
 import net.jeeshop.services.manage.systemSetting.SystemSettingService;
 import net.jeeshop.services.manage.systemSetting.bean.SystemSetting;
-import net.jeeshop.services.manage.accountRank.AccountRankService;
-import net.jeeshop.services.manage.accountRank.bean.AccountRank;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.annotations.Param;
@@ -54,8 +52,7 @@ public class FrontCache {
 	@Autowired
 	private CatalogService catalogService;
 	// private OssService ossService;
-	@Autowired
-	private AccountRankService accountRankService;
+	
 
 	/**
 	 * front前台
@@ -70,13 +67,9 @@ public class FrontCache {
 		FrontCache.systemManager = systemManager;
 	}
 
-	public AccountRankService getAccountRankService() {
-		return accountRankService;
-	}
+	
 
-	public void setAccountRankService(AccountRankService accountRankService) {
-		this.accountRankService = accountRankService;
-	}
+	
 
 	public void setSystemSettingService(SystemSettingService systemSettingService) {
 		this.systemSettingService = systemSettingService;
@@ -457,34 +450,13 @@ public class FrontCache {
 		}
 	}
 
-	/**
-	 * 加载会员等级列表
-	 */
-	private void loadAccountRank() {
-		List<AccountRank> list = accountRankService.selectList(new AccountRank());
-		Map<String, AccountRank> accountRankMap = Maps.newHashMap();
-		if (list != null && list.size() > 0) {
-			for (int i = 0; i < list.size(); i++) {
-				AccountRank item = list.get(i);
-				accountRankMap.put(item.getCode(), item);
-			}
-		}
-		systemManager.setAccountRankMap(accountRankMap);
-	}
+	
 
 	/**
 	 * 加载热卖商品列表，此数据将会在门户的超级菜单上显示出来。
 	 */
 
-	/**
-	 * 加载首页左侧的商品列表，此位置的商品从全局加载
-	 */
-	private void loadIndexLeftProduct() {
-		Product p = new Product();
-		p.setTop(FrontContainer.default_page_left_product_size);
-		List<Product> indexLeftProduct = productService.selectPageLeftHotProducts(p);
-		systemManager.setIndexLeftProduct(indexLeftProduct);
-	}
+	
 
 	/**
 	 * 加载全部的缓存数据
@@ -494,10 +466,8 @@ public class FrontCache {
 	public void loadAllCache() throws Exception {
 		logger.info("loadAllCache...");
 		loadCatalogs(true);
-		loadIndexLeftProduct();
 		loadKeyValue();
 		loadProductStock();
-		loadAccountRank();
 		// 加载所有的活动列表
 
 		logger.info("前台缓存加载完毕!");

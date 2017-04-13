@@ -13,6 +13,6 @@ import java.util.List;
 public class CurrentAccountGetter implements TemplateMethodModelEx {
     @Override
     public Object exec(List arguments) throws TemplateModelException {
-        return LoginUserHolder.getLoginAccount();
+        return LoginUserHolder.getLoginUser();
     }
 }

@@ -20,7 +20,6 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import net.jeeshop.core.front.SystemManager;
-import net.jeeshop.services.front.account.impl.AccountServiceImpl;
 
 import org.apache.commons.lang.StringUtils;
 
