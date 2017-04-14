@@ -59,7 +59,10 @@
 	#trends3 td:nth-child(1){
 		text-align:left;
 	}
-	
+	/*左侧显示标的信息*/
+	#bdxx td:nth-child(1){
+		text-align:left;
+	}
 	
 </style>
 <form action="${basepath}/manage/secureProduct" id="form" name="form" namespace="/manage" theme="simple" enctype="multipart/form-data" method="post">		
@@ -151,8 +154,8 @@
 	           </tr>
 	           <tr>
 	           		<td >证件类型</td>
-	        		<td><#assign map = {"110002":'工商注册号码',"110001":'组织机构代码',"110009",'其他'}>
-	                    <select id="CertfCls" name="TCertfCls" class="input-medium">
+	        		<td><#assign map = {"110001":'组织机构代码',"120001":'居民身份证'}>
+	                    <select id="CertfCls" disabled name="TCertfCls" class="input-medium">
                         		<#list map?keys as key>
                             		<option value="${key}" <#if common.TCertfCls?? && common.TCertfCls==key>selected="selected" </#if>>${map[key]}</option>
                         		</#list>
@@ -203,21 +206,25 @@
 	           		</td> 
 	           	</tr>
 	           <tr>   	                		
-	                 <td >投保日期</td>
-	        		  <td> <input id="TAppTm" type="text" name="TAppTm" style="line-height:4px;height:30px;"
-							class="Wdate search-query input-small" value="${base.TAppTm!""}" data-rule="required;"
-							onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '2008-03-08 11:30:00', maxDate: '2200-03-10 20:59:30' })"/>
-							&nbsp;<span style="color:red">*</span>
-					  </td>
+	                 
 					   <td >保险起期</td>
-	        		 <td colspan="2"> <input id="TInsrncBgnTm" type="text" name="TInsrncBgnTm" style="line-height:4px;height:30px;"
+	        		 <td colspan=""> <input id="TInsrncBgnTm" type="text" name="TInsrncBgnTm" style="line-height:4px;height:30px;"
 							class="Wdate search-query input-small" value="${base.TInsrncBgnTm!""}" data-rule="required;" 
-							onFocus="WdatePicker({el:'TInsrncBgnTm',onpicked:setTInsrncEndTm, skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '#F{$dp.$D(\'TAppTm\')||\'2008-03-08\'}', maxDate: '2200-03-10 20:59:30' })"/>
+							onFocus="WdatePicker({el:'TInsrncBgnTm',onpicked:setTInsrncEndTm, skin:'whyGreen',dateFmt: 'yyyy-MM-dd ', minDate: '%y-%M-{%d+1}||\'2008-03-08\'}', maxDate: '2200-03-10 20:59:30' })"/>
 							&nbsp;<span style="color:red">*</span>
 					 </td>  
+					 
+					 
+					 <td >保险止期</td>
+	        		  <td colspan="2">   	        		  
+						<input id="TInsrncEndTm" disabled style="line-height:3px;height:30px;" class="Wdate search-query input-small" 
+						name="TInsrncEndTm" type="text" value="${base.TInsrncEndTm!""}" data-rule="required;"
+						  />
+						
+					  </td>
 	           </tr>
-	            <tr>	
-	             	 <td >保期/(年)</td> 
+	            <tr id="hideArea">	
+	             	 <td>保期/(年)</td> 
 	           		 <td>   
 			        	<div class="input-group spinner" style="width:40%" data-trigger="spinner">
 					          <input type="text" id="secureCount" class="form-control text-center" value="1" data-rule="quantity">
@@ -226,13 +233,13 @@
 					            <a href="javascript:;" class="spin-down" data-spin="down" onclick="setSecureYearDec()"><i class="fa fa-caret-down"></i></a>
 					          </div>
 					        </div>
-     				 </td>       		 
-	                  <td >保险止期</td>
-	        		  <td colspan="2">   	        		  
-						<input id="TInsrncEndTm" style="line-height:3px;height:30px;" class="Wdate search-query input-small" 
-						name="TInsrncEndTm" type="text" value="${base.TInsrncEndTm!""}" data-rule="required;"
-						 onFocus="WdatePicker({skin:'whyGreen',dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate: '#F{$dp.$D(\'TInsrncBgnTm\')||\'2008-03-08 11:30:00\'}', maxDate: '2200-03-10 20:59:30' })" />
-						&nbsp;<span style="color:red">*</span>
+     				 </td>
+     				      		 
+	                <td >投保日期</td>
+	        		  <td> <input id="TAppTm" type="text" name="TAppTm" style="line-height:4px;height:30px;"
+							class="Wdate search-query input-small" value="${base.TAppTm!""}" data-rule="required;"
+							onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+							
 					  </td>
 				</tr>
 				
@@ -318,8 +325,8 @@
 	           </tr>
 	           <tr>
 	           		<td >证件类型</td>
-	        		<td><#assign map = {"110001":'组织机构代码',"110002":'工商注册号码',"110009",'其他'}>
-	                    <select id="CertfClsA" name="BCCertfCls" class="input-medium" >
+	        		<td><#assign map = {"110001":'组织机构代码',"120001":'居民身份证'}>
+	                    <select id="CertfClsA" disabled name="BCCertfCls" class="input-medium" >
                         		<#list map?keys as key>
                             		<option value="${key}"<#if common.BCCertfCls?? && common.BCCertfCls ==key> selected="selected"</#if>>${map[key]}</option>
                         		</#list>
@@ -365,7 +372,7 @@
 	           		</td>	           		
           		</tr>
           		
-				
+			<!----------------040001产品附加信息-------------------------------------->	
 			<tr id="trends3">
 				<td colspan="4">
 				<span style="font-size:16px;" class="badge badge-warning">房屋信息</span>
@@ -389,7 +396,29 @@
 						<td><input type="text" name="Tzip" value="${zip!""}" id="zip" data-rule="邮编;required;length[0~7];"/>&nbsp;<span style="color:red">*</span>
 	           		 </td>	 
 				</tr>
-         	
+				
+			<!----------------040001产品附加信息end-------------------------------------->	
+			
+			<!----------------010001产品附加信息-------------------------------------->	
+				<tr id="bdxx">
+				<td colspan="4">
+				<span style="font-size:16px;" class="badge badge-warning">标的信息</span>
+		         
+		 		</td>
+		 	</tr>  
+				
+				<tr id="bdxxColum">
+					<td style="text-align: right;">投保财产坐落地址</td> 
+						<td><input type="text" name="tIfoAddress" value="${common.tIfoAddress!""}" id="cbqy" data-rule="承保区域;required;length[0~20];"/>&nbsp;<span style="color:red">*</span>
+	           		 	</td>  
+	           		
+	           		 <td style="text-align: right;">邮编</td> 
+						<td><input type="text" name="tIfoZip" value="${common.tIfoZip!""}" id="yycs" data-rule="营业场所地址;required;length[0~20];"/>&nbsp;<span style="color:red">*</span>
+	           		 	</td>
+	           		 		  
+				</tr>
+         		<!----------------010001产品附加信息end-------------------------------------->
+	         
 	           </table>
 		  	 <!------------------table ending---------------------------------->																
 	</div>
@@ -425,6 +454,37 @@
 
 
 <script>
+//点击提交按钮移除禁用的属性 使数据可以正常提交到后台
+$('#commit').click(function(){
+	flag=confirm('提示!请再次确认提交保单');
+	if(flag==true){
+		$('#CertfCls').attr("disabled",false);
+		$('#TInsrncEndTm').attr("disabled",false);   
+		$('#CertfClsA').attr("disabled",false);
+	}else{
+		return false;
+	}
+	
+	
+});
+//客户类型选择级联证件类型投保人
+$('#ClntMrk').change(function(){
+	var clntMrk=$(this).val();
+	if(clntMrk==0){
+		$('#CertfCls').val('110001');
+	}else{
+		$('#CertfCls').val('120001');
+	}
+});	
+//客户类型选择级联证件类型被保人
+$('#ClntMrkA').change(function(){
+	var clntMrkA=$(this).val();
+	if(clntMrkA==0){
+		$('#CertfClsA').val('110001');
+	}else{
+		$('#CertfClsA').val('120001');
+	}
+});
 //动态下拉框功能实现
  $('#yyxz').change(function(){
       //调用方法实现下拉框级联	
@@ -455,6 +515,19 @@
  }     
        
 $(function(){
+$('#hideArea').hide();
+//$('#hideArea1').hide();
+	//页面初始化为投保日期赋值------------
+	var mydate = new Date();
+  	var str = "" + mydate.getFullYear() + "-";
+   	str += (mydate.getMonth()+1) + "-";
+   	str += mydate.getDate() + " ";
+   	str+= mydate.getHours()+":";
+   	str+= mydate.getMinutes()+":";
+   	str += mydate.getSeconds();
+	$('#TAppTm').val(str);
+	//页面初始化为投保日期赋值end------------
+	
 //------页面初始化将动态生成的下拉框的样式remove掉---------
 	$("select").addClass("setSelect");
 	//为动态添加的下拉框赋新的样式和宽度
@@ -518,6 +591,18 @@ var appCdeStr=$('#appCde').val();
       		$('#trends3').remove();	 
       		//alert($('#zip').val());
 		}
+		//判断如果是责任险移除页面中标的信息的字段
+		else if(cProdNo=="040001"){
+			$('#bdxx').remove();	
+			$('#bdxxColum').remove();	
+		}else{
+			$('#trends').empty(); 
+      		$('#trends1').remove();	 
+      		$('#trends2').remove();	 
+      		$('#trends3').remove();
+      		$('#bdxx').remove();	
+			$('#bdxxColum').remove();	 
+		}
   		//---------判断保险end--------------------------------------------------------------
 });
 
@@ -549,8 +634,8 @@ function setSecureYearAdd(){
 }
 //给保险止期赋值
 function setTInsrncEndTm(){
-	$dp.$('TInsrncEndTm').value = parseInt($dp.cal.getP('y'))+parseInt($("#secureCount").val())+'-'+$dp.cal.getP('M')+'-'+$dp.cal.getP('d')
-		+' '+$dp.cal.getP('H')+':'+$dp.cal.getP('m')+':'+$dp.cal.getP('s');
+debugger;
+	$dp.$('TInsrncEndTm').value = parseInt($dp.cal.getP('y'))+parseInt($("#secureCount").val())+'-'+$dp.cal.getP('M')+'-'+$dp.cal.getP('d')+' ';
 return true;
 }
 //不用验证是否离开页面，此方法解除验证

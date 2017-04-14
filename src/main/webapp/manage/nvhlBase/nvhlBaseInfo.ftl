@@ -91,7 +91,6 @@
 <script>
 $(function() {
 	/*获取保单状态返回信息 页面显示 start-----------------*/
-	debugger;
 	var href = window.location.href;
 	var msg = '';
 	var indexNum = href.indexOf('msg');

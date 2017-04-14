@@ -148,22 +148,23 @@ public class NvhlBaseAction  extends BaseController<NvhlBaseVO>{
 	 */
 	@RequestMapping(value="todiscardStatus")
 	public String toChageDiscard(HttpServletRequest request ,NvhlBaseVO baseVO){
-		String []ids=request.getParameterValues("ids");
-		String discard=request.getParameter("discard");
-		if(discard.equals("0"))
-		{
-			for(int i=0; i<ids.length;i++){
-				baseVO.setCAppNo(ids[i]);
-				baseVO.setDiscardStatus(1);
-				nvhlBaseService.updateDiscardStatus(baseVO);
-			}
-		}else{
-			for(int i=0; i<ids.length;i++){
-				baseVO.setCAppNo(ids[i]);
-				baseVO.setDiscardStatus(0);
-				nvhlBaseService.updateDiscardStatus(baseVO);
-			}
+		//获取页面url中传来的参数
+		String cappNo=baseVO.getCAppNo();
+		int disCardStatus=baseVO.getDiscardStatus();
+		if(null!=cappNo && !"".equals(cappNo)){
+			if(disCardStatus==0)
+			{
+					baseVO.setCAppNo(cappNo);
+					baseVO.setDiscardStatus(1);
+					nvhlBaseService.updateDiscardStatus(baseVO);
+			}else{
+					baseVO.setCAppNo(cappNo);
+					baseVO.setDiscardStatus(0);
+					nvhlBaseService.updateDiscardStatus(baseVO);
+			}	
+			
 		}
+		
 		
 		return "redirect:selectList";
 	}

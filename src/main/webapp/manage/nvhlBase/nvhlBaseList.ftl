@@ -7,15 +7,15 @@
 <script type="text/javascript">
 	
 $(function() {
-	//判断订单废弃状态动态显示按钮组
 	var discard=$('input[name="discard"]').val();
 	if(discard!=0 && discard==1){
-		$('#toDiscard').remove();
 		$('#selDiscard').remove();
 		$('#selectLi').remove();
+		$('span[name="hideDis"]').each(function(){
+			$(this).remove();
+		});
 	}
 	if(discard!=1 && discard==0 || discard==undefined){
-		$('#toRecover').remove();
 		$('#selectDisLi').remove();
 		$('#backBtn').remove();
 	}
@@ -55,43 +55,20 @@ $(function() {
 	    $(this).html(showCappNo);
 	})
 	
-	//点击废弃按钮触发的函数
-	$('#toDiscard').click(function(){
-		//判断是否选中 复选框
-		var idsLength=$('input[name="ids"]:checked').length;
-				if(1>idsLength){
-					alert("提示：请先选择订单在进行操作！");
-				}
-				
-				if($('input[name=ids]:checked').length>0){
-				flag=confirm('请再次确认废弃订单！');
-				//判断用户是否确定废弃订单
-				if(flag==true){
-					changeDiscardStatus();
-				}
-			}
-		});
+	$('a[name="toDiscard"]').click(function(){
+		flag=confirm('msg!您确定要废弃此订单吗?');
+		if(flag==true){
+			return true;
+		}else{
+			return false;
+		}
+	});
 		
 	//$('#selDiscard').click(function(){
 		//$('form:eq(0)').prop("action","${basepath}/manage/NvhlBase/selectDiscardList").submit();
 	//});	
 	
-	//点击恢复按钮触发的函数
-	$('#toRecover').click(function(){
-		//判断是否选中 复选框
-		var idsLength=$('input[name="ids"]:checked').length;
-				if(1>idsLength){
-					alert("提示：请先选择订单在进行操作！");
-				}
-				
-				if($('input[name=ids]:checked').length>0){
-				flag=confirm('请确认恢复订单！');
-				//判断用户是否确定废弃订单
-				if(flag==true){
-				changeDiscardStatus();
-				}
-			}
-		});
+	
 });
 
 function selDisListfun(){
@@ -137,10 +114,8 @@ function flushPage(){
 				<i class="icon-search icon-white"></i> 查询
 			</button>
 			<input id="selectDisLi" onclick="selDisListfun();" type="button" class="btn btn-primary" value="查询订单"/>
-			<input id="toDiscard" type="button" class="btn btn-danger" value="废弃"/>
-			<input id="toRecover" type="button" class="btn btn-success" value="恢复订单"/>
 			<input id="selDiscard" type="button" class="btn btn-warning" onclick="selDisListfun();" value="查询废弃订单"/>	
-			<button onclick="javascript:history.back(-1)" class="btn btn-warning" id="backBtn">返回</button>	
+			<button method="selectList" onclick="selectList(this)" class="btn btn-warning" id="backBtn">返回</button>	
 		</td>
 		
 		
@@ -152,7 +127,6 @@ function flushPage(){
 	<div style="" id="tableList">		
 	<table id="orderList" class="table table-bordered table-hover"style="text-align: center;">
 		<tr style="background-color: #dff0d8">
-			<th class="checkboxTh"style="width:5%;text-align: center"><input type="checkbox" id="firstCheckbox" /></th>
 			<th style="text-align: center;">投保单号</th>
 			<!--<th style="text-align: center;">产品代码</th>-->
 			<th style="text-align: center;">产品名称</th>				
@@ -170,9 +144,6 @@ function flushPage(){
 		<#list pager.list as item>
 			<input type="hidden" name="discard" value="${item.discardStatus}">
 			<tr>
-				<td class="checkboxTh"><input type="checkbox" name="ids"
-						value="${item.CAppNo!""}" />
-						</td>			
 				<td class="tipso" name="cappNo" data-tipso="${item.CAppNo!""}">${item.CAppNo!""}</td>
 				<!--<td>${item.CProdNo!""}</td>-->
 				<td>${item.CProdName!""}</td>					
@@ -205,11 +176,23 @@ function flushPage(){
 					</#list>
 				</td>
 				<td>					
-					<a href="selectOrderInfo?id=${item.id!""}">查看 |</a>
-					<#if item.status == "1" ||item.status == "2" || item.status == "4" || item.status == "5" >				
-						<a href="#" onclick="flushPage()">刷新</a>
+					<a href="selectOrderInfo?id=${item.id!""}">查看 </a>
+					<#if item.status == "1" ||item.status == "2" || item.status == "4" || item.status == "5">				
+						<span name="hideDis">
+							<a href="#" onclick="flushPage()">|刷新</a>
+						</span>
+					<#if item.discardStatus ==0 && item.status == "1" ||item.status == "2" || item.status == "3">
+						<span name="hideDis">
+								<a name="toDiscard" href="todiscardStatus?CAppNo=${item.CAppNo!""}&discardStatus=${item.discardStatus!""}">|废弃</a>
+						</span>
+					</#if>
 					<#else>	
-						<a href="toInsurancePolicy?payNo=${item.payNo!""}&cappNo=${item.CAppNo!""}">保单落地</a>	
+						<span name="hideDis">	
+							<a href="toInsurancePolicy?payNo=${item.payNo!""}&cappNo=${item.CAppNo!""}">保单落地</a>	
+						</span>
+						<span name="hideDis">
+							<a href="todiscardStatus?CAppNo=${item.CAppNo!""}&discardStatus=${item.discardStatus!""}">|废弃</a>
+						</span>
 					</#if>
 				</td>
 		</tr>
