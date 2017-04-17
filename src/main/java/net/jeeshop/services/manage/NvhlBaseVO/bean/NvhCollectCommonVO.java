@@ -20,6 +20,9 @@ public class NvhCollectCommonVO extends QueryModel implements Serializable {
 	private String cbqy;//承保区域
 	private String yycs;//营业场所地址
 	private String zip;//邮编
+	//标的信息
+	private String tIfoZip;//邮编
+	private String tIfoAddress;//投保财产坐落地址
 	public String getId() {
 		return id;
 	}
@@ -73,6 +76,18 @@ public class NvhCollectCommonVO extends QueryModel implements Serializable {
 	}
 	public void setZip(String zip) {
 		this.zip = zip;
+	}
+	public String gettIfoZip() {
+		return tIfoZip;
+	}
+	public void settIfoZip(String tIfoZip) {
+		this.tIfoZip = tIfoZip;
+	}
+	public String gettIfoAddress() {
+		return tIfoAddress;
+	}
+	public void settIfoAddress(String tIfoAddress) {
+		this.tIfoAddress = tIfoAddress;
 	}
 
 	

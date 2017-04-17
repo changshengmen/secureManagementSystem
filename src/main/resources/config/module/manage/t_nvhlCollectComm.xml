@@ -8,10 +8,10 @@
 		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhCollectCommonVO"
 		useGeneratedKeys="true" keyProperty="id">
 		insert into nvhcollectcomment(		
-		cappno,yyxzkey,hylxkey,cbqy,yycs,zip
+		cappno,yyxzkey,hylxkey,cbqy,yycs,zip,tifozip,tifoaddress
 		)
          values(
-         #{cAppNo},#{yyxzKey},#{hylxKey},#{cbqy},#{yycs},#{zip}
+         #{cAppNo},#{yyxzKey},#{hylxKey},#{cbqy},#{yycs},#{zip},#{tifozip},#{tifoaddress}
   		
   		)
 	</insert>
