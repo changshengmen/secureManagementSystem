@@ -45,7 +45,7 @@
 						  <#if e.NAmtRmbExch?? && e.NAmtRmbExch==key>
 						  ${map[key]}
 						  </#if>
-						 </#list>	
+						 </#list>
 					 </td>
 					<td>${e.NAmt!""}</td>
 					<td id="introduce"class="tipso" name="introduce" data-tipso="${e.introduce!""}">${e.introduce!""}</td>
@@ -133,7 +133,9 @@
 			<br>
 			<#if e.id??>
 			 	<a href="toPayPage?CProdNo=${e.CProdNo}&NAmt=${e.NAmt}&NPrm=${e.NPrm}&occPropFlag=${e.occPropFlag}" class="btn btn-success">下单</a>            
-                <a href="selectList"class="btn btn-warning">返回</a>
+                <button method="selectList?init=y" class="btn btn-warning">
+	                <i class="icon-ok icon-white"></i>返回
+	        	</button>	
 			
 			</#if>
 						

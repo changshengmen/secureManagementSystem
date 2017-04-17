@@ -85,7 +85,7 @@
 	</div><!--end tabs-->
 	<!--------------------------操作按钮模块------------------------------------->
 	<br>
-   		<a href="javascript:history.go(-1)"class="btn btn-warning">返回</a> 
+   		<a href="selectList"class="btn btn-warning">返回</a>
 	<!--------------------------操作按钮模块------------------------------------->
 </form>
 <script>
