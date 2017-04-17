@@ -50,7 +50,7 @@ function addRow(){
 	var rateTd="<td><input id='fl' type='text' name='secureProductDetailList["+count+"].rate'class='search-query form-control input-small'data-rule='费率;required;double;rate;'maxlength='9'/></td>"
 	var NIndemLmt="<td><input type='text' name='secureProductDetailList["+count+"].NIndemLmt'class='search-query form-control input-small'maxlength='9'/></td>"
 	var nonceIndemLmt="<td><input type='text' name='secureProductDetailList["+count+"].nonceIndemLmt'class='search-query form-control input-small'maxlength='9'/></td>"
-	var	wayTd="<td><select id='sure_way' name='secureProductDetailList["+count+"].sure_way'class='search-query form-control input-medium'><option value='0'>市场价值</option></select></td></tr>"	
+	var	wayTd="<td><select id='sure_way' name='secureProductDetailList["+count+"].sure_way'class='search-query form-control input-medium'><option value='0'>出险时的市场价值</option></select></td></tr>"	
 	var checkBoxTd="<td><input type='checkbox' name='ids'/></td>";
 	if(${e.secureProductDetailList?size}>0){
 		var trHtml=tr+checkBoxTd+cvrgNoTd+subNameTd+premiumTd+amountTd+rateTd+NIndemLmt+nonceIndemLmt+wayTd;	
@@ -164,11 +164,11 @@ function addRow(){
      				<th style="text-align: center;">险别代码</th>
      				<th style="text-align: center;">标的名称</th>
      				<th style="text-align: center;">保费(元)</th> 
-     				<th style="text-align: center;">保额(元)</th>
+     				<th style="text-align: center;">保险金额(元)</th>
      				<th style="text-align: center;">费率(‰)</th>
      				<th style="text-align: center;">累计赔偿限额</th>	
      				<th style="text-align: center;">每次事故赔偿限额</th>
-     				<th style="text-align: center;">确定方式</th>	
+     				<th style="text-align: center;">保险价值确定方式</th>	
      				</div>
      				</tr>
         	        <#if e.secureProductDetailList?? && e.secureProductDetailList?size gt 0>
@@ -213,7 +213,7 @@ function addRow(){
 								</td>
 								
 								<td>
-	                                <#assign map = {'0':'市场价值'}>
+	                                <#assign map = {'0':'出险时的市场价值'}>
 	                                <select id="sure_way" name="secureProductDetailList[${item_index}].sure_way" class="search-query input-medium">
 	                                    <#list map?keys as key>
 	                                        <option value="${key}" <#if item.sure_way?? && item.sure_way==key>selected="selected" </#if>>${map[key]}</option>

@@ -61,7 +61,7 @@
 	     				<th style="width:10%;text-align: center">险别代码</th>
 	     				<th style="width:15%;text-align: center">标的名称</th>
 	     				<th style="width:8%;text-align: center">保费(元)</th> 
-	     				<th style="width:8%;text-align: center">保额(元)</th>
+	     				<th style="width:8%;text-align: center">保险金额(元)</th>
 	     				<th style="width:8%;text-align: center">费率(‰)</th>
 	     				<th style="width:13%;text-align: center">累计赔偿限额</th>
 	     				<th style="width:15%;text-align: center">每次事故赔偿限额</th>
@@ -79,7 +79,7 @@
 								<td>${e.secureProductDetailList[item_index].NIndemLmt!""}</td>
 								<td>${e.secureProductDetailList[item_index].nonceIndemLmt!""}</td>
 								<td>
-	                                <#assign map = {'0':'市场价值'}>	                             	                                    
+	                                <#assign map = {'0':'出险时的市场价值'}>	                             	                                    
 	                                <#list map?keys as key>
 	                                     <#if item.sure_way?? && item.sure_way==key>
 	                                     	${map[key]}
