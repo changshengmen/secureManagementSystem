@@ -53,3 +53,11 @@
 	责任险的子产品：险别代码、标的名称、保费、保额、费率
 11.保单状态：
 	"0":'支付成功',"1":'支付中',"2":'信息审核中',"3":"保单落地失败","4":"保单落地 ,"5":"核保通过"
+
+12.日期格式
+
+1001	
+	policyStartdate yyyyMMddhhmmss 	第二天0时
+	startDate	yyyyMMddhhmmss	第二天0时
+	transDate	yyyy-MM-dd 当天日期
+	
