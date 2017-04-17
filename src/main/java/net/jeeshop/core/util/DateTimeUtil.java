@@ -198,6 +198,31 @@ public class DateTimeUtil {
 		
 		return dateString;
 	}
+	
+	
+	public static String formatDate(String dt, String con) {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+		Date date = null;String dateString = "";
+			String dtNow = dt.replace("-", "").substring(0, 8);
+			try {
+				date = formatter.parse(dtNow);
+				Calendar calendar = new GregorianCalendar();
+				calendar.setTime(date);
+				if (con == "last") {
+					calendar.add(calendar.DATE, -1);
+					date = calendar.getTime(); // 这个时间就是日期往后推一天的结果
+					dateString = formatter.format(date) + "235959";
+				} else {
+					//calendar.add(calendar.DATE, 1);
+					date = calendar.getTime(); // 这个时间就是日期往后推一天的结果
+					dateString = formatter.format(date) + "000000";
+				}
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		
+		return dateString;
+	}
 
 	/**
 	 * @param yyyyMMddhhmmss
