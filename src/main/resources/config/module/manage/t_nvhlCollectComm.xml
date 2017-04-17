@@ -14,8 +14,19 @@
          #{cAppNo},#{yyxzKey},#{hylxKey},#{cbqy},#{yycs},#{zip},#{tifozip},#{tifoaddress}
   		
   		)
-	</insert>
+	</insert> 
 	
+	<insert id="manage.NvhlCollectComm.insertIfoMessage"
+		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhCollectCommonVO"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into nvhcollectcomment(		
+		cappno,tifozip,tifoaddress
+		)
+         values(
+         #{cAppNo},#{tifozip},#{tifoaddress}
+  		
+  		)
+	</insert>
 	<!-- 根据保单编号查记录 -->
 	<select id="manage.NvhlCollectComm.selectByCappNo" parameterType="object"
 	resultType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhCollectCommonVO">
