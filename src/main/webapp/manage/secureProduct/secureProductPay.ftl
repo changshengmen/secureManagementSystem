@@ -664,9 +664,9 @@ $.ajax({
          success: function(data){ 
               $.each(data,function(){
              	$("#Name").val(data.appNme);
-             	$("#ClntMrk").val(data.clntMrk);
+             	//$("#ClntMrk").val(data.clntMrk);
              	$("#ClntAddr").val(data.clntAddr);        	
-             	$("#CertfCls").val(data.certfCls);                 	
+             	//$("#CertfCls").val(data.certfCls);                 	
              	$("#CertfCde").val(data.certfCde);
              	$("#Mobile").val(data.mobile);
              	$("#Country").val(data.country);
