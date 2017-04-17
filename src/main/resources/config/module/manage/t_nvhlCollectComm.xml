@@ -8,18 +8,16 @@
 		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhCollectCommonVO"
 		useGeneratedKeys="true" keyProperty="id">
 		insert into nvhcollectcomment(		
-		cappno,yyxzkey,hylxkey,cbqy,yycs,zip,tifozip,tifoaddress
+		cappno,yyxzkey,hylxkey,cbqy,yycs,zip
 		)
          values(
-         #{cAppNo},#{yyxzKey},#{hylxKey},#{cbqy},#{yycs},#{zip},#{tifozip},#{tifoaddress}
-  		
+         #{cAppNo},#{yyxzKey},#{hylxKey},#{cbqy},#{yycs},#{zip}
   		)
 	</insert> 
 	
 	<!-- 插入财产险标的信息中的两个字段的数据 -->
 	<insert id="manage.NvhlCollectComm.insertIfoMessage"
-		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhCollectCommonVO"
-		useGeneratedKeys="true" keyProperty="id">
+		parameterType="net.jeeshop.services.manage.NvhlBaseVO.bean.NvhCollectCommonVO">
 		insert into nvhcollectcomment(		
 		cappno,tifozip,tifoaddress
 		)
