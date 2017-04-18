@@ -54,10 +54,23 @@
 11.保单状态：
 	"0":'支付成功',"1":'支付中',"2":'信息审核中',"3":"保单落地失败","4":"保单落地 ,"5":"核保通过"
 
-12.日期格式
-
-1001	
+12.日期格式：
+1000入参：
+	transDate		yyyy-MM-dd		当天日期
+	transTime		hh:mm:ss		当前时间
+1001入参：	
 	policyStartdate yyyyMMddhhmmss 	第二天0时
-	startDate	yyyyMMddhhmmss	第二天0时
-	transDate	yyyy-MM-dd 当天日期
-	
+	startDate		yyyyMMddhhmmss	第二天0时
+	transDate		yyyy-MM-dd 		当天日期
+1003入参：
+	operTm			yyyy-MM-dd hh:mm:ss	当天日期当前时间
+	bgnTm			yyyyMMddhhmmss	第二天0时
+	endTm			yyyyMMddhhmmss	第二年当天23点59分
+	TAppTm			yyyy-MM-dd hh:mm:ss	当天日期当前时间
+	TInsrncBgnTm	yyyyMMddhhmmss	第二天0时
+	TInsrncEndTm	yyyyMMddhhmmss	第二年当天23点59分
+	TIssueTm		yyyy-MM-dd		当天日期
+	TPayBgnTm		yyyy-MM-dd hh:mm:ss 当天日期当前时间
+	TPayEndTm		yyyy-MM-dd hh:mm:ss	第二天0时
+	transDate		yyyy-MM-dd		当天日期
+	transTime		hh:mm:ss		当前时间		
