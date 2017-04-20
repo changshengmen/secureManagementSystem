@@ -161,10 +161,12 @@
                         		</#list>
                    		</select>
 	           		 </td>
-	           		 <td >证件号码</td>
-	        		 <td colspan="2"><input type="text" name="TCertfCde"  data-rule="证件号码;required;length[0~20];" value="${common.TCertfCde!""}" 
-	                                             id="CertfCde" />&nbsp;<span style="color:red">*</span>
-	           		 </td>            		
+	           		 <td id="CertfCde_Area">证件号码</td>
+	           			
+	           		 	 <td colspan="2">
+	        		 		<input type="text" name="TCertfCde"  value="${common.TCertfCde!""}" 
+	                   	                          id="CertfCde" />&nbsp;<span style="color:red">*</span>
+	           			 </td>
 	           </tr>
 	            
 	           <tr>
@@ -333,7 +335,7 @@
                    		</select>
 	           		 </td>
 	          		 <td >证件号码</td>
-	        		 <td colspan="2"><input type="text" name="BCCertfCde"  data-rule="证件号码;required;length[0~44];" 
+	        		 <td colspan="2"><input type="text" name="BCCertfCde" 
 	                                             id="CertfCdeA" value="${common.BCCertfCde!""}"/>&nbsp;<span style="color:red">*</span>
 	           		 </td>	           		
 	           </tr>	             	           
@@ -454,18 +456,123 @@
 
 
 <script>
+//校验投保人证件号码
+function validateCertfCde(){
+	//投保人证件号码的值
+	var cde=$('#CertfCde').val();
+	//获取客户类型的值  1为自然人身份证件 0为组织机构代码
+	var mrk=$('#ClntMrk').val();
+	//投保人证件号码的值
+	var cdeA=$('#CertfCdeA').val();
+	//获取客户类型的值  1为自然人身份证件 0为组织机构代码
+	var mrkA=$('#ClntMrkA').val();
+	//校验身份证的正则表达式规则	
+	 var partter=/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[A-Z])$/;
+	//判断如果客户类型是1就进行身份证校验
+	if('1'==mrk){
+		//正则表达式验证输入的身份证号码是否正确 如果不正确给出相关提示
+		result=partter.test(cde);
+			if(result==false){
+				$('#msgArea').remove();
+				var html='';
+				html+='<span class="msg-box n-error" id="msgArea">';
+	        	html+='<span class="msg-wrap n-error" role="alert" style="margin-left:15px">';
+	       	 	html+='<span class="n-icon"></span>';
+	       		html+='<span class="n-msg">请输入正确的身份证号码</span></span></span>';
+				$('#CertfCde').after(html);
+				event.preventDefault();
+				return false;
+			}else{
+				$('#msgArea').remove();
+				return true;
+			}
+	}else{
+	//移除提示
+	$('#msgArea').remove();
+		//选择了非自然人 组织机构代码 
+		if(cde=="" && $.trim(cde)==""){
+			var html='';
+			html+='<span class="msg-box n-error" id="msgArea">';
+	        html+='<span class="msg-wrap n-error" role="alert" style="margin-left:15px">';
+	        html+='<span class="n-icon"></span>';
+	        html+='<span class="n-msg">请输入正确的证件号码</span></span></span>';
+			$('#CertfCde').after(html);
+			//组织表单提交
+			event.preventDefault();
+			return false;
+		}
+		return true;
+	}
+}
+//校验被保人证件号码
+function validateCertfCdeA(){
+	//投保人证件号码的值
+	var cdeA=$('#CertfCdeA').val();
+	//获取客户类型的值  1为自然人身份证件 0为组织机构代码
+	var mrkA=$('#ClntMrkA').val();
+	//校验身份证的正则表达式规则	
+	 var partter=/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[A-Z])$/;
+	if('1'==mrkA){
+		//正则表达式验证输入的身份证号码是否正确 如果不正确给出相关提示
+		resultA=partter.test(cdeA);
+			if(resultA==false){
+				$('#msgAreaA').remove();
+				var html='';
+				html+='<span class="msg-box n-error" id="msgAreaA">';
+	        	html+='<span class="msg-wrap n-error" role="alert" style="margin-left:15px">';
+	       	 	html+='<span class="n-icon"></span>';
+	       		html+='<span class="n-msg">请输入正确的身份证号码</span></span></span>';
+				$('#CertfCdeA').after(html);
+				event.preventDefault();
+				return false;
+			}else{
+				$('#msgAreaA').remove();
+				return true;
+			}
+	}else{
+	//移除提示
+	$('#msgAreaA').remove();
+		//选择了非自然人 组织机构代码 
+		if(cdeA=="" && $.trim(cdeA)==""){
+			var html='';
+			html+='<span class="msg-box n-error" id="msgAreaA">';
+	        html+='<span class="msg-wrap n-error" role="alert" style="margin-left:15px">';
+	        html+='<span class="n-icon"></span>';
+	        html+='<span class="n-msg">请输入正确的证件号码</span></span></span>';
+			$('#CertfCdeA').after(html);
+			//组织表单提交
+			event.preventDefault();
+			return false;
+		}
+		return true;
+	}
+}
+
+//投保人区域填写完证件号码进行校验
+$('#CertfCde').blur(function(){
+	validateCertfCde();
+});
+//被保人区域填写完证件号码进行校验
+$('#CertfCdeA').blur(function(){
+	validateCertfCdeA();
+});
 //点击提交按钮移除禁用的属性 使数据可以正常提交到后台
 $('#commit').click(function(){
+	//点击提交按钮校验证件类型
 	flag=confirm('提示!请再次确认提交保单');
-	if(flag==true){
-		$('#CertfCls').attr("disabled",false);
-		$('#TInsrncEndTm').attr("disabled",false);   
-		$('#CertfClsA').attr("disabled",false);
-	}else{
+		if(flag==true){
+			$('#CertfCls').attr("disabled",false);
+			$('#TInsrncEndTm').attr("disabled",false);   
+			$('#CertfClsA').attr("disabled",false);
+		}else{
+			return false;
+		}
+	//点击完提交按钮进行投保人/被保人证件号码的校验返回 true/false 判断校验结果
+	var result=validateCertfCde();
+	var resultA=validateCertfCdeA();
+	if(result==false && resultA==false){
 		return false;
 	}
-	
-	
 });
 //客户类型选择级联证件类型投保人
 $('#ClntMrk').change(function(){
@@ -573,13 +680,8 @@ var appCdeStr=$('#appCde').val();
 			$("table select").prop('selectedIndex', 0);
 			//调用方法级联下拉框
 			yycxChange();
-       	
-      
   		}
-  		
   	});
-  		
-      	
       	//----判断是哪份保险如果是010001财产险则删除页面中营业性质承保区域等字段 ----------------------------------------------
       	var cProdNo=$('#CProdNo').val();
       	//alert(cProdNo=="010001");
@@ -605,7 +707,6 @@ var appCdeStr=$('#appCde').val();
 		}
   		//---------判断保险end--------------------------------------------------------------
 });
-
 
 //设置保期-
 function setSecureYearDec(){
