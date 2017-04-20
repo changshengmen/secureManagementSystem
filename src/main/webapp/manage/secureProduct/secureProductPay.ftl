@@ -155,7 +155,7 @@
 	           <tr>
 	           		<td >证件类型</td>
 	        		<td><#assign map = {"110001":'组织机构代码',"120001":'居民身份证'}>
-	                    <select id="CertfCls" disabled name="TCertfCls" class="input-medium">
+	                    <select id="CertfCls"  name="TCertfCls" class="input-medium">
                         		<#list map?keys as key>
                             		<option value="${key}" <#if common.TCertfCls?? && common.TCertfCls==key>selected="selected" </#if>>${map[key]}</option>
                         		</#list>
@@ -219,7 +219,7 @@
 					 
 					 <td >保险止期</td>
 	        		  <td colspan="2">   	        		  
-						<input id="TInsrncEndTm" disabled style="line-height:3px;height:30px;" class="Wdate search-query input-small" 
+						<input id="TInsrncEndTm"  style="line-height:3px;height:30px;" class="Wdate search-query input-small" 
 						name="TInsrncEndTm" type="text" value="${base.TInsrncEndTm!""}" data-rule="required;"
 						  />
 						
@@ -328,7 +328,7 @@
 	           <tr>
 	           		<td >证件类型</td>
 	        		<td><#assign map = {"110001":'组织机构代码',"120001":'居民身份证'}>
-	                    <select id="CertfClsA" disabled name="BCCertfCls" class="input-medium" >
+	                    <select id="CertfClsA"  name="BCCertfCls" class="input-medium" >
                         		<#list map?keys as key>
                             		<option value="${key}"<#if common.BCCertfCls?? && common.BCCertfCls ==key> selected="selected"</#if>>${map[key]}</option>
                         		</#list>
@@ -622,8 +622,13 @@ $('#ClntMrkA').change(function(){
  }     
        
 $(function(){
-$('#hideArea').hide();
-//$('#hideArea1').hide();
+		//页面初始化禁用相关元素--------------- 
+		$('#CertfCls').attr("disabled",true);
+		$('#TInsrncEndTm').attr("disabled",true);   
+		$('#CertfClsA').attr("disabled",true);
+		//页面初始化禁用相关元素end-------------
+		
+	$('#hideArea').hide();
 	//页面初始化为投保日期赋值------------
 	var mydate = new Date();
   	var str = "" + mydate.getFullYear() + "-";
@@ -634,7 +639,7 @@ $('#hideArea').hide();
    	str += mydate.getSeconds();
 	$('#TAppTm').val(str);
 	//页面初始化为投保日期赋值end------------
-	
+	 
 //------页面初始化将动态生成的下拉框的样式remove掉---------
 	$("select").addClass("setSelect");
 	//为动态添加的下拉框赋新的样式和宽度
