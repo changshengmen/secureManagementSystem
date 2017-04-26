@@ -277,7 +277,7 @@
 						"598024":'地铁',"598025":'煤炭开采',"598026":'铁矿开采',"598027":'有色金属矿开采',"598028":'非金属矿开采'}>
 		                    <select id="occProp" name="occProp" class="input-medium">
 	                        		<#list map?keys as key>
-	                            		<option value="${key}">${map[key]}</option>
+	                            		<option value="${key}"<#if base.occProp?? && base.occProp==key>selected="selected"</#if>>${map[key]}</option>
 	                        		</#list>
 	                   		</select>
 		           		 </td>
