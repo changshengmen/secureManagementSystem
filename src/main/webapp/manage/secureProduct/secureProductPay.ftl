@@ -384,11 +384,11 @@
 				
 				<tr id="trends1">
 					<td style="text-align: right;">承保区域</td> 
-						<td><input type="text" name="Tcbqy" value="${cbqy!""}" id="cbqy" data-rule="承保区域;required;length[0~20];"/>&nbsp;<span style="color:red">*</span>
+						<td><input type="text" name="Tcbqy" value="${cbqy!""}" id="cbqy" data-rule="承保区域;required;"/>&nbsp;<span style="color:red">*</span>
 	           		 	</td>  
 	           		
 	           		 <td style="text-align: right;">营业场所地址</td> 
-						<td><input type="text" name="Tyycs" value="${yycs!""}" id="yycs" data-rule="营业场所地址;required;length[0~20];"/>&nbsp;<span style="color:red">*</span>
+						<td><input type="text" name="Tyycs" value="${yycs!""}" id="yycs" data-rule="营业场所地址;required;"/>&nbsp;<span style="color:red">*</span>
 	           		 	</td>
 	           		 		  
 				</tr>
@@ -415,7 +415,7 @@
 	           		 	</td>  
 	           		
 	           		 <td style="text-align: right;">邮编</td> 
-						<td><input type="text" name="tIfoZip" value="${common.tIfoZip!""}" id="" data-rule="邮编;required;length[0~20];"/>&nbsp;<span style="color:red">*</span>
+						<td><input type="text" name="tIfoZip" value="${common.tIfoZip!""}" id="" data-rule="邮编;required;length[0~7];"/>&nbsp;<span style="color:red">*</span>
 	           		 	</td>
 	           		 		  
 				</tr>
