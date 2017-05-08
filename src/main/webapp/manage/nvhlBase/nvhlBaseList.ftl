@@ -51,8 +51,9 @@ $(function() {
  	$(".see").click(function(){
 		$("#btn_bdld_show").prepend("<div class='loading'> <span></span> <span></span><span></span> <span></span></div>")
 	})
-	var discard=$('input[name="discard"]').val();
-	if(discard!=0 && discard==1){
+//废弃操作
+	var discard = $('input[name="discard"]').val();
+	if(discard != 0 && discard == 1){
 		$('#selDiscard').remove();
 		$('#selectLi').remove();
 		$('span[name="hideDis"]').each(function(){
@@ -63,12 +64,10 @@ $(function() {
 		$('#selectDisLi').remove();
 		$('#backBtn').remove();
 	}
-	
+	//点击保单落地按钮 该按钮不可多次点击提交 变灰操作
 	$("#btn_bdld").click(function(){ 
-	
 		  $(this).remove();
 		  $("#btn_bdld_show").show();
-            
 	});
 	
 	$('.tipso').tipso({
@@ -105,20 +104,15 @@ $(function() {
 	    $(this).html(showCappNo);
 	})
 	
-	$('a[name="toDiscard"]').click(function(){
-		flag=confirm('msg!您确定要废弃此订单吗?');
-		if(flag==true){
+	$('a[name = "toDiscard"]').click(function(){
+		flag = confirm('msg!您确定要废弃此订单吗?');
+		if(flag == true){
 			return true;
 		}else{
 			return false;
 		}
 	});
 		
-	//$('#selDiscard').click(function(){
-		//$('form:eq(0)').prop("action","${basepath}/manage/NvhlBase/selectDiscardList").submit();
-	//});	
-	
-	
 });
 
 function selDisListfun(){
@@ -128,13 +122,14 @@ function selDisListfun(){
 function changeDiscardStatus(){
 	$('form:eq(0)').prop("action","${basepath}/manage/NvhlBase/todiscardStatus").submit();
 }
-function flushPage(){
+function flushPage(){//刷新页面
 	window.location.reload();
 }
-
 	
 </script>
+
 <div id = "msgShow"></div>
+
 <form action="${basepath}/manage/NvhlBase" method="post" theme="simple">
 	<table class="table table-bordered">
 	<tr>
@@ -167,15 +162,10 @@ function flushPage(){
 			<input id="selDiscard" type="button" class="btn btn-warning" onclick="selDisListfun();" value="查询废弃订单"/>	
 			<button method="selectList" onclick="selectList(this)" class="btn btn-warning" id="backBtn">返回</button>	
 		</td>
-		
-		
-				   			
-		
 	</tr>
 	</table>
 	
-	<div style="" id="tableList">		
-	<table id="orderList" class="table table-bordered table-hover"style="text-align: center;">
+	<table id = "orderList" class = "table table-bordered table-hover" style = "text-align: center;">
 		<tr style="background-color: #dff0d8">
 			<th style="text-align: center;">投保单号</th>
 			<!--<th style="text-align: center;">产品代码</th>-->
@@ -192,9 +182,9 @@ function flushPage(){
 			<th style="text-align: center;">操作</th>
 		</tr>
 		<#list pager.list as item>
-			<input type="hidden" name="discard" value="${item.discardStatus}">
+			<input type = "hidden" name = "discard" value = "${item.discardStatus}">
 			<tr>
-				<td class="tipso" name="cappNo" data-tipso="${item.CAppNo!""}">${item.CAppNo!""}</td>
+				<td class = "tipso" name="cappNo" data-tipso="${item.CAppNo!""}">${item.CAppNo!""}</td>
 				<!--<td>${item.CProdNo!""}</td>-->
 				<td>${item.CProdName!""}</td>					
 				<td>${item.appNme!""}</td>
@@ -240,15 +230,13 @@ function flushPage(){
 							<a class = "see" id = "btn_bdld" href="toInsurancePolicy?payNo=${item.payNo!""}&cappNo=${item.CAppNo!""}" >保单落地</a>	
 							<a  id = "btn_bdld_show" href="javascript:void(0)"  style="color:gray;display:none">保单落地</a>
 						</span>
-						
 					
 						<span name="hideDis">
 							| <a href="todiscardStatus?CAppNo=${item.CAppNo!""}&discardStatus=${item.discardStatus!""}">废弃</a>
 						</span>
-					</#if>				
+				</#if>		
+						
 					| <a href="selectOrderInfo?id=${item.id!""}">查看 </a>
-					
-					
 				</td>
 		</tr>
 		</#list>
@@ -258,7 +246,7 @@ function flushPage(){
 		</tr>
 	</table>
 		</div>
-	<div class="alert alert-info" style="text-align: left;font-size: 14px;margin: 2px 0px;">
+	<div class = "alert alert-info" style="text-align: left;font-size: 14px;margin: 2px 0px;">
 		颜色含义：<BR>
 		<img  src="${basepath}/resource/images/ydq.png">：已过期 &nbsp;
 		<img  src="${basepath}/resource/images/jjdq.png">：即将到期
