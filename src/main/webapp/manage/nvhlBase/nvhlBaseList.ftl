@@ -1,12 +1,56 @@
 <#import "/manage/tpl/pageBase.ftl" as page>
 <@page.pageBase currentMenu="订单信息">
 <style type="text/css">
+.loading{
+            width: 120px;
+            height: 15px;
+            margin: 0 auto;
+            margin-top:-15px;
+        }
+        .loading span{
+            display: inline-block;
+            width: 15px;
+            height: 80%;
+            margin-right: 5px;
+            border-radius: 50%;
+            background: lightgreen;
+            -webkit-animation: load 1.04s ease infinite;
+        }
+        .loading span:last-child{
+            margin-right: 0px; 
+        }
+        @-webkit-keyframes load{
+            0%{
+                opacity: 1;
+                -webkit-transform: scale(1.3);
+            }
+            100%{
+                opacity: 0.2;
+                -webkit-transform: scale(.3);
+            }
+        }
+        .loading span:nth-child(1){
+            -webkit-animation-delay:0.13s;
+        }
+        .loading span:nth-child(2){
+            -webkit-animation-delay:0.26s;
+        }
+        .loading span:nth-child(3){
+            -webkit-animation-delay:0.39s;
+        }
+        .loading span:nth-child(4){
+            -webkit-animation-delay:0.52s;
+        }
 </style>
 
 
 <script type="text/javascript">
-	
+    
 $(function() {
+//保单落地加载条
+ 	$(".see").click(function(){
+		$("#btn_bdld_show").prepend("<div class='loading'> <span></span> <span></span><span></span> <span></span></div>")
+	})
 	var discard=$('input[name="discard"]').val();
 	if(discard!=0 && discard==1){
 		$('#selDiscard').remove();
@@ -15,11 +59,17 @@ $(function() {
 			$(this).remove();
 		});
 	}
-	if(discard!=1 && discard==0 || discard==undefined){
+	if(discard != 1 && discard == 0 || discard == undefined){
 		$('#selectDisLi').remove();
 		$('#backBtn').remove();
 	}
-		
+	
+	$("#btn_bdld").click(function(){ 
+	
+		  $(this).remove();
+		  $("#btn_bdld_show").show();
+            
+	});
 	
 	$('.tipso').tipso({
 		useTitle: false
@@ -175,25 +225,30 @@ function flushPage(){
 					  </#if>
 					</#list>
 				</td>
-				<td>					
-					<a href="selectOrderInfo?id=${item.id!""}">查看 </a>
-					<#if item.status == "1" ||item.status == "2" || item.status == "4" || item.status == "5">				
+				<td>	
+				<#if item.status == "1" ||item.status == "2" || item.status == "4" || item.status == "5">				
 						<span name="hideDis">
-							<a href="#" onclick="flushPage()">|刷新</a>
+							&nbsp;<a href="#" onclick="flushPage()">刷新</a>
 						</span>
 					<#if item.discardStatus ==0 && item.status == "1" ||item.status == "2" || item.status == "3">
 						<span name="hideDis">
-								<a name="toDiscard" href="todiscardStatus?CAppNo=${item.CAppNo!""}&discardStatus=${item.discardStatus!""}">|废弃</a>
+								|&nbsp;<a name="toDiscard" href="todiscardStatus?CAppNo=${item.CAppNo!""}&discardStatus=${item.discardStatus!""}">废弃</a>
 						</span>
 					</#if>
 					<#else>	
 						<span name="hideDis">	
-							<a href="toInsurancePolicy?payNo=${item.payNo!""}&cappNo=${item.CAppNo!""}">保单落地</a>	
+							<a class = "see" id = "btn_bdld" href="toInsurancePolicy?payNo=${item.payNo!""}&cappNo=${item.CAppNo!""}" >保单落地</a>	
+							<a  id = "btn_bdld_show" href="javascript:void(0)"  style="color:gray;display:none">保单落地</a>
 						</span>
+						
+					
 						<span name="hideDis">
-							<a href="todiscardStatus?CAppNo=${item.CAppNo!""}&discardStatus=${item.discardStatus!""}">|废弃</a>
+							| <a href="todiscardStatus?CAppNo=${item.CAppNo!""}&discardStatus=${item.discardStatus!""}">废弃</a>
 						</span>
-					</#if>
+					</#if>				
+					| <a href="selectOrderInfo?id=${item.id!""}">查看 </a>
+					
+					
 				</td>
 		</tr>
 		</#list>

@@ -80,10 +80,10 @@
     <#--<link rel="stylesheet" href="${staticpath}/datatables-responsive/css/dataTables.responsive.css" />-->
     <#--<script charset="utf-8" src="${staticpath}/datatables-responsive/js/dataTables.responsive.js"></script>-->
     <script type="text/javascript" src="${basepath}/manage/manage.js"></script>
-      <script type="text/javascript" src="${basepath}/resource/jquery-spinner/jquery.spinner.min.js"></script>
-   
+    <script type="text/javascript" src="${basepath}/resource/jquery-spinner/jquery.spinner.min.js"></script>
    	<link href="${basepath}/resource/tipso/css/tipso.css" rel="stylesheet">
     <script type="text/javascript" src="${basepath}/resource/tipso/js/tipso.js"></script>
+       <#--<script type="text/javascript" src="${basepath}/resource/tongji/tongji.js"></script>-->
     <#list staticJsFiles as jsFile>
         <script src="${staticpath}/${jsFile}"></script>
     </#list>
