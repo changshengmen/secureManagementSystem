@@ -164,7 +164,7 @@ function flushPage(){//刷新页面
 		</td>
 	</tr>
 	</table>
-	
+	<div style="" id="tableList">	
 	<table id = "orderList" class = "table table-bordered table-hover" style = "text-align: center;">
 		<tr style="background-color: #dff0d8">
 			<th style="text-align: center;">投保单号</th>
@@ -218,25 +218,25 @@ function flushPage(){//刷新页面
 				<td>	
 				<#if item.status == "1" ||item.status == "2" || item.status == "4" || item.status == "5">				
 						<span name="hideDis">
-							&nbsp;<a href="#" onclick="flushPage()">刷新</a>
+							&nbsp;<a href="#" onclick="flushPage()">刷新</a> |
 						</span>
 					<#if item.discardStatus ==0 && item.status == "1" ||item.status == "2" || item.status == "3">
 						<span name="hideDis">
-								|&nbsp;<a name="toDiscard" href="todiscardStatus?CAppNo=${item.CAppNo!""}&discardStatus=${item.discardStatus!""}">废弃</a>
+								<a name="toDiscard" href="todiscardStatus?CAppNo=${item.CAppNo!""}&discardStatus=${item.discardStatus!""}">废弃</a> |
 						</span>
 					</#if>
 					<#else>	
 						<span name="hideDis">	
 							<a class = "see" id = "btn_bdld" href="toInsurancePolicy?payNo=${item.payNo!""}&cappNo=${item.CAppNo!""}" >保单落地</a>	
-							<a  id = "btn_bdld_show" href="javascript:void(0)"  style="color:gray;display:none">保单落地</a>
+							<a  id = "btn_bdld_show" href="javascript:void(0)"  style="color:gray;display:none">保单落地</a> |
 						</span>
 					
 						<span name="hideDis">
-							| <a href="todiscardStatus?CAppNo=${item.CAppNo!""}&discardStatus=${item.discardStatus!""}">废弃</a>
+							 <a href="todiscardStatus?CAppNo=${item.CAppNo!""}&discardStatus=${item.discardStatus!""}">废弃</a> |
 						</span>
 				</#if>		
 						
-					| <a href="selectOrderInfo?id=${item.id!""}">查看 </a>
+					 <a href="selectOrderInfo?id=${item.id!""}">查看 </a>
 				</td>
 		</tr>
 		</#list>
@@ -246,8 +246,8 @@ function flushPage(){//刷新页面
 		</tr>
 	</table>
 		</div>
-	<div class = "alert alert-info" style="text-align: left;font-size: 14px;margin: 2px 0px;">
-		颜色含义：<BR>
+	<div class="alert alert-info" style="text-align: left;font-size: 14px;margin: 2px 0px;">
+			颜色含义：<BR>
 		<img  src="${basepath}/resource/images/ydq.png">：已过期 &nbsp;
 		<img  src="${basepath}/resource/images/jjdq.png">：即将到期
 	</div>
