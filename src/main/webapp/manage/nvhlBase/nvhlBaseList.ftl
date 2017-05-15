@@ -104,6 +104,15 @@ $(function() {
 	    $(this).html(showCappNo);
 	})
 	
+	//投保企业缩短显示
+	$('#orderList').find('td[name="appNme"]').each(function(){
+		var appNme=$(this).text();
+		var len=appNme.length;
+		if(len>4){
+			var showAppName=appNme.substring(0,4)+"...";
+			$(this).html(showAppName);
+		}
+	});
 	$('a[name = "toDiscard"]').click(function(){
 		flag = confirm('msg!您确定要废弃此订单吗?');
 		if(flag == true){
@@ -187,7 +196,7 @@ function flushPage(){//刷新页面
 				<td class = "tipso" name="cappNo" data-tipso="${item.CAppNo!""}">${item.CAppNo!""}</td>
 				<!--<td>${item.CProdNo!""}</td>-->
 				<td>${item.CProdName!""}</td>					
-				<td>${item.appNme!""}</td>
+				<td class="tipso" name="appNme" data-tipso="${item.appNme!""}">${item.appNme!""}</td>
 				<!--<td>${item.appCdePlay!""}</td>
 				<td>${item.NAmt!""}</td>
 				<td>${item.NPrm!""}</td>
