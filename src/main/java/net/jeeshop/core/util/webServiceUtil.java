@@ -19,8 +19,6 @@ public class webServiceUtil
 	public static String getSupplyInfo(String json, String url,String operationName,String interfaceType)
 	{
 		String result = "";
-		if(interfaceType.equals("1000")){
-			
 			try
 			{
 				Service service = new Service();
@@ -30,10 +28,10 @@ public class webServiceUtil
 				call.addParameter("TotalParValue", XMLType.XSD_STRING, ParameterMode.IN);
 				call.setReturnType(XMLType.XSD_STRING);
 				// 调用并且获取返回的报文结果
-				logger.info("1000入参=" + json);
+				logger.info(interfaceType+"入参=" + json);
 				
 				//项数据库日至表插入入参信息
-				MDC.put("interfaceType", "1000");
+				MDC.put("interfaceType", interfaceType);
 				MDC.put("inPutParameter", json);
 				
 				result = (String) call.invoke(new Object[] { json });
@@ -42,61 +40,9 @@ public class webServiceUtil
 			{
 				System.out.println("GeneratorData_error_supply:" + e);
 			}
-			logger.info("1000出参=" + result);
+			logger.info(interfaceType+"出参=" + result);
 			//向数据库插入出参信息
 			MDC.put("outPutParameter", result);
-		}
-		
-		if(interfaceType.equals("1001")){
-			try
-			{
-				Service service = new Service();
-				Call call = (Call) service.createCall();
-				call.setTargetEndpointAddress(url);
-				call.setOperationName(operationName);
-				call.addParameter("TotalParValue", XMLType.XSD_STRING, ParameterMode.IN);
-				call.setReturnType(XMLType.XSD_STRING);
-				// 调用并且获取返回的报文结果
-				logger.info("1001入参=" + json);
-				//项数据库日至表插入入参信息
-				MDC.put("interfaceType", "1001");
-				MDC.put("inPutParameter", json);
-				result = (String) call.invoke(new Object[] { json });
-				
-			} catch (Exception e)
-			{
-				System.out.println("GeneratorData_error_supply:" + e);
-			}
-			logger.info("1001出参=" + result);
-			//向数据库插入出参信息
-			MDC.put("outPutParameter", result);
-			
-		}
-		
-		if(interfaceType.equals("1003")){
-			try
-			{
-				Service service = new Service();
-				Call call = (Call) service.createCall();
-				call.setTargetEndpointAddress(url);
-				call.setOperationName(operationName);
-				call.addParameter("TotalParValue", XMLType.XSD_STRING, ParameterMode.IN);
-				call.setReturnType(XMLType.XSD_STRING);
-				// 调用并且获取返回的报文结果
-				logger.info("1003入参=" + json);
-				//项数据库日至表插入入参信息
-				MDC.put("interfaceType", "1003");
-				MDC.put("inPutParameter", json);
-				result = (String) call.invoke(new Object[] { json });
-				
-			} catch (Exception e)
-			{
-				System.out.println("GeneratorData_error_supply:" + e);
-			}
-			logger.info("1003出参=" + result);
-			//向数据库插入出参信息
-			MDC.put("outPutParameter", result);
-		}
 		return result;
 	}
 }
