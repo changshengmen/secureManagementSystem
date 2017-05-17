@@ -4,25 +4,15 @@ import javax.annotation.Resource;
 import javax.jws.WebService;
 
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
+import org.apache.log4j.MDC;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
 import net.jeeshop.core.ServersManager;
 import net.jeeshop.core.dao.BaseDao;
-import net.jeeshop.core.util.DateTimeUtil;
 import net.jeeshop.services.common.telOperVO;
 import net.jeeshop.services.manage.NvhlBaseVO.bean.NvhlBaseVO;
 import net.jeeshop.services.manage.NvhlBaseVO.dao.NvhlBaseDao;
-import net.jeeshop.services.manage.secureProduct.bean.SecureProduct;
-import net.jeeshop.services.manage.secureProduct.dao.SecureProductDao;
-import net.jeeshop.services.manage.task.bean.Task;
-import net.jeeshop.services.manage.task.dao.TaskDao;
 import net.jeeshop.services.manage.webservice.ManualUnderwritingResultService;
-import net.jeeshop.web.action.manage.secureProduct.SecureProductAction;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -30,7 +20,7 @@ import net.sf.json.JSONObject;
 @Component//这个是spring的注解
 
 public class ManualUnderwritingResultServiceImpl extends ServersManager<NvhlBaseVO, NvhlBaseDao> implements ManualUnderwritingResultService{
-	private static final Logger logger = LoggerFactory.getLogger(SecureProductAction.class);
+	private static final Logger logger = Logger.getLogger(ManualUnderwritingResultServiceImpl.class);
 	@Resource
 	private BaseDao dao;
 
@@ -63,7 +53,7 @@ public class ManualUnderwritingResultServiceImpl extends ServersManager<NvhlBase
 	
 		//验证入参非空
 		if(StringUtils.isEmpty(policyStatusResult) || (!policyStatusResult.contains("packageList"))){
-			logger.error("人工核保返回参数为空");		
+			logger.info("人工核保返回参数为空");		
 			return "0";
 		}
 		JSONObject policyStatusJson = JSONObject.fromObject(policyStatusResult).getJSONArray("packageList").getJSONObject(0);
@@ -77,7 +67,7 @@ public class ManualUnderwritingResultServiceImpl extends ServersManager<NvhlBase
 			cpassWd = telOperVO.getString("CPassWd");
 			//验证用户名密码
 			if(!(coperId.equals("JDT") && cpassWd.equals("JDT"))){
-				logger.error("用户名或密码不对");
+				logger.info("用户名或密码不对");
 				return "0";
 			}
 		}
@@ -101,6 +91,10 @@ public class ManualUnderwritingResultServiceImpl extends ServersManager<NvhlBase
 			base.setTudrTm(policyStatusJson.getString("TUdrTm"));
 			base.setStatus("5");
 			dao.update("manage.manualUnderwritingResult.update", base);
+			
+			MDC.put("cappNo", policyStatusJson.getString("CAppNo"));
+			MDC.put("policyNo", policyStatusJson.getString("policyNo"));
+			logger.error("----------------投保单号与保单号日志插入数据库----------------");
 			//更新订单 end
 			telBaseOutVOList = getReturnTelBaseOutVOList(policyStatusJson.getString("CAppNo"),"1","成功");
 			System.out.println(telBaseOutVOList);
